@@ -4,36 +4,141 @@ import arrow
 import json
 app = Flask(__name__, static_folder="../static/dist", template_folder="../static")
 
-# Charger les capacites installées
-fichier_capacites = open('data/puissances_installees.json', 'r')
-capacites_installees = fichier_capacites.read()
-fichier_capacites.close()
-print(capacites_installees)
+# Informations générales
+nombre_region = 12
+nombre_donnees_par_heure = 4
+nombre_heures = 24
+global periode_rafraichissement
+periode_rafraichissement = 5
 
-# Variables globales
+# Gestion des données
+global dernier_appel
+dernier_appel = None
+global donnees
+donnees = None
+global sources_energie
+sources_energie = ['thermique', 'nucleaire', 'solaire', 'eolien', 'hydraulique', 'bioenergies']
+
+def init_donnees():
+    global donnees
+    donnees = {
+        'national': {},
+        'regional': {
+            '11': {},
+            '24': {},
+            '27': {},
+            '28': {},
+            '32': {},
+            '44': {},
+            '52': {},
+            '53': {},
+            '75': {},
+            '76': {},
+            '84': {},
+            '93': {},
+        }
+    }
+    for region_key in donnees['regional'].keys():
+        donnees['regional'][region_key]['capacites'] = {}
+        donnees['regional'][region_key]['evolution'] = []
+    donnees['national']['capacites'] = {}
+    donnees['national']['evolution'] = []
+    
+def appel_necessaire():
+    global dernier_appel
+    global periode_rafraichissement
+    return dernier_appel is None or dernier_appel < arrow.now().shift(minutes=-periode_rafraichissement)
+
+def calculs_regionaux(donnees_regional):
+    global donnees
+    global sources_energie
+    for record in donnees_regional['records']:
+        ligne_donnee = record['fields']
+        nouvelle_donnee = {
+            'date_heure': ligne_donnee['date_heure'], 
+            'libelle_region': ligne_donnee['libelle_region']
+        }
+        for source_energie in sources_energie:
+            cle_tch = 'tch_' + source_energie
+
+            if source_energie in ligne_donnee:
+                nouvelle_donnee[source_energie] = float(ligne_donnee[source_energie])
+            if cle_tch in ligne_donnee:
+                nouvelle_donnee[cle_tch] = float(ligne_donnee[cle_tch])
+            
+            source_energie_non_calculee = source_energie not in donnees['regional'][ligne_donnee['code_insee_region']]['capacites']
+            source_energie_calculable = source_energie in nouvelle_donnee and cle_tch in nouvelle_donnee and nouvelle_donnee[cle_tch] > 0
+            if source_energie_non_calculee and source_energie_calculable:
+                capacite = nouvelle_donnee[source_energie] / nouvelle_donnee[cle_tch] * 100
+                donnees['regional'][ligne_donnee['code_insee_region']]['capacites'][source_energie] = capacite
+         
+        donnees['regional'][ligne_donnee['code_insee_region']]['evolution'].append(nouvelle_donnee)
+
+def calculs_nationaux():
+    global donnees
+    global sources_energie
+    
+    nombre_resultats = len(donnees['regional']['11']['evolution'])
+    for i in range(0, nombre_resultats):
+        donnees['national']['evolution'].append({
+            'date_heure': donnees['regional']['11']['evolution'][i]['date_heure']
+        })
+
+    for source_energie in sources_energie:
+        capacite_source = 0
+        for region_key in donnees['regional'].keys():
+            if source_energie in donnees['regional'][region_key]['capacites']:
+                capacite_source += donnees['regional'][region_key]['capacites'][source_energie]
+        donnees['national']['capacites'][source_energie] = capacite_source
+
+        for i in range(0, nombre_resultats):
+            valeur_source = 0
+            for region_key in donnees['regional'].keys():
+                if source_energie in donnees['regional'][region_key]['evolution'][i]:
+                    valeur_source += donnees['regional'][region_key]['evolution'][i][source_energie]
+            donnees['national']['evolution'][i][source_energie] = valeur_source
+            cle_tch = 'tch_' + source_energie
+            donnees['national']['evolution'][i][cle_tch] = valeur_source / donnees['national']['capacites'][source_energie] * 100
+
+        
 API_RESEAUX_ENERGIE = "https://opendata.reseaux-energies.fr/api/records/1.0/search/"
+
+def mise_a_jour_donnees():
+    r = requests.session()
+    date_max = arrow.now(tz='Europe/Paris')
+    date_min = date_max.shift(days=-1)
+    formatte_max = date_max.format('YYYY-MM-DDTHH:mm')
+    formatte_min = date_min.format('YYYY-MM-DDTHH:mm')
+
+    params_regional = {
+        'dataset': 'eco2mix-regional-tr',
+        'facet': 'nature',
+        'refine.nature': "Données temps réel",
+        'sort': 'date_heure',
+        'q': 'date_heure >= {} AND date_heure <= {}'.format(formatte_min, formatte_max),
+        'timezone': 'Europe/Paris',
+        'rows': nombre_region * nombre_donnees_par_heure * nombre_heures
+    }
+    reponse_regional = r.get(API_RESEAUX_ENERGIE, params=params_regional)
+    donnees_regional = json.loads(reponse_regional.content)
+
+    init_donnees()
+    calculs_regionaux(donnees_regional)
+    calculs_nationaux()
+
+    global donnees
+    print(donnees)
 
 @app.route("/")
 def index():
-    r = requests.session()
-    date = arrow.now(tz='Europe/Paris')
-    formatte = date.format('YYYY-MM-DDTHH:mm')
 
-    params = {
-        'dataset': 'eco2mix-national-tr',
-        'q': 'date_heure <= {}'.format(formatte),
-        'timezone': 'Europe/Paris',
-        'rows': 1
-    }
-    reponse = r.get(API_RESEAUX_ENERGIE, params=params)
-    donnees = json.loads(reponse.content)
-    print(donnees)
+    if appel_necessaire():
+        global dernier_appel
+        dernier_appel = arrow.now()
+        mise_a_jour_donnees()
 
-    return render_template("index.html")
-
-@app.route("/hello")
-def hello():
-    return "Hello World!"
+    global donnees
+    return render_template("index.html", donnees=donnees)
 
 if __name__ == "__main__":
     app.run()
