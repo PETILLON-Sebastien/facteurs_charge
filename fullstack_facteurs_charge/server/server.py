@@ -7,7 +7,7 @@ app = Flask(__name__, static_folder="../static/dist", template_folder="../static
 # Informations générales
 nombre_region = 12
 nombre_donnees_par_heure = 4
-nombre_heures = 1
+nombre_heures = 24
 global periode_rafraichissement
 periode_rafraichissement = 5
 
@@ -90,7 +90,7 @@ def calculs_nationaux():
             if source_energie in donnees['regional'][region_key]['capacites']:
                 capacite_source += donnees['regional'][region_key]['capacites'][source_energie]
         donnees['national']['capacites'][source_energie] = capacite_source
-        
+
         for i in range(0, nombre_resultats - 1):
             valeur_source = 0
             for region_key in donnees['regional'].keys():
