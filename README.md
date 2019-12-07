@@ -41,3 +41,19 @@ Installez Flask :
 
 Pour exécuter le back-end, lancez la commande
 ```python server.py```
+
+### Précisions
+
+Correspondances code_insee_region / nom région :
+11 : Ile-de-France
+24 : Centre-Val de Loire
+27 : Bourgogne-Franche-Comté
+28 : Normandie
+32 : Hauts-de-France
+44 : Grand-Est
+52 : Pays de la Loire
+53 : Bretagne
+75 : Nouvelle-Aquitaine
+76 : Occitanie
+14 : Auvergne-Rhône-Alpes
+93 : Provence-Alpes-Côte d'Azur
