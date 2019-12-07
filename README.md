@@ -12,7 +12,7 @@ Lancez la commande suivante dans le dossier `fullstack_facteurs_charge\static` :
 
 ```npm i webpack --save-dev```
 
-Installez les dépendances dans le dossier `fullstack_facteurs_charge` :
+Installez les dépendances :
 
 ```npm install```
 
