@@ -7,7 +7,7 @@ app = Flask(__name__, static_folder="../static/dist", template_folder="../static
 # Informations générales
 nombre_region = 12
 nombre_donnees_par_heure = 4
-nombre_heures = 24
+nombre_heures = 1
 global periode_rafraichissement
 periode_rafraichissement = 5
 
@@ -79,7 +79,7 @@ def calculs_nationaux():
     global sources_energie
     
     nombre_resultats = len(donnees['regional']['11']['evolution'])
-    for i in range(0, nombre_resultats):
+    for i in range(0, nombre_resultats - 1):
         donnees['national']['evolution'].append({
             'date_heure': donnees['regional']['11']['evolution'][i]['date_heure']
         })
@@ -90,15 +90,18 @@ def calculs_nationaux():
             if source_energie in donnees['regional'][region_key]['capacites']:
                 capacite_source += donnees['regional'][region_key]['capacites'][source_energie]
         donnees['national']['capacites'][source_energie] = capacite_source
-
-        for i in range(0, nombre_resultats):
+        
+        for i in range(0, nombre_resultats - 1):
             valeur_source = 0
             for region_key in donnees['regional'].keys():
                 if source_energie in donnees['regional'][region_key]['evolution'][i]:
                     valeur_source += donnees['regional'][region_key]['evolution'][i][source_energie]
             donnees['national']['evolution'][i][source_energie] = valeur_source
             cle_tch = 'tch_' + source_energie
-            donnees['national']['evolution'][i][cle_tch] = valeur_source / donnees['national']['capacites'][source_energie] * 100
+            if donnees['national']['capacites'][source_energie] == 0:
+                donnees['national']['evolution'][i][cle_tch] = 0
+            else:
+                donnees['national']['evolution'][i][cle_tch] = valeur_source / donnees['national']['capacites'][source_energie] * 100
 
         
 API_RESEAUX_ENERGIE = "https://opendata.reseaux-energies.fr/api/records/1.0/search/"
