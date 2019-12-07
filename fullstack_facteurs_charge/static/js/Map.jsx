@@ -1,22 +1,5 @@
 import React from "react";
 
-/*
-
-11 : Ile-de-France
-24 : Centre-Val de Loire
-27 : Bourgogne-Franche-Comté
-28 : Normandie
-32 : Hauts-de-France
-44 : Grand-Est
-52 : Pays de la Loire
-53 : Bretagne
-75 : Nouvelle-Aquitaine
-76 : Occitanie
-14 : Auvergne-Rhône-Alpes
-93 : Provence-Alpes-Côte d'Azur
-
-*/
-
 class Map extends React.Component {
   constructor(props) {
     super(props);
@@ -77,7 +60,7 @@ class Map extends React.Component {
       console.log(this.regionsDescriptions[i])
       regions.push(
         <path d={this.regionsDescriptions[i].path} key={this.regionsDescriptions[i].id} onClick={() => this.props.onClick(this.regionsDescriptions[i].id)}
-          display="inline" fill="#99ffbb" fillOpacity="1" fillRule="evenodd" stroke="#7f7f7f"
+          class="region" display="inline" fill="#99ffbb" fillOpacity="1" fillRule="evenodd" stroke="#7f7f7f"
           strokeDasharray="none" strokeLinecap="butt" strokeLinejoin="miter" strokeMiterlimit="4" strokeOpacity="1">
         </path>
       );
