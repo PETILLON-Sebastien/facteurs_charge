@@ -77,7 +77,7 @@ def calculs_nationaux():
     global sources_energie
     
     nombre_resultats = len(donnees['11']['evolution'])
-    for i in range(0, nombre_resultats - 1):
+    for i in range(0, nombre_resultats):
         donnees['0']['evolution'].append({
             'date_heure': donnees['11']['evolution'][i]['date_heure']
         })
@@ -89,11 +89,12 @@ def calculs_nationaux():
                 capacite_source += donnees[region_key]['capacites'][source_energie]
         donnees['0']['capacites'][source_energie] = capacite_source
 
-        for i in range(0, nombre_resultats - 1):
+        for i in range(0, nombre_resultats):
             valeur_source = 0
             for region_key in donnees.keys():
-                if source_energie in donnees[region_key]['evolution'][i]:
-                    valeur_source += donnees[region_key]['evolution'][i][source_energie]
+                evolutions = donnees[region_key]['evolution']
+                if source_energie in evolutions[i]:
+                    valeur_source += evolutions[i][source_energie]
             donnees['0']['evolution'][i][source_energie] = valeur_source
             cle_tch = 'tch_' + source_energie
             if donnees['0']['capacites'][source_energie] == 0:
@@ -101,7 +102,22 @@ def calculs_nationaux():
             else:
                 donnees['0']['evolution'][i][cle_tch] = valeur_source / donnees['0']['capacites'][source_energie] * 100
 
-        
+def calcul_meilleur_facteur():
+    global donnees
+    tch_prefix = 'tch_'
+    for code_insee_region in donnees:
+        meilleure_valeur = 0.
+        meilleure_cle = None
+        donnee = donnees[code_insee_region]
+        premiere_donnee = donnee['evolution'][0]
+        for cle in premiere_donnee:
+            if cle.find(tch_prefix) != -1:
+                if float(premiere_donnee[cle]) > meilleure_valeur:
+                    meilleure_valeur = premiere_donnee[cle]
+                    meilleure_cle = cle[len(tch_prefix):]
+        donnees[code_insee_region]['meilleur_facteur'] = meilleure_cle
+                    
+
 API_RESEAUX_ENERGIE = "https://opendata.reseaux-energies.fr/api/records/1.0/search/"
 
 def mise_a_jour_donnees():
@@ -127,9 +143,6 @@ def mise_a_jour_donnees():
     calculs_regionaux(donnees_regional)
     calculs_nationaux()
 
-    global donnees
-    print(donnees)
-
 @app.route("/")
 def index():
 
@@ -137,6 +150,7 @@ def index():
         global dernier_appel
         dernier_appel = arrow.now()
         mise_a_jour_donnees()
+        calcul_meilleur_facteur()
 
     global donnees
     return render_template("index.html", donnees=donnees)

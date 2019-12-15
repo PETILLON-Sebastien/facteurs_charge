@@ -1,10 +1,37 @@
+body {
+    background-color: #222;
+}
+
 .region {
     cursor: pointer;
     transition: fill 0.5s;
-
-    fill: #99ffbb;
+    opacity: 0.8;
+    stroke: black;
 }
-
 .region:hover {
-    fill: #1122EE;
+    opacity: 1;
+}
+.nucleaire_couleur {
+    fill: rgba(174, 184, 0);
+}
+.bioenergies_couleur {
+    fill: rgb(22, 106, 87);
+}
+.eolien_couleur {
+    fill: rgb(116, 205, 185);
+}
+.hydraulique_couleur {
+    fill: rgb(39, 114, 178);
+}
+.solaire_couleur {
+    fill: rgb(242, 116, 6);
+}
+.thermique_couleur {
+    fill: rgb(134, 125, 102);
+}
+.selectionnee {
+    opacity: 1;
+    stroke: black;
+    stroke-width: 3px;
+    stroke-opacity: 1;
 }
