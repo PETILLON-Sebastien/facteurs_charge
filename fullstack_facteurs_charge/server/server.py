@@ -2,7 +2,7 @@ from flask import Flask, render_template
 import requests
 import arrow
 import json
-app = Flask(__name__, static_folder="../static/dist", template_folder="../static")
+app = Flask(__name__, static_folder="../static", template_folder="../static")
 
 # Informations générales
 nombre_region = 12
