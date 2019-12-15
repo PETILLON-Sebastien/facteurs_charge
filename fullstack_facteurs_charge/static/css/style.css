@@ -35,3 +35,20 @@ body {
     stroke-width: 3px;
     stroke-opacity: 1;
 }
+
+.pales {
+    animation-name: rotation;
+    /* Things added */
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    transform-origin: 88.5px 63px;
+    display: inline-block;
+}
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

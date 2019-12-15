@@ -1,5 +1,7 @@
 import React from "react";
 import Map from "./Map";
+import Eolienne from "./representations/eolienne";
+
 export default class App extends React.Component {
   constructor() {
     super();
@@ -20,8 +22,8 @@ export default class App extends React.Component {
     }
     return (
       <div>
-        <p>Données brutes :</p>
         <Map handleClick={(i) => this.handleClick(i)} meilleurs_facteurs={meilleurs_facteurs} zone_selectionnee={this.zone_selectionnee}/>
+        {/* <Eolienne pourcentage={70}/> */}
       </div>
     );
   }
