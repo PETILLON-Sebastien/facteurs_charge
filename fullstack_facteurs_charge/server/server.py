@@ -22,27 +22,25 @@ sources_energie = ['thermique', 'nucleaire', 'solaire', 'eolien', 'hydraulique',
 def init_donnees():
     global donnees
     donnees = {
-        'national': {},
-        'regional': {
-            '11': {},
-            '24': {},
-            '27': {},
-            '28': {},
-            '32': {},
-            '44': {},
-            '52': {},
-            '53': {},
-            '75': {},
-            '76': {},
-            '84': {},
-            '93': {},
-        }
+        '0': {},
+        '11': {},
+        '24': {},
+        '27': {},
+        '28': {},
+        '32': {},
+        '44': {},
+        '52': {},
+        '53': {},
+        '75': {},
+        '76': {},
+        '84': {},
+        '93': {}
     }
-    for region_key in donnees['regional'].keys():
-        donnees['regional'][region_key]['capacites'] = {}
-        donnees['regional'][region_key]['evolution'] = []
-    donnees['national']['capacites'] = {}
-    donnees['national']['evolution'] = []
+    for region_key in donnees.keys():
+        donnees[region_key]['capacites'] = {}
+        donnees[region_key]['evolution'] = []
+    donnees['0']['capacites'] = {}
+    donnees['0']['evolution'] = []
     
 def appel_necessaire():
     global dernier_appel
@@ -66,42 +64,42 @@ def calculs_regionaux(donnees_regional):
             if cle_tch in ligne_donnee:
                 nouvelle_donnee[cle_tch] = float(ligne_donnee[cle_tch])
             
-            source_energie_non_calculee = source_energie not in donnees['regional'][ligne_donnee['code_insee_region']]['capacites']
+            source_energie_non_calculee = source_energie not in donnees[ligne_donnee['code_insee_region']]['capacites']
             source_energie_calculable = source_energie in nouvelle_donnee and cle_tch in nouvelle_donnee and nouvelle_donnee[cle_tch] > 0
             if source_energie_non_calculee and source_energie_calculable:
                 capacite = nouvelle_donnee[source_energie] / nouvelle_donnee[cle_tch] * 100
-                donnees['regional'][ligne_donnee['code_insee_region']]['capacites'][source_energie] = capacite
+                donnees[ligne_donnee['code_insee_region']]['capacites'][source_energie] = capacite
          
-        donnees['regional'][ligne_donnee['code_insee_region']]['evolution'].append(nouvelle_donnee)
+        donnees[ligne_donnee['code_insee_region']]['evolution'].append(nouvelle_donnee)
 
 def calculs_nationaux():
     global donnees
     global sources_energie
     
-    nombre_resultats = len(donnees['regional']['11']['evolution'])
+    nombre_resultats = len(donnees['11']['evolution'])
     for i in range(0, nombre_resultats - 1):
-        donnees['national']['evolution'].append({
-            'date_heure': donnees['regional']['11']['evolution'][i]['date_heure']
+        donnees['0']['evolution'].append({
+            'date_heure': donnees['11']['evolution'][i]['date_heure']
         })
 
     for source_energie in sources_energie:
         capacite_source = 0
-        for region_key in donnees['regional'].keys():
-            if source_energie in donnees['regional'][region_key]['capacites']:
-                capacite_source += donnees['regional'][region_key]['capacites'][source_energie]
-        donnees['national']['capacites'][source_energie] = capacite_source
+        for region_key in donnees.keys():
+            if source_energie in donnees[region_key]['capacites']:
+                capacite_source += donnees[region_key]['capacites'][source_energie]
+        donnees['0']['capacites'][source_energie] = capacite_source
 
         for i in range(0, nombre_resultats - 1):
             valeur_source = 0
-            for region_key in donnees['regional'].keys():
-                if source_energie in donnees['regional'][region_key]['evolution'][i]:
-                    valeur_source += donnees['regional'][region_key]['evolution'][i][source_energie]
-            donnees['national']['evolution'][i][source_energie] = valeur_source
+            for region_key in donnees.keys():
+                if source_energie in donnees[region_key]['evolution'][i]:
+                    valeur_source += donnees[region_key]['evolution'][i][source_energie]
+            donnees['0']['evolution'][i][source_energie] = valeur_source
             cle_tch = 'tch_' + source_energie
-            if donnees['national']['capacites'][source_energie] == 0:
-                donnees['national']['evolution'][i][cle_tch] = 0
+            if donnees['0']['capacites'][source_energie] == 0:
+                donnees['0']['evolution'][i][cle_tch] = 0
             else:
-                donnees['national']['evolution'][i][cle_tch] = valeur_source / donnees['national']['capacites'][source_energie] * 100
+                donnees['0']['evolution'][i][cle_tch] = valeur_source / donnees['0']['capacites'][source_energie] * 100
 
         
 API_RESEAUX_ENERGIE = "https://opendata.reseaux-energies.fr/api/records/1.0/search/"

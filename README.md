@@ -55,5 +55,5 @@ Correspondances code_insee_region / nom région :
 53 : Bretagne
 75 : Nouvelle-Aquitaine
 76 : Occitanie
-14 : Auvergne-Rhône-Alpes
+84 : Auvergne-Rhône-Alpes
 93 : Provence-Alpes-Côte d'Azur

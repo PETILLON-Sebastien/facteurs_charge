@@ -2,10 +2,13 @@ import React from "react";
 import Map from "./Map";
 export default class App extends React.Component {
   constructor() {
-      super();
+    super();
+    this.donnees = donnees;
+    this.donnees_zone = this.donnees[0];
   }
-  handleClick(i) {
-    alert(i);
+  handleClick(indice_zone) {
+    this.donnees_zone = this.donnees[indice_zone];
+    console.log(this.donnees_zone);
   }
   render () {
     return (
