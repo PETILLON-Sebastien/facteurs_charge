@@ -5,6 +5,7 @@ body {
 /* Placement des composants de l'application */
 .app {
     display: flex;
+    flex-wrap: wrap;
 }
 
 /* Bandeau supérieur */
@@ -92,5 +93,21 @@ body {
     }
     100% {
         transform: rotate(360deg);
+    }
+}
+
+/* Informations */
+.informations {
+    width: 100%;
+    padding: 20px;
+}
+@media (min-width: 600px) {
+    .informations {
+        width: 50%;
+    }
+}
+@media (min-width: 1200px) {
+    .informations {
+        width: 66%;
     }
 }

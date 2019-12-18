@@ -2,6 +2,7 @@ import React from "react";
 import Map from "./Map";
 import github from '../images/github.png';
 import Eolienne from "./representations/eolienne";
+import PanneauSolaire from "./representations/panneau-solaire";
 
 export default class App extends React.Component {
   constructor() {
@@ -22,7 +23,7 @@ export default class App extends React.Component {
       meilleurs_facteurs[cle_region] = this.donnees[cle_region]['meilleur_facteur'];
     }
     return (
-      <div class="application">
+      <div class="app">
         <div class="bandeau">
           <span>---</span>
           <h1>Taux de charge</h1>
@@ -36,7 +37,9 @@ export default class App extends React.Component {
           </div>
         </div>
         <Map handleClick={(i) => this.handleClick(i)} meilleurs_facteurs={meilleurs_facteurs} zone_selectionnee={this.zone_selectionnee}/>
-        {/* <Eolienne pourcentage={70}/> */}
+        <div class="informations">
+          <PanneauSolaire pourcentage={50}/>
+        </div>
       </div>
     );
   }
