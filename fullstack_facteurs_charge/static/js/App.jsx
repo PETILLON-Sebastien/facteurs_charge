@@ -38,7 +38,8 @@ export default class App extends React.Component {
         </div>
         <Map handleClick={(i) => this.handleClick(i)} meilleurs_facteurs={meilleurs_facteurs} zone_selectionnee={this.zone_selectionnee}/>
         <div class="informations">
-          <PanneauSolaire pourcentage={50}/>
+          <PanneauSolaire pourcentage={100}/>
+          <Eolienne pourcentage={100}/>
         </div>
       </div>
     );
