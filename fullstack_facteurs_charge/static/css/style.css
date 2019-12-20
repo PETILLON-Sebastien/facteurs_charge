@@ -95,6 +95,15 @@ body {
         transform: rotate(360deg);
     }
 }
+.ecoulement-gauche {
+    transform-origin: 38px 0px;
+}
+.ecoulement-central {
+    transform-origin: 62px 0px;
+}
+.ecoulement-droite {
+    transform-origin: 86px 0px;
+}
 
 /* Informations */
 .informations {
