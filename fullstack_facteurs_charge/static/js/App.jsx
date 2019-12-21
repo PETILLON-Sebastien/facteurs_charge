@@ -4,6 +4,7 @@ import github from '../images/github.png';
 import Eolienne from "./representations/eolienne";
 import PanneauSolaire from "./representations/panneau-solaire";
 import Barrage from "./representations/barrage";
+import Fossile from "./representations/fossile";
 
 export default class App extends React.Component {
   constructor() {
@@ -39,9 +40,10 @@ export default class App extends React.Component {
         </div>
         <Map handleClick={(i) => this.handleClick(i)} meilleurs_facteurs={meilleurs_facteurs} zone_selectionnee={this.zone_selectionnee}/>
         <div class="informations">
-          <PanneauSolaire pourcentage={50}/>
-          <Eolienne pourcentage={50}/>
-          <Barrage pourcentage={50}/>
+          <PanneauSolaire pourcentage={75}/>
+          <Eolienne pourcentage={75}/>
+          <Barrage pourcentage={75}/>
+          <Fossile pourcentage={75}/>
         </div>
       </div>
     );
