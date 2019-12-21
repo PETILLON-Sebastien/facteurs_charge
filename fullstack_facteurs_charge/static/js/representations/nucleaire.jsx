@@ -32,7 +32,7 @@ class Nucleaire extends React.Component {
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
             version="1.1"
-            viewBox="0 0 90 170"
+            viewBox="0 0 95 170"
           >
             <defs>
               <linearGradient id="nucleaire-r">

@@ -6,6 +6,7 @@ import PanneauSolaire from "./representations/panneau-solaire";
 import Barrage from "./representations/barrage";
 import Fossile from "./representations/fossile";
 import Nucleaire from "./representations/nucleaire";
+import Bioenergies from "./representations/bioenergies";
 
 export default class App extends React.Component {
   constructor() {
@@ -46,6 +47,7 @@ export default class App extends React.Component {
           <Barrage pourcentage={75}/>
           <Fossile pourcentage={75}/>
           <Nucleaire pourcentage={75}/>
+          <Bioenergies pourcentage={75}/>
         </div>
       </div>
     );
