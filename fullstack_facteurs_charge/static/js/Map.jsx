@@ -6,7 +6,7 @@ class Map extends React.Component {
   calculSelection() {
     for(let region_indice in this.regions) {
       let region = this.regions[region_indice];
-      region.props.description.estSelectionnee = region.props.description.id == this.props.zone_selectionnee.id;
+      region.props.description.estSelectionnee = region.props.description.id == this.props.id_zone_selectionnee;
     }
   }
 
@@ -75,7 +75,7 @@ class Map extends React.Component {
     for(var regionKey in this.regionsDescriptions) {
       let regionDescription = this.regionsDescriptions[regionKey];
       regionDescription.meilleur_facteur = this.props.meilleurs_facteurs[regionDescription.id][this.props.index_temps];
-      regionDescription.estSelectionnee = regionDescription.id == this.props.zone_selectionnee.id;
+      regionDescription.estSelectionnee = regionDescription.id == this.props.id_zone_selectionnee;
     }
   }
 

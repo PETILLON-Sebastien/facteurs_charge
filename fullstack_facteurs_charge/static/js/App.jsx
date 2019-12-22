@@ -4,23 +4,32 @@ import github from '../images/github.png';
 import Representations from "./representations"
 
 export default class App extends React.Component {
-  constructor() {
-    super();
-    this.donnees = donnees;
-    this.zone_selectionnee = {id: 0};
-    this.donnees_zone = this.donnees[this.zone_selectionnee.id];
-    this.index_temps = this.donnees_zone.evolution.length - 1;
-  }
-  handleClick(indice_zone) {
-    this.zone_selectionnee.id = indice_zone;
-    this.donnees_zone = this.donnees[this.zone_selectionnee.id];
-    this.setState({});
-  }
-  render () {
-    let meilleurs_facteurs = {};
-    for(var cle_region in this.donnees) {
-      meilleurs_facteurs[cle_region] = this.donnees[cle_region]['meilleur_facteur'];
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      donnees: donnees,
+      id_zone_selectionnee: 0,
+      donnees_zone: donnees[0],
+      index_temps: donnees[0].evolution.length - 1
     }
+  }
+
+  handleClick(indice_zone) {
+    this.setState({
+      id_zone_selectionnee: indice_zone,
+      donnees_zone: this.state.donnees[indice_zone],
+      index_temps: this.state.donnees[indice_zone].evolution.length - 1
+    });
+  }
+
+  render() {
+    let meilleurs_facteurs = {};
+    
+    for(var cle_region in this.state.donnees) {
+      meilleurs_facteurs[cle_region] = this.state.donnees[cle_region]['meilleur_facteur'];
+    }
+
     return (
       <div class="app">
         <div class="bandeau">
@@ -35,8 +44,11 @@ export default class App extends React.Component {
             </a>
           </div>
         </div>
-        <Map handleClick={(i) => this.handleClick(i)} meilleurs_facteurs={meilleurs_facteurs} zone_selectionnee={this.zone_selectionnee} index_temps={this.index_temps}/>
-        <Representations class="representations" donnees={this.donnees_zone} index_temps={this.index_temps}/>
+        <Map  handleClick={(i) => this.handleClick(i)} 
+              meilleurs_facteurs={meilleurs_facteurs} 
+              zone_selectionnee={this.state.id_zone_selectionnee} 
+              index_temps={this.state.index_temps}/>
+        <Representations class="representations" donnees={this.state.donnees_zone} index_temps={this.state.index_temps}/>
       </div>
     );
   }
