@@ -46,19 +46,19 @@ class Representations extends React.Component {
         }
       
         return (
-            <div class="representation">
-            <div class="legende">
+            <div className="representation">
+            <div className="legende">
                 <span className={classes}></span>
                 <span>{this.props.type}</span>
             </div>
-            <div class="affichage">
+            <div className="affichage">
                 {svg}
-                <div class="statistiques">
-                    <div class="titre">Taux de charge :</div>
+                <div className="statistiques">
+                    <div className="titre">Taux de charge :</div>
                     <div>{taux_charge} %</div>
-                    <div class="titre">Production :</div>
+                    <div className="titre">Production :</div>
                     <div>{production} Mwh</div>
-                    <div class="titre">Capacites :</div>
+                    <div className="titre">Capacites :</div>
                     <div>{capacites} Mw</div>
                 </div>
             </div>

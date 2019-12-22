@@ -31,11 +31,11 @@ export default class App extends React.Component {
     }
 
     return (
-      <div class="app">
-        <div class="bandeau">
+      <div className="app">
+        <div className="bandeau">
           <span>---</span>
           <h1>Taux de charge</h1>
-          <div class="liens">
+          <div className="liens">
             <a href="https://github.com/PETILLON-Sebastien/facteurs_charge">
               <img src={github} alt="Projet github" title="Projet github"/>
             </a>
@@ -48,7 +48,7 @@ export default class App extends React.Component {
               meilleurs_facteurs={meilleurs_facteurs} 
               zone_selectionnee={this.state.id_zone_selectionnee} 
               index_temps={this.state.index_temps}/>
-        <Representations class="representations" donnees={this.state.donnees_zone} index_temps={this.state.index_temps}/>
+        <Representations className="representations" donnees={this.state.donnees_zone} index_temps={this.state.index_temps}/>
       </div>
     );
   }
