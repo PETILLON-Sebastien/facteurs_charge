@@ -10,7 +10,6 @@ class Representations extends React.Component {
 
   constructor(props) {
     super(props);
-    this.index = this.props.donnees.evolution.length - 1;
   }
 
   render() {
@@ -22,12 +21,12 @@ class Representations extends React.Component {
                     <span>Photovoltaïque</span>
                 </div>
                 <div class="affichage">
-                    <PanneauSolaire pourcentage={this.props.donnees.evolution[this.index].tch_solaire}/>
+                    <PanneauSolaire pourcentage={this.props.donnees.evolution[this.props.index_temps].tch_solaire}/>
                     <div class="statistiques">
                         <div class="titre">Taux de charge :</div>
-                        <div>{Math.round(this.props.donnees.evolution[this.index].tch_solaire)} %</div>
+                        <div>{Math.round(this.props.donnees.evolution[this.props.index_temps].tch_solaire)} %</div>
                         <div class="titre">Production :</div>
-                        <div>{Math.round(this.props.donnees.evolution[this.index].solaire)} Mwh</div>
+                        <div>{Math.round(this.props.donnees.evolution[this.props.index_temps].solaire)} Mwh</div>
                         <div class="titre">Capacites :</div>
                         <div>{Math.round(this.props.donnees.capacites.solaire)} Mw</div>
                     </div>
@@ -40,12 +39,12 @@ class Representations extends React.Component {
                     <span>Éolien</span>
                 </div>
                 <div class="affichage">
-                    <Eolienne pourcentage={this.props.donnees.evolution[this.index].tch_eolien}/>
+                    <Eolienne pourcentage={this.props.donnees.evolution[this.props.index_temps].tch_eolien}/>
                     <div class="statistiques">
                         <div class="titre">Taux de charge :</div>
-                        <div>{Math.round(this.props.donnees.evolution[this.index].tch_eolien)} %</div>
+                        <div>{Math.round(this.props.donnees.evolution[this.props.index_temps].tch_eolien)} %</div>
                         <div class="titre">Production :</div>
-                        <div>{Math.round(this.props.donnees.evolution[this.index].eolien)} Mwh</div>
+                        <div>{Math.round(this.props.donnees.evolution[this.props.index_temps].eolien)} Mwh</div>
                         <div class="titre">Capacites :</div>
                         <div>{Math.round(this.props.donnees.capacites.eolien)} Mw</div>
                     </div>
@@ -58,12 +57,12 @@ class Representations extends React.Component {
                     <span>Hydraulique</span>
                 </div>
                 <div class="affichage">
-                    <Barrage pourcentage={this.props.donnees.evolution[this.index].tch_hydraulique}/>
+                    <Barrage pourcentage={this.props.donnees.evolution[this.props.index_temps].tch_hydraulique}/>
                     <div class="statistiques">
                         <div class="titre">Taux de charge :</div>
-                        <div>{Math.round(this.props.donnees.evolution[this.index].tch_hydraulique)} %</div>
+                        <div>{Math.round(this.props.donnees.evolution[this.props.index_temps].tch_hydraulique)} %</div>
                         <div class="titre">Production :</div>
-                        <div>{Math.round(this.props.donnees.evolution[this.index].hydraulique)} Mwh</div>
+                        <div>{Math.round(this.props.donnees.evolution[this.props.index_temps].hydraulique)} Mwh</div>
                         <div class="titre">Capacites :</div>
                         <div>{Math.round(this.props.donnees.capacites.hydraulique)} Mw</div>
                     </div>
@@ -76,12 +75,12 @@ class Representations extends React.Component {
                     <span>Nucléaire</span>
                 </div>
                 <div class="affichage">
-                    <Nucleaire pourcentage={this.props.donnees.evolution[this.index].tch_nucleaire}/>
+                    <Nucleaire pourcentage={this.props.donnees.evolution[this.props.index_temps].tch_nucleaire}/>
                     <div class="statistiques">
                         <div class="titre">Taux de charge :</div>
-                        <div>{Math.round(this.props.donnees.evolution[this.index].tch_nucleaire)} %</div>
+                        <div>{Math.round(this.props.donnees.evolution[this.props.index_temps].tch_nucleaire)} %</div>
                         <div class="titre">Production :</div>
-                        <div>{Math.round(this.props.donnees.evolution[this.index].nucleaire)} Mwh</div>
+                        <div>{Math.round(this.props.donnees.evolution[this.props.index_temps].nucleaire)} Mwh</div>
                         <div class="titre">Capacites :</div>
                         <div>{Math.round(this.props.donnees.capacites.nucleaire)} Mw</div>
                     </div>
@@ -94,12 +93,12 @@ class Representations extends React.Component {
                     <span>Bioénergies</span>
                 </div>
                 <div class="affichage">
-                    <Bioenergies pourcentage={this.props.donnees.evolution[this.index].tch_bioenergies}/>
+                    <Bioenergies pourcentage={this.props.donnees.evolution[this.props.index_temps].tch_bioenergies}/>
                     <div class="statistiques">
                         <div class="titre">Taux de charge :</div>
-                        <div>{Math.round(this.props.donnees.evolution[this.index].tch_bioenergies)} %</div>
+                        <div>{Math.round(this.props.donnees.evolution[this.props.index_temps].tch_bioenergies)} %</div>
                         <div class="titre">Production :</div>
-                        <div>{Math.round(this.props.donnees.evolution[this.index].bioenergies)} Mwh</div>
+                        <div>{Math.round(this.props.donnees.evolution[this.props.index_temps].bioenergies)} Mwh</div>
                         <div class="titre">Capacites :</div>
                         <div>{Math.round(this.props.donnees.capacites.bioenergies)} Mw</div>
                     </div>
@@ -112,12 +111,12 @@ class Representations extends React.Component {
                     <span>Fossile</span>
                 </div>
                 <div class="affichage">
-                    <Fossile pourcentage={this.props.donnees.evolution[this.index].tch_thermique}/>
+                    <Fossile pourcentage={this.props.donnees.evolution[this.props.index_temps].tch_thermique}/>
                     <div class="statistiques">
                         <div class="titre">Taux de charge :</div>
-                        <div>{Math.round(this.props.donnees.evolution[this.index].tch_thermique)} %</div>
+                        <div>{Math.round(this.props.donnees.evolution[this.props.index_temps].tch_thermique)} %</div>
                         <div class="titre">Production :</div>
-                        <div>{Math.round(this.props.donnees.evolution[this.index].thermique)} Mwh</div>
+                        <div>{Math.round(this.props.donnees.evolution[this.props.index_temps].thermique)} Mwh</div>
                         <div class="titre">Capacites :</div>
                         <div>{Math.round(this.props.donnees.capacites.thermique)} Mw</div>
                     </div>

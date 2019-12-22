@@ -74,7 +74,7 @@ class Map extends React.Component {
     ];
     for(var regionKey in this.regionsDescriptions) {
       let regionDescription = this.regionsDescriptions[regionKey];
-      regionDescription.meilleur_facteur = this.props.meilleurs_facteurs[regionDescription.id];
+      regionDescription.meilleur_facteur = this.props.meilleurs_facteurs[regionDescription.id][this.props.index_temps];
       regionDescription.estSelectionnee = regionDescription.id == this.props.zone_selectionnee.id;
     }
   }
@@ -87,8 +87,6 @@ class Map extends React.Component {
           key={this.regionsDescriptions[i].id} 
           description={this.regionsDescriptions[i]}
           onClick={(i) => this.handleClick(i)}
-          //onClick={() => alert(this.regionsDescriptions[i].id)}
-          // onClick={() => this.handleClick(this.regionsDescriptions[i].id)}
         />
       );
     }

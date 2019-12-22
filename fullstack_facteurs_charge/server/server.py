@@ -71,6 +71,16 @@ def calculs_regionaux(donnees_regional):
                 donnees[ligne_donnee['code_insee_region']]['capacites'][source_energie] = capacite
          
         donnees[ligne_donnee['code_insee_region']]['evolution'].append(nouvelle_donnee)
+    
+    # Verification des tailles des evolutions
+    # for key in donnees:
+    #     if key != '0':
+    #         ligne = donnees[key]
+    #         print(key)
+    #         length = len(ligne['evolution'])
+    #         print(length)
+    #         print(ligne['evolution'][length - 1]['date_heure'])
+    #         print('-------')
 
 def calculs_nationaux():
     global donnees
@@ -106,16 +116,17 @@ def calcul_meilleur_facteur():
     global donnees
     tch_prefix = 'tch_'
     for code_insee_region in donnees:
-        meilleure_valeur = 0.
-        meilleure_cle = None
         donnee = donnees[code_insee_region]
-        premiere_donnee = donnee['evolution'][0]
-        for cle in premiere_donnee:
-            if cle.find(tch_prefix) != -1:
-                if float(premiere_donnee[cle]) > meilleure_valeur:
-                    meilleure_valeur = premiere_donnee[cle]
-                    meilleure_cle = cle[len(tch_prefix):]
-        donnees[code_insee_region]['meilleur_facteur'] = meilleure_cle
+        donnees[code_insee_region]['meilleur_facteur'] = []
+        for donnee_courante in donnee['evolution']:
+            meilleure_valeur = 0.
+            meilleure_cle = None
+            for cle in donnee_courante:
+                if cle.find(tch_prefix) != -1:
+                    if float(donnee_courante[cle]) > meilleure_valeur:
+                        meilleure_valeur = donnee_courante[cle]
+                        meilleure_cle = cle[len(tch_prefix):]
+            donnees[code_insee_region]['meilleur_facteur'].append(meilleure_cle)
                     
 
 API_RESEAUX_ENERGIE = "https://opendata.reseaux-energies.fr/api/records/1.0/search/"

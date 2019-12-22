@@ -7,9 +7,9 @@ export default class App extends React.Component {
   constructor() {
     super();
     this.donnees = donnees;
-    console.log(this.donnees)
     this.zone_selectionnee = {id: 0};
     this.donnees_zone = this.donnees[this.zone_selectionnee.id];
+    this.index_temps = this.donnees_zone.evolution.length - 1;
   }
   handleClick(indice_zone) {
     this.zone_selectionnee.id = indice_zone;
@@ -36,8 +36,8 @@ export default class App extends React.Component {
             </a>
           </div>
         </div>
-        <Map handleClick={(i) => this.handleClick(i)} meilleurs_facteurs={meilleurs_facteurs} zone_selectionnee={this.zone_selectionnee}/>
-        <Representations class="representations" donnees={this.donnees_zone}/>
+        <Map handleClick={(i) => this.handleClick(i)} meilleurs_facteurs={meilleurs_facteurs} zone_selectionnee={this.zone_selectionnee} index_temps={this.index_temps}/>
+        <Representations class="representations" donnees={this.donnees_zone} index_temps={this.index_temps}/>
       </div>
     );
   }
