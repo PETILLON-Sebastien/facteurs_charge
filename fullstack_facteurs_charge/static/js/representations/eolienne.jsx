@@ -1,13 +1,12 @@
 import React from "react";
 
-
 class Eolienne extends React.Component {
 
     constructor(props) {
         super(props);
     }
 
-    pourcentageVersTemps(pourcentage) {
+    pourcentageVersTemps() {
         var temps = 0;
         if(this.props.pourcentage > 1) {
             temps = 53 * Math.exp(-0.04 * this.props.pourcentage);
@@ -17,7 +16,7 @@ class Eolienne extends React.Component {
 
     render() {
         const rotationStyle = {
-            'animationDuration': this.pourcentageVersTemps(this.props.pourcentage) + 's'
+            'animationDuration': this.pourcentageVersTemps() + 's'
         };
         return (
             <svg

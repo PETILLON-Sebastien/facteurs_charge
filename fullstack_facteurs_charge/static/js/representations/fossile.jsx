@@ -6,26 +6,26 @@ class Fossile extends React.Component {
         super(props);
     }
 
-    pourcentageVersTemps(pourcentage) {
+    pourcentageVersTemps() {
         var temps = 0;
-        if(pourcentage > 1) {
-            temps = 3 * Math.exp(-0.02 * pourcentage);
+        if(this.props.pourcentage > 1) {
+            temps = 3 * Math.exp(-0.02 * this.props.pourcentage);
         }
         return temps;
     }
-    pourcentageVersOpacite(pourcentage) {
+    pourcentageVersOpacite() {
         var opacite = 0;
-        if(pourcentage > 1) {
-            opacite = 0.24 * Math.log(pourcentage) - 0.15;
+        if(this.props.pourcentage > 1) {
+            opacite = 0.24 * Math.log(this.props.pourcentage) - 0.15;
         }
         return opacite;
     }
 
     render() {
         const translationStyle = {
-            'animationDuration': this.pourcentageVersTemps(this.props.pourcentage) + 's'
+            'animationDuration': this.pourcentageVersTemps() + 's'
         };
-        const opacite = this.pourcentageVersOpacite(this.props.pourcentage);
+        const opacite = this.pourcentageVersOpacite();
 
         return (
             <svg
