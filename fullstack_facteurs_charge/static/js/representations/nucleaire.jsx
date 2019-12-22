@@ -23,7 +23,7 @@ class Nucleaire extends React.Component {
 
     render() {
         const translationStyle = {
-            'animation-duration': this.pourcentageVersTemps(this.props.pourcentage) + 's'
+            'animationDuration': this.pourcentageVersTemps(this.props.pourcentage) + 's'
         };
         const opacite = this.pourcentageVersOpacite(this.props.pourcentage);
 

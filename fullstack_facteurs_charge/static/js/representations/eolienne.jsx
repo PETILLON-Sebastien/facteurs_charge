@@ -17,7 +17,7 @@ class Eolienne extends React.Component {
 
     render() {
         const rotationStyle = {
-            'animation-duration': this.pourcentageVersTemps(this.props.pourcentage) + 's'
+            'animationDuration': this.pourcentageVersTemps(this.props.pourcentage) + 's'
         };
         return (
             <svg
