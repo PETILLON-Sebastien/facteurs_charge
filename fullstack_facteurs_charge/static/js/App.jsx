@@ -1,24 +1,20 @@
 import React from "react";
 import Map from "./Map";
 import github from '../images/github.png';
-import Eolienne from "./representations/eolienne";
-import PanneauSolaire from "./representations/panneau-solaire";
-import Barrage from "./representations/barrage";
-import Fossile from "./representations/fossile";
-import Nucleaire from "./representations/nucleaire";
-import Bioenergies from "./representations/bioenergies";
+import Representations from "./representations"
 
 export default class App extends React.Component {
   constructor() {
     super();
     this.donnees = donnees;
+    console.log(this.donnees)
     this.zone_selectionnee = {id: 0};
-    this.donnees_zone = this.donnees[this.zone_selectionnee];
+    this.donnees_zone = this.donnees[this.zone_selectionnee.id];
   }
   handleClick(indice_zone) {
     this.zone_selectionnee.id = indice_zone;
     this.donnees_zone = this.donnees[this.zone_selectionnee.id];
-    console.log(this.donnees_zone);
+    console.log(this.donnees_zone)
     this.setState({});
   }
   render () {
@@ -41,14 +37,7 @@ export default class App extends React.Component {
           </div>
         </div>
         <Map handleClick={(i) => this.handleClick(i)} meilleurs_facteurs={meilleurs_facteurs} zone_selectionnee={this.zone_selectionnee}/>
-        <div class="informations">
-          <PanneauSolaire pourcentage={75}/>
-          <Eolienne pourcentage={75}/>
-          <Barrage pourcentage={75}/>
-          <Fossile pourcentage={75}/>
-          <Nucleaire pourcentage={75}/>
-          <Bioenergies pourcentage={75}/>
-        </div>
+        <Representations class="representations" donnees={this.donnees_zone}/>
       </div>
     );
   }

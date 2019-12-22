@@ -1,5 +1,6 @@
 body {
     background-color: #222;
+    color: #CCC;
 }
 
 /* Placement des composants de l'application */
@@ -14,6 +15,7 @@ body {
     height: 50px;
     padding: 10px;
     background-color: #BBB;
+    color: #222;
     display: flex;
     justify-content: space-between;
 }
@@ -79,6 +81,92 @@ body {
 }
 
 /* Style des représentations graphiques */
+.regroupement-representations {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+@media (min-width: 600px) {
+    .regroupement-representations {
+        width: 50%;
+    }
+}
+@media (min-width: 1200px) {
+    .regroupement-representations {
+        width: 66%;
+    }
+}
+.representation {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 350px;
+    margin-bottom: 20px;
+}
+.representation svg {
+    height: 150px;
+    width: 100%;
+}
+.statistiques {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+@media (min-width: 600px) {
+    .representation {
+        width: 33%;
+    }
+}
+@media (min-width: 1200px) {
+    .representation {
+        width: 16%;
+    }
+}
+.representation .titre {
+    margin-right: 10px;
+    color: #888;
+    font-weight: 600;
+
+}
+.legende {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.legende-moyen-production {
+    width: 10px;
+    height: 10px;
+    padding: 5px;
+    display: inline-flex;
+    margin: 1px;
+    margin-right: 10px;
+    border-radius: 100%;
+    border: white solid 1px;
+}
+.legende-photovoltaique {
+    background-color:rgb(242, 116, 6);
+}
+.legende-eolien {
+    background-color:rgb(116, 205, 185);
+}
+.legende-hydraulique {
+    background-color:rgb(39, 114, 178);
+}
+.legende-nucleaire {
+    background-color:rgba(174, 184, 0);
+}
+.legende-bioenergies {
+    background-color:rgb(22, 106, 87);
+}
+.legende-thermique {
+    background-color:rgb(134, 125, 102);
+}
+
 .pales {
     animation-name: rotation;
     /* Things added */

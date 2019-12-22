@@ -123,7 +123,7 @@ class Eolienne extends React.Component {
                     strokeWidth="0.165"
                     d="M87.952 65.173l-1.512 56.696h3.97l-1.702-56.79z"
                 ></path>
-                <g fillRule="nonzero" strokeWidth="0.103" className="pales" transform="translate(-30px, -90px);"  style={rotationStyle}>
+                <g fillRule="nonzero" strokeWidth="0.103" className="pales" style={rotationStyle}>
                     <path
                         fill="url(#eolienne-d)"
                         d="M44.497 87.902c11.782-4.69 20.881-11.045 33.274-15.41.426-.103 11.066-8.439 10.756-9.112-.582-1.26-2.28.41-7.7 3.186-7.807 3.999-36.47 21.125-36.33 21.336z"
