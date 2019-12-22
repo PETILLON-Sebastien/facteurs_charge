@@ -14,7 +14,6 @@ export default class App extends React.Component {
   handleClick(indice_zone) {
     this.zone_selectionnee.id = indice_zone;
     this.donnees_zone = this.donnees[this.zone_selectionnee.id];
-    console.log(this.donnees_zone)
     this.setState({});
   }
   render () {

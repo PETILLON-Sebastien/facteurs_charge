@@ -2,12 +2,13 @@ from flask import Flask, render_template
 import requests
 import arrow
 import json
+import time
 app = Flask(__name__, static_folder="../static", template_folder="../static")
 
 # Informations générales
 nombre_region = 12
 nombre_donnees_par_heure = 4
-nombre_heures = 24
+nombre_heures = 25
 global periode_rafraichissement
 periode_rafraichissement = 5
 
@@ -50,6 +51,8 @@ def appel_necessaire():
 def calculs_regionaux(donnees_regional):
     global donnees
     global sources_energie
+
+    # Copie et calcul des donnees pour chaque enregistrement
     for record in donnees_regional['records']:
         ligne_donnee = record['fields']
         nouvelle_donnee = {
@@ -69,29 +72,39 @@ def calculs_regionaux(donnees_regional):
             if source_energie_non_calculee and source_energie_calculable:
                 capacite = nouvelle_donnee[source_energie] / nouvelle_donnee[cle_tch] * 100
                 donnees[ligne_donnee['code_insee_region']]['capacites'][source_energie] = capacite
-         
+        
         donnees[ligne_donnee['code_insee_region']]['evolution'].append(nouvelle_donnee)
     
-    # Verification des tailles des evolutions
-    # for key in donnees:
-    #     if key != '0':
-    #         ligne = donnees[key]
-    #         print(key)
-    #         length = len(ligne['evolution'])
-    #         print(length)
-    #         print(ligne['evolution'][length - 1]['date_heure'])
-    #         print('-------')
+    # Calcul du plus petit nombre de donnees pour une region
+    nombre_resultats_min = nombre_donnees_par_heure * nombre_heures
+    for key in donnees:
+        if key != '0':
+            ligne = donnees[key]
+            nombre_resultats = len(ligne['evolution']) - 1
+            if key != '0' and nombre_resultats < nombre_resultats_min:
+                nombre_resultats_min = nombre_resultats
+
+    # Conservation du meme nombre de donnees pour chacune des regions
+    for key in donnees:
+        if key != '0':
+            ligne = donnees[key]
+            nombre_resultats = len(ligne['evolution'])
+            difference = nombre_resultats - nombre_resultats_min
+            if difference > 0:
+                del ligne['evolution'][0:difference-1]
 
 def calculs_nationaux():
     global donnees
     global sources_energie
-    
+
+    # Construction de la structure avec heures au national
     nombre_resultats = len(donnees['11']['evolution'])
     for i in range(0, nombre_resultats):
         donnees['0']['evolution'].append({
             'date_heure': donnees['11']['evolution'][i]['date_heure']
         })
 
+    # Calcul des données agrégées depuis le regional
     for source_energie in sources_energie:
         capacite_source = 0
         for region_key in donnees.keys():
@@ -112,6 +125,7 @@ def calculs_nationaux():
             else:
                 donnees['0']['evolution'][i][cle_tch] = valeur_source / donnees['0']['capacites'][source_energie] * 100
 
+
 def calcul_meilleur_facteur():
     global donnees
     tch_prefix = 'tch_'
@@ -131,6 +145,10 @@ def calcul_meilleur_facteur():
 
 API_RESEAUX_ENERGIE = "https://opendata.reseaux-energies.fr/api/records/1.0/search/"
 
+def sauver(reponse_serveur):
+    with open(str(int(round(time.time() * 1000))) + '-data.json', 'w') as f:
+        json.dump(reponse_serveur, f)
+
 def mise_a_jour_donnees():
     r = requests.session()
     date_max = arrow.now(tz='Europe/Paris')
@@ -149,6 +167,9 @@ def mise_a_jour_donnees():
     }
     reponse_regional = r.get(API_RESEAUX_ENERGIE, params=params_regional)
     donnees_regional = json.loads(reponse_regional.content)
+    
+    # Utile pour du debug
+    # sauver(donnees_regional)
 
     init_donnees()
     calculs_regionaux(donnees_regional)

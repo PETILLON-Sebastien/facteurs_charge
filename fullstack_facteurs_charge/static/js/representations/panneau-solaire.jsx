@@ -6,10 +6,16 @@ class PanneauSolaire extends React.Component {
         super(props);
     }
     pourcentageVersPositionY(pourcentage) {
-        return 50 - 2 * Math.exp(pourcentage / 35);
+        if(pourcentage !== undefined) {
+            return 50 - 2 * Math.exp(pourcentage / 35);
+        }
+        return 0;
     }
     pourcentageVersPositionX(pourcentage) {
-        return 50 + 2 * Math.exp(pourcentage / 35);
+        if(pourcentage !== undefined) {
+            return 50 + 2 * Math.exp(pourcentage / 35);
+        }
+        return 0;
     }
 
 
