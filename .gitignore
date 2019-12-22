@@ -4,3 +4,5 @@
 **\scripts
 **\tcl
 **\**\dist
+**\**\package-lock.json
+**\**\bundle.js
