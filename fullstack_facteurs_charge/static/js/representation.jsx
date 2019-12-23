@@ -14,7 +14,7 @@ class Representations extends React.Component {
 
   render() {
         const taux_charge = isNaN(this.props.pourcentage) ? "-" : Math.round(this.props.pourcentage);
-        const production = isNaN(this.props.pourcentage) ? "-" : Math.round(this.props.pourcentage);
+        const production = isNaN(this.props.production) ? "-" : Math.round(this.props.production);
         const capacites = isNaN(this.props.capacites) ? "-" : Math.round(this.props.capacites);
         let svg;
         let classes = "legende-moyen-production legende-";
