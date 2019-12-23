@@ -48,7 +48,13 @@ body {
 }
 .affichage {
     width: 100%;
+    display: flex;
+    flex-wrap: wrap;
 }
+.affichage > * {
+    width: 100%;
+}
+
 @media (min-width: 600px) {
     .affichage {
         width: 50%;
@@ -56,8 +62,18 @@ body {
 }
 @media (min-width: 1200px) {
     .affichage {
-        width: 66%;
+        width: 67%;
     }
+    .affichage > * {
+        width: 50%;
+    }
+}
+
+.chart-wrapping {
+    padding: 10px;;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .region {
@@ -97,6 +113,7 @@ body {
 /* Style des représentations graphiques */
 .regroupement-representations {
     width: 100%;
+    padding: 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -126,7 +143,7 @@ body {
 }
 @media (min-width: 1200px) {
     .representation {
-        width: 16%;
+        width: 16.6%;
     }
 }
 .representation .titre {
@@ -222,6 +239,6 @@ body {
 }
 @media (min-width: 1200px) {
     .informations {
-        width: 66%;
+        width: 67%;
     }
 }

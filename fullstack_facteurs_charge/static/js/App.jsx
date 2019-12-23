@@ -3,6 +3,7 @@ import Map from "./Map";
 import github from '../images/github.png';
 import Representations from "./representations"
 import GrapheCharge from "./graphe-charge";
+import GrapheProduction from "./graphe-production";
 
 export default class App extends React.Component {
 
@@ -54,6 +55,7 @@ export default class App extends React.Component {
         <div className="affichage">
           <Representations className="representations" donnees={this.state.donnees_zone} index_temps={this.state.index_temps}/>
           <GrapheCharge donnees={this.state.donnees_zone.evolution} />
+          <GrapheProduction donnees={this.state.donnees_zone.evolution} />
         </div>
       </div>
     );

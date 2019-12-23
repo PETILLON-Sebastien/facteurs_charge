@@ -2,7 +2,7 @@ import React from "react";
 import ReactHighcharts from "react-highcharts";
 import moment from "moment";
 
-class GrapheCharge extends React.Component {
+class GrapheProduction extends React.Component {
 
     constructor(props) {
         super(props);
@@ -13,37 +13,31 @@ class GrapheCharge extends React.Component {
             {
                 name: "Photovoltaïque",
                 color: "rgb(242, 116, 6)",
-                type: "spline",
                 data: []
             },
             {
                 name: "Éolien",
                 color: "rgb(116, 205, 185)",
-                type: "spline",
                 data: []
             },
             {
                 name: "Hydraulique",
                 color: "rgb(39, 114, 178)",
-                type: "spline",
                 data: []
             },
             {
                 name: "Nucléaire",
                 color: "rgb(174, 184, 0)",
-                type: "spline",
                 data: []
             },
             {
                 name: "Bioénergies",
                 color: "rgb(22, 106, 87)",
-                type: "spline",
                 data: []
             },
             {
                 name: "Fossile",
                 color: "rgb(134, 125, 102)",
-                type: "spline",
                 data: []
             }
         ];
@@ -51,12 +45,12 @@ class GrapheCharge extends React.Component {
         for(let index in this.props.donnees) {
             let donnee = this.props.donnees[index];
             let date = moment(donnee["date_heure"]).valueOf();
-            series[0].data.push([date, Math.round(donnee["tch_solaire"] * 100) / 100]);
-            series[1].data.push([date, Math.round(donnee["tch_eolien"] * 100) / 100]);
-            series[2].data.push([date, Math.round(donnee["tch_hydraulique"] * 100) / 100]);
-            series[3].data.push([date, Math.round(donnee["tch_nucleaire"] * 100) / 100]);
-            series[4].data.push([date, Math.round(donnee["tch_bioenergies"] * 100) / 100]);
-            series[5].data.push([date, Math.round(donnee["tch_thermique"] * 100) / 100]);
+            series[0].data.push([date, Math.round(donnee["solaire"] * 100) / 100]);
+            series[1].data.push([date, Math.round(donnee["eolien"] * 100) / 100]);
+            series[2].data.push([date, Math.round(donnee["hydraulique"] * 100) / 100]);
+            series[3].data.push([date, Math.round(donnee["nucleaire"] * 100) / 100]);
+            series[4].data.push([date, Math.round(donnee["bioenergies"] * 100) / 100]);
+            series[5].data.push([date, Math.round(donnee["thermique"] * 100) / 100]);
         }
         
         let config = {
@@ -65,15 +59,21 @@ class GrapheCharge extends React.Component {
             },
             tooltip: {
                 split: true,
-                valueSuffix: ' %'
+                valueSuffix: ' MWh'
             },
             yAxis: {
                 title: {
-                    text: 'Taux de charge (%)'
+                    text: 'Production'
                 },
-                tickAmount: 0,
                 min: 0,
-                max: 100
+                labels: {
+                    formatter: function () {
+                        if(this.value > 999) {
+                            return Math.round(this.value / 10) / 100 + " GWh";
+                        }
+                        return this.value + " MWh";
+                    }
+                }
             },
             xAxis: {
                 type: 'datetime',
@@ -85,25 +85,30 @@ class GrapheCharge extends React.Component {
                 enabled: false
             },
             plotOptions: {
-                series: {
-                    label: {
-                        connectorAllowed: false
-                    },
+                areaspline: {
+                    stacking: 'areaspline',
+                    lineColor: '#666666',
+                    lineWidth: 1,
+                    marker: {
+                        lineWidth: 1,
+                        lineColor: '#666666'
+                    }
                 }
             },
             chart: {
+                type: 'areaspline',
+                stacking: 'normal',
                 backgroundColor: "rgba(0,0,0,0)"
             },
             series: series
-        
         }
         return (
             <div className="chart-wrapping">
-                <span>Taux de charge</span>
+                <span>Production</span>
                 <ReactHighcharts width="100%" height="100%" config = {config}></ReactHighcharts>
             </div>
         );
     }
 }
 
-export default GrapheCharge;
+export default GrapheProduction;
