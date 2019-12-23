@@ -9,7 +9,7 @@ class Representations extends React.Component {
 
   render() {
       return (
-        <div class="regroupement-representations">
+        <div className="regroupement-representations">
             <Representation 
                 pourcentage={this.props.donnees.evolution[this.props.index_temps].tch_solaire}
                 production={this.props.donnees.evolution[this.props.index_temps].solaire}

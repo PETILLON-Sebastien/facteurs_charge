@@ -6,12 +6,12 @@ class Barrage extends React.Component {
         super(props);
     }
 
-    pourcentageVersLargeur(pourcentage) {
-        return pourcentage / 100;
+    pourcentageVersLargeur() {
+        return this.props.pourcentage / 100;
     }
 
     render() {
-        const largeur = this.pourcentageVersLargeur(this.props.pourcentage);
+        const largeur = this.pourcentageVersLargeur();
 
         return (
             <svg

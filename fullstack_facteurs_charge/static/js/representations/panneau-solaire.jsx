@@ -5,23 +5,23 @@ class PanneauSolaire extends React.Component {
     constructor(props) {
         super(props);
     }
-    pourcentageVersPositionY(pourcentage) {
-        if(pourcentage !== undefined) {
-            return 50 - 2 * Math.exp(pourcentage / 35);
+    pourcentageVersPositionY() {
+        if(this.props.pourcentage !== undefined) {
+            return 50 - 2 * Math.exp(this.props.pourcentage / 35);
         }
         return 0;
     }
-    pourcentageVersPositionX(pourcentage) {
-        if(pourcentage !== undefined) {
-            return 50 + 2 * Math.exp(pourcentage / 35);
+    pourcentageVersPositionX() {
+        if(this.props.pourcentage !== undefined) {
+            return 50 + 2 * Math.exp(this.props.pourcentage / 35);
         }
         return 0;
     }
 
 
     render() {
-        var yPosition = this.pourcentageVersPositionY(this.props.pourcentage);
-        var xPosition = this.pourcentageVersPositionX(this.props.pourcentage);
+        var yPosition = this.pourcentageVersPositionY();
+        var xPosition = this.pourcentageVersPositionX();
         return (
             <svg
             xmlns="http://www.w3.org/2000/svg"
