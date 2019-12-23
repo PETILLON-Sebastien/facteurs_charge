@@ -2,6 +2,7 @@ import React from "react";
 import Map from "./Map";
 import github from '../images/github.png';
 import Representations from "./representations"
+import GrapheCharge from "./graphe-charge";
 
 export default class App extends React.Component {
   constructor() {
@@ -37,6 +38,7 @@ export default class App extends React.Component {
         </div>
         <Map handleClick={(i) => this.handleClick(i)} meilleurs_facteurs={meilleurs_facteurs} zone_selectionnee={this.zone_selectionnee} index_temps={this.index_temps}/>
         <Representations class="representations" donnees={this.donnees_zone} index_temps={this.index_temps}/>
+        <GrapheCharge donnees={this.donnees_zone.evolution} />
       </div>
     );
   }
