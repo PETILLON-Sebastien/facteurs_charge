@@ -32,20 +32,34 @@ body {
 }
 
 /* Composant carte */
-.map {
+.actions {
     width: 100%;
     padding: 20px;
 }
 @media (min-width: 600px) {
-    .map {
+    .actions {
         width: 50%;
     }
 }
 @media (min-width: 1200px) {
-    .map {
+    .actions {
         width: 33%;
     }
 }
+.affichage {
+    width: 100%;
+}
+@media (min-width: 600px) {
+    .affichage {
+        width: 50%;
+    }
+}
+@media (min-width: 1200px) {
+    .affichage {
+        width: 66%;
+    }
+}
+
 .region {
     cursor: pointer;
     transition: fill 0.5s;
@@ -86,16 +100,6 @@ body {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-}
-@media (min-width: 600px) {
-    .regroupement-representations {
-        width: 50%;
-    }
-}
-@media (min-width: 1200px) {
-    .regroupement-representations {
-        width: 66%;
-    }
 }
 .representation {
     width: 100%;

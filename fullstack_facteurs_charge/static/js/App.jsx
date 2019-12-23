@@ -45,12 +45,16 @@ export default class App extends React.Component {
             </a>
           </div>
         </div>
-        <Map  handleClick={(i) => this.handleClick(i)} 
-              meilleurs_facteurs={meilleurs_facteurs} 
-              zone_selectionnee={this.state.id_zone_selectionnee} 
-              index_temps={this.state.index_temps}/>
-        <Representations className="representations" donnees={this.state.donnees_zone} index_temps={this.state.index_temps}/>
-        <GrapheCharge donnees={this.state.donnees_zone.evolution} />
+        <div className="actions">
+          <Map  handleClick={(i) => this.handleClick(i)} 
+                meilleurs_facteurs={meilleurs_facteurs} 
+                zone_selectionnee={this.state.id_zone_selectionnee} 
+                index_temps={this.state.index_temps}/>
+        </div>
+        <div className="affichage">
+          <Representations className="representations" donnees={this.state.donnees_zone} index_temps={this.state.index_temps}/>
+          <GrapheCharge donnees={this.state.donnees_zone.evolution} />
+        </div>
       </div>
     );
   }

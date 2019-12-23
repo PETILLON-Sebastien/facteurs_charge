@@ -9,7 +9,6 @@ class GrapheCharge extends React.Component {
     }
 
     render() {
-        console.log(this.props.donnees);
         let series = [
             {
                 name: "Photovoltaïque",
@@ -94,7 +93,7 @@ class GrapheCharge extends React.Component {
         series: series
         
         }
-        return (<ReactHighcharts config = {config}></ReactHighcharts>);
+        return (<ReactHighcharts width="100%" height="100%" config = {config}></ReactHighcharts>);
     }
 }
 

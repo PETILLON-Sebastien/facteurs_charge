@@ -6,7 +6,7 @@ class Zone extends React.Component {
   }
 
   render() {
-    const selectionnee = this.props.description.estSelectionnee ? 'selectionnee' : '';
+    const selectionnee = this.props.zone_selectionnee === this.props.description.id ? 'selectionnee' : '';
     const couleur = this.props.description.meilleur_facteur + '_couleur';
     return (<path
         d={this.props.description.path}

@@ -51,7 +51,7 @@ class Representations extends React.Component {
                 <span className={classes}></span>
                 <span>{this.props.type}</span>
             </div>
-            <div className="affichage">
+            <div className="affichage-representation">
                 {svg}
                 <div className="statistiques">
                     <div className="titre">Taux de charge :</div>
