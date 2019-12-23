@@ -53,7 +53,7 @@ def calculs_regionaux(donnees_regional):
     global sources_energie
 
     # Copie et calcul des donnees pour chaque enregistrement
-    for record in donnees_regional['records']:
+    for record in reversed(donnees_regional['records']):
         ligne_donnee = record['fields']
         nouvelle_donnee = {
             'date_heure': ligne_donnee['date_heure'], 
