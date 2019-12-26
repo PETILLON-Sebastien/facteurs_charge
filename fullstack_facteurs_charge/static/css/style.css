@@ -25,7 +25,7 @@ body {
     font-size: 120%;
 }
 .bandeau .liens > * {
-    margin-right: 20px;
+    margin-right: 5px;
 }
 .bandeau .liens img {
     width: 25px;
@@ -40,6 +40,7 @@ body {
     align-items: center;
     width: 100%;
     padding: 20px;
+    margin-bottom: 25px;
 }
 @media (min-width: 600px) {
     .actions {
@@ -50,6 +51,20 @@ body {
     .actions {
         width: 33%;
     }
+}
+
+.label-region {
+    font-weight: 600;
+}
+.label-date-heure {
+    padding-bottom: 15px;
+    font-weight: 200;
+    font-size: 80%;
+}
+
+.unit {
+    font-weight: 200;
+    font-size: 80%;
 }
 
 .slider-temps {
@@ -98,6 +113,13 @@ body {
 @media (min-width: 1200px) {
     .chart-wrapping {
         width: 48%;
+    }
+}
+
+@media (max-width: 500px) {
+    .chart-wrapping {
+        padding: 0px;
+        width: 100%;
     }
 }
 
@@ -173,7 +195,7 @@ body {
 .representation .titre {
     margin-right: 10px;
     color: #888;
-    font-weight: 600;
+    font-weight: 200;
 
 }
 .legende {

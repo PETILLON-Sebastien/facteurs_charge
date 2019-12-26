@@ -98,7 +98,14 @@ class GrapheCharge extends React.Component {
             responsive: {
                 rules: [{
                     condition: {
-                        maxWidth: "100%"
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        yAxis: {
+                            title: {
+                                text: null
+                            }
+                        }
                     }
                 }]
             }

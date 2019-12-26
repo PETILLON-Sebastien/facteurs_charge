@@ -7,6 +7,8 @@ import GrapheProduction from "./graphe-production";
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import moment from "moment";
+import regionDescription from "./regions-descriptions";
+import _ from "lodash";
 
 var that;
 
@@ -14,7 +16,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     that = this;
-    console.log(donnees);
+    this.regionsDescriptions = regionDescription;
     this.state = {
       donnees: donnees,
       id_zone_selectionnee: 0,
@@ -48,6 +50,10 @@ export default class App extends React.Component {
         marks[index] = (moment(donnee.date_heure)).format("HH:mm");
       }
     }
+    
+    let donnee_region_selectionnee = _.find(this.regionsDescriptions, {'id': this.state.id_zone_selectionnee});
+    let label_region = donnee_region_selectionnee.label;
+    let label_date_heure = moment(this.state.donnees_zone.evolution[this.state.index_temps].date_heure).format("DD/MM/YY HH:mm"); 
 
     return (
       <div className="app">
@@ -64,6 +70,8 @@ export default class App extends React.Component {
           </div>
         </div>
         <div className="actions">
+          <span className="label-region">{label_region}</span>
+          <span className="label-date-heure">{label_date_heure}</span>
           <Map handleClick={(i) => this.handleClick(i)} 
                 meilleurs_facteurs={meilleurs_facteurs} 
                 zone_selectionnee={this.state.id_zone_selectionnee} 
