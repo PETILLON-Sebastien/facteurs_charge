@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createRef } from 'react'
 import Map from "./Map";
 import github from '../images/github.png';
 import Representations from "./representations"
@@ -16,6 +16,8 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     that = this;
+    this.grapheCharge = createRef();
+    this.grapheProduction = createRef();
     this.regionsDescriptions = regionDescription;
     this.state = {
       donnees: donnees,
@@ -25,10 +27,12 @@ export default class App extends React.Component {
     }
   }
 
-  onSliderChange(value) {
+  onSliderChange(valeur) {
     that.setState({
-      index_temps: value
+      index_temps: valeur
     });
+    that.grapheCharge.current.modifierTemps(valeur);
+    that.grapheProduction.current.modifierTemps(valeur);
   }
 
   handleClick(indice_zone) {
@@ -81,8 +85,8 @@ export default class App extends React.Component {
         </div>
         <div className="affichage">
           <Representations className="representations" donnees={this.state.donnees_zone} index_temps={this.state.index_temps} />
-          <GrapheCharge donnees={this.state.donnees_zone.evolution} />
-          <GrapheProduction donnees={this.state.donnees_zone.evolution} />
+          <GrapheCharge donnees={this.state.donnees_zone.evolution} index_temps={this.state.index_temps} ref={this.grapheCharge} />
+          <GrapheProduction donnees={this.state.donnees_zone.evolution} index_temps={this.state.index_temps} ref={this.grapheProduction} />
         </div>
       </div>
     );

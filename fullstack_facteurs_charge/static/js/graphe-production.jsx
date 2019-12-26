@@ -1,11 +1,31 @@
-import React from "react";
+import React, { createRef } from "react";
 import ReactHighcharts from "react-highcharts";
 import moment from "moment";
+
+let that;
 
 class GrapheProduction extends React.Component {
 
     constructor(props) {
         super(props);
+        that = this;
+        this.chart = createRef();
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps.donnees != this.props.donnees;
+    }
+
+    modifierTemps(valeur) {
+        that.chart.current.chart.update({
+            xAxis: {
+                plotLines: [{
+                    color: '#FFF',
+                    width: 1,
+                    value: moment(this.props.donnees[valeur]["date_heure"]).valueOf()
+                }]
+            }
+        });
     }
 
     render() {
@@ -53,6 +73,8 @@ class GrapheProduction extends React.Component {
             series[5].data.push([date, Math.round(donnee["thermique"] * 100) / 100]);
         }
         
+        let heure_courante = moment(this.props.donnees[this.props.index_temps]["date_heure"]).valueOf();
+
         let config = {
             title: {
                 text: ''
@@ -79,7 +101,12 @@ class GrapheProduction extends React.Component {
                 type: 'datetime',
                 title: {
                     text: 'Heure'
-                }
+                },
+                plotLines: [{
+                    color: '#FFF',
+                    width: 1,
+                    value: heure_courante
+                }]
             },
             legend: {
                 enabled: false
@@ -119,7 +146,7 @@ class GrapheProduction extends React.Component {
         return (
             <div className="chart-wrapping">
                 <span>Production</span>
-                <ReactHighcharts config = {config}></ReactHighcharts>
+                <ReactHighcharts config = {config} ref={this.chart}></ReactHighcharts>
             </div>
         );
     }
