@@ -7,6 +7,8 @@ body {
 .app {
     display: flex;
     flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 
 /* Bandeau supérieur */
@@ -33,6 +35,9 @@ body {
 
 /* Composant carte */
 .actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
     padding: 20px;
 }
@@ -46,6 +51,12 @@ body {
         width: 33%;
     }
 }
+
+.slider-temps {
+    width: 80% !important;
+    margin-top: 20px;
+}
+
 .affichage {
     width: 100%;
     display: flex;
@@ -60,7 +71,7 @@ body {
         width: 50%;
     }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1200px) {      
     .affichage {
         width: 67%;
     }
@@ -70,10 +81,24 @@ body {
 }
 
 .chart-wrapping {
-    padding: 10px;;
+    padding: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 95%;
+}
+.chart-wrapping > div {
+    width: 100%;
+}
+.highcharts-figure, .highcharts-data-table table {
+    min-width: 250px; 
+    max-width: 800px;
+}
+
+@media (min-width: 1200px) {
+    .chart-wrapping {
+        width: 48%;
+    }
 }
 
 .region {
@@ -113,7 +138,6 @@ body {
 /* Style des représentations graphiques */
 .regroupement-representations {
     width: 100%;
-    padding: 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

@@ -100,12 +100,19 @@ class GrapheProduction extends React.Component {
                 stacking: 'normal',
                 backgroundColor: "rgba(0,0,0,0)"
             },
-            series: series
+            series: series,
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: "100%"
+                    }
+                }]
+            }
         }
         return (
             <div className="chart-wrapping">
                 <span>Production</span>
-                <ReactHighcharts width="100%" height="100%" config = {config}></ReactHighcharts>
+                <ReactHighcharts config = {config}></ReactHighcharts>
             </div>
         );
     }

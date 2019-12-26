@@ -16,7 +16,6 @@ class Map extends React.Component {
 
   handleClick(valeur) {
     this.props.handleClick(valeur);
-    this.calculSelection();
   }
 
   render() {
