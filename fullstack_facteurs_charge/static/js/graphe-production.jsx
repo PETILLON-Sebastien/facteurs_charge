@@ -13,7 +13,7 @@ class GrapheProduction extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return nextProps.donnees != this.props.donnees;
+        return nextProps.donnees != this.props.donnees || nextProps.actionsVisibles != this.props.actionsVisibles;
     }
 
     modifierTemps(valeur) {

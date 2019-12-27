@@ -1,6 +1,8 @@
 import React, { createRef } from 'react'
 import Map from "./Map";
 import github from '../images/github.png';
+import buttonOn from '../images/buttonon.png';
+import buttonOff from '../images/buttonoff.png';
 import Representations from "./representations"
 import GrapheCharge from "./graphe-charge";
 import GrapheProduction from "./graphe-production";
@@ -21,6 +23,7 @@ export default class App extends React.Component {
     this.regionsDescriptions = regionDescription;
     this.state = {
       donnees: donnees,
+      actionsVisibles: true,
       id_zone_selectionnee: 0,
       donnees_zone: donnees[0],
       index_temps: donnees[0].evolution.length - 1
@@ -42,6 +45,14 @@ export default class App extends React.Component {
     });
   }
 
+  changerVisibiliteActions() {
+    that.setState({
+      actionsVisibles: !that.state.actionsVisibles 
+    });
+    // that.grapheCharge.current.redessiner();
+    // that.grapheProduction.current.redessiner();
+  }
+
   render() {
     let meilleurs_facteurs = {};
     for(var cle_region in this.state.donnees) {
@@ -57,13 +68,33 @@ export default class App extends React.Component {
     
     let donnee_region_selectionnee = _.find(this.regionsDescriptions, {'id': this.state.id_zone_selectionnee});
     let label_region = donnee_region_selectionnee.label;
-    let label_date_heure = moment(this.state.donnees_zone.evolution[this.state.index_temps].date_heure).format("DD/MM/YY HH:mm"); 
+    let label_date_heure = moment(this.state.donnees_zone.evolution[this.state.index_temps].date_heure).format("DD/MM/YY HH:mm");
+
+    let actions = this.state.actionsVisibles ? 
+      (<div className="actions">
+        <Map handleClick={(i) => this.handleClick(i)} 
+              meilleurs_facteurs={meilleurs_facteurs} 
+              zone_selectionnee={this.state.id_zone_selectionnee} 
+              index_temps={this.state.index_temps}/>
+        <Slider className="slider-temps" value={this.state.index_temps} marks={marks}
+          min={0} max={this.state.donnees[0].evolution.length - 1} onChange={this.onSliderChange}/>
+      </div>)
+      : null;
+
+    let boutonActions = this.state.actionsVisibles ? 
+      <img src={buttonOff} className="buttonOff" onClick={this.changerVisibiliteActions} alt="Cacher les actions" title="Cacher les actions"/>
+      : <img src={buttonOn} className="buttonOn" onClick={this.changerVisibiliteActions} alt="Montrer les actions" title="Montrer les actions"/>;
+
+    let classNameAffichage = this.state.actionsVisibles ? "affichage" : "affichage seul";
 
     return (
       <div className="app">
         <div className="bandeau">
-          <span>---</span>
-          <h1>Taux de charge</h1>
+          {boutonActions}
+          <div className="titre">
+            <span className="label-region">{label_region}</span>
+            <span className="label-date-heure">{label_date_heure}</span>
+          </div>
           <div className="liens">
             <a href="https://github.com/PETILLON-Sebastien/facteurs_charge">
               <img src={github} alt="Projet github" title="Projet github"/>
@@ -73,20 +104,15 @@ export default class App extends React.Component {
             </a>
           </div>
         </div>
-        <div className="actions">
-          <span className="label-region">{label_region}</span>
-          <span className="label-date-heure">{label_date_heure}</span>
-          <Map handleClick={(i) => this.handleClick(i)} 
-                meilleurs_facteurs={meilleurs_facteurs} 
-                zone_selectionnee={this.state.id_zone_selectionnee} 
-                index_temps={this.state.index_temps}/>
-          <Slider className="slider-temps" value={this.state.index_temps} marks={marks}
-            min={0} max={this.state.donnees[0].evolution.length - 1} onChange={this.onSliderChange}/>
-        </div>
-        <div className="affichage">
+        {actions}
+        <div className={classNameAffichage}>
           <Representations className="representations" donnees={this.state.donnees_zone} index_temps={this.state.index_temps} />
-          <GrapheCharge donnees={this.state.donnees_zone.evolution} index_temps={this.state.index_temps} ref={this.grapheCharge} />
-          <GrapheProduction donnees={this.state.donnees_zone.evolution} index_temps={this.state.index_temps} ref={this.grapheProduction} />
+        </div>
+        <div className={classNameAffichage}>
+          <GrapheCharge donnees={this.state.donnees_zone.evolution} index_temps={this.state.index_temps}
+            ref={this.grapheCharge} actionsVisibles={this.state.actionsVisibles} />
+          <GrapheProduction donnees={this.state.donnees_zone.evolution} index_temps={this.state.index_temps}
+            ref={this.grapheProduction} actionsVisibles={this.state.actionsVisibles} />
         </div>
       </div>
     );
