@@ -49,8 +49,6 @@ export default class App extends React.Component {
     that.setState({
       actionsVisibles: !that.state.actionsVisibles 
     });
-    // that.grapheCharge.current.redessiner();
-    // that.grapheProduction.current.redessiner();
   }
 
   render() {

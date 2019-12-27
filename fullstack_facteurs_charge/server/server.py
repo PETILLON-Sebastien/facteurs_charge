@@ -168,7 +168,7 @@ def sauver(reponse_serveur):
 def mise_a_jour_donnees():
     r = requests.session()
     date_max = arrow.now(tz='Europe/Paris')
-    date_min = date_max.shift(days=-1)
+    date_min = date_max.shift(hours= - nombre_donnees_par_heure * nombre_heures)
     formatte_max = date_max.format('YYYY-MM-DDTHH:mm')
     formatte_min = date_min.format('YYYY-MM-DDTHH:mm')
 
