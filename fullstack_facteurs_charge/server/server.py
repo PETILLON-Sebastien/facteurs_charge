@@ -19,6 +19,8 @@ global donnees
 donnees = None
 global sources_energie
 sources_energie = ['thermique', 'nucleaire', 'solaire', 'eolien', 'hydraulique', 'bioenergies']
+global autres_donnees
+autres_donnees = ['ech_physiques', 'consommation']
 
 def init_donnees():
     global donnees
@@ -51,6 +53,7 @@ def appel_necessaire():
 def calculs_regionaux(donnees_regional):
     global donnees
     global sources_energie
+    global autres_donnees
 
     # Copie et calcul des donnees pour chaque enregistrement
     for record in reversed(donnees_regional['records']):
@@ -72,6 +75,10 @@ def calculs_regionaux(donnees_regional):
             if source_energie_non_calculee and source_energie_calculable:
                 capacite = nouvelle_donnee[source_energie] / nouvelle_donnee[cle_tch] * 100
                 donnees[ligne_donnee['code_insee_region']]['capacites'][source_energie] = capacite
+
+        for autre_donnee in autres_donnees:
+            if autre_donnee in ligne_donnee:
+                nouvelle_donnee[autre_donnee] = float(ligne_donnee[autre_donnee])
         
         donnees[ligne_donnee['code_insee_region']]['evolution'].append(nouvelle_donnee)
     
@@ -96,6 +103,7 @@ def calculs_regionaux(donnees_regional):
 def calculs_nationaux():
     global donnees
     global sources_energie
+    global autres_donnees
 
     # Construction de la structure avec heures au national
     nombre_resultats = len(donnees['11']['evolution'])
@@ -125,6 +133,14 @@ def calculs_nationaux():
             else:
                 donnees['0']['evolution'][i][cle_tch] = valeur_source / donnees['0']['capacites'][source_energie] * 100
 
+    # Calcul de la consommation et des echanges
+    for autre_donnee in autres_donnees:
+        for i in range(0, nombre_resultats):
+            valeur_donnee = 0
+            for region_key in donnees.keys():
+                if autre_donnee in donnees[region_key]['evolution'][i]:
+                    valeur_donnee += float(donnees[region_key]['evolution'][i][autre_donnee])
+            donnees['0']['evolution'][i][autre_donnee] = valeur_donnee
 
 def calcul_meilleur_facteur():
     global donnees

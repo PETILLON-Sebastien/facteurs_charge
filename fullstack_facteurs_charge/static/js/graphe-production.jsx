@@ -46,11 +46,6 @@ class GrapheProduction extends React.Component {
                 data: []
             },
             {
-                name: "Nucléaire",
-                color: "rgb(174, 184, 0)",
-                data: []
-            },
-            {
                 name: "Bioénergies",
                 color: "rgb(22, 106, 87)",
                 data: []
@@ -59,7 +54,24 @@ class GrapheProduction extends React.Component {
                 name: "Fossile",
                 color: "rgb(134, 125, 102)",
                 data: []
-            }
+            },
+            {
+                name: "Nucléaire",
+                color: "rgb(174, 184, 0)",
+                data: []
+            },
+            {
+                name: "Consommation",
+                color: "rgb(0, 0, 0)",
+                data: [],
+                type: 'spline'
+            },
+            {
+                name: "Echanges",
+                color: "rgb(0, 0, 0)",
+                fillOpacity: "0.4",
+                data: []
+            },
         ];
 
         for(let index in this.props.donnees) {
@@ -68,9 +80,11 @@ class GrapheProduction extends React.Component {
             series[0].data.push([date, Math.round(donnee["solaire"] * 100) / 100]);
             series[1].data.push([date, Math.round(donnee["eolien"] * 100) / 100]);
             series[2].data.push([date, Math.round(donnee["hydraulique"] * 100) / 100]);
-            series[3].data.push([date, Math.round(donnee["nucleaire"] * 100) / 100]);
-            series[4].data.push([date, Math.round(donnee["bioenergies"] * 100) / 100]);
-            series[5].data.push([date, Math.round(donnee["thermique"] * 100) / 100]);
+            series[3].data.push([date, Math.round(donnee["bioenergies"] * 100) / 100]);
+            series[4].data.push([date, Math.round(donnee["thermique"] * 100) / 100]);
+            series[5].data.push([date, Math.round(donnee["nucleaire"] * 100) / 100]);
+            series[6].data.push([date, Math.round(donnee["consommation"] * 100) / 100]);
+            series[7].data.push([date, Math.round(donnee["ech_physiques"] * 100) / 100]);
         }
         
         let heure_courante = moment(this.props.donnees[this.props.index_temps]["date_heure"]).valueOf();
@@ -80,17 +94,15 @@ class GrapheProduction extends React.Component {
                 text: ''
             },
             tooltip: {
-                split: true,
                 valueSuffix: ' MWh'
             },
             yAxis: {
                 title: {
                     text: 'Production'
                 },
-                min: 0,
                 labels: {
                     formatter: function () {
-                        if(this.value > 999) {
+                        if(this.value > 999 || this.value < 999) {
                             return Math.round(this.value / 10) / 100 + " GWh";
                         }
                         return this.value + " MWh";
@@ -112,13 +124,15 @@ class GrapheProduction extends React.Component {
                 enabled: false
             },
             plotOptions: {
+                marker: { enabled: false },
+                stacking: 'normal',
                 areaspline: {
                     stacking: 'areaspline',
-                    lineColor: '#666666',
+                    lineColor: '#222',
                     lineWidth: 1,
                     marker: {
                         lineWidth: 1,
-                        lineColor: '#666666'
+                        lineColor: '#222'
                     }
                 }
             },
