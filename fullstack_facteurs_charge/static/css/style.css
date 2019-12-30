@@ -41,10 +41,10 @@ body {
     width: 100%;
     padding: 20px;
     margin-bottom: 25px;
-    max-height: 300px;
 }
 @media (min-width: 600px) {
     .actions {
+        max-height: 300px;
         width: 50%;
     }
 }
@@ -309,4 +309,23 @@ body {
     .informations {
         width: 67%;
     }
+}
+
+.aPropos {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #666;
+}
+
+.aPropos .titre {
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.aPropos a {
+    font-style: none;
+    color: rgb(20, 50, 255);
 }

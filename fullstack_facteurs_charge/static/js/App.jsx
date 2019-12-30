@@ -7,6 +7,7 @@ import Representations from "./representations"
 import GrapheCharge from "./graphe-charge";
 import GrapheProduction from "./graphe-production";
 import Slider from 'rc-slider';
+import APropos from './a-propos'
 import 'rc-slider/assets/index.css';
 import moment from "moment";
 import regionDescription from "./regions-descriptions";
@@ -112,6 +113,7 @@ export default class App extends React.Component {
           <GrapheProduction donnees={this.state.donnees_zone.evolution} index_temps={this.state.index_temps}
             ref={this.grapheProduction} actionsVisibles={this.state.actionsVisibles} />
         </div>
+        <APropos />
       </div>
     );
   }
