@@ -8,7 +8,7 @@ Quelques instructions pour mettre en place l'environnement de travail
 
 ### Front-end
 
-Lancez la commande suivante dans le dossier `fullstack_facteurs_charge\static` :
+Lancez la commande suivante dans le dossier `fullstack_facteurs_charge\server\static` :
 
 ```npm i webpack --save-dev```
 
