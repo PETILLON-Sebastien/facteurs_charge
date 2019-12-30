@@ -1,0 +1,331 @@
+body {
+    background-color: #222;
+    color: #CCC;
+}
+
+/* Placement des composants de l'application */
+.app {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+/* Bandeau supérieur */
+.bandeau {
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    background-color: #BBB;
+    color: #222;
+    display: flex;
+    justify-content: space-between;
+}
+.bandeau h1 {
+    font-size: 120%;
+}
+.bandeau .liens > * {
+    margin-right: 5px;
+}
+.bandeau .liens img {
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+}
+
+/* Composant carte */
+.actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+@media (min-width: 600px) {
+    .actions {
+        max-height: 300px;
+        width: 50%;
+    }
+}
+@media (min-width: 1200px) {
+    .actions {
+        width: 33%;
+    }
+}
+
+.buttonOn, .buttonOff {
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+    margin: 2px;
+}
+.buttonOn {
+    background-color:  white;
+}
+.buttonOff {
+    background-color:  black;
+}
+
+.titre span {
+    margin-right: 20px;
+}
+.label-region {
+    font-weight: 600;
+}
+.label-date-heure {
+    padding-bottom: 15px;
+    font-weight: 200;
+    font-size: 80%;
+}
+
+.unit {
+    font-weight: 200;
+    font-size: 80%;
+}
+
+.slider-temps {
+    width: 80% !important;
+    margin-top: 20px;
+}
+
+.affichage {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.affichage.seul {
+    width: 100% !important;
+}
+
+.affichage > * {
+    width: 100%;
+}
+
+@media (min-width: 600px) {
+    .affichage {
+        width: 50%;
+    }
+}
+@media (min-width: 1200px) {      
+    .affichage {
+        width: 67%;
+    }
+    .affichage > * {
+        width: 50%;
+    }
+}
+
+.chart-wrapping {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 95%;
+}
+.chart-wrapping > div {
+    width: 100%;
+}
+.highcharts-figure, .highcharts-data-table table {
+    min-width: 250px; 
+    max-width: 800px;
+}
+
+@media (min-width: 1200px) {
+    .chart-wrapping {
+        width: 48%;
+    }
+}
+
+@media (max-width: 500px) {
+    .chart-wrapping {
+        padding: 0px;
+        width: 100%;
+    }
+}
+
+.region {
+    cursor: pointer;
+    transition: fill 0.5s;
+    opacity: 0.8;
+    stroke: black;
+}
+.region:hover {
+    opacity: 1;
+}
+.nucleaire_couleur {
+    fill: rgb(174, 184, 0);
+}
+.bioenergies_couleur {
+    fill: rgb(22, 106, 87);
+}
+.eolien_couleur {
+    fill: rgb(116, 205, 185);
+}
+.hydraulique_couleur {
+    fill: rgb(39, 114, 178);
+}
+.solaire_couleur {
+    fill: rgb(242, 116, 6);
+}
+.thermique_couleur {
+    fill: rgb(134, 125, 102);
+}
+.selectionnee {
+    opacity: 1;
+    stroke: black;
+    stroke-width: 3px;
+    stroke-opacity: 1;
+}
+
+/* Style des représentations graphiques */
+.regroupement-representations {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.representation {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 320px;
+    margin-bottom: 20px;
+}
+.representation svg {
+    height: 140px;
+    width: 100%;
+}
+.statistiques {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+@media (min-width: 600px) {
+    .representation {
+        width: 33%;
+    }
+}
+@media (min-width: 1200px) {
+    .representation {
+        width: 16.6%;
+    }
+}
+.representation .titre {
+    margin-right: 10px;
+    color: #888;
+    font-weight: 200;
+
+}
+.legende {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.legende-moyen-production {
+    width: 10px;
+    height: 10px;
+    padding: 5px;
+    display: inline-flex;
+    margin: 1px;
+    margin-right: 10px;
+    border-radius: 100%;
+    border: white solid 1px;
+}
+.legende-photovoltaique {
+    background-color:rgb(242, 116, 6);
+}
+.legende-eolien {
+    background-color:rgb(116, 205, 185);
+}
+.legende-hydraulique {
+    background-color:rgb(39, 114, 178);
+}
+.legende-nucleaire {
+    background-color:rgb(174, 184, 0);
+}
+.legende-bioenergies {
+    background-color:rgb(22, 106, 87);
+}
+.legende-thermique {
+    background-color:rgb(134, 125, 102);
+}
+
+.pales {
+    animation-name: rotation;
+    /* Things added */
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    transform-origin: 88.5px 63px;
+    display: inline-block;
+}
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.ecoulement-gauche {
+    transform-origin: 38px 0px;
+}
+.ecoulement-central {
+    transform-origin: 62px 0px;
+}
+.ecoulement-droite {
+    transform-origin: 86px 0px;
+}
+.fumee {
+    animation-name: montee;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+@keyframes montee {
+    0% {
+        transform: translate(0px, 1px);
+    }
+    100% {
+        transform: translate(0.5px, -37px)
+    }
+}
+
+/* Informations */
+.informations {
+    width: 100%;
+    padding: 20px;
+}
+@media (min-width: 600px) {
+    .informations {
+        width: 50%;
+    }
+}
+@media (min-width: 1200px) {
+    .informations {
+        width: 67%;
+    }
+}
+
+.aPropos {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #666;
+}
+
+.aPropos .titre {
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.aPropos a {
+    font-style: none;
+    color: rgb(20, 50, 255);
+}

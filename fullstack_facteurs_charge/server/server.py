@@ -1,9 +1,10 @@
+# -*-coding:Latin-1 -*
 from flask import Flask, render_template
 import requests
 import arrow
 import json
 import time
-app = Flask(__name__, static_folder="../static", template_folder="../static")
+app = Flask(__name__, static_folder="static", template_folder="static")
 
 # Informations générales
 nombre_region = 12
