@@ -169,14 +169,14 @@ def sauver(reponse_serveur):
 def mise_a_jour_donnees():
     r = requests.session()
     date_max = arrow.now(tz='Europe/Paris')
-    date_min = date_max.shift(hours= - nombre_donnees_par_heure * nombre_heures)
+    date_min = date_max.shift(hours= - nombre_heures)
     formatte_max = date_max.format('YYYY-MM-DDTHH:mm')
     formatte_min = date_min.format('YYYY-MM-DDTHH:mm')
 
     params_regional = {
         'dataset': 'eco2mix-regional-tr',
         'facet': 'nature',
-        'refine.nature': "Données temps réel",
+        'refine.nature': "Donn\u00e9es temps r\u00e9el",
         'sort': 'date_heure',
         'q': 'date_heure >= {} AND date_heure <= {}'.format(formatte_min, formatte_max),
         'timezone': 'Europe/Paris',
@@ -186,7 +186,7 @@ def mise_a_jour_donnees():
     donnees_regional = json.loads(reponse_regional.content)
     
     # Utile pour du debug
-    #sauver(donnees_regional)
+    # sauver(donnees_regional)
 
     init_donnees()
     calculs_regionaux(donnees_regional)
