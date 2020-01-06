@@ -63,6 +63,7 @@ def calculs_regionaux(donnees_regional):
             'date_heure': ligne_donnee['date_heure'], 
             'libelle_region': ligne_donnee['libelle_region']
         }
+        donnees_region = donnees[str(ligne_donnee['code_insee_region'])]
         for source_energie in sources_energie:
             cle_tch = 'tch_' + source_energie
 
@@ -71,17 +72,17 @@ def calculs_regionaux(donnees_regional):
             if cle_tch in ligne_donnee:
                 nouvelle_donnee[cle_tch] = float(ligne_donnee[cle_tch])
             
-            source_energie_non_calculee = source_energie not in donnees[ligne_donnee['code_insee_region']]['capacites']
+            source_energie_non_calculee = source_energie not in donnees_region['capacites']
             source_energie_calculable = source_energie in nouvelle_donnee and cle_tch in nouvelle_donnee and nouvelle_donnee[cle_tch] > 0
             if source_energie_non_calculee and source_energie_calculable:
                 capacite = nouvelle_donnee[source_energie] / nouvelle_donnee[cle_tch] * 100
-                donnees[ligne_donnee['code_insee_region']]['capacites'][source_energie] = capacite
+                donnees_region['capacites'][source_energie] = capacite
 
         for autre_donnee in autres_donnees:
             if autre_donnee in ligne_donnee:
                 nouvelle_donnee[autre_donnee] = float(ligne_donnee[autre_donnee])
         
-        donnees[ligne_donnee['code_insee_region']]['evolution'].append(nouvelle_donnee)
+        donnees_region['evolution'].append(nouvelle_donnee)
     
     # Calcul du plus petit nombre de donnees pour une region
     nombre_resultats_min = nombre_donnees_par_heure * nombre_heures
@@ -183,6 +184,7 @@ def mise_a_jour_donnees():
         'rows': nombre_region * nombre_donnees_par_heure * nombre_heures
     }
     reponse_regional = r.get(API_RESEAUX_ENERGIE, params=params_regional)
+    print(reponse_regional)
     donnees_regional = json.loads(reponse_regional.content)
     
     # Utile pour du debug
