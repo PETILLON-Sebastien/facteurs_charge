@@ -77,7 +77,6 @@ def calculs_regionaux(donnees_regional):
             if source_energie_non_calculee and source_energie_calculable:
                 capacite = nouvelle_donnee[source_energie] / nouvelle_donnee[cle_tch] * 100
                 donnees_region['capacites'][source_energie] = capacite
-
         for autre_donnee in autres_donnees:
             if autre_donnee in ligne_donnee:
                 nouvelle_donnee[autre_donnee] = float(ligne_donnee[autre_donnee])
@@ -177,15 +176,14 @@ def mise_a_jour_donnees():
     params_regional = {
         'dataset': 'eco2mix-regional-tr',
         'facet': 'nature',
-        'refine.nature': "Donn\u00e9es temps r\u00e9el",
+        'refine.nature': "Données temps réel",
         'sort': 'date_heure',
         'q': 'date_heure >= {} AND date_heure <= {}'.format(formatte_min, formatte_max),
         'timezone': 'Europe/Paris',
         'rows': nombre_region * nombre_donnees_par_heure * nombre_heures
     }
     reponse_regional = r.get(API_RESEAUX_ENERGIE, params=params_regional)
-    print(reponse_regional)
-    donnees_regional = json.loads(reponse_regional.content)
+    donnees_regional = json.loads(reponse_regional.content.decode("utf-8"))
     
     # Utile pour du debug
     # sauver(donnees_regional)
