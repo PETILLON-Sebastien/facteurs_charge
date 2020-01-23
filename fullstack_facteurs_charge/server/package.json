@@ -1,0 +1,10 @@
+{
+  "name": "facteurs_charge_server",
+  "version": "1.0.0",
+  "description": "Facteurs de charge server",
+  "main": "server.js",
+  "author": "PETILLON Sébastien",
+  "devDependencies": {
+    "lodash": "4.17.15"
+  }
+}
