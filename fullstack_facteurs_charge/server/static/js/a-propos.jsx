@@ -8,7 +8,7 @@ class APropos extends React.Component {
 
     render() {
         return (<div className="aPropos">
-            <div class="titre">À propos</div>
+            <div className="titre">À propos</div>
             <span>Cette application s'appuie sur les données fournies par <a href="https://opendata.reseaux-energies.fr">
                 https://opendata.reseaux-energies.fr
             </a>.</span>

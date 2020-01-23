@@ -5,6 +5,7 @@
   "main": "server.js",
   "author": "PETILLON Sébastien",
   "devDependencies": {
-    "lodash": "4.17.15"
+    "lodash": "4.17.15",
+    "moment": "2.24.0"
   }
 }
