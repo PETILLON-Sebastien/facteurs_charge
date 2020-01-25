@@ -39,7 +39,7 @@ class PanneauSolaire extends React.Component {
                 <stop offset="1" stopColor="#646464" stopOpacity="1"></stop>
                 </linearGradient>
                 <linearGradient id="panneau-solaire-a">
-                <stop offset="0" stopColor="#0024a1" stopOpacity="1"></stop>
+                <stop offset="0" stopColor="#0024ff" stopOpacity="1"></stop>
                 <stop offset="1" stopColor="#002453" stopOpacity="1"></stop>
                 </linearGradient>
                 <linearGradient

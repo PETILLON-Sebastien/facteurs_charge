@@ -124,7 +124,7 @@ var calculs_nationaux = function(donnees) {
     var nombre_resultats = donnees['11'].evolution.length;
     for (var i = 0; i < nombre_resultats; i++) {
         donnees['0'].evolution.push({
-            'date_heure': donnees['11'].evolution[i].date_heur
+            'date_heure': donnees['11'].evolution[i].date_heure
         });
     }
 
@@ -178,13 +178,13 @@ var calcul_meilleur_facteur = function(donnees) {
     var tch_prefix = 'tch_';
     _.forEach(donnees, function(donnee) {
         donnee.meilleur_facteur = [];
-        _.forEach(donnees.evolution, function(donnee_courante) {
+        _.forEach(donnee.evolution, function(donnee_courante) {
             var meilleure_valeur = 0;
             var meilleure_cle = undefined;
             _.forEach(donnee_courante, function(value, key) {
                 if (_.includes(key, tch_prefix) && parseFloat(value) > meilleure_valeur) {
                     meilleure_valeur = parseFloat(value);
-                    meilleure_cle = key;
+                    meilleure_cle = _.replace(key, tch_prefix, "");
                 }
             });
             donnee.meilleur_facteur.push(meilleure_cle);
