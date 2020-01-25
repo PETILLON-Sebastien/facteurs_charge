@@ -30,17 +30,16 @@ puis ouvrez le fichier `index.html`.
 
 ### Back-end
 
-Créez un environement virtuel python. Pour ce faire, installez virtualenv (python nécessaire) :
-```pip install virtualenv```
+Tout d'abord, installez nodejs.
 
-Créez l'environnement virtuel :
-```virtualenv server\```
+Positionnez-vous dans le dossier `fullstack_facteurs_charge\server` :
 
-Installez Flask :
-```pip install -U Flask```
+Installez les dépendances :
+
+```npm install```
 
 Pour exécuter le back-end, lancez la commande
-```python server.py```
+```node server.py```
 
 ### Précisions
 
