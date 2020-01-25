@@ -10,6 +10,9 @@ body {
     flex-direction: row;
     justify-content: flex-end;
 }
+.map {
+    width: 90%;
+}
 
 /* Bandeau supérieur */
 .bandeau {
@@ -42,13 +45,13 @@ body {
     padding: 20px;
     margin-bottom: 25px;
 }
-@media (min-width: 600px) {
+@media (min-width: 600px) and (max-resolution: 150dpi) {
     .actions {
         max-height: 300px;
         width: 50%;
     }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1200px) and (max-resolution: 150dpi) {
     .actions {
         width: 33%;
     }
@@ -103,12 +106,12 @@ body {
     width: 100%;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 600px) and (max-resolution: 150dpi) {
     .affichage {
         width: 50%;
     }
 }
-@media (min-width: 1200px) {      
+@media (min-width: 1200px) and (max-resolution: 150dpi) {      
     .affichage {
         width: 67%;
     }
@@ -123,6 +126,7 @@ body {
     flex-direction: column;
     align-items: center;
     width: 95%;
+    height: 450px;
 }
 .chart-wrapping > div {
     width: 100%;
@@ -132,13 +136,13 @@ body {
     max-width: 800px;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1200px) and (max-resolution: 150dpi) {
     .chart-wrapping {
         width: 48%;
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 500px) and (max-resolution: 150dpi) {
     .chart-wrapping {
         padding: 0px;
         width: 100%;
@@ -204,12 +208,12 @@ body {
     flex-direction: column;
     align-items: center;
 }
-@media (min-width: 600px) {
+@media (min-width: 600px) and (max-resolution: 150dpi) {
     .representation {
         width: 33%;
     }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1200px) and (max-resolution: 150dpi) {
     .representation {
         width: 16.6%;
     }
@@ -300,12 +304,12 @@ body {
     width: 100%;
     padding: 20px;
 }
-@media (min-width: 600px) {
+@media (min-width: 600px) and (max-resolution: 150dpi) {
     .informations {
         width: 50%;
     }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1200px) and (max-resolution: 150dpi) {
     .informations {
         width: 67%;
     }
@@ -323,4 +327,50 @@ body {
 .aPropos a {
     font-style: none;
     color: rgb(20, 50, 255);
+}
+
+@media (min-resolution: 150dpi) {
+    body {
+        font-size: 250%;
+    }
+    .bandeau h1 {
+        font-size: 240%;
+    }
+    .bandeau {
+        height: 100px;
+    }
+    .buttonOn, .buttonOff, .bandeau .liens img {
+        width: 60px;
+        height: 60px;
+    }
+    .representation {
+        width: 50%;
+        margin-top: 20px;
+        height: 850px;
+    }
+    .representation svg {
+        height: 400px;
+    }
+    .label-region, .label-date-heure {
+        font-size: 75%;
+    }
+    .aPropos {
+        font-size: 75%;
+    }
+    .affichage-representation {
+        margin-bottom: 20px;
+    }
+    .chart-wrapping {
+        height: 650px;
+    }
+    .chart-wrapping > div {
+        height: 100%;
+    }    
+    .legende-moyen-production {
+        width: 25px;
+        height: 25px;
+    }
+    .regroupement-representations {
+        padding-left: 20px;
+    }
 }

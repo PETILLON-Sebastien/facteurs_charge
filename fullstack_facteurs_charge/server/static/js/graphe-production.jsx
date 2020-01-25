@@ -124,7 +124,6 @@ class GrapheProduction extends React.Component {
                 enabled: false
             },
             plotOptions: {
-                marker: { enabled: false },
                 stacking: 'normal',
                 areaspline: {
                     stacking: 'areaspline',
@@ -132,7 +131,15 @@ class GrapheProduction extends React.Component {
                     lineWidth: 1,
                     marker: {
                         lineWidth: 1,
-                        lineColor: '#222'
+                        lineColor: '#222',
+                        enabled: false
+                    }
+                },
+                spline: {                    
+                    marker: {
+                        lineWidth: 1,
+                        lineColor: '#222',
+                        enabled: false
                     }
                 }
             },

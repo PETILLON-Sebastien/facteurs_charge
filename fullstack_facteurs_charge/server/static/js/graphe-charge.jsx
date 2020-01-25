@@ -116,6 +116,11 @@ class GrapheCharge extends React.Component {
                 enabled: false
             },
             plotOptions: {
+                spline: {
+                    marker: {
+                        enabled: false
+                    }
+                },
                 series: {
                     label: {
                         connectorAllowed: false
