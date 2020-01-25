@@ -103,7 +103,7 @@ var calculs_regionaux = function(donnees, api_response, nombre_donnees_par_heure
     var nombre_resultats_min = nombre_donnees_par_heure * nombre_heures;
     _.forEach(donnees, function(ligne, key) {
         if (key != 0) {
-            var nombre_resultats = ligne.evolution.length - 1;
+            var nombre_resultats = ligne.evolution.length;
             if (nombre_resultats < nombre_resultats_min) {
                 nombre_resultats_min = nombre_resultats;
             } 
