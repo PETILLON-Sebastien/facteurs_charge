@@ -127,6 +127,9 @@ class GrapheCharge extends React.Component {
                     },
                 }
             },
+            time: {
+                timezoneOffset: -60
+            },
             chart: {
                 backgroundColor: "rgba(0,0,0,0)"
             },

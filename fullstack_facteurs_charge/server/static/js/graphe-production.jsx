@@ -143,6 +143,9 @@ class GrapheProduction extends React.Component {
                     }
                 }
             },
+            time: {
+                timezoneOffset: -60
+            },
             chart: {
                 type: 'areaspline',
                 stacking: 'normal',
