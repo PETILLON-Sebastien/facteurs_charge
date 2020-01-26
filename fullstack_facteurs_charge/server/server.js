@@ -26,7 +26,7 @@ function serveData(res) {
 }
 
 function serveStaticFile(url, res) {
-    fs.readFile('./static/' + url, function (err, data) {
+    fs.readFile('./static' + url, function (err, data) {
         if (err) {
           res.writeHead(404);
           res.end(JSON.stringify(err));
@@ -38,6 +38,8 @@ function serveStaticFile(url, res) {
             res.writeHead(200, {"Content-Type": "text/html"});
         } else if (_.endsWith(url, '.js')) {
             res.writeHead(200, {"Content-Type": "application/javascript"});
+        } else if (_.endsWith(url, '.ico')) {
+            res.writeHead(200, {"Content-Type": "image/x-icon"});
         } else {
             res.writeHead(200);
         }
@@ -48,8 +50,11 @@ function serveStaticFile(url, res) {
 var server = http.createServer(function(req, res) {
     if (_.endsWith(req.url, 'data.js')) {
         serveData(res);
+    } else if (_.includes(req.url, '.ico')) {
+        console.log('haha :')
+        serveStaticFile('/images/favicon.ico', res);
     } else if (_.isEqual(req.url, "/")) {
-        serveStaticFile('facteurscharge.html', res);
+        serveStaticFile('/facteurscharge.html', res);
     } else {
         serveStaticFile(req.url, res);
     }
