@@ -57,7 +57,7 @@ class Representations extends React.Component {
                     <div className="titre">Taux de charge&nbsp;:</div>
                     <div><span>{taux_charge} </span><span className="unit">%</span></div>
                     <div className="titre">Production&nbsp;:</div>
-                    <div><span>{production} </span> <span className="unit">MWh</span></div>
+                    <div><span>{production} </span> <span className="unit">MW</span></div>
                     <div className="titre">Capacites&nbsp;:</div>
                     <div><span>{capacites} </span><span className="unit">MW</span></div>
                 </div>
