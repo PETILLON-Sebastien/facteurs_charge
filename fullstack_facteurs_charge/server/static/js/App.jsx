@@ -67,6 +67,10 @@ export default class App extends React.Component {
     
     let donnee_region_selectionnee = _.find(this.regionsDescriptions, {'id': this.state.id_zone_selectionnee});
     let label_region = donnee_region_selectionnee.label;
+    console.log("Index")
+    console.log(this.state.index_temps)
+    console.log("Evolution")
+    console.log(this.state.donnees_zone.evolution);
     let label_date_heure = moment(this.state.donnees_zone.evolution[this.state.index_temps].date_heure).format("DD/MM/YY HH:mm");
 
     let actions = this.state.actionsVisibles ? 

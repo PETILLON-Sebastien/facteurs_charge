@@ -51,7 +51,6 @@ var server = http.createServer(function(req, res) {
     if (_.endsWith(req.url, 'data.js')) {
         serveData(res);
     } else if (_.includes(req.url, '.ico')) {
-        console.log('haha :')
         serveStaticFile('/images/favicon.ico', res);
     } else if (_.isEqual(req.url, "/")) {
         serveStaticFile('/facteurscharge.html', res);
