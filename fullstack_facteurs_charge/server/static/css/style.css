@@ -17,22 +17,26 @@ body {
 /* Bandeau supérieur */
 .bandeau {
     width: 100%;
-    height: 50px;
-    padding: 10px;
+    height: 70px;
+    padding: 10 20 10 20;
     background-color: #BBB;
     color: #222;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
-.bandeau h1 {
-    font-size: 120%;
+.bandeau .titre {
+    font-size: 180%;
+}
+.bandeau .liens {
+    width: 100px;
 }
 .bandeau .liens > * {
     margin-right: 5px;
 }
 .bandeau .liens img {
-    width: 25px;
-    height: 25px;
+    width: 40px;
+    height: 40px;
     border-radius: 100%;
 }
 
@@ -59,8 +63,8 @@ body {
 
 .buttonOn, .buttonOff {
     cursor: pointer;
-    width: 25px;
-    height: 25px;
+    width: 40px;
+    height: 40px;
     border-radius: 100%;
     margin: 2px;
 }
@@ -79,7 +83,7 @@ body {
 }
 .label-date-heure {
     padding-bottom: 15px;
-    font-weight: 200;
+    font-weight: 400;
     font-size: 80%;
 }
 
@@ -319,14 +323,16 @@ body {
     width: 100%;
     padding: 20px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
     align-items: center;
-    background-color: #666;
 }
 
 .aPropos a {
-    font-style: none;
-    color: rgb(20, 50, 255);
+    font-weight: 600;
+    text-decoration: underline;
+    color: #FFF;
 }
 
 @media (min-resolution: 150dpi) {
@@ -337,11 +343,14 @@ body {
         font-size: 240%;
     }
     .bandeau {
-        height: 100px;
+        height: 200px;
+    }
+    .bandeau .liens {
+        width: 150px;
     }
     .buttonOn, .buttonOff, .bandeau .liens img {
-        width: 60px;
-        height: 60px;
+        width: 70px;
+        height: 70px;
     }
     .representation {
         width: 50%;
