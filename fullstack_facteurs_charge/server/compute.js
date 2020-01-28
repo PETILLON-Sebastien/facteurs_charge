@@ -6,7 +6,7 @@ var moment = require('moment');
 const API_RESEAUX_ENERGIE_HOST = "opendata.reseaux-energies.fr";
 const API_RESEAUX_ENERGIE_PATH = 'api/records/1.0/search/';
 const sources_energie = ['thermique', 'nucleaire', 'solaire', 'eolien', 'hydraulique', 'bioenergies'];
-const autres_donnees = ['ech_physiques', 'consommation'];
+const autres_donnees = ['ech_physiques', 'consommation', 'pompage'];
 const regions_keys = ['0', '11', '24', '27', '28', '32', '44', '52', '53', '75', '76', '84', '93'];
 
 var appel_necessaire = function(dernier_appel, periode_rafraichissement) {

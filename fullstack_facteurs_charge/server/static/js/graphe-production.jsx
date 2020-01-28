@@ -32,31 +32,37 @@ class GrapheProduction extends React.Component {
         let series = [
             {
                 name: "Photovoltaïque",
+                stack: 0,
                 color: "rgb(242, 116, 6)",
                 data: []
             },
             {
                 name: "Éolien",
+                stack: 0,
                 color: "rgb(116, 205, 185)",
                 data: []
             },
             {
                 name: "Hydraulique",
+                stack: 0,
                 color: "rgb(39, 114, 178)",
                 data: []
             },
             {
                 name: "Bioénergies",
+                stack: 0,
                 color: "rgb(22, 106, 87)",
                 data: []
             },
             {
                 name: "Fossile",
+                stack: 0,
                 color: "rgb(134, 125, 102)",
                 data: []
             },
             {
                 name: "Nucléaire",
+                stack: 0,
                 color: "rgb(174, 184, 0)",
                 data: []
             },
@@ -67,25 +73,42 @@ class GrapheProduction extends React.Component {
                 type: 'spline'
             },
             {
-                name: "Echanges",
+                name: "Pompage hydraulique",
+                stack: 1,
+                color: "rgb(39, 114, 178)",
+                data: []
+            },
+            {
+                name: "Imports",
+                stack: 0,
                 color: "rgb(0, 0, 0)",
-                fillOpacity: "0.4",
+                data: []
+            },
+            {
+                name: "Exports",
+                stack: 1,
+                color: "rgb(0, 0, 0)",
                 data: []
             },
         ];
 
+        var sourcesSimples = ["solaire", "eolien", "hydraulique", "bioenergies", "thermique", "nucleaire", "consommation", "pompage"];
         for(let index in this.props.donnees) {
             let donnee = this.props.donnees[index];
             let date = moment(donnee["date_heure"]).valueOf();
-            series[0].data.push([date, Math.round(donnee["solaire"] * 100) / 100]);
-            series[1].data.push([date, Math.round(donnee["eolien"] * 100) / 100]);
-            series[2].data.push([date, Math.round(donnee["hydraulique"] * 100) / 100]);
-            series[3].data.push([date, Math.round(donnee["bioenergies"] * 100) / 100]);
-            series[4].data.push([date, Math.round(donnee["thermique"] * 100) / 100]);
-            series[5].data.push([date, Math.round(donnee["nucleaire"] * 100) / 100]);
-            series[6].data.push([date, Math.round(donnee["consommation"] * 100) / 100]);
-            series[7].data.push([date, Math.round(donnee["ech_physiques"] * 100) / 100]);
+            for(let i = 0; i < sourcesSimples.length; i++) {
+                series[i].data.push([date, Math.round(donnee[sourcesSimples[i]])]);
+            }
+            let echanges = Math.round(donnee["ech_physiques"]);
+            if(echanges > 0) {
+                series[8].data.push([date, Math.round(donnee["ech_physiques"])]);
+                series[9].data.push([date, null]);
+            } else {
+                series[8].data.push([date, null]);
+                series[9].data.push([date, Math.round(donnee["ech_physiques"])]);
+            }
         }
+        
         
         let heure_courante = moment(this.props.donnees[this.props.index_temps]["date_heure"]).valueOf();
 
@@ -124,6 +147,9 @@ class GrapheProduction extends React.Component {
                 enabled: false
             },
             plotOptions: {
+                series: {
+                    connectNulls: true
+                },
                 stacking: 'normal',
                 areaspline: {
                     stacking: 'areaspline',
@@ -169,7 +195,7 @@ class GrapheProduction extends React.Component {
         }
         return (
             <div className="chart-wrapping">
-                <span>Production</span>
+                <span>Production & Consommation</span>
                 <ReactHighcharts config = {config} ref={this.chart}></ReactHighcharts>
             </div>
         );
