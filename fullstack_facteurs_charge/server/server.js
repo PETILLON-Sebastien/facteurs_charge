@@ -15,9 +15,14 @@ var periode_rafraichissement = 5
 function serveData(res) {
     res.writeHead(200, {"Content-Type": "application/javascript"});
     if(compute.appel_necessaire(dernier_appel, periode_rafraichissement)) {
-        dernier_appel = moment();
         compute.recuperation_donnes_api(nombre_region, nombre_donnees_par_heure, nombre_heures, function (api_response) {
-            donnees = compute.construct_data(api_response, nombre_donnees_par_heure, nombre_heures);
+            try {
+                var donnees_calculees = compute.construct_data(api_response, nombre_donnees_par_heure, nombre_heures);
+                donnees = donnees_calculees;
+                dernier_appel = moment();
+            } catch (e) {
+                console.error(e);
+            }
             res.end("var donnees = " + JSON.stringify(donnees) + ";");
         });
     } else {

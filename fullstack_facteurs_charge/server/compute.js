@@ -64,9 +64,9 @@ var get_init_data = function() {
 }
 
 var calculs_regionaux = function(donnees, api_response, nombre_donnees_par_heure, nombre_heures) {
-
+    
     // Copie et calcul des données pour chaque enregistrement
-    _.forEach(_.reverse(api_response['records']), function(record) {
+    _.forEach(_.reverse(api_response.records), function(record) {
         var ligne_donnee = record.fields;
         var nouvelle_donnee = {
             date_heure: ligne_donnee.date_heure,
@@ -76,6 +76,7 @@ var calculs_regionaux = function(donnees, api_response, nombre_donnees_par_heure
 
         _.forEach(sources_energie, function(source_energie) {
             var cle_tch = 'tch_' + source_energie;
+            
             if(_.get(ligne_donnee, source_energie) !== undefined) {
                 nouvelle_donnee[source_energie] = parseFloat(ligne_donnee[source_energie]);
             }
@@ -109,6 +110,10 @@ var calculs_regionaux = function(donnees, api_response, nombre_donnees_par_heure
             } 
         }
     });
+
+    if(nombre_resultats_min < nombre_donnees_par_heure * nombre_heures / 4) {
+        throw "Trop peu de données en retour";
+    }
 
     // Conservation du même nombre de données pour chacune des régions
     _.forEach(donnees, function(ligne, key) {
