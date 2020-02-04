@@ -1,0 +1,6 @@
+steps:
+- name: 'gcr.io/cloud-builders/git'
+  args: ['clone', 'https://github.com/PETILLON-Sebastien/facteurs_charge.git']
+
+- name: 'gcr.io/cloud-builders/npm'
+  args: ['build', 'gcr.io/facteurs_charge/fullstack_facteurs_charge/server/static/']
