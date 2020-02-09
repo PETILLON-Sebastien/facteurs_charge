@@ -117,7 +117,7 @@ class GrapheProduction extends React.Component {
                 text: ''
             },
             tooltip: {
-                valueSuffix: ' MWh'
+                valueSuffix: ' MW'
             },
             yAxis: {
                 title: {
@@ -128,7 +128,7 @@ class GrapheProduction extends React.Component {
                         if(this.value > 999 || this.value < 999) {
                             return Math.round(this.value / 10) / 100 + " GWh";
                         }
-                        return this.value + " MWh";
+                        return this.value + " MW";
                     }
                 }
             },
