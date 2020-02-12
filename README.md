@@ -8,7 +8,7 @@ Quelques instructions pour mettre en place l'environnement de travail
 
 ### Front-end
 
-Lancez la commande suivante dans le dossier `fullstack_facteurs_charge\server\static` :
+Lancez la commande suivante dans le dossier à la racine :
 
 ```npm i webpack --save-dev```
 
@@ -30,16 +30,12 @@ puis ouvrez le fichier `index.html`.
 
 ### Back-end
 
-Tout d'abord, installez nodejs.
-
-Positionnez-vous dans le dossier `fullstack_facteurs_charge\server` :
-
 Installez les dépendances :
 
 ```npm install```
 
 Pour exécuter le back-end, lancez la commande
-```node server.py```
+```npm run start```
 
 ### Précisions
 
