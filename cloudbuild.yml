@@ -5,4 +5,4 @@ steps:
   args: ['install']
 - name: 'gcr.io/cloud-builders/npm'
   args: ['run', 'build']
-images: ['gcr.io/facteurs-charge/static/dist/bundle.js', 'gcr.io/facteurs-charge/server.js', 'gcr.io/facteurs-charge/compute.js', 'gcr.io/facteurs-charge/static/facteurscharge.html']
+images: ['gcr.io/facteurs_charge/static/dist/bundle.js', 'gcr.io/facteurs_charge/server.js', 'gcr.io/facteurs_charge/compute.js', 'gcr.io/facteurs_charge/static/facteurscharge.html']
