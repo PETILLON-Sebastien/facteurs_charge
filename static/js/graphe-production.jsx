@@ -126,7 +126,7 @@ class GrapheProduction extends React.Component {
                 labels: {
                     formatter: function () {
                         if(this.value > 999 || this.value < 999) {
-                            return Math.round(this.value / 10) / 100 + " GWh";
+                            return Math.round(this.value / 10) / 100 + " GW";
                         }
                         return this.value + " MW";
                     }
