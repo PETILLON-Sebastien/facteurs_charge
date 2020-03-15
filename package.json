@@ -19,7 +19,8 @@
     "react-highcharts": "16.1.0",
     "moment": "2.24.0",
     "rc-slider": "8.7.1",
-    "lodash": "4.17.15"
+    "lodash": "4.17.15",
+    "express": "4.17.1"
   },
   "dependencies": {
     "babel-loader": "^8.0.6"
