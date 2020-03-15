@@ -6,28 +6,35 @@ var compute = require('./compute.js');
 
 var dernier_appel = undefined;
 var donnees = undefined;
-var nombre_region = 12
-var nombre_donnees_par_heure = 4
-var nombre_heures = 25
-var periode_rafraichissement = 5
+var nombre_region = 12;
+var nombre_donnees_par_heure = 4;
+var nombre_heures = 25;
+var periode_rafraichissement = 5;
 
 
 function serveData(res) {
     res.writeHead(200, {"Content-Type": "application/javascript"});
-    if(compute.appel_necessaire(dernier_appel, periode_rafraichissement)) {
-        compute.recuperation_donnes_api(nombre_region, nombre_donnees_par_heure, nombre_heures, function (api_response) {
-            try {
-                var donnees_calculees = compute.construct_data(api_response, nombre_donnees_par_heure, nombre_heures);
-                donnees = donnees_calculees;
-                dernier_appel = moment();
-            } catch (e) {
-                console.error(e);
-            }
-            res.end("var donnees = " + JSON.stringify(donnees) + ";");
-        });
-    } else {
-        res.end("var donnees = " + JSON.stringify(donnees) + ";");
-    }
+    // if(compute.appel_necessaire(dernier_appel, periode_rafraichissement)) {
+    //     compute.recuperation_donnes_api(nombre_region, nombre_donnees_par_heure, nombre_heures, function (api_response) {
+    //         try {
+    //             var donnees_calculees = compute.construire_donnees(api_response, nombre_donnees_par_heure, nombre_heures, true);
+    //             donnees = donnees_calculees;
+    //             dernier_appel = moment();
+    //         } catch (e) {
+    //             console.error(e);
+    //         }
+    //         res.end("var donnees = " + JSON.stringify(donnees) + ";");
+    //     });
+    // } else {
+    //     res.end("var donnees = " + JSON.stringify(donnees) + ";");
+    // }
+    
+    fs.readFile("donnees/donnees_2020-03-15.json", function read(err, data) {
+        if (err) {
+            throw err;
+        }
+        res.end("var donnees = " + data + ";");
+    });
 }
 
 function serveStaticFile(url, res) {

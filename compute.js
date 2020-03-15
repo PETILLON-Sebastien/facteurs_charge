@@ -2,6 +2,7 @@ var url = require('url');
 var https = require('https');
 var _ = require('lodash');
 var moment = require('moment');
+const fs = require('fs');
 
 const API_RESEAUX_ENERGIE_HOST = "opendata.reseaux-energies.fr";
 const API_RESEAUX_ENERGIE_PATH = 'api/records/1.0/search/';
@@ -13,12 +14,54 @@ var appel_necessaire = function(dernier_appel, periode_rafraichissement) {
     return dernier_appel === undefined || dernier_appel.isBefore(moment().subtract(5, 'minutes'));
 };
 
+var recuperation_donnes_api_date = function(nombre_region, nombre_donnees_par_heure, date_debut, function_success) {
+    var date_fin = moment(date_debut).add(1, "day");
+    var formatte_min = date_debut.format('YYYY-MM-DDTHH:mm');
+    var formatte_max = date_fin.format('YYYY-MM-DDTHH:mm');
+    var duree = moment.duration(date_fin.diff(date_debut));
+    var rows = nombre_region * nombre_donnees_par_heure * duree.as("hours");
+    
+    const requestUrl = url.parse(url.format({
+        protocol: 'https',
+        hostname: API_RESEAUX_ENERGIE_HOST,
+        pathname: API_RESEAUX_ENERGIE_PATH,
+        query: {
+            'dataset': 'eco2mix-regional-tr',
+            'facet': 'nature',
+            'refine.nature': "Données temps réel",
+            'sort': 'date_heure',
+            'q': 'date_heure >= ' + formatte_min + ' AND date_heure <= ' + formatte_max,
+            'timezone': 'Europe/Paris',
+            'rows': rows
+        }
+    }));
+
+    var nom = "donnees_" + moment(date_debut).add(1, "minute").format("YYYY-MM-DD");
+    nom = nom.replace(/:/g, "-");
+    
+    const req = https.get({
+        hostname: requestUrl.hostname,
+        path: requestUrl.path,
+    }, (res) => {
+        var body = "";
+        res.on('data', function(d) {
+            body += d;
+        });
+        res.on('end', function() {
+            var parsed = JSON.parse(body);
+            if (_.isFunction(function_success)) {
+                function_success(parsed, nom);
+            }
+        })
+    });
+}
+
 var recuperation_donnes_api = function(nombre_region, nombre_donnees_par_heure, nombre_heures, function_success) {
 
     var date_max = moment();
     var date_min = moment(date_max).subtract(nombre_heures, 'hours');
-    formatte_max = date_max.format('YYYY-MM-DDTHH:mm')
-    formatte_min = date_min.format('YYYY-MM-DDTHH:mm')
+    var formatte_max = date_max.format('YYYY-MM-DDTHH:mm');
+    var formatte_min = date_min.format('YYYY-MM-DDTHH:mm');
 
     const requestUrl = url.parse(url.format({
         protocol: 'https',
@@ -63,8 +106,7 @@ var get_init_data = function() {
     return donnees;
 }
 
-var calculs_regionaux = function(donnees, api_response, nombre_donnees_par_heure, nombre_heures) {
-    
+var calculs_regionaux = function(donnees, api_response, nombre_donnees_par_heure, nombre_heures, verifier_taille_donnees) {
     // Copie et calcul des données pour chaque enregistrement
     _.forEach(_.reverse(api_response.records), function(record) {
         var ligne_donnee = record.fields;
@@ -111,7 +153,7 @@ var calculs_regionaux = function(donnees, api_response, nombre_donnees_par_heure
         }
     });
 
-    if(nombre_resultats_min < nombre_donnees_par_heure * nombre_heures / 4) {
+    if(verifier_taille_donnees && nombre_resultats_min < nombre_donnees_par_heure * nombre_heures / 4) {
         throw "Trop peu de données en retour";
     }
 
@@ -197,9 +239,21 @@ var calcul_meilleur_facteur = function(donnees) {
     });
 };
 
-var construct_data = function(api_response, nombre_donnees_par_heure, nombre_heures) {
+var sauver = function(donnees, nom) {
+    
+    var nom_final = nom + ".json";
+
+    fs.writeFile(nom_final, JSON.stringify(donnees), function(err) {
+        if(err) {
+            return console.log(err);
+        }
+        console.log("Données conservées");
+    }); 
+}
+
+var construire_donnees = function(api_response, nombre_donnees_par_heure, nombre_heures, verifier_taille_donnees) {
     var donnees = get_init_data();
-    calculs_regionaux(donnees, api_response, nombre_donnees_par_heure, nombre_heures);
+    calculs_regionaux(donnees, api_response, nombre_donnees_par_heure, nombre_heures, verifier_taille_donnees,);
     calculs_nationaux(donnees);
     calcul_meilleur_facteur(donnees);
     return donnees;
@@ -207,4 +261,6 @@ var construct_data = function(api_response, nombre_donnees_par_heure, nombre_heu
 
 exports.appel_necessaire = appel_necessaire;
 exports.recuperation_donnes_api = recuperation_donnes_api;
-exports.construct_data = construct_data;
+exports.recuperation_donnes_api_date = recuperation_donnes_api_date;
+exports.construire_donnees = construire_donnees;
+exports.sauver = sauver;
