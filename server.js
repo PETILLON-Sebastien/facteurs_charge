@@ -24,10 +24,10 @@ function serveData(res) {
             } catch (e) {
                 console.error(e);
             }
-            res.end("var donnees = " + JSON.stringify(donnees) + ";");
+            res.end(JSON.stringify(donnees));
         });
     } else {
-        res.end("var donnees = " + JSON.stringify(donnees) + ";");
+        res.end(JSON.stringify(donnees));
     }
     
     // fs.readFile("donnees/donnees_2020-03-08.json", function read(err, data) {
@@ -54,8 +54,7 @@ app.get('/', function (req, res) {
         }
     });
 });
-
-app.get('/data.js', function (req, res) {
+app.get('/now', (req, res) => {
     serveData(res);
 });
 

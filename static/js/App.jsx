@@ -13,22 +13,34 @@ import moment from "moment";
 import regionDescription from "./regions-descriptions";
 import _ from "lodash";
 
+// var SERVER = "http://localhost:8080";
+var SERVER = "http://facteurs-charge.fr";
+
 var that;
 
 export default class App extends React.Component {
+
   constructor(props) {
     super(props);
     that = this;
     this.grapheCharge = createRef();
     this.grapheProduction = createRef();
     this.regionsDescriptions = regionDescription;
-    this.state = {
-      donnees: donnees,
-      actionsVisibles: true,
-      id_zone_selectionnee: 0,
-      donnees_zone: donnees[0],
-      index_temps: donnees[0].evolution.length - 1
-    }
+  }
+
+  componentDidMount() {
+    fetch(SERVER + '/now')
+    .then(res => res.json())
+    .then((donnees) => {
+      this.setState({
+        donnees: donnees,
+        actionsVisibles: true,
+        id_zone_selectionnee: 0,
+        donnees_zone: donnees[0],
+        index_temps: donnees[0].evolution.length - 1
+      });
+    })
+    .catch(console.log)
   }
 
   onSliderChange(valeur) {
@@ -53,6 +65,9 @@ export default class App extends React.Component {
   }
 
   render() {
+    if(!this.state) {
+      return "";
+    }
     let meilleurs_facteurs = {};
     for(var cle_region in this.state.donnees) {
       meilleurs_facteurs[cle_region] = this.state.donnees[cle_region]['meilleur_facteur'];
