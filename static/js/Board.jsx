@@ -44,8 +44,8 @@ export default class Board extends React.Component {
         donnees: donnees,
         actionsVisibles: true,
         id_zone_selectionnee: id_zone,
-        donnees_zone: donnees[0],
-        index_temps: donnees[0].evolution.length - 1
+        donnees_zone: donnees[id_zone],
+        index_temps: donnees[id_zone].evolution.length - 1
       });
     })
     .catch(console.log)
