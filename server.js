@@ -15,27 +15,27 @@ var periode_rafraichissement = 5;
 
 function serveData(res) {
     res.writeHead(200, {"Content-Type": "application/json"});
-    // if(compute.appel_necessaire(dernier_appel, periode_rafraichissement)) {
-    //     compute.recuperation_donnes_api(nombre_region, nombre_donnees_par_heure, nombre_heures, function (api_response) {
-    //         try {
-    //             var donnees_calculees = compute.construire_donnees(api_response, nombre_donnees_par_heure, nombre_heures, true);
-    //             donnees = donnees_calculees;
-    //             dernier_appel = moment();
-    //         } catch (e) {
-    //             console.error(e);
-    //         }
-    //         res.end(JSON.stringify(donnees));
-    //     });
-    // } else {
-    //     res.end(JSON.stringify(donnees));
-    // }
+    if(compute.appel_necessaire(dernier_appel, periode_rafraichissement)) {
+        compute.recuperation_donnes_api(nombre_region, nombre_donnees_par_heure, nombre_heures, function (api_response) {
+            try {
+                var donnees_calculees = compute.construire_donnees(api_response, nombre_donnees_par_heure, nombre_heures, true);
+                donnees = donnees_calculees;
+                dernier_appel = moment();
+            } catch (e) {
+                console.error(e);
+            }
+            res.end(JSON.stringify(donnees));
+        });
+    } else {
+        res.end(JSON.stringify(donnees));
+    }
     
-    fs.readFile("donnees/donnees_2020-03-08.json", function read(err, data) {
-        if (err) {
-            throw err;
-        }
-        res.end(data);
-    });
+    // fs.readFile("donnees/donnees_2020-03-08.json", function read(err, data) {
+    //     if (err) {
+    //         throw err;
+    //     }
+    //     res.end(data);
+    // });
 }
 
 function serveFrontEnd(res) {
