@@ -13,8 +13,8 @@ import moment from "moment";
 import regionDescription from "./regions-descriptions";
 import _ from "lodash";
 
-var SERVER = "http://localhost:8080";
-// var SERVER = "http://facteurs-charge.fr";
+// var SERVER = "http://localhost:8080";
+var SERVER = "http://facteurs-charge.fr";
 
 var that;
 
