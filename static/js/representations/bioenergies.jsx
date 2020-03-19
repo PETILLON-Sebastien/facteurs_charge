@@ -148,12 +148,12 @@ class Bioenergies extends React.Component {
           className="fumee-petite"
           d="M31.925-.43c.032 4.906 2.11 6.576 2.006 9.353-.103 2.777-2.118 3.58-2.098 5.74.032 4.907 2.11 6.576 2.006 9.353-.104 2.777-2.119 3.579-2.099 5.74.032 4.906 2.11 6.575 2.006 9.352-.103 2.778-2.118 3.58-2.098 5.74.032 4.907 2.11 6.576 2.006 9.354-.104 2.777-2.119 3.58-2.099 5.74.032 4.906 2.11 6.576 2.006 9.353-.104 2.777-2.118 3.58-2.099 5.74.033 4.906 2.11 6.576 2.007 9.353-.104 2.777-2.119 3.579-2.099 5.74l8.372.034c.118-1.786 1.18-2.855 1.228-6.307.048-3.452-1.156-5.857-1.136-8.786.118-1.786 1.18-2.855 1.229-6.307.048-3.452-1.156-5.857-1.136-8.786.118-1.786 1.18-2.855 1.228-6.306.048-3.452-1.156-5.859-1.136-8.787.119-1.787 1.18-2.855 1.229-6.307.048-3.451-1.157-5.857-1.136-8.786.118-1.786 1.18-2.855 1.228-6.307.048-3.451-1.156-5.857-1.136-8.786.118-1.786 1.18-2.855 1.229-6.307.048-3.452-1.156-5.857-1.136-8.786z"
           ></path>
-        <g clip-path="none" transform="translate(0 -1.058)">
+        <g clipPath="none" transform="translate(0 -1.058)">
           <g
             id="bioenergies-g"
             fillOpacity="1"
             stroke="#ccc"
-            stroke-width="0.5"
+            strokeWidth="0.5"
             strokeDasharray="none"
             strokeMiterlimit="4"
             strokeOpacity="1"
@@ -210,7 +210,7 @@ class Bioenergies extends React.Component {
           strokeDasharray="none"
           strokeMiterlimit="4"
           strokeOpacity="1"
-          clip-path="none"
+          clipPath="none"
         >
           <path
             fill="url(#bioenergies-h)"
@@ -228,7 +228,7 @@ class Bioenergies extends React.Component {
           transform="translate(32.808 -1.058)"
           xlinkHref="#bioenergies-g"
         ></use>
-        <g clip-path="none" transform="translate(-8.168 29.02)">
+        <g clipPath="none" transform="translate(-8.168 29.02)">
           <g id="bioenergies-k" fillOpacity="1">
             <path
               fill="url(#bioenergies-i)"

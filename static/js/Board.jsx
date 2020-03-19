@@ -31,13 +31,34 @@ export default class Board extends React.Component {
   componentDidMount() {
     // Recuperation de la zone
     var path = window.location.pathname;
-    var match = path.match(".*/region/([0-9]+)");
+    var search = window.location.search;
+    
+    var matchPath = path.match(/(\/region\/([0-9]+))?/);
+    var matchSearch = search.match(/(\?date=([0-9]{4}-[0-9]{2}-[0-9]{2}))?/);
     var id_zone = 0;
-    if(match) {
-      id_zone = Number.parseInt(match[1]);
+    var date = undefined;
+    
+    if(matchSearch[2]) {
+      date = matchSearch[2];
+      if(!moment(date).isValid()) {
+        date = undefined;
+        window.location.search = "";
+      }
+    }
+    if(matchPath[2]) {
+      id_zone = Number.parseInt(matchPath[2]);
+      if(!_.find(this.regionsDescriptions, {'id': id_zone})) {
+        this.props.history.push("/" + window.location.search);
+        id_zone = 0;
+      }
+    }
+
+    var resource = "/now";
+    if(date) {
+      resource = "/donnees_" + date + ".json"; 
     }
     
-    fetch(SERVER + '/now')
+    fetch(SERVER + resource)
     .then(res => res.json())
     .then((donnees) => {
       this.setState({
@@ -45,7 +66,7 @@ export default class Board extends React.Component {
         actionsVisibles: true,
         id_zone_selectionnee: id_zone,
         donnees_zone: donnees[id_zone],
-        index_temps: donnees[id_zone].evolution.length - 1
+        index_temps: date ? 0 : donnees[id_zone].evolution.length - 1
       });
     })
     .catch(console.log)
@@ -62,9 +83,9 @@ export default class Board extends React.Component {
   handleClick(indice_zone) {
     
     if(indice_zone == 0) {
-      this.props.history.push("/");
+      this.props.history.push("/" + window.location.search);
     } else {
-      this.props.history.push("/region/" + indice_zone);
+      this.props.history.push("/region/" + indice_zone + window.location.search);
     }
     this.setState({
       id_zone_selectionnee: indice_zone,

@@ -29,13 +29,6 @@ function serveData(res) {
     } else {
         res.end(JSON.stringify(donnees));
     }
-    
-    // fs.readFile("donnees/donnees_2020-03-08.json", function read(err, data) {
-    //     if (err) {
-    //         throw err;
-    //     }
-    //     res.end(data);
-    // });
 }
 
 function serveFrontEnd(res) {
