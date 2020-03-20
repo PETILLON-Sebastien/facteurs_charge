@@ -73,6 +73,7 @@ export default class Board extends React.Component {
         that.jourSelectionne = dateUtilise.toDate();
       }
     }
+    that.date = dateUtilise;
     if(matchPath[2]) {
       id_zone = Number.parseInt(matchPath[2]);
       if(!_.find(this.regionsDescriptions, {'id': id_zone})) {
