@@ -12,6 +12,7 @@ body {
 }
 .map {
     width: 90%;
+    margin-bottom: 20px;
 }
 
 /* Bandeau supérieur */
@@ -57,7 +58,7 @@ body {
 }
 @media (min-width: 1200px) and (max-resolution: 150dpi) {
     .actions {
-        width: 33%;
+        width: 25%;
     }
 }
 
@@ -92,6 +93,27 @@ body {
     font-size: 80%;
 }
 
+.DayPicker .DayPicker-Day {
+    width: 22px;
+    border-radius: 0% !important;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+.DayPicker .DayPicker-Day--selected, .DayPicker .DayPicker-Day--selected:hover {
+    background-color: #96dbfa !important;
+    color: black !important;
+}
+
+.DayPicker .DayPicker-Day:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+.DayPicker .DayPicker-Day--disabled, .DayPicker .DayPicker-Day--outside {
+    background-color: rgba(255, 255, 255, 0);
+    color: rgba(255, 255, 255, 0.1);
+}
+.DayPicker .DayPicker-Day--disabled:hover, .DayPicker .DayPicker-Day--outside:hover {
+    background-color: rgba(255, 255, 255, 0) !important;
+}
+
 .slider-temps {
     width: 80% !important;
     margin-top: 20px;
@@ -117,7 +139,7 @@ body {
 }
 @media (min-width: 1200px) and (max-resolution: 150dpi) {      
     .affichage {
-        width: 67%;
+        width: 75%;
     }
     .affichage > * {
         width: 50%;

@@ -12,11 +12,17 @@ import 'rc-slider/assets/index.css';
 import moment from "moment";
 import regionDescription from "./regions-descriptions";
 import _ from "lodash";
+import DayPicker from 'react-day-picker';
+import 'react-day-picker/lib/style.css';
+import MomentLocaleUtils from 'react-day-picker/moment';
+import 'moment/locale/fr';
 
 // var SERVER = "http://localhost:8080";
 var SERVER = "http://facteurs-charge.fr";
 
 var that;
+var DAY_LABELS = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+var MONTH_LABELS = ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aûot', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
 
 export default class Board extends React.Component {
 
@@ -28,6 +34,25 @@ export default class Board extends React.Component {
     this.regionsDescriptions = regionDescription;
   }
 
+  updateData() {
+    var resource = "/now";
+    var date = _.get(this, "date");
+    if(date) {
+      resource = "/donnees_" + date.format("YYYY-MM-DD") + ".json"; 
+    }
+    
+    fetch(SERVER + resource)
+    .then(res => res.json())
+    .then((donnees) => {
+      this.setState({
+        donnees: donnees,
+        donnees_zone: donnees[this.state.id_zone_selectionnee],
+        index_temps: date ? 0 : donnees[this.state.id_zone_selectionnee].evolution.length - 1,
+      });
+    })
+    .catch(console.log)
+  }
+
   componentDidMount() {
     // Recuperation de la zone
     var path = window.location.pathname;
@@ -36,13 +61,16 @@ export default class Board extends React.Component {
     var matchPath = path.match(/(\/region\/([0-9]+))?/);
     var matchSearch = search.match(/(\?date=([0-9]{4}-[0-9]{2}-[0-9]{2}))?/);
     var id_zone = 0;
-    var date = undefined;
+    var dateUtilise = undefined;
+    that.jourSelectionne = new Date();
     
     if(matchSearch[2]) {
-      date = matchSearch[2];
-      if(!moment(date).isValid()) {
-        date = undefined;
+      dateUtilise = moment.parseZone(matchSearch[2], "YYYY-MM-DD");
+      if(!dateUtilise.isValid()) {
+        dateUtilise = undefined;
         window.location.search = "";
+      } else {
+        that.jourSelectionne = dateUtilise.toDate();
       }
     }
     if(matchPath[2]) {
@@ -52,24 +80,12 @@ export default class Board extends React.Component {
         id_zone = 0;
       }
     }
+    this.setState({
+      actionsVisibles: true,
+      id_zone_selectionnee: id_zone
+    });
 
-    var resource = "/now";
-    if(date) {
-      resource = "/donnees_" + date + ".json"; 
-    }
-    
-    fetch(SERVER + resource)
-    .then(res => res.json())
-    .then((donnees) => {
-      this.setState({
-        donnees: donnees,
-        actionsVisibles: true,
-        id_zone_selectionnee: id_zone,
-        donnees_zone: donnees[id_zone],
-        index_temps: date ? 0 : donnees[id_zone].evolution.length - 1
-      });
-    })
-    .catch(console.log)
+    this.updateData();
   }
 
   onSliderChange(valeur) {
@@ -79,9 +95,32 @@ export default class Board extends React.Component {
     that.grapheCharge.current.modifierTemps(valeur);
     that.grapheProduction.current.modifierTemps(valeur);
   }
+  onDateChange(day, modifiers = {}) {
+    that.jourSelectionne = day;
+    console.log(that.jourSelectionne)
+    if (modifiers.disabled) {
+      return;
+    }
+    that.date = moment(day);
+    var search;
+    if(moment().isSame(that.date, 'day')) {
+      search = "";
+      that.date = undefined;
+    } else {
+      search = "?date=" + that.date.format("YYYY-MM-DD");
+    }
+    if(that.state.id_zone_selectionnee == 0) {
+      that.props.history.push("/" + search);
+    } else {
+      that.props.history.push("/region/" + that.state.id_zone_selectionnee + search);
+    }
+    that.updateData();
+  }
+  disableDates(date) {
+    return date > new Date() || date < new Date(2020, 1, 1);
+  }
 
   handleClick(indice_zone) {
-    
     if(indice_zone == 0) {
       this.props.history.push("/" + window.location.search);
     } else {
@@ -98,9 +137,9 @@ export default class Board extends React.Component {
       actionsVisibles: !that.state.actionsVisibles 
     });
   }
-
+  
   render() {
-    if(!this.state) {
+    if(_.get(this, "state.donnees") === undefined) {
       return "";
     }
     let meilleurs_facteurs = {};
@@ -122,9 +161,11 @@ export default class Board extends React.Component {
     let actions = this.state.actionsVisibles ? 
       (<div className="actions">
         <Map handleClick={(i) => this.handleClick(i)} 
-              meilleurs_facteurs={meilleurs_facteurs} 
-              zone_selectionnee={this.state.id_zone_selectionnee} 
-              index_temps={this.state.index_temps}/>
+          meilleurs_facteurs={meilleurs_facteurs} 
+          zone_selectionnee={this.state.id_zone_selectionnee} 
+          index_temps={this.state.index_temps}/>
+          <DayPicker selectedDays={that.jourSelectionne} onDayClick={this.onDateChange}
+          disabledDays={[{before: new Date(2020, 1, 1), after: new Date()}]} localeUtils={MomentLocaleUtils} locale='fr'/>
         <Slider className="slider-temps" value={this.state.index_temps} marks={marks}
           min={0} max={this.state.donnees[0].evolution.length - 1} onChange={this.onSliderChange}/>
       </div>)

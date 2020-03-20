@@ -8,7 +8,7 @@ var nombre_heures = 24 * 7;
 function recuperer_donnees() {
     var date_debut = moment("2020-03-13");
     date_debut.subtract(1, "minute");
-    var date_fin = moment("2020-03-16");
+    var date_fin = moment("2020-03-20");
 
     while(date_debut.isBefore(date_fin)) {        
         compute.recuperation_donnes_api_date(nombre_region, nombre_donnees_par_heure, date_debut, function (api_response, nom) {
