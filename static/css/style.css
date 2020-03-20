@@ -114,6 +114,33 @@ body {
     background-color: rgba(255, 255, 255, 0) !important;
 }
 
+@media (max-resolution: 300dpi) {
+    .DayPicker {
+        height: 500px;
+        scale: 2.5;
+        position: relative;
+        top: 350px;
+    }
+    .actions {
+        height: 1700px;
+    }
+    .rc-slider {
+        width: 250px !important;
+        top: 320px;
+    }
+    .rc-slider-dot, .rc-slider-handle {
+        scale: 5;
+    }
+    .rc-slider-handle {
+        margin-left: 15px;
+    }
+    .rc-slider-mark-text {
+        scale: 3;
+        top: 35px;
+        margin-left: 15px;
+    }
+}
+
 .slider-temps {
     width: 80% !important;
     margin-top: 20px;

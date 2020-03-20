@@ -21,8 +21,6 @@ import 'moment/locale/fr';
 var SERVER = "http://facteurs-charge.fr";
 
 var that;
-var DAY_LABELS = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
-var MONTH_LABELS = ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aûot', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
 
 export default class Board extends React.Component {
 
