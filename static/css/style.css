@@ -1,6 +1,12 @@
 body {
     background-color: #222;
     color: #CCC;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
 }
 
 /* Placement des composants de l'application */
@@ -98,13 +104,16 @@ body {
     border-radius: 0% !important;
     background-color: rgba(255, 255, 255, 0.05);
 }
-.DayPicker .DayPicker-Day--selected, .DayPicker .DayPicker-Day--selected:hover {
+.DayPicker .DayPicker-Day--selected, .DayPicker-Day .DayPicker-Day--selected:hover {
     background-color: #96dbfa !important;
     color: black !important;
 }
 
-.DayPicker .DayPicker-Day:hover {
-    background-color: rgba(255, 255, 255, 0.1) !important;
+.actions .DayPicker-Day--today {
+    color: #BBB;
+}
+.actions .DayPicker:not(.DayPicker--interactionDisabled) .DayPicker-Day:not(.DayPicker-Day--disabled):not(.DayPicker-Day--selected):not(.DayPicker-Day--outside):hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 .DayPicker .DayPicker-Day--disabled, .DayPicker .DayPicker-Day--outside {
     background-color: rgba(255, 255, 255, 0);
