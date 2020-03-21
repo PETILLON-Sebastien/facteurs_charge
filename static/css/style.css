@@ -114,10 +114,10 @@ body {
     background-color: rgba(255, 255, 255, 0) !important;
 }
 
-@media (min-resolution: 200dpi), (pixel-ratio: 2){
+@media (min-resolution: 200dpi) and (orientation: portrait), (pixel-ratio: 2) and (orientation: portrait){
     .DayPicker {
         height: 500px;
-        scale: 2.5;
+        transform: scale(2.5);
         position: relative;
         top: 350px;
     }
@@ -129,13 +129,13 @@ body {
         top: 320px;
     }
     .rc-slider-dot, .rc-slider-handle {
-        scale: 5;
+        transform: scale(5) !important;
     }
     .rc-slider-handle {
         margin-left: 15px;
     }
     .rc-slider-mark-text {
-        scale: 3;
+        transform: scale(3);
         top: 35px;
         margin-left: 15px;
     }
