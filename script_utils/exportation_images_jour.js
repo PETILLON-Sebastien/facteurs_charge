@@ -197,10 +197,10 @@ var exporter_jour = function(date) {
 
     exporter.initPool({
         maxWorkers: 256,
-        initialWorkers: 8,
-        workLimit: 4 * 24 * 31,
-        queueSize: 4 * 24 * 31,
-        timeoutThreshold: 120000
+        initialWorkers: 32,
+        workLimit: 4 * 24,
+        queueSize: 4 * 24,
+        timeoutThreshold: 3600000
     });
 
     charts.forEach((chart, i) => {

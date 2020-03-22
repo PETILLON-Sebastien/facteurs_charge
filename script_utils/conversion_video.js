@@ -3,15 +3,11 @@ var {readdir, createReadStream, createWriteStream} = require('fs');
 const { Converter } = require("ffmpeg-stream");
 
 var directoryPath = path.join(__dirname, 'images_generees');
-var files = [];
 
 readdir(directoryPath, function (err, files) {
     if (err) {
         return console.log('Unable to scan directory: ' + err);
-    } 
-    files.forEach(function (file) {
-        files.push(file);
-    });
+    }
 
     const converter = new Converter()
     // create input writable stream
