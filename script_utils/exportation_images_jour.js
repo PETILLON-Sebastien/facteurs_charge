@@ -10,7 +10,7 @@ var exporter_jour = function(date) {
     var donnees = require('../donnees/donnees_' + date.format("YYYY-MM-DD") + '.json');
     var tailleTotale = donnees[0].evolution.length;
 
-    for(var i = 0; i < 5; i++) {
+    for(var i = 0; i < tailleTotale; i++) {
         let donnee = donnees[0].evolution[i];
         let moment_date =  moment(donnee["date_heure"]);
         let date = moment_date.valueOf();
@@ -44,7 +44,8 @@ var exporter_jour = function(date) {
                         tickAmount: 7,
                         tickInterval: 20,
                         labels: {
-                            enabled: true
+                            enabled: true,
+                            style: { "color": "#FFF"},
                         }
                     },
                     {
