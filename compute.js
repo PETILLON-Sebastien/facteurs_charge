@@ -139,7 +139,10 @@ var calculs_regionaux = function(donnees, api_response, nombre_donnees_par_heure
             }
         });
 
-        donnees_region.evolution.push(nouvelle_donnee);
+        // Eviter les entrées vides
+        if(!!nouvelle_donnee['consommation']) {
+            donnees_region.evolution.push(nouvelle_donnee);
+        }
     });
     
     // Calcul du plus petit nombre de données pour une région
