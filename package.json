@@ -4,6 +4,10 @@
   "description": "Facteurs de charge server",
   "main": "server.js",
   "author": "PETILLON Sébastien",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PETILLON-Sebastien/facteurs_charge.git"
+  },
   "devDependencies": {
     "@babel/core": "^7.7.4",
     "@babel/preset-env": "^7.7.4",
