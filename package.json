@@ -33,9 +33,9 @@
     "babel-loader": "^8.0.6"
   },
   "scripts": {
-    "build": "webpack -p --progress --config static/webpack.config.js",
-    "dev-build": "webpack --progress -d --config static/webpack.config.js",
-    "watch": "webpack --progress -d --config static/webpack.config.js --watch",
+    "build": "webpack -p --env.API_URL=https://www.facteurs-charge.fr --progress --config static/webpack.config.js",
+    "dev-build": "webpack --env.API_URL=http://localhost:8080 --progress -d --config static/webpack.config.js",
+    "watch": "webpack --env.API_URL=http://localhost:8080 --progress -d --config static/webpack.config.js --watch",
     "start": "node server.js"
   }
 }
