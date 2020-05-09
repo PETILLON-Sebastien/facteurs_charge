@@ -188,8 +188,8 @@ export default class Board extends React.Component {
             <a href="https://github.com/PETILLON-Sebastien/facteurs_charge">
               <img src={github} alt="Projet github" title="Projet github"/>
             </a>
-            <a href="https://twitter.com/PetillonSebast1">
-              <img src="https://pbs.twimg.com/profile_images/1141374395623071744/qmY4xWra_400x400.jpg" alt="Profil twitter" title="Profil twitter"/>
+            <a href="https://twitter.com/FacteursC">
+              <img src="https://pbs.twimg.com/profile_images/1224028525113544704/O5tajbCL_400x400.jpg" alt="Profil twitter" title="Profil twitter"/>
             </a>
           </div>
         </div>
