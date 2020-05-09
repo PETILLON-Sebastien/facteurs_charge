@@ -17,8 +17,8 @@ import 'react-day-picker/lib/style.css';
 import MomentLocaleUtils from 'react-day-picker/moment';
 import 'moment/locale/fr';
 
-// var SERVER = "http://localhost:8080";
-var SERVER = "http://facteurs-charge.fr";
+var SERVER_URL = process.env.API_URL; ;
+console.warn("Server API's URL was set to", SERVER_URL); // Delete me :)
 
 var that;
 
@@ -38,8 +38,8 @@ export default class Board extends React.Component {
     if(date) {
       resource = "/donnees_" + date.format("YYYY-MM-DD") + ".json"; 
     }
-    
-    fetch(SERVER + resource)
+        
+    fetch(SERVER_URL + resource)
     .then(res => res.json())
     .then((donnees) => {
       this.setState({
