@@ -1,8 +1,0 @@
-steps:
-- name: 'gcr.io/cloud-builders/git'
-  args: ['clone', 'https://github.com/PETILLON-Sebastien/facteurs_charge.git']
-- name: 'gcr.io/cloud-builders/npm'
-  args: ['install']
-- name: 'gcr.io/cloud-builders/npm'
-  args: ['run', 'build']
-images: ['gcr.io/facteurs_charge/static/dist/bundle.js', 'gcr.io/facteurs_charge/server.js', 'gcr.io/facteurs_charge/compute.js', 'gcr.io/facteurs_charge/static/facteurscharge.html']
