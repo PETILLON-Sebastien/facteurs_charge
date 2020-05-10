@@ -19,7 +19,7 @@ before_deploy:
 deploy:
 - provider: script
   skip_cleanup: true
-  script: rsync -r --delete-after $TRAVIS_BUILD_DIR/static $TRAVIS_BUILD_DIR/server.js
-    $TRAVIS_BUILD_DIR/compute.js facteus@sshcloud.cluster024.hosting.ovh.net:44335:~/www/
+  script: rsync -e 'ssh -p 44335' -r --delete-after $TRAVIS_BUILD_DIR/static $TRAVIS_BUILD_DIR/server.js
+    $TRAVIS_BUILD_DIR/compute.js facteus@sshcloud.cluster024.hosting.ovh.net:~/www/
   on:
     branch: master
