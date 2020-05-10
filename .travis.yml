@@ -20,6 +20,6 @@ deploy:
 - provider: script
   skip_cleanup: true
   script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/static $TRAVIS_BUILD_DIR/server.js
-    $TRAVIS_BUILD_DIR/compute.js --port 44335 facteus@sshcloud.cluster024.hosting.ovh.net:~/www/
+    $TRAVIS_BUILD_DIR/compute.js --port=44335 facteus@sshcloud.cluster024.hosting.ovh.net:~/www/
   on:
     branch: master
