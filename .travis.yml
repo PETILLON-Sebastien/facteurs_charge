@@ -2,7 +2,7 @@ language: node_js
 node_js:
 - 8
 addons:
-  ssh_known_hosts: facteus@sshcloud.cluster024.hosting.ovh.net
+  ssh_known_hosts: facteus@sshcloud.cluster024.hosting.ovh.net:44335
 before_script:
 - npm i webpack --save-dev
 - npm i @babel/preset-env @babel/preset-react --save-dev
