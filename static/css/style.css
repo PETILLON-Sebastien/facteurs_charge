@@ -1,5 +1,5 @@
 body {
-    background-color: #222;
+    background-color: #17181c;
     color: #CCC;
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -252,7 +252,7 @@ body {
     flex-direction: row;
     flex-wrap: wrap;
 }
-.representation {
+/* .representation {
     width: 100%;
     padding: 10px;
     display: flex;
@@ -260,7 +260,7 @@ body {
     justify-content: space-between;
     height: 320px;
     margin-bottom: 20px;
-}
+} */
 .representation svg {
     height: 140px;
     width: 100%;
@@ -270,7 +270,7 @@ body {
     flex-direction: column;
     align-items: center;
 }
-@media (min-width: 600px) and (max-resolution: 150dpi) {
+/* @media (min-width: 600px) and (max-resolution: 150dpi) {
     .representation {
         width: 33%;
     }
@@ -285,7 +285,7 @@ body {
     color: #888;
     font-weight: 200;
 
-}
+} */
 .legende {
     margin-bottom: 10px;
     display: flex;
@@ -423,13 +423,13 @@ body {
         width: 70px;
         height: 70px;
     }
-    .representation {
+    /* .representation {
         width: 50%;
         margin-top: 20px;
         height: 850px;
-    }
+    } */
     .representation svg {
-        height: 400px;
+        height: 140px;
     }
     .label-region, .label-date-heure {
         font-size: 75%;
