@@ -18,29 +18,36 @@ class Representations extends React.Component {
         const capacites = isNaN(this.props.capacites) ? "-" : Math.round(this.props.capacites);
         let svg;
         let classes = "legende-moyen-production legende-";
+        let name = "DEFAULT";
         switch (this.props.type) {
             case "Photovoltaïque":
                 svg = <PanneauSolaire pourcentage={taux_charge}/>;
+                name="Photovoltaïque";
                 classes += "photovoltaique"
                 break;
             case "Éolien":
                 svg = <Eolienne pourcentage={taux_charge}/>;
+                name="Éolien";
                 classes += "eolien"
                 break;
             case "Hydraulique":
                 svg = <Barrage pourcentage={taux_charge}/>;
+                name="Hydraulique";
                 classes += "hydraulique"
                 break;
             case "Nucléaire":
                 svg = <Nucleaire pourcentage={taux_charge}/>;
+                name="Nucléaire";
                 classes += "nucleaire"
                 break;
             case "Bioénergies":
                 svg = <Bioenergies pourcentage={taux_charge}/>;
+                name="Bioénergies";
                 classes += "bioenergies"
                 break;
             case "Fossile":
                 svg = <Fossile pourcentage={taux_charge}/>;
+                name="Thermique";
                 classes += "thermique"
                 break;
         }
@@ -49,7 +56,7 @@ class Representations extends React.Component {
             <div className="representation">
             <div className="legende">
                 <span className={classes}></span>
-                <span>{this.props.type}</span>
+                <span>{name}</span>
             </div>
             <div className="affichage-representation">
                 {svg}
