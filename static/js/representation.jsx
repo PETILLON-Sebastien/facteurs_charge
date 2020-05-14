@@ -80,8 +80,8 @@ class Representations extends React.Component {
                     <span className="representation-name is-size-5">{name}</span>
 
                     <div className="content statistiques representation-data-text">
-                        <div>
-                        <progress className="progress" value={taux_charge} max="100">{taux_charge}%</progress>
+                        <div style={{width:'75%'}}>
+                        <progress className={`progress ${taux_charge < 25 ? "is-danger" : taux_charge < 50 ? "is-info" : taux_charge < 75 ? "is-success" : "" }`} value={taux_charge} max="100">{taux_charge}%</progress>
                         </div>
                         <div>
                             <span className="titre">Taux de charge&nbsp;:</span>
