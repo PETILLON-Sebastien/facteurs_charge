@@ -30,12 +30,12 @@ $navbar-item-color:#b5b5b5;
 //     background-color:rgba($color: #000000, $alpha: 0.0)
 //   }
 
-// @media screen and (min-width: 1408px) {
-//     .container {
-//         max-width: 1152px;
-//         width: 1152px;
-//     }
-// }
+@media screen and (min-width: 1408px) {
+    .container {
+        max-width: 1152px;
+        width: 1152px;
+    }
+}
 
 // .affichage-representation {
 //     display: flex;
