@@ -7412,9 +7412,15 @@ header.section > .container {
 .navbar {
   padding: 0rem 1rem 0rem 1rem; }
 
+.logo-mix, .logo-mix > svg {
+  height: 7rem; }
+
+.progress {
+  height: 4px; }
+
 .footer {
   background-color: #121212;
-  position: absolute;
+  position: fixed;
   bottom: 0px;
   width: 100%;
   padding: 2rem 1.5rem 2rem; }

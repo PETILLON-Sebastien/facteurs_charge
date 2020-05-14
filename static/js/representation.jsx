@@ -70,26 +70,32 @@ class Representations extends React.Component {
             //         <span className="representation-name">{name}</span>
             //     </div>
             // </div>
-            <div className="columns is-vcentered">
+            <div className="columns is-vcentered representation">
                 <div className="column is-5 is-vcentered">
-                    <figure className="image is-128x128">
+                    <figure className="image logo-mix">
                         {svg}
                     </figure></div>
                 <div className="column">
                     <span className={classes}></span>
                     <span className="representation-name is-size-5">{name}</span>
 
-                    <div className="content representation-data-text">
-                        <div className="titre">Taux de charge&nbsp;:
+                    <div className="content statistiques representation-data-text">
+                        <div>
+                        <progress className="progress" value={taux_charge} max="100">{taux_charge}%</progress>
+                        </div>
+                        <div>
+                            <span className="titre">Taux de charge&nbsp;:</span>
                             <span>{taux_charge} </span>
                             <span className="unit">%</span>
                         </div>
-                        <div className="titre">Production&nbsp;:
-                        <span>{production} </span>
+                        <div>
+                            <span className="titre">Production&nbsp;:</span>
+                            <span>{production} </span>
                             <span className="unit">MW</span>
                         </div>
-                        <div className="titre">Capacites&nbsp;:
-                        <span>{capacites} </span>
+                        <div>
+                            <span className="titre">Capacites&nbsp;:</span>
+                            <span>{capacites} </span>
                             <span className="unit">MW</span>
                         </div>
                     </div>

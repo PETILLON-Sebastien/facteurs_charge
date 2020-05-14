@@ -271,6 +271,7 @@ export default class Board extends React.Component {
         </header>
 
         <div className="container">
+          
 
           {/* {actions} */}
           {/* <div className={classNameAffichage}> */}

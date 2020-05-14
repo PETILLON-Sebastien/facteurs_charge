@@ -10,7 +10,7 @@ class Representations extends React.Component {
     render() {
         return (
 
-            <div className="columns is-multiline">
+            <div className="columns is-8 is-multiline">
                 <div className="column is-4">
                     <Representation
                         pourcentage={this.props.donnees.evolution[this.props.index_temps].tch_solaire}
@@ -35,15 +35,15 @@ class Representations extends React.Component {
                         type="Hydraulique"
                     />
                 </div>
-                {/* <div className="column is-4">
+                <div className="column is-4">
                     <Representation
                         pourcentage={this.props.donnees.evolution[this.props.index_temps].tch_nucleaire}
                         production={this.props.donnees.evolution[this.props.index_temps].nucleaire}
                         capacites={this.props.donnees.capacites.nucleaire}
                         type="Nucléaire"
                     />
-                </div> */}
-                {/* <div className="column is-4">
+                </div>
+                <div className="column is-4">
                     <Representation
                         pourcentage={this.props.donnees.evolution[this.props.index_temps].tch_bioenergies}
                         production={this.props.donnees.evolution[this.props.index_temps].bioenergies}
@@ -58,7 +58,7 @@ class Representations extends React.Component {
                         capacites={this.props.donnees.capacites.thermique}
                         type="Fossile"
                     />
-                </div> */}
+                </div>
             </div>
         );
     }
