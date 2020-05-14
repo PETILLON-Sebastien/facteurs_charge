@@ -199,12 +199,13 @@ export default class Board extends React.Component {
 
       <React.Fragment>
 
+
         <header className="section">
           <div className="container">
             <nav className="navbar" role="navigation" aria-label="main navigation">
               <div className="navbar-brand">
                 <span className="navbar-item">
-                Facteurs Charge
+                  Facteurs Charge
                 </span>
                 <a className="navbar-item is-hidden-desktop" href="https://github.com/PETILLON-Sebastien/facteurs_charge" target="_blank">
                   <img src={github} alt="Projet github" title="Projet github" />
@@ -273,14 +274,74 @@ export default class Board extends React.Component {
           </div>
         </header>
 
-        <div className="container">
+        {this.state.activeTab == 'mix' &&
+          <div className="container">
 
 
-          {/* {actions} */}
-          {/* <div className={classNameAffichage}> */}
-          <Representations className="representations representation-name" donnees={this.state.donnees_zone} index_temps={this.state.index_temps} />
-          {/* </div> */}
-        </div>
+            {/* {actions} */}
+            {/* <div className={classNameAffichage}> */}
+            <Representations className="representations representation-name" donnees={this.state.donnees_zone} index_temps={this.state.index_temps} />
+            {/* </div> */}
+          </div>
+        }
+        {
+          this.state.activeTab == 'map' &&
+          <div className="container">
+
+            <React.Fragment>
+              <div className="columns has-text-centered">
+                <div className="column is-8">
+                  <Map handleClick={(i) => this.handleClick(i)}
+                    meilleurs_facteurs={meilleurs_facteurs}
+                    zone_selectionnee={this.state.id_zone_selectionnee}
+                    index_temps={this.state.index_temps} />
+                </div>
+                <div className="column is-4">
+                  <div className="columns is-multiline">
+                    <div className="column is-12">
+
+                      <DayPicker selectedDays={that.jourSelectionne} onDayClick={this.onDateChange}
+                        disabledDays={[{ before: new Date(2020, 1, 1), after: new Date() }]} localeUtils={MomentLocaleUtils} locale='fr' />
+                    </div>
+                    <div className="column is-12">
+                      <Slider className="slider-temps" value={this.state.index_temps} marks={marks}
+                        min={0} max={this.state.donnees[0].evolution.length - 1} onChange={this.onSliderChange} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </React.Fragment>
+          </div>
+        }
+        {
+          this.state.activeTab == 'load' &&
+          <div className="container">
+
+            <React.Fragment>
+              <div className="columns has-text-centered">
+                <div className="column">
+
+                  <GrapheCharge donnees={this.state.donnees_zone.evolution} index_temps={this.state.index_temps}
+                    ref={this.grapheCharge} actionsVisibles={this.state.actionsVisibles} />
+                </div>
+              </div>
+            </React.Fragment>
+          </div>
+        }
+        {
+          this.state.activeTab == 'production' &&
+          <div className="container">
+
+            <React.Fragment>
+              <div className="columns has-text-centered">
+                <div className="column">
+                  <GrapheProduction donnees={this.state.donnees_zone.evolution} index_temps={this.state.index_temps}
+                    ref={this.grapheProduction} actionsVisibles={this.state.actionsVisibles} />
+                </div>
+              </div>
+            </React.Fragment>
+          </div>
+        }
         <footer className="footer">
           <div className="content has-text-centered is-dark">
 
