@@ -30,6 +30,9 @@ export default class Board extends React.Component {
     this.grapheCharge = createRef();
     this.grapheProduction = createRef();
     this.regionsDescriptions = regionDescription;
+
+    this.state = { showMobileMenu: false, activeTab: 'mix' };
+
   }
 
   updateData() {
@@ -52,6 +55,8 @@ export default class Board extends React.Component {
   }
 
   componentDidMount() {
+    this.menuToggle = this.menuToggle.bind(this);
+
     // Recuperation de la zone
     var path = window.location.pathname;
     var search = window.location.search;
@@ -137,6 +142,12 @@ export default class Board extends React.Component {
     });
   }
 
+  menuToggle() {
+    this.setState(state => ({
+      showMobileMenu: !state.showMobileMenu
+    }));
+  }
+
   render() {
     if (_.get(this, "state.donnees") === undefined) {
       return "";
@@ -180,23 +191,58 @@ export default class Board extends React.Component {
 
     return (
 
-      <div>
+      <React.Fragment>
+
+
+
         <header className="section">
           <div className="container">
             <nav className="navbar" role="navigation" aria-label="main navigation">
               <div className="navbar-brand">
-                {boutonActions}
+                {/* <figure className="image is-64x64 is-square is-hidden-touch">
+                  {boutonActions}
+                </figure> */}
+                Facteurs Charge
+                <a className="navbar-item is-hidden-desktop" href="https://github.com/PETILLON-Sebastien/facteurs_charge" target="_blank">
+                  <img src={github} alt="Projet github" title="Projet github" />
+                </a>
+
+                <a className="navbar-item is-hidden-desktop" href="https://twitter.com/FacteursC" target="_blank">
+                  <img src="https://pbs.twimg.com/profile_images/1224028525113544704/O5tajbCL_400x400.jpg" alt="Profil twitter" title="Profil twitter" />
+                </a>
 
 
-                <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <a role="button" className={`navbar-burger burger ${that.state.showMobileMenu ? "is-active" : ""}`} onClick={this.menuToggle} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                   <span aria-hidden="true"></span>
                   <span aria-hidden="true"></span>
                   <span aria-hidden="true"></span>
                 </a>
               </div>
 
-              <div id="navbarBasicExample" className="navbar-menu">
+              <div id="navbarBasicExample" className={`navbar-menu ${that.state.showMobileMenu ? "is-active" : ""}`}>
                 <div className="navbar-start">
+
+                  <span className="navbar-item">
+                    <span className="button is-dark">
+                      Carte
+                    </span>
+                  </span>
+                  <span className="navbar-item">
+                    <span className="button is-dark">
+                      Évolution Charge
+                    </span>
+                  </span>
+
+                  <span className="navbar-item">
+                    <span className="button is-dark">
+                      Évolution Production
+                    </span>
+                  </span>
+                  <span className="navbar-item">
+                    <span className="button is-dark">
+                      Mix
+                    </span>
+                  </span>
                   <span className="navbar-item">
                     <span className="navbar-item-name">
                       {label_region}
@@ -228,7 +274,7 @@ export default class Board extends React.Component {
 
           {/* {actions} */}
           {/* <div className={classNameAffichage}> */}
-            <Representations className="representations representation-name" donnees={this.state.donnees_zone} index_temps={this.state.index_temps} />
+          <Representations className="representations representation-name" donnees={this.state.donnees_zone} index_temps={this.state.index_temps} />
           {/* </div> */}
         </div>
         <footer className="footer">
@@ -244,7 +290,7 @@ export default class Board extends React.Component {
             <APropos />
           </div></footer>
         {/* </div> */}
-      </div >
+      </React.Fragment >
     );
   }
 }

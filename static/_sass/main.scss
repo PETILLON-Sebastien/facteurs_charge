@@ -1,48 +1,52 @@
 $footer-background-color:#ff0000;
 $navbar-item-color:#b5b5b5;
+
+@import "_variables.scss";
 @import "../../node_modules/bulma/bulma";
+@import "_overrides.scss";
 
-body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-  }
 
-  #wrapper {
-    flex: 1;
-  }
+// body {
+//     display: flex;
+//     min-height: 100vh;
+//     flex-direction: column;
+//   }
 
-  .navbar-item-name { 
-    font-size: 20px !important;
-    font-weight: 900;
-  }
+//   #wrapper {
+//     flex: 1;
+//   }
 
-  .representation-name {
-    // color: #b5b5b5;
-    color:#dbdbdb;
-  }
+//   .navbar-item-name { 
+//     font-size: 20px !important;
+//     font-weight: 900;
+//   }
 
-  .navbar {
-    background-color:rgba($color: #000000, $alpha: 0.0)
-  }
+//   .representation-name {
+//     // color: #b5b5b5;
+//     color:#dbdbdb;
+//   }
 
-@media screen and (min-width: 1408px) {
-    .container {
-        max-width: 1152px;
-        width: 1152px;
-    }
-}
+//   .navbar {
+//     background-color:rgba($color: #000000, $alpha: 0.0)
+//   }
 
-.affichage-representation {
-    display: flex;
-}
-.representation-icon {
-    height:20rem;
-}
+// @media screen and (min-width: 1408px) {
+//     .container {
+//         max-width: 1152px;
+//         width: 1152px;
+//     }
+// }
 
-.representation-data-text {
-    color:#dbdbdb;
-}
+// .affichage-representation {
+//     display: flex;
+// }
+// .representation-icon {
+//     height:20rem;
+// }
+
+// .representation-data-text {
+//     color:#dbdbdb;
+// }
 
 .footer {
     background-color:#121212;
