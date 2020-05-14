@@ -148,6 +148,12 @@ export default class Board extends React.Component {
     }));
   }
 
+  changeTab(tab) {
+    this.setState(state => ({
+      activeTab: tab
+    }));
+  }
+
   render() {
     if (_.get(this, "state.donnees") === undefined) {
       return "";
@@ -193,16 +199,13 @@ export default class Board extends React.Component {
 
       <React.Fragment>
 
-
-
         <header className="section">
           <div className="container">
             <nav className="navbar" role="navigation" aria-label="main navigation">
               <div className="navbar-brand">
-                {/* <figure className="image is-64x64 is-square is-hidden-touch">
-                  {boutonActions}
-                </figure> */}
+                <span className="navbar-item">
                 Facteurs Charge
+                </span>
                 <a className="navbar-item is-hidden-desktop" href="https://github.com/PETILLON-Sebastien/facteurs_charge" target="_blank">
                   <img src={github} alt="Projet github" title="Projet github" />
                 </a>
@@ -222,24 +225,24 @@ export default class Board extends React.Component {
               <div id="navbarBasicExample" className={`navbar-menu ${that.state.showMobileMenu ? "is-active" : ""}`}>
                 <div className="navbar-start">
 
-                  <span className="navbar-item">
-                    <span className="button is-dark">
+                  <span className="navbar-item" onClick={() => this.changeTab('map')} >
+                    <span className={`button is-dark ${that.state.activeTab == 'map' ? "is-active" : ""}`}>
                       Carte
                     </span>
                   </span>
-                  <span className="navbar-item">
-                    <span className="button is-dark">
+                  <span className="navbar-item" onClick={() => this.changeTab('load')}>
+                    <span className={`button is-dark ${that.state.activeTab == 'load' ? "is-active" : ""}`}>
                       Évolution Charge
                     </span>
                   </span>
 
-                  <span className="navbar-item">
-                    <span className="button is-dark">
+                  <span className="navbar-item" onClick={() => this.changeTab('production')}>
+                    <span className={`button is-dark ${that.state.activeTab == 'production' ? "is-active" : ""}`}>
                       Évolution Production
                     </span>
                   </span>
-                  <span className="navbar-item">
-                    <span className="button is-dark">
+                  <span className="navbar-item" onClick={() => this.changeTab('mix')}>
+                    <span className={`button is-dark ${that.state.activeTab == 'mix' ? "is-active" : ""}`}>
                       Mix
                     </span>
                   </span>
@@ -257,7 +260,7 @@ export default class Board extends React.Component {
 
                 <div className="navbar-end">
                   <div className="navbar-item liens">
-                    <a href="https://github.com/PETILLON-Sebastien/facteurs_charge">
+                    <a href="https://github.com/PETILLON-Sebastien/facteurs_charge" target="_blank">
                       <img src={github} alt="Projet github" title="Projet github" />
                     </a>
                     <a href="https://twitter.com/FacteursC">
@@ -271,7 +274,7 @@ export default class Board extends React.Component {
         </header>
 
         <div className="container">
-          
+
 
           {/* {actions} */}
           {/* <div className={classNameAffichage}> */}

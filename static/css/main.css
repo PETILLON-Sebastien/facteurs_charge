@@ -7419,6 +7419,10 @@ header.section > .container {
 .progress {
   height: 4px; }
 
+.navbar .button.is-active {
+  background-color: #808080;
+  box-shadow: 0 0 0 2px rgba(171, 171, 171, 0.5); }
+
 @media screen and (min-width: 1408px) {
   .container {
     max-width: 1152px;
