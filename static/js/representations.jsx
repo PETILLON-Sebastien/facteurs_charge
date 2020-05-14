@@ -10,8 +10,9 @@ class Representations extends React.Component {
     render() {
         return (
 
-            <div className="columns is-8 is-multiline">
-                <div className="column is-4">
+            <div className="columns is-8 is-mobile is-multiline representations-wrapper">
+                {/* THIS DIV WRAPPER SHOULD BE PART OF REPRESENTATION COMPONENT */}
+                <div className="column is-4 is-six-mobile">
                     <Representation
                         pourcentage={this.props.donnees.evolution[this.props.index_temps].tch_solaire}
                         production={this.props.donnees.evolution[this.props.index_temps].solaire}
@@ -19,7 +20,7 @@ class Representations extends React.Component {
                         type="Photovoltaïque"
                     />
                 </div>
-                <div className="column is-4">
+                <div className="column is-4 is-six-mobile">
                     <Representation
                         pourcentage={this.props.donnees.evolution[this.props.index_temps].tch_eolien}
                         production={this.props.donnees.evolution[this.props.index_temps].eolien}
@@ -27,7 +28,7 @@ class Representations extends React.Component {
                         type="Éolien"
                     />
                 </div>
-                <div className="column is-4">
+                <div className="column is-4 is-six-mobile">
                     <Representation
                         pourcentage={this.props.donnees.evolution[this.props.index_temps].tch_hydraulique}
                         production={this.props.donnees.evolution[this.props.index_temps].hydraulique}
@@ -35,7 +36,7 @@ class Representations extends React.Component {
                         type="Hydraulique"
                     />
                 </div>
-                <div className="column is-4">
+                <div className="column is-4 is-six-mobile">
                     <Representation
                         pourcentage={this.props.donnees.evolution[this.props.index_temps].tch_nucleaire}
                         production={this.props.donnees.evolution[this.props.index_temps].nucleaire}

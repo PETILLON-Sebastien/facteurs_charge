@@ -70,12 +70,12 @@ class Representations extends React.Component {
             //         <span className="representation-name">{name}</span>
             //     </div>
             // </div>
-            <div className="columns is-vcentered representation">
-                <div className="column is-5 is-vcentered">
+            <div className="columns is-gapless  is-vcentered representation">
+                <div className="column is-4 is-vcentered">
                     <figure className="image logo-mix">
                         {svg}
                     </figure></div>
-                <div className="column">
+                <div className="column is-8">
                     <span className={classes}></span>
                     <span className="representation-name is-size-5">{name}</span>
 

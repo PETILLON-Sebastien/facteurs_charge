@@ -7413,7 +7413,8 @@ header.section > .container {
   padding: 0rem 1rem 0rem 1rem; }
 
 .logo-mix, .logo-mix > svg {
-  height: 7rem; }
+  height: 7rem;
+  max-width: 7rem; }
 
 .progress {
   height: 4px; }
@@ -7424,3 +7425,6 @@ header.section > .container {
   bottom: 0px;
   width: 100%;
   padding: 2rem 1.5rem 2rem; }
+
+.representations-wrapper > .column {
+  margin-bottom: 6rem; }
