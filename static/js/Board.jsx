@@ -231,7 +231,7 @@ export default class Board extends React.Component {
                       Carte
                     </span>
                   </span>
-                  <span className="navbar-item" onClick={() => this.changeTab('load')}>
+                  {/* <span className="navbar-item" onClick={() => this.changeTab('load')}>
                     <span className={`button is-dark ${that.state.activeTab == 'load' ? "is-active" : ""}`}>
                       Évolution Charge
                     </span>
@@ -246,7 +246,7 @@ export default class Board extends React.Component {
                     <span className={`button is-dark ${that.state.activeTab == 'mix' ? "is-active" : ""}`}>
                       Mix
                     </span>
-                  </span>
+                  </span> */}
                   <span className="navbar-item">
                     <span className="navbar-item-name">
                       {label_region}
@@ -281,6 +281,20 @@ export default class Board extends React.Component {
             {/* {actions} */}
             {/* <div className={classNameAffichage}> */}
             <Representations className="representations representation-name" donnees={this.state.donnees_zone} index_temps={this.state.index_temps} />
+
+            <div className="columns has-text-centered">
+              <div className="column is-6">
+
+                <GrapheCharge donnees={this.state.donnees_zone.evolution} index_temps={this.state.index_temps}
+                  ref={this.grapheCharge} actionsVisibles={this.state.actionsVisibles} />
+              </div>
+            
+              <div className="column is-6">
+                <GrapheProduction donnees={this.state.donnees_zone.evolution} index_temps={this.state.index_temps}
+                  ref={this.grapheProduction} actionsVisibles={this.state.actionsVisibles} />
+              </div>
+            </div>
+
             {/* </div> */}
           </div>
         }
@@ -342,18 +356,7 @@ export default class Board extends React.Component {
             </React.Fragment>
           </div>
         }
-        <footer className="footer">
-          <div className="content has-text-centered is-dark">
 
-            {/* <div className="hero-foot"> */}
-            {/* <div className={classNameAffichage}>
-          <GrapheCharge donnees={this.state.donnees_zone.evolution} index_temps={this.state.index_temps}
-            ref={this.grapheCharge} actionsVisibles={this.state.actionsVisibles} />
-          <GrapheProduction donnees={this.state.donnees_zone.evolution} index_temps={this.state.index_temps}
-            ref={this.grapheProduction} actionsVisibles={this.state.actionsVisibles} />
-        </div> */}
-            <APropos />
-          </div></footer>
         {/* </div> */}
       </React.Fragment >
     );

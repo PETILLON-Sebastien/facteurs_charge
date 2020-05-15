@@ -10,7 +10,7 @@ class Representations extends React.Component {
     render() {
         return (
 
-            <div className="columns is-8 is-variable is-mobile is-multiline representations-wrapper">
+            <div className="columns is-0 is-variable is-mobile is-multiline representations-wrapper has-text-centered">
                 {/* THIS DIV WRAPPER SHOULD BE PART OF REPRESENTATION COMPONENT */}
                 <div className="column is-4 is-six-mobile">
                     <Representation

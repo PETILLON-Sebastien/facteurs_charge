@@ -393,7 +393,7 @@ body {
         margin-bottom: 20px;
     }
     .chart-wrapping {
-        height: 650px;
+        height: 300px;
     }
     .chart-wrapping > div {
         height: 100%;

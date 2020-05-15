@@ -7397,7 +7397,7 @@ body > .navbar {
   background-color: transparent; }
 
 header.section {
-  padding: 0rem 0rem 6rem 0rem; }
+  padding: 0rem 0rem 3rem 0rem; }
 
 header.section > .container {
   width: 100% !important;
@@ -7446,4 +7446,4 @@ header.section > .container {
   margin-top: 3rem; }
 
 .representations-wrapper > .column {
-  margin-bottom: 6rem; }
+  margin-bottom: 3rem; }
