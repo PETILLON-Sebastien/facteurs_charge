@@ -1,0 +1,192 @@
+swagger: "2.0"
+info:
+  description: "This is the facteurs-charge website's API."
+  version: "1.0.0"
+  title: "Facteurs-charge"
+  license:
+    name: "GPL-3.0"
+    url: "https://www.gnu.org/licenses/gpl-3.0.fr.html"
+host: "www.facteurs-charge.fr"
+basePath: "/api/v1"
+tags:
+- name: "zone"
+  description: "Zones electricity data"
+schemes:
+- "https"
+paths:
+  "/zones":
+    get:
+      tags:
+      - "zone"
+      summary: "Retrieve zones' data"
+      operationId: getZones
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "query"
+        name: "from"
+        description: "Start of the period"
+        required: false
+        type: "string"
+        format: "date-time"
+      - in: "query"
+        name: "to"
+        description: "End of the period"
+        required: false
+        type: "string"
+        format: "date-time"
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            $ref: '#/definitions/response'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            $ref: '#/definitions/response'
+  "/zones/{id}":
+    get:
+      tags:
+      - "zone"
+      summary: "Retrieve zone's data"
+      operationId: getZone
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "id"
+        description: "The zone's id"
+        required: true
+        type: "number"
+        format: "int32"
+      - in: "query"
+        name: "from"
+        description: "Start of the period"
+        required: false
+        type: "string"
+        format: "date-time"
+      - in: "query"
+        name: "to"
+        description: "End of the period"
+        required: false
+        type: "string"
+        format: "date-time"
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            $ref: '#/definitions/response'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            $ref: '#/definitions/response'
+
+definitions:
+  exchange:
+    type: "object"
+    required: ["zone", "value"]
+    properties:
+      zone:
+        type: "number"
+        format: "int32"
+      value:
+        type: "number"
+        format: "float"
+  capacites:
+    type: "object"
+    required: ["aeolien", "photovoltaic", "hydraulic", "nuclear",  "bioenergies", "fossil"]
+    properties:
+      aeolien:
+        type: "number"
+        format: "float"
+      photovoltaic:
+        type: "number"
+        format: "float"
+      hydraulic:
+        type: "number"
+        format: "float"
+      nuclear:
+        type: "number"
+        format: "float"
+      bioenergies:
+        type: "number"
+        format: "float"
+      fossil:
+        type: "number"
+        format: "float"
+  zone_snapshot:
+    type: "object"
+    required: ["datetime"]
+    properties:
+      aeolien:
+        type: "number"
+        format: "float"
+      photovoltaic:
+        type: "number"
+        format: "float"
+      hydraulic:
+        type: "number"
+        format: "float"
+      nuclear:
+        type: "number"
+        format: "float"
+      bioenergies:
+        type: "number"
+        format: "float"
+      fossil:
+        type: "number"
+        format: "float"
+      pumping:
+        type: "number"
+        format: "float"
+      consumption:
+        type: "number"
+        format: "float"
+      datetime:
+        type: string
+        format: "date-time"
+      exchanges:
+        type: "array"
+        items:
+          $ref: '#/definitions/exchange'
+  zone:
+    type: "object"
+    required: ["id", "capacites", "name", "evolution"]
+    properties:
+      id:
+        type: "number"
+        format: "int32"
+      capacites:
+        $ref: '#/definitions/capacites'
+      name:
+        type: "string"
+      evolution:
+        type: "array"
+        items:
+          $ref: '#/definitions/zone_snapshot'
+  response:
+    type: "object"
+    required: ["zones", "date_minimum", "date_maximum", ]
+    properties:
+      zones:
+        type: "array"
+        items:
+          $ref: '#/definitions/zone'
+      date_minimum:
+        type: string
+        format: "date-time"
+      date_maximum:
+        type: string
+        format: "date-time"
