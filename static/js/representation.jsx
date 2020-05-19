@@ -17,7 +17,7 @@ class Representations extends React.Component {
         let svg;
         let classes = "legende-moyen-production legende-";
         let name = "DEFAULT";
-        
+
         switch (this.props.type) {
             case "Photovoltaïque":
                 svg = <PanneauSolaire pourcentage={taux_charge} />;
@@ -62,40 +62,44 @@ class Representations extends React.Component {
     render() {
 
         return (
-            <div className="column is-4 is-six-mobile">
+            <React.Fragment>
+                {/* <div className="column is-0-fullhd is-0-widescreen is-0-desktop is-0-tablet is-2-mobile"></div> */}
+                <div className="column is-4-fullhd is-offset-0-fullhd is-4-widescreen is-offset-0-widescreen is-six-desktop is-offset-0-desktop is-5-tablet is-offset-0-tablet is-5-mobile is-offset-1-mobile">
 
-                <div className="columns is-gapless  is-vcentered representation">
-                    <div className="column is-4 is-vcentered">
-                        <figure className="image logo-mix">
-                            {this.svg}
-                        </figure></div>
-                    <div className="column is-8">
-                        <span className={this.classes}></span>
-                        <span className="representation-name is-size-5">{this.name}</span>
+                    <div className="columns is-gapless  is-vcentered representation">
+                        <div className="column is-4-fullhd is-4-widescreen is-4-desktop is-4-tablet is-4-mobile is-offset-2 is-vcentered">
+                            <figure className="image logo-mix">
+                                {this.svg}
+                            </figure></div>
+                        <div className="column is-8-fullhd is-8-widescreen is-8-desktop is-8-tablet is-8-mobile is-offset-2">
+                            <span className={this.classes}></span>
+                            <span className="representation-name is-size-5">{this.name}</span>
 
-                        <div className="content statistiques representation-data-text">
-                            <div style={{ width: '75%' }}>
-                                <progress className={`progress`} value={this.taux_charge} max="100">{this.taux_charge}%</progress>
-                            </div>
-                            <div>
-                                <span className="titre">Taux de charge&nbsp;:</span>
-                                <span>{this.taux_charge} </span>
-                                <span className="unit">%</span>
-                            </div>
-                            <div>
-                                <span className="titre">Production&nbsp;:</span>
-                                <span>{this.production} </span>
-                                <span className="unit">MW</span>
-                            </div>
-                            <div>
-                                <span className="titre">Capacites&nbsp;:</span>
-                                <span>{this.capacites} </span>
-                                <span className="unit">MW</span>
+                            <div className="content statistiques representation-data-text">
+                                <div style={{ width: '75%' }}>
+                                    <progress className={`progress`} value={this.taux_charge} max="100">{this.taux_charge}%</progress>
+                                </div>
+                                <div>
+                                    <span className="titre">Taux de charge&nbsp;:</span>
+                                    <span>{this.taux_charge} </span>
+                                    <span className="unit">%</span>
+                                </div>
+                                <div>
+                                    <span className="titre">Production&nbsp;:</span>
+                                    <span>{this.production} </span>
+                                    <span className="unit">MW</span>
+                                </div>
+                                <div>
+                                    <span className="titre">Capacites&nbsp;:</span>
+                                    <span>{this.capacites} </span>
+                                    <span className="unit">MW</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                {/* <div className="column is-0-fullhd is-0-widescreen is-0-desktop is-0-tablet is-2-mobile"></div> */}
+            </React.Fragment>
         );
     }
 }

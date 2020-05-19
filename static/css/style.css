@@ -269,7 +269,7 @@ body {
 .statistiques {
     display: flex;
     flex-direction: column;
-    align-items: justify;
+    text-align: justify;
 }
 /* @media (min-width: 600px) and (max-resolution: 150dpi) {
     .representation {

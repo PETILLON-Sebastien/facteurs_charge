@@ -10,7 +10,7 @@ class Representations extends React.Component {
     render() {
         return (
 
-            <div className="columns is-0 is-variable is-mobile is-multiline representations-wrapper has-text-centered">
+            <div className="columns is-0 is-variable is-centered is-mobile is-multiline representations-wrapper has-text-centered">
                 {/* THIS DIV WRAPPER SHOULD BE PART OF REPRESENTATION COMPONENT */}
                 <Representation
                     pourcentage={this.props.donnees.evolution[this.props.index_temps].tch_solaire}
