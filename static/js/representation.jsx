@@ -53,50 +53,36 @@ class Representations extends React.Component {
         }
 
         return (
-            // <div className="representation">
-            //     <div className="affichage-representation">
-            //         {svg}
-            //         <div className="statistiques">
-            //             <div className="titre">Taux de charge&nbsp;:</div>
-            //             <div><span>{taux_charge} </span><span className="unit">%</span></div>
-            //             <div className="titre">Production&nbsp;:</div>
-            //             <div><span>{production} </span> <span className="unit">MW</span></div>
-            //             <div className="titre">Capacites&nbsp;:</div>
-            //             <div><span>{capacites} </span><span className="unit">MW</span></div>
-            //         </div>
-            //     </div>
-            //     <div className="legende">
-            //         <span className={classes}></span>
-            //         <span className="representation-name">{name}</span>
-            //     </div>
-            // </div>
-            <div className="columns is-gapless  is-vcentered representation">
-                <div className="column is-4 is-vcentered">
-                    <figure className="image logo-mix">
-                        {svg}
-                    </figure></div>
-                <div className="column is-8">
-                    <span className={classes}></span>
-                    <span className="representation-name is-size-5">{name}</span>
+            <div className="column is-4 is-six-mobile">
 
-                    <div className="content statistiques representation-data-text">
-                        <div style={{width:'75%'}}>
-                        <progress className={`progress`} value={taux_charge} max="100">{taux_charge}%</progress>
-                        </div>
-                        <div>
-                            <span className="titre">Taux de charge&nbsp;:</span>
-                            <span>{taux_charge} </span>
-                            <span className="unit">%</span>
-                        </div>
-                        <div>
-                            <span className="titre">Production&nbsp;:</span>
-                            <span>{production} </span>
-                            <span className="unit">MW</span>
-                        </div>
-                        <div>
-                            <span className="titre">Capacites&nbsp;:</span>
-                            <span>{capacites} </span>
-                            <span className="unit">MW</span>
+                <div className="columns is-gapless  is-vcentered representation">
+                    <div className="column is-4 is-vcentered">
+                        <figure className="image logo-mix">
+                            {svg}
+                        </figure></div>
+                    <div className="column is-8">
+                        <span className={classes}></span>
+                        <span className="representation-name is-size-5">{name}</span>
+
+                        <div className="content statistiques representation-data-text">
+                            <div style={{ width: '75%' }}>
+                                <progress className={`progress`} value={taux_charge} max="100">{taux_charge}%</progress>
+                            </div>
+                            <div>
+                                <span className="titre">Taux de charge&nbsp;:</span>
+                                <span>{taux_charge} </span>
+                                <span className="unit">%</span>
+                            </div>
+                            <div>
+                                <span className="titre">Production&nbsp;:</span>
+                                <span>{production} </span>
+                                <span className="unit">MW</span>
+                            </div>
+                            <div>
+                                <span className="titre">Capacites&nbsp;:</span>
+                                <span>{capacites} </span>
+                                <span className="unit">MW</span>
+                            </div>
                         </div>
                     </div>
                 </div>
