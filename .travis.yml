@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- 8
+- 12
 addons:
   ssh_known_hosts: facteus@sshcloud.cluster024.hosting.ovh.net:44335
 before_script:
