@@ -14,28 +14,22 @@ class Navbar extends React.Component {
     componentDidMount() {
         this.menuToggle = this.menuToggle.bind(this);
     }
-    menuToggle() {
-        this.setState(state => ({
-          showMobileMenu: !state.showMobileMenu
-        }));
-      }
     
-      changeTab(tab) {
-        this.setState(state => ({
-          activeTab: tab
+    menuToggle() {
+        that.setState(state => ({
+            showMobileMenu: !state.showMobileMenu
         }));
-      }    
+    }
 
     render() {
         return (
             <header className="section">
-
                 <div className="container">
                     <nav className="navbar" role="navigation" aria-label="main navigation">
                         <div className="navbar-brand">
                             <span className="navbar-item">
                                 Facteurs Charge
-      </span>
+                            </span>
                             <a className="navbar-item is-size-2" href="https://github.com/PETILLON-Sebastien/facteurs_charge" target="_blank">
                                 <span className="icon has-text-white	is-hidden-desktop">
                                     <i className="fab fa-github-square"></i>
@@ -62,24 +56,9 @@ class Navbar extends React.Component {
                                 <span className="navbar-item" onClick={() => this.changeTab('map')} >
                                     <span className={`button is-dark ${that.state.activeTab == 'map' ? "is-active" : ""}`}>
                                         Carte
-          </span>
+                                    </span>
                                 </span>
-                                {/* <span className="navbar-item" onClick={() => this.changeTab('load')}>
-          <span className={`button is-dark ${that.state.activeTab == 'load' ? "is-active" : ""}`}>
-            Évolution Charge
-          </span>
-        </span>
 
-        <span className="navbar-item" onClick={() => this.changeTab('production')}>
-          <span className={`button is-dark ${that.state.activeTab == 'production' ? "is-active" : ""}`}>
-            Évolution Production
-          </span>
-        </span>
-        <span className="navbar-item" onClick={() => this.changeTab('mix')}>
-          <span className={`button is-dark ${that.state.activeTab == 'mix' ? "is-active" : ""}`}>
-            Mix
-          </span>
-        </span> */}
                                 <span className="navbar-item">
                                     <span className="navbar-item-name">
                                         {this.props.label_region}
