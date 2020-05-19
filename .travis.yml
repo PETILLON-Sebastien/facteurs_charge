@@ -6,6 +6,7 @@ addons:
 before_script:
 - npm i webpack --save-dev
 - npm i @babel/preset-env @babel/preset-react --save-dev
+- npm rebuild node-sass
 - npm install babel-loader
 - npm install --save-dev @babel/core @babel/preset-env
 - npm install
