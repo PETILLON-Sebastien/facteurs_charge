@@ -4,9 +4,6 @@
 | [![Develop](https://travis-ci.org/PETILLON-Sebastien/facteurs_charge.svg?branch=develop)](https://travis-ci.org/PETILLON-Sebastien/facteurs_charge)| [![Master](https://travis-ci.org/PETILLON-Sebastien/facteurs_charge.svg?branch=master)](https://travis-ci.org/PETILLON-Sebastien/facteurs_charge) |
 
 
-: 
-
-: 
 
 # Facteurs de charge
 
