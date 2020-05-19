@@ -1,8 +1,8 @@
 import React, { createRef } from 'react'
 import Map from "./Map";
 import github from '../images/github.png';
-import buttonOn from '../images/buttonon.png';
-import buttonOff from '../images/buttonoff.png';
+import twitter from '../images/twitter.png';
+
 import Representations from "./representations"
 import GrapheCharge from "./graphe-charge";
 import GrapheProduction from "./graphe-production";
@@ -32,6 +32,7 @@ export default class Board extends React.Component {
     this.regionsDescriptions = regionDescription;
 
     this.state = { showMobileMenu: false, activeTab: 'mix' };
+
 
   }
 
@@ -189,9 +190,9 @@ export default class Board extends React.Component {
       )
       : null;
 
-    let boutonActions = this.state.actionsVisibles ?
-      <img src={buttonOff} className="buttonOff" onClick={this.changerVisibiliteActions} alt="Cacher les actions" title="Cacher les actions" />
-      : <img src={buttonOn} className="buttonOn" onClick={this.changerVisibiliteActions} alt="Montrer les actions" title="Montrer les actions" />;
+    // let boutonActions = this.state.actionsVisibles ?
+    // <img src={buttonOff} className="buttonOff" onClick={this.changerVisibiliteActions} alt="Cacher les actions" title="Cacher les actions" />
+    // : <img src={buttonOn} className="buttonOn" onClick={this.changerVisibiliteActions} alt="Montrer les actions" title="Montrer les actions" />;
 
     let classNameAffichage = this.state.actionsVisibles ? "affichage" : "affichage seul";
 
@@ -200,20 +201,26 @@ export default class Board extends React.Component {
       <React.Fragment>
 
 
+
         <header className="section">
+
           <div className="container">
             <nav className="navbar" role="navigation" aria-label="main navigation">
               <div className="navbar-brand">
                 <span className="navbar-item">
                   Facteurs Charge
                 </span>
-                <a className="navbar-item is-hidden-desktop" href="https://github.com/PETILLON-Sebastien/facteurs_charge" target="_blank">
-                  <img src={github} alt="Projet github" title="Projet github" />
-                </a>
-
-                <a className="navbar-item is-hidden-desktop" href="https://twitter.com/FacteursC" target="_blank">
-                  <img src="https://pbs.twimg.com/profile_images/1224028525113544704/O5tajbCL_400x400.jpg" alt="Profil twitter" title="Profil twitter" />
-                </a>
+                    <a className="navbar-item is-size-2" href="https://github.com/PETILLON-Sebastien/facteurs_charge" target="_blank">
+                      <span className="icon has-text-white	is-hidden-desktop">
+                        <i className="fab fa-github-square"></i>
+                      </span>
+                    </a>
+                    
+                    <a className="navbar-item is-size-2" href="https://twitter.com/FacteursC">
+                      <span className="icon has-text-white	is-hidden-desktop">
+                        <i className="fab fa-twitter-square"></i>
+                      </span>
+                    </a>
 
 
                 <a role="button" className={`navbar-burger burger ${that.state.showMobileMenu ? "is-active" : ""}`} onClick={this.menuToggle} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -260,12 +267,17 @@ export default class Board extends React.Component {
                 </div>
 
                 <div className="navbar-end">
-                  <div className="navbar-item liens">
-                    <a href="https://github.com/PETILLON-Sebastien/facteurs_charge" target="_blank">
-                      <img src={github} alt="Projet github" title="Projet github" />
+                  <div className="navbar-item">
+                    <a className="navbar-item is-size-2" href="https://github.com/PETILLON-Sebastien/facteurs_charge" target="_blank">
+                      <span className="icon has-text-white	is-hidden-touch">
+                        <i className="fab fa-github-square"></i>
+                      </span>
                     </a>
-                    <a href="https://twitter.com/FacteursC">
-                      <img src="https://pbs.twimg.com/profile_images/1224028525113544704/O5tajbCL_400x400.jpg" alt="Profil twitter" title="Profil twitter" />
+                    
+                    <a className="navbar-item is-size-2" href="https://twitter.com/FacteursC">
+                      <span className="icon has-text-white	is-hidden-touch">
+                        <i className="fab fa-twitter-square"></i>
+                      </span>
                     </a>
                   </div>
                 </div>
@@ -288,7 +300,7 @@ export default class Board extends React.Component {
                 <GrapheCharge donnees={this.state.donnees_zone.evolution} index_temps={this.state.index_temps}
                   ref={this.grapheCharge} actionsVisibles={this.state.actionsVisibles} />
               </div>
-            
+
               <div className="column is-6">
                 <GrapheProduction donnees={this.state.donnees_zone.evolution} index_temps={this.state.index_temps}
                   ref={this.grapheProduction} actionsVisibles={this.state.actionsVisibles} />
