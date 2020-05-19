@@ -1,5 +1,5 @@
 body {
-    background-color: #222;
+    background-color: #17181c;
     color: #CCC;
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -10,7 +10,7 @@ body {
 }
 
 /* Placement des composants de l'application */
-.app {
+/* .app {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -19,10 +19,10 @@ body {
 .map {
     width: 90%;
     margin-bottom: 20px;
-}
+} */
 
 /* Bandeau supérieur */
-.bandeau {
+/* .bandeau {
     width: 100%;
     height: 70px;
     padding: 10 20 10 20;
@@ -45,10 +45,10 @@ body {
     width: 40px;
     height: 40px;
     border-radius: 100%;
-}
+} */
 
 /* Composant carte */
-.actions {
+/* .actions {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -80,8 +80,8 @@ body {
 }
 .buttonOff {
     background-color:  black;
-}
-
+} 
+*/
 .titre span {
     margin-right: 20px;
 }
@@ -99,6 +99,7 @@ body {
     font-size: 80%;
 }
 
+/*
 .DayPicker .DayPicker-Day {
     width: 22px;
     border-radius: 0% !important;
@@ -210,7 +211,7 @@ body {
         width: 100%;
     }
 }
-
+*/
 .region {
     cursor: pointer;
     transition: fill 0.5s;
@@ -246,13 +247,13 @@ body {
 }
 
 /* Style des représentations graphiques */
-.regroupement-representations {
+/* .regroupement-representations {
     width: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-}
-.representation {
+} */
+/* .representation {
     width: 100%;
     padding: 10px;
     display: flex;
@@ -260,7 +261,7 @@ body {
     justify-content: space-between;
     height: 320px;
     margin-bottom: 20px;
-}
+} */
 .representation svg {
     height: 140px;
     width: 100%;
@@ -268,9 +269,9 @@ body {
 .statistiques {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: justify;
 }
-@media (min-width: 600px) and (max-resolution: 150dpi) {
+/* @media (min-width: 600px) and (max-resolution: 150dpi) {
     .representation {
         width: 33%;
     }
@@ -280,12 +281,13 @@ body {
         width: 16.6%;
     }
 }
+*/
 .representation .titre {
     margin-right: 10px;
     color: #888;
     font-weight: 200;
 
-}
+} 
 .legende {
     margin-bottom: 10px;
     display: flex;
@@ -322,57 +324,7 @@ body {
     background-color:rgb(134, 125, 102);
 }
 
-.pales {
-    animation-name: rotation;
-    /* Things added */
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-    transform-origin: 88.5px 63px;
-    display: inline-block;
-}
-@keyframes rotation {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-.ecoulement-gauche {
-    transform-origin: 38px 0px;
-}
-.ecoulement-central {
-    transform-origin: 62px 0px;
-}
-.ecoulement-droite {
-    transform-origin: 86px 0px;
-}
-.fumee {
-    animation-name: montee;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-}
-.fumee-petite {
-    animation-name: montee-petite;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-}
-@keyframes montee {
-    0% {
-        transform: translate(0px, 1px);
-    }
-    100% {
-        transform: translate(0.5px, -37px)
-    }
-}
-@keyframes montee-petite {
-    0% {
-        transform: translate(0px, 1px);
-    }
-    100% {
-        transform: translate(0px, -29px)
-    }
-}
+
 
 /* Informations */
 .informations {
@@ -423,13 +375,13 @@ body {
         width: 70px;
         height: 70px;
     }
-    .representation {
+    /* .representation {
         width: 50%;
         margin-top: 20px;
         height: 850px;
-    }
+    } */
     .representation svg {
-        height: 400px;
+        height: 140px;
     }
     .label-region, .label-date-heure {
         font-size: 75%;
@@ -441,14 +393,15 @@ body {
         margin-bottom: 20px;
     }
     .chart-wrapping {
-        height: 650px;
+        height: 300px;
     }
     .chart-wrapping > div {
         height: 100%;
     }    
     .legende-moyen-production {
-        width: 25px;
-        height: 25px;
+        width: 18px;
+        height: 18px;
+        margin-bottom: -0.2rem;
     }
     .regroupement-representations {
         padding-left: 20px;
