@@ -1,3 +1,10 @@
+
+| Development Branch | Master Branch | 
+| --------------- | --------------- | 
+| [![Develop](https://travis-ci.org/PETILLON-Sebastien/facteurs_charge.svg?branch=develop)](https://travis-ci.org/PETILLON-Sebastien/facteurs_charge)| [![Master](https://travis-ci.org/PETILLON-Sebastien/facteurs_charge.svg?branch=master)](https://travis-ci.org/PETILLON-Sebastien/facteurs_charge) |
+
+
+
 # Facteurs de charge
 
 Ceci est le projet de démonstration des facteurs de charge du parc électrique français.
