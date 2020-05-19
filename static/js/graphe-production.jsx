@@ -129,6 +129,9 @@ class GrapheProduction extends React.Component {
                             return Math.round(this.value / 10) / 100 + " GW";
                         }
                         return this.value + " MW";
+                    },
+                    style:{
+                        color:"#ffffff"
                     }
                 }
             },
@@ -141,7 +144,12 @@ class GrapheProduction extends React.Component {
                     color: '#FFF',
                     width: 1,
                     value: heure_courante
-                }]
+                }],
+                labels: {
+                    style:{
+                        color:"#ffffff"
+                    }
+                }
             },
             legend: {
                 enabled: false

@@ -99,7 +99,12 @@ class GrapheCharge extends React.Component {
                 },
                 tickAmount: 0,
                 min: 0,
-                max: 100
+                max: 100,
+                labels: {
+                    style:{
+                        color:"#ffffff"
+                    }
+                }
             },
             xAxis: {
                 type: 'datetime',
@@ -110,7 +115,12 @@ class GrapheCharge extends React.Component {
                     color: '#FFF',
                     width: 1,
                     value: heure_courante
-                }]
+                }],
+                labels: {
+                    style:{
+                        color:"#ffffff"
+                    }
+                }
             },
             legend: {
                 enabled: false
