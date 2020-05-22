@@ -8,20 +8,33 @@
   <link rel="stylesheet" href="css/animations-mix.css" />
   <link rel="stylesheet" href="css/main.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  
+<style>.pageloader { background-color:#375a7f }</style>
+  <script>
+    window.setTimeout(() =>  {
+// document.getElementById("spinner").classList = "pageLoader";
+    }, 3000);
+  </script>
   <title>Facteurs de charge</title>
 </head>
 
-<body >
-  <section  id="content" class="is-fullheight">
+<body>
+
+ 
 
 
+  <section id="content" class="is-fullheight">
+  
+<!-- 
+    <div class="pageloader is-dark is-active" id="spinner"><span class="title">Facteurs charge préchauffe... On arrive!</span>
+
+    </div> -->
   </section>
   <!-- Application react -->
   <script src="dist/bundle.js" type="text/javascript"></script>
   <script>
 
-</script>
+  </script>
 </body>
 
 </html>

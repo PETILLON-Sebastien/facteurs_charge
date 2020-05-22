@@ -48,6 +48,7 @@ export default class Board extends React.Component {
   }
 
   componentDidMount() {
+
     // Recuperation de la zone
     var path = window.location.pathname;
     var search = window.location.search;
@@ -82,6 +83,11 @@ export default class Board extends React.Component {
     });
 
     this.updateData();
+
+    setTimeout(()  => {
+    this.setState({ done: true });
+    },1500);
+
   }
 
 
@@ -92,11 +98,11 @@ export default class Board extends React.Component {
     }
 
     let meilleurs_facteurs = {};
-    
+
     for (var cle_region in this.state.donnees) {
       meilleurs_facteurs[cle_region] = this.state.donnees[cle_region]['meilleur_facteur'];
     }
-    
+
     let marks = {};
     for (var index in this.state.donnees[0].evolution) {
       if (index % 16 === 0) {
@@ -111,27 +117,39 @@ export default class Board extends React.Component {
 
     return (
 
+
       <React.Fragment>
-        <Navbar that={that} label_region={label_region} label_date_heure={label_date_heure} />
-
-        <div className="container">
-
-          <Representations className="representations representation-name" donnees={this.state.donnees_zone} index_temps={this.state.index_temps} />
-
-          <div className="columns has-text-centered">
-            <div className="column is-6">
-
-              <GrapheCharge donnees={this.state.donnees_zone.evolution} index_temps={this.state.index_temps}
-                ref={this.grapheCharge} actionsVisibles={this.state.actionsVisibles} />
+        {
+          ! this.state.done ? (
+            
+            <div class="pageloader is-dark is-active" ref="spinner"><span class="title">Facteurs charge préchauffe... On arrive!</span>
+{this.state.done}
             </div>
+          ) : (
+              <React.Fragment>
+{this.state.done}
+                <Navbar that={that} label_region={label_region} label_date_heure={label_date_heure} />
 
-            <div className="column is-6">
-              <GrapheProduction donnees={this.state.donnees_zone.evolution} index_temps={this.state.index_temps}
-                ref={this.grapheProduction} actionsVisibles={this.state.actionsVisibles} />
-            </div>
-          </div>
-        </div>
-      </React.Fragment >
-    );
-  }
+                <div className="container">
+
+                  <Representations className="representations representation-name" donnees={this.state.donnees_zone} index_temps={this.state.index_temps} />
+
+                  <div className="columns has-text-centered">
+                    <div className="column is-6">
+
+                      <GrapheCharge donnees={this.state.donnees_zone.evolution} index_temps={this.state.index_temps}
+                        ref={this.grapheCharge} actionsVisibles={this.state.actionsVisibles} />
+                    </div>
+
+                    <div className="column is-6">
+                      <GrapheProduction donnees={this.state.donnees_zone.evolution} index_temps={this.state.index_temps}
+                        ref={this.grapheProduction} actionsVisibles={this.state.actionsVisibles} />
+                    </div>
+                  </div>
+                </div>
+              </React.Fragment>
+
+            )};
+      </React.Fragment>
+    )}
 }

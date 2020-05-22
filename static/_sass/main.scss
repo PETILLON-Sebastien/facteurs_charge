@@ -1,8 +1,12 @@
 $footer-background-color:#ff0000;
 $navbar-item-color:#b5b5b5;
 
+// @import 'bulma';
+// @import '~bulma-page-loader';
+
 @import "_variables.scss";
 @import "../../node_modules/bulma/bulma";
+@import "../../node_modules/bulma-pageloader/dist/css/bulma-pageloader";
 @import "../../node_modules/@fortawesome/fontawesome-free/css/all.css";
 @import "_overrides.scss";
 
