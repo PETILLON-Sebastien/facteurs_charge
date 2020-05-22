@@ -84,9 +84,6 @@ export default class Board extends React.Component {
 
     this.updateData();
 
-    setTimeout(()  => {
-    this.setState({ done: true });
-    },1500);
 
   }
 
@@ -118,16 +115,9 @@ export default class Board extends React.Component {
     return (
 
 
-      <React.Fragment>
-        {
-          ! this.state.done ? (
-            
-            <div class="pageloader is-dark is-active" ref="spinner"><span class="title">Facteurs charge préchauffe... On arrive!</span>
-{this.state.done}
-            </div>
-          ) : (
+ 
               <React.Fragment>
-{this.state.done}
+
                 <Navbar that={that} label_region={label_region} label_date_heure={label_date_heure} />
 
                 <div className="container">
@@ -149,7 +139,5 @@ export default class Board extends React.Component {
                 </div>
               </React.Fragment>
 
-            )};
-      </React.Fragment>
     )}
 }
