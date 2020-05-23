@@ -1,7 +1,7 @@
 import React from "react";
 import Representation from "./representation";
 
-class Representations extends React.Component {
+class Breakdown extends React.Component {
 
     constructor(props) {
         super(props);
@@ -58,4 +58,4 @@ class Representations extends React.Component {
     }
 }
 
-export default Representations;
+export default Breakdown;

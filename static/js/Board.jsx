@@ -1,6 +1,6 @@
 import React, { createRef } from 'react'
 
-import Representations from "./representations"
+import Breakdown from "./Breakdown"
 import GrapheCharge from "./graphe-charge";
 import GrapheProduction from "./graphe-production";
 import Navbar from './Navbar';
@@ -122,7 +122,7 @@ export default class Board extends React.Component {
 
                 <div className="container">
 
-                  <Representations className="representations representation-name" donnees={this.state.donnees_zone} index_temps={this.state.index_temps} />
+                  <Breakdown className="representations representation-name" donnees={this.state.donnees_zone} index_temps={this.state.index_temps} />
 
                   <div className="columns has-text-centered">
                     <div className="column is-6">
