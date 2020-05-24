@@ -12,6 +12,7 @@ tags:
 - name: Breakdown
 - name: Consumption
 - name: Exchange
+- name: Production
 - name: Zone
 schemes:
 - "https"
@@ -113,6 +114,37 @@ paths:
             type: array
             items:
               $ref: '#/definitions/exchange'
+  /productions:
+    get:
+      tags:
+      - Production
+      summary: Retrieve productions
+      operationId: getProductions
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+        - $ref: '#/parameters/zoneId'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/production'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/production'
   /zones:
     get:
       tags:
@@ -151,9 +183,7 @@ paths:
         "200":
           description: "All data retreived"
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/zone'
+            $ref: '#/definitions/zone'
         "400":
           description: "Bad parameter"
         "404":
@@ -193,9 +223,20 @@ definitions:
         type: string
         pattern: "[A-Z]{2}-[0-9]{1-2}$"
       used:
-        $ref: '#/definitions/powerConsumption'
+        $ref: '#/definitions/power'
       stepStorage:
-        $ref: '#/definitions/powerConsumption'
+        $ref: '#/definitions/power'
+  production:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        format: date-time
+      zoneId:
+        type: string
+        pattern: "[A-Z]{2}-[0-9]{1-2}$"
+      production:
+        $ref: '#/definitions/power'
   exchange:
     type: object
     properties:
@@ -213,7 +254,8 @@ definitions:
         format: int64
       unit:
         type: string
-  powerConsumption:
+        pattern: "^W|MW|GW$"
+  power:
     type: object
     properties:
       value:
@@ -221,25 +263,14 @@ definitions:
         format: int64
       unit:
         type: string
+        pattern: "^W|MW|GW$"
   powerSource:
     type: object
     properties:
       capacity:
-        type: object
-        properties:
-          value:
-            type: number
-            format: int64
-          unit:
-            type: string
+        $ref: '#/definitions/power'
       production:
-        type: object
-        properties:
-          value:
-            type: number
-            format: int64
-          unit:
-            type: string
+        $ref: '#/definitions/power'
       loadFactor:
         type: number
         format: double
@@ -283,6 +314,7 @@ parameters:
     name: "value"
     description: "Filter on values"
     type: string
+    pattern: "lowest|highest"
   loadFilter:
     in: "query"
     name: "load"
@@ -294,7 +326,7 @@ parameters:
     name: "source"
     description: "Filter on sources"
     type: string
-    pattern: "photovoltaic|windEnergy|hydaulic|nuclear|bioenergies|fossil"
+    pattern: "photovoltaic|windEnergy|hydraulic|nuclear|bioenergies|fossil"
   consumptionFilter:
     in: "query"
     name: "target"
