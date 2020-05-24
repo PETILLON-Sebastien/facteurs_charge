@@ -9,39 +9,38 @@ info:
 host: "www.facteurs-charge.fr"
 basePath: "/api/v1"
 tags:
-- name: "zone"
-  description: "Zones electricity data"
+- name: Breakdown
+- name: Consumption
+- name: Exchange
+- name: Zone
 schemes:
 - "https"
+
 paths:
-  "/zones":
+  /breakdowns:
     get:
       tags:
-      - "zone"
-      summary: "Retrieve zones' data"
-      operationId: getZones
+      - Breakdown
+      summary: Retrieve breakdowns
+      operationId: getBreakdowns
       consumes:
       - "application/json"
       produces:
       - "application/json"
       parameters:
-      - in: "query"
-        name: "from"
-        description: "Start of the period"
-        required: false
-        type: "string"
-        format: "date-time"
-      - in: "query"
-        name: "to"
-        description: "End of the period"
-        required: false
-        type: "string"
-        format: "date-time"
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/valueFilter'
+        - $ref: '#/parameters/loadFilter'
+        - $ref: '#/parameters/powerSourceFilter'
       responses:
         "200":
           description: "All data retreived"
           schema:
-            $ref: '#/definitions/response'
+            type: array
+            items:
+              $ref: '#/definitions/breakdown'
         "400":
           description: "Bad parameter"
         "404":
@@ -49,12 +48,93 @@ paths:
         "409":
           description: "Partial content"
           schema:
-            $ref: '#/definitions/response'
-  "/zones/{id}":
+            type: array
+            items:
+              $ref: '#/definitions/breakdown'
+  /consumptions:
     get:
       tags:
-      - "zone"
-      summary: "Retrieve zone's data"
+      - Consumption
+      summary: Retrieve consumptions
+      operationId: getConsumptions
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+        - $ref: '#/parameters/zoneId'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/consumption'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/consumption'
+  /exchanges:
+    get:
+      tags:
+      - Exchange
+      summary: Retrieve exchanges
+      operationId: getExchanges
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+        - $ref: '#/parameters/zoneId'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/exchange'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/exchange'
+  /zones:
+    get:
+      tags:
+      - Zone
+      summary: Retrieve zones
+      operationId: getZones
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/zone'
+  /zones/{id}:
+    get:
+      tags:
+      - Zone
+      summary: Retrieve zone
       operationId: getZone
       consumes:
       - "application/json"
@@ -63,130 +143,161 @@ paths:
       parameters:
       - in: "path"
         name: "id"
-        description: "The zone's id"
         required: true
-        type: "number"
-        format: "int32"
-      - in: "query"
-        name: "from"
-        description: "Start of the period"
-        required: false
-        type: "string"
-        format: "date-time"
-      - in: "query"
-        name: "to"
-        description: "End of the period"
-        required: false
-        type: "string"
-        format: "date-time"
+        description: "The zone id"
+        type: string
+        pattern: "[A-Z]{2}(-[0-9]{1-2})?$"
       responses:
         "200":
           description: "All data retreived"
           schema:
-            $ref: '#/definitions/response'
+            type: array
+            items:
+              $ref: '#/definitions/zone'
         "400":
           description: "Bad parameter"
         "404":
           description: "No data"
-        "409":
-          description: "Partial content"
-          schema:
-            $ref: '#/definitions/response'
-
 definitions:
-  exchange:
-    type: "object"
-    required: ["zone", "value"]
+  breakdown:
+    type: object
     properties:
-      zone:
-        type: "number"
-        format: "int32"
-      value:
-        type: "number"
-        format: "float"
-  capacites:
-    type: "object"
-    required: ["aeolien", "photovoltaic", "hydraulic", "nuclear",  "bioenergies", "fossil"]
-    properties:
-      aeolien:
-        type: "number"
-        format: "float"
-      photovoltaic:
-        type: "number"
-        format: "float"
-      hydraulic:
-        type: "number"
-        format: "float"
-      nuclear:
-        type: "number"
-        format: "float"
-      bioenergies:
-        type: "number"
-        format: "float"
-      fossil:
-        type: "number"
-        format: "float"
-  zone_snapshot:
-    type: "object"
-    required: ["datetime"]
-    properties:
-      aeolien:
-        type: "number"
-        format: "float"
-      photovoltaic:
-        type: "number"
-        format: "float"
-      hydraulic:
-        type: "number"
-        format: "float"
-      nuclear:
-        type: "number"
-        format: "float"
-      bioenergies:
-        type: "number"
-        format: "float"
-      fossil:
-        type: "number"
-        format: "float"
-      pumping:
-        type: "number"
-        format: "float"
-      consumption:
-        type: "number"
-        format: "float"
-      datetime:
+      timestamp:
         type: string
-        format: "date-time"
-      exchanges:
-        type: "array"
-        items:
-          $ref: '#/definitions/exchange'
+        format: date-time
+      zoneId:
+        type: string
+        pattern: "[A-Z]{2}-[0-9]{1-2}$"
+      breakdown:
+        type: object
+        properties:
+          photovoltaic:
+            $ref: '#/definitions/powerSource'
+          windEnergy:
+            $ref: '#/definitions/powerSource'
+          hydraulic:
+            $ref: '#/definitions/powerSource'
+          nuclear:
+            $ref: '#/definitions/powerSource'
+          bioenergies:
+            $ref: '#/definitions/powerSource'
+          fossil:
+            $ref: '#/definitions/powerSource'
+  consumption:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        format: date-time
+      zoneId:
+        type: string
+        pattern: "[A-Z]{2}-[0-9]{1-2}$"
+      used:
+        $ref: '#/definitions/powerConsumption'
+      stepStorage:
+        $ref: '#/definitions/powerConsumption'
+  exchange:
+    type: object
+    properties:
+      timestamp:
+        type: string
+        format: date-time
+      sourceZone:
+        type: string
+        pattern: "[A-Z]{2}-[0-9]{1-2}$"
+      targetZone:
+        type: string
+        pattern: "[A-Z]{2}-[0-9]{1-2}$"
+      value:
+        type: number
+        format: int64
+      unit:
+        type: string
+  powerConsumption:
+    type: object
+    properties:
+      value:
+        type: number
+        format: int64
+      unit:
+        type: string
+  powerSource:
+    type: object
+    properties:
+      capacity:
+        type: object
+        properties:
+          value:
+            type: number
+            format: int64
+          unit:
+            type: string
+      production:
+        type: object
+        properties:
+          value:
+            type: number
+            format: int64
+          unit:
+            type: string
+      loadFactor:
+        type: number
+        format: double
   zone:
-    type: "object"
-    required: ["id", "capacites", "name", "evolution"]
+    type: object
     properties:
       id:
-        type: "number"
-        format: "int32"
-      capacites:
-        $ref: '#/definitions/capacites'
+        type: string
+        pattern: "[A-Z]{2}(-[0-9]{1-2})?$"
       name:
-        type: "string"
-      evolution:
-        type: "array"
-        items:
-          $ref: '#/definitions/zone_snapshot'
-  response:
-    type: "object"
-    required: ["zones", "date_minimum", "date_maximum", ]
-    properties:
-      zones:
-        type: "array"
-        items:
-          $ref: '#/definitions/zone'
-      date_minimum:
         type: string
-        format: "date-time"
-      date_maximum:
-        type: string
-        format: "date-time"
+      connections:
+        type: array
+        items:
+          type: string
+          pattern: "[A-Z]{2}(-[0-9]{1-2})?$"
+parameters:
+  from:
+    in: "query"
+    name: "from"
+    description: "Start of the period"
+    required: false
+    type: "string"
+    format: "date-time"
+  to:
+    in: "query"
+    name: "to"
+    description: "End of the period"
+    required: false
+    type: "string"
+    format: "date-time"
+  zoneId:
+    in: "query"
+    name: "zoneId"
+    description: "Zone to retrieve data from"
+    required: false
+    type: string
+    pattern: "[A-Z]{2}(-[0-9]{1-2})?$"
+  valueFilter:
+    in: "query"
+    name: "value"
+    description: "Filter on values"
+    type: string
+  loadFilter:
+    in: "query"
+    name: "load"
+    description: "Filter on load factors"
+    type: string
+    pattern: "lowest|highest"
+  powerSourceFilter:
+    in: "query"
+    name: "source"
+    description: "Filter on sources"
+    type: string
+    pattern: "photovoltaic|windEnergy|hydaulic|nuclear|bioenergies|fossil"
+  consumptionFilter:
+    in: "query"
+    name: "target"
+    description: "Filter on consumptions"
+    type: string
+    pattern: "used|stepStorage"
