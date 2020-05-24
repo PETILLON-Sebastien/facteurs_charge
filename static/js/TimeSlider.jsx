@@ -21,7 +21,7 @@ class TimeSlider extends React.Component {
             <React.Fragment>
                 {/* <Slider className="slider-temps" value={this.props.index_temps} marks={this.props.marks} min={0} max={this.props.max} onChange={this.onTimeChange} /> */}
 
-                <Slider className="slider-temps" value={16} marks={this.mapping} min={16} max={80} onChange={this.handleTimeChange} />
+                <Slider className="slider-temps" value={this.props.currentTime} marks={this.mapping} min={0} max={this.props.endOfTimeframe} onChange={this.handleTimeChange} />
 
             </React.Fragment>
         )

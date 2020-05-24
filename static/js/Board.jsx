@@ -140,7 +140,7 @@ export default class Board extends React.Component {
 <header className="section">
         <Navbar that={that} label_region={label_region} label_date_heure={label_date_heure} marks={marks} max={this.state.donnees[0].evolution.length - 1} />
         {/* <Slider className="slider-temps" value={this.props.index_temps} marks={this.props.marks} min={0} max={this.props.max} onChange={this.onTimeChange} /> */}
-        <TimeSlider hours={{0: "09:45", 16: "13:45", 32: "17:45", 48: "21:45", 64: "02:00", 80: "06:00"}} onTimeChange={this.handleSliderChange}/>
+        <TimeSlider hours={marks} currentTime={this.state.index_temps} endOfTimeframe={this.state.donnees[0].evolution.length - 1} onTimeChange={this.handleSliderChange}/>
         </header>
  
         <div className="container">
