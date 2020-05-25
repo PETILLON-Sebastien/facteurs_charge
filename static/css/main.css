@@ -8468,10 +8468,14 @@ header.section > .container {
   height: 50vh; }
 
 .rc-slider-mark-text {
-  color: #cecece; }
+  /* color: #cecece;  */
+  color:red;
+}
 
 .rc-slider-mark-text .rc-slider-mark-text-active {
-  color: #f5f5f5; }
+  /* color: #f5f5f5;  */
+  color:yellow;
+}
 
 @media screen and (min-width: 1408px) {
   .container {
@@ -8488,3 +8492,8 @@ header.section > .container {
 
 .representations-wrapper > .column {
   margin-bottom: 3rem; }
+
+  .rc-slider {
+    width:90% !important;
+    margin:auto !important;
+  }
