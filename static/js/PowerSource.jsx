@@ -6,6 +6,7 @@ import Fossile from "./power-sources/fossile";
 import Nucleaire from "./power-sources/nucleaire";
 import Bioenergies from "./power-sources/bioenergies";
 import PowerSourceKPI from "./PowerSourceKPI";
+import LoadBar from "./LoadBar";
 
 class PowerSource extends React.Component {
 
@@ -63,7 +64,7 @@ class PowerSource extends React.Component {
 
     buildProperVisualization(type, loadDescription) {
 
-        const load = 10;
+        let load = 50;
         if (loadDescription != undefined) {
             load = loadDescription.value;
         }
@@ -126,8 +127,6 @@ class PowerSource extends React.Component {
         const cssClass = this.props.cssClass;
         return (
             <React.Fragment>
-
-
                 <div className="columns is-gapless is-vcentered representation">
                     <div className="column is-4-fullhd is-4-widescreen is-4-desktop is-4-tablet is-10-mobile is-offset-2 is-vcentered has-text-centered">
                         <figure className={`image ${cssClass}-logo-mix`}>
