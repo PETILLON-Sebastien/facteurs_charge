@@ -11,45 +11,45 @@ class Breakdown extends React.Component {
         return (
             <div id="breakdown" className="columns is-3 is-variable is-centered is-mobile is-multiline representations-wrapper has-text-centered">
                 <PowerSource
-                    pourcentage={this.props.donnees.evolution[this.props.index_temps].tch_solaire}
+                    load={this.props.donnees.evolution[this.props.index_temps].tch_solaire}
                     production={this.props.donnees.evolution[this.props.index_temps].solaire}
-                    capacites={this.props.donnees.capacites.solaire}
-                    type="Photovoltaïque"
+                    capacity={this.props.donnees.capacites.solaire}
+                    type="solar"
                 />
 
                 <PowerSource
-                    pourcentage={this.props.donnees.evolution[this.props.index_temps].tch_eolien}
+                    load={this.props.donnees.evolution[this.props.index_temps].tch_eolien}
                     production={this.props.donnees.evolution[this.props.index_temps].eolien}
-                    capacites={this.props.donnees.capacites.eolien}
-                    type="Éolien"
+                    capacity={this.props.donnees.capacites.eolien}
+                    type="wind"
                 />
 
                 <PowerSource
-                    pourcentage={this.props.donnees.evolution[this.props.index_temps].tch_hydraulique}
+                    load={this.props.donnees.evolution[this.props.index_temps].tch_hydraulique}
                     production={this.props.donnees.evolution[this.props.index_temps].hydraulique}
-                    capacites={this.props.donnees.capacites.hydraulique}
-                    type="Hydraulique"
+                    capacity={this.props.donnees.capacites.hydraulique}
+                    type="hydraulic"
                 />
 
                 <PowerSource
-                    pourcentage={this.props.donnees.evolution[this.props.index_temps].tch_nucleaire}
+                    load={this.props.donnees.evolution[this.props.index_temps].tch_nucleaire}
                     production={this.props.donnees.evolution[this.props.index_temps].nucleaire}
-                    capacites={this.props.donnees.capacites.nucleaire}
-                    type="Nucléaire"
+                    capacity={this.props.donnees.capacites.nucleaire}
+                    type="nuclear"
                 />
 
                 <PowerSource
-                    pourcentage={this.props.donnees.evolution[this.props.index_temps].tch_bioenergies}
+                    load={this.props.donnees.evolution[this.props.index_temps].tch_bioenergies}
                     production={this.props.donnees.evolution[this.props.index_temps].bioenergies}
-                    capacites={this.props.donnees.capacites.bioenergies}
-                    type="Bioénergies"
+                    capacity={this.props.donnees.capacites.bioenergies}
+                    type="bioenergies"
                 />
 
                 <PowerSource
-                    pourcentage={this.props.donnees.evolution[this.props.index_temps].tch_thermique}
+                    load={this.props.donnees.evolution[this.props.index_temps].tch_thermique}
                     production={this.props.donnees.evolution[this.props.index_temps].thermique}
-                    capacites={this.props.donnees.capacites.thermique}
-                    type="Fossile"
+                    capacity={this.props.donnees.capacites.thermique}
+                    type="thermal"
                 />
             </div>
         );

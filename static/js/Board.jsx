@@ -1,10 +1,11 @@
 import React, { createRef } from 'react'
 import TimeSlider from './TimeSlider';
 
-import Breakdown from "./Breakdown"
-import GrapheCharge from "./graphe-charge";
-import GrapheProduction from "./graphe-production";
-import GrapheProductionOnly from "./graphe-production-only";
+// import Breakdown from "./Breakdown"
+import PowerSources from "./PowerSources"
+// import GrapheCharge from "./graphe-charge";
+// import GrapheProduction from "./graphe-production";
+// import GrapheProductionOnly from "./graphe-production-only";
 
 import Navbar from './Navbar';
 
@@ -147,12 +148,13 @@ export default class Board extends React.Component {
           <TimeSlider hours={marks} currentTime={this.state.index_temps} endOfTimeframe={this.state.donnees[0].evolution.length - 1} onTimeChange={this.handleSliderChange} />
         </header>
 
-        <div className="section ">
+        <div className="section">
           <div className="container">
+            
+            <PowerSources/>
+            {/* <Breakdown className="representations representation-name" donnees={this.state.donnees_zone} index_temps={this.state.index_temps} /> */}
 
-            <Breakdown className="representations representation-name" donnees={this.state.donnees_zone} index_temps={this.state.index_temps} />
-
-            <div className="columns has-text-centered is-multiline">
+            {/* <div className="columns has-text-centered is-multiline">
               <div className="column is-6">
 
                 <GrapheCharge donnees={this.state.donnees_zone.evolution} index_temps={this.state.index_temps}
@@ -166,15 +168,15 @@ export default class Board extends React.Component {
 
                 <GrapheProduction donnees={this.state.donnees_zone.evolution} index_temps={this.state.index_temps} ref={this.grapheProduction} actionsVisibles={this.state.actionsVisibles} />
 
-              </div>
+              </div> */}
 
-              <div className="column is-12">
+              {/* <div className="column is-12"> */}
                 {/* <DayPicker selectedDays={that.jourSelectionne} onDayClick={this.onDateChange}
           disabledDays={[{before: new Date(2020, 1, 1), after: new Date()}]} localeUtils={MomentLocaleUtils} locale='fr'/> */}
                 {/* <Slider className="slider-temps" value={this.state.index_temps} marks={marks} min={0} max={this.state.donnees[0].evolution.length - 1} onChange={this.onSliderChange}/> */}
 
-              </div>
-            </div>
+              {/* </div> */}
+            {/* </div> */}
           </div>
 
         </div>

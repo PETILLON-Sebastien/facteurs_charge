@@ -5,99 +5,147 @@ import Barrage from "./power-sources/barrage";
 import Fossile from "./power-sources/fossile";
 import Nucleaire from "./power-sources/nucleaire";
 import Bioenergies from "./power-sources/bioenergies";
+import PowerSourceKPI from "./PowerSourceKPI";
 
 class PowerSource extends React.Component {
 
     constructor(props) {
         super(props);
 
-        const taux_charge = isNaN(this.props.pourcentage) ? "-" : Math.round(this.props.pourcentage);
-        const production = isNaN(this.props.production) ? "-" : Math.round(this.props.production);
-        const capacites = isNaN(this.props.capacites) ? "-" : Math.round(this.props.capacites);
+        this.state = {};
+
+        const load = this.props.load;
+        const production = this.props.production;
+        const capacity = this.props.capacity;
+        const type = this.props.type;
+
+
+        const kpis = this.buildKPIs(load, production, capacity);
+        [this.state.svg, this.state.classes, this.state.name] = this.buildProperVisualization(type, load);
+        this.state.loadBar = this.buildProgressBar(load);
+
+        this.state.kpis = kpis;
+    }
+
+    buildProgressBar(load) {
+        if (!isNaN(load)) {
+            return <LoadBar load={load} />
+        }
+    }
+
+
+    buildKPIs(load, production, capacity) {
+        let kpis = {};
+
+        if (load != undefined) {
+            const loadValue = Math.round(load.value);
+            const loadUnit = load.unit;
+            const loadKPI = <PowerSourceKPI title="Taux de charge" value={loadValue} unit={loadUnit} />
+            kpis.load = loadKPI;
+        }
+
+        if (production != undefined) {
+            const productionValue = Math.round(production.value);
+            const productionUnit = production.unit;
+            const productionKPI = <PowerSourceKPI title="Production" value={productionValue} unit={productionUnit} />
+            kpis.production = productionKPI;
+        }
+
+        if (capacity != undefined) {
+            const capacityValue = Math.round(capacity.value);
+            const capacityUnit = capacity.unit;
+            const capacityKPI = <PowerSourceKPI title="Capacité" value={capacityValue} unit={capacityUnit} />
+            kpis.capacity = capacityKPI;
+        }
+
+        return kpis;
+    }
+
+    buildProperVisualization(type, loadDescription) {
+
+        const load = 10;
+        if (loadDescription != undefined) {
+            load = loadDescription.value;
+        }
+
         let svg;
         let classes = "legende-moyen-production legende-";
         let name = "DEFAULT";
 
-        switch (this.props.type) {
-            case "Photovoltaïque":
-                svg = <PanneauSolaire pourcentage={taux_charge} />;
+        switch (type) {
+            case "solar":
+                svg = <PanneauSolaire pourcentage={load} />;
                 name = "Photovoltaïque";
-                classes += "photovoltaique"
+                classes += "solar"
                 break;
-            case "Éolien":
-                svg = <Eolienne pourcentage={taux_charge} />;
+            case "wind":
+                svg = <Eolienne pourcentage={load} />;
                 name = "Éolien";
-                classes += "eolien"
+                classes += "wind"
                 break;
-            case "Hydraulique":
-                svg = <Barrage pourcentage={taux_charge} />;
+            case "hydraulic":
+                svg = <Barrage pourcentage={load} />;
                 name = "Hydraulique";
-                classes += "hydraulique"
+                classes += "hydraulic"
                 break;
-            case "Nucléaire":
-                svg = <Nucleaire pourcentage={taux_charge} />;
+            case "nuclear":
+                svg = <Nucleaire pourcentage={load} />;
                 name = "Nucléaire";
-                classes += "nucleaire"
+                classes += "nuclear"
                 break;
-            case "Bioénergies":
-                svg = <Bioenergies pourcentage={taux_charge} />;
+            case "bioenergies":
+                svg = <Bioenergies pourcentage={load} />;
                 name = "Bioénergies";
                 classes += "bioenergies"
                 break;
-            case "Fossile":
-                svg = <Fossile pourcentage={taux_charge} />;
+            case "thermal":
+                svg = <Fossile pourcentage={load} />;
                 name = "Thermique";
-                classes += "thermique"
+                classes += "thermal"
+                break;
+            default:
+                console.warn("A unknown type of power-source has been passed (" + type + "). Defaulting values.");
+                svg = <Fossile pourcentage={load} />;
+                name = "UNKNOWN TYPE " + type;
+                classes += "unknown"
                 break;
         }
 
-        this.svg = svg;
-        this.classes = classes;
-        this.name = name;
-        this.taux_charge =  Number(taux_charge).toLocaleString('fr');;
-        this.production = Number(production).toLocaleString('fr');
-        this.capacites = Number(capacites).toLocaleString('fr');;
+        return [svg, classes, name];
+
+        // return {
+        //     svg:svg,
+        //     classes:classes,
+        //     name:name
+        // }
     }
 
     render() {
 
-
-
+        const load = this.props.load;
+        const cssClass = this.props.cssClass;
         return (
             <React.Fragment>
-                <div className="column is-4-fullhd is-offset-0-fullhd is-4-widescreen is-offset-0-widescreen is-six-desktop is-offset-0-desktop is-5-tablet is-offset-0-tablet is-5-mobile is-offset-1-mobile">
 
-                    <div className="box-c columns is-gapless  is-vcentered representation">
-                        <div className="column is-4-fullhd is-4-widescreen is-4-desktop is-4-tablet is-10-mobile is-offset-2 is-vcentered">
-                            <figure className="image logo-mix">
-                                {this.svg}
-                            </figure></div>
-                        <div className="column is-8-fullhd is-8-widescreen is-8-desktop is-8-tablet is-10-mobile is-offset-2">
-                            <span className={this.classes}></span>
-                            <span className="representation-name is-size-5">{this.name}</span>
 
-                            <div className="content statistiques representation-data-text">
-                                {/* <div style={{ width: '75%' }}>
-                                    <progress className={`progress`} value={this.taux_charge} max="100">{this.taux_charge}%</progress>
-                                </div> */}
-                                {/* <div>
-                                    <span className="titre">Taux de charge&nbsp;:</span>
-                                    <span>{this.taux_charge} </span>
-                                    <span className="unit">%</span>
-                                </div> */}
-                                <div>
-                                    <span className="titre">Production&nbsp;:</span>
-                                    <span>{this.production} </span>
-                                    <span className="unit">MW</span>
-                                </div>
-                                {/* <div>
-                                    <span className="titre">Capacites&nbsp;:</span>
-                                    <span>{this.capacites} </span>
-                                    <span className="unit">MW</span>
-                                </div> */}
-                            </div>
+                <div className="columns is-gapless is-vcentered representation">
+                    <div className="column is-4-fullhd is-4-widescreen is-4-desktop is-4-tablet is-10-mobile is-offset-2 is-vcentered has-text-centered">
+                        <figure className={`image ${cssClass}-logo-mix`}>
+                            {this.state.svg}
+                        </figure>
+                    </div>
+                    <div className="column is-8-fullhd is-8-widescreen is-8-desktop is-8-tablet is-10-mobile is-offset-2">
+                        <span className={this.state.classes}></span>
+                        <span className="representation-name is-size-5">{this.state.name}</span>
+
+                        <div className="content statistiques representation-data-text">
+                            {this.state.loadBar}
+                            {this.state.kpis.load}
+                            {this.state.kpis.production}
+                            {this.state.kpis.capacity}
                         </div>
                     </div>
+
                 </div>
             </React.Fragment>
         );

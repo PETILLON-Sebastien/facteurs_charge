@@ -295,34 +295,7 @@ body {
     justify-content: center;
     align-items: center;
 }
-.legende-moyen-production {
-    width: 10px;
-    height: 10px;
-    padding: 5px;
-    display: inline-flex;
-    margin: 1px;
-    margin-right: 10px;
-    border-radius: 100%;
-    border: white solid 1px;
-}
-.legende-photovoltaique {
-    background-color:rgb(242, 116, 6);
-}
-.legende-eolien {
-    background-color:rgb(116, 205, 185);
-}
-.legende-hydraulique {
-    background-color:rgb(39, 114, 178);
-}
-.legende-nucleaire {
-    background-color:rgb(174, 184, 0);
-}
-.legende-bioenergies {
-    background-color:rgb(22, 106, 87);
-}
-.legende-thermique {
-    background-color:rgb(134, 125, 102);
-}
+
 
 
 

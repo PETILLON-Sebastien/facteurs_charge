@@ -7,8 +7,6 @@ class Navbar extends React.Component {
         super(props);
         that = this;
         this.state = { showMobileMenu: false, activeTab: 'mix' };
-        console.log(props);
-
     }
 
     componentDidMount() {

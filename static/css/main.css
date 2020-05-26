@@ -8473,6 +8473,38 @@ header.section > .container {
 .rc-slider-mark-text .rc-slider-mark-text-active {
   color: #f5f5f5; }
 
+.legende-moyen-production {
+  width: 10px;
+  height: 10px;
+  padding: 5px;
+  display: inline-flex;
+  margin: 1px;
+  margin-right: 10px;
+  border-radius: 100%;
+  border: white solid 1px; }
+
+.legende-solar {
+  background-color: #f27406; }
+
+.legende-wind {
+  background-color: #74cdb9; }
+
+.legende-hydraulic {
+  background-color: #2772b2; }
+
+.legende-nuclear {
+  background-color: #aeb800; }
+
+.legende-bioenergies {
+  background-color: #166a57; }
+
+.legende-thermal {
+  background-color: #867d66; }
+
+.power-sources-logo-mix, .power-sources-logo-mix > svg {
+  height: 5rem;
+  max-width: 5rem; }
+
 @media screen and (min-width: 1408px) {
   .container {
     max-width: 1152px;
