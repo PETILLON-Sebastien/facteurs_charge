@@ -17,6 +17,7 @@ import 'react-day-picker/lib/style.css';
 
 import 'moment/locale/fr';
 import DayPicker from 'react-day-picker';
+import Breakdown from './Breakdown';
 
 var SERVER_URL = process.env.API_URL;;
 console.warn("Server API's URL was set to", SERVER_URL); // Delete me :)
@@ -145,16 +146,17 @@ export default class Board extends React.Component {
         <header >
           <Navbar that={that} label_region={label_region} label_date_heure={label_date_heure} marks={marks} max={this.state.donnees[0].evolution.length - 1} />
           {/* <Slider className="slider-temps" value={this.props.index_temps} marks={this.props.marks} min={0} max={this.props.max} onChange={this.onTimeChange} /> */}
-          <TimeSlider hours={marks} currentTime={this.state.index_temps} endOfTimeframe={this.state.donnees[0].evolution.length - 1} onTimeChange={this.handleSliderChange} />
+          {/* <TimeSlider hours={marks} currentTime={this.state.index_temps} endOfTimeframe={this.state.donnees[0].evolution.length - 1} onTimeChange={this.handleSliderChange} /> */}
         </header>
 
-        <div className="section">
+        <div className="section is-medium">
           <div className="container">
-            
-            <PowerSources/>
-            {/* <Breakdown className="representations representation-name" donnees={this.state.donnees_zone} index_temps={this.state.index_temps} /> */}
+            <PowerSources />
+             </div>
+        </div>
+        {/* <Breakdown className="representations representation-name" donnees={this.state.donnees_zone} index_temps={this.state.index_temps} /> */}
 
-            {/* <div className="columns has-text-centered is-multiline">
+        {/* <div className="columns has-text-centered is-multiline">
               <div className="column is-6">
 
                 <GrapheCharge donnees={this.state.donnees_zone.evolution} index_temps={this.state.index_temps}
@@ -170,15 +172,20 @@ export default class Board extends React.Component {
 
               </div> */}
 
-              {/* <div className="column is-12"> */}
-                {/* <DayPicker selectedDays={that.jourSelectionne} onDayClick={this.onDateChange}
+        {/* <div className="column is-12"> */}
+        {/* <DayPicker selectedDays={that.jourSelectionne} onDayClick={this.onDateChange}
           disabledDays={[{before: new Date(2020, 1, 1), after: new Date()}]} localeUtils={MomentLocaleUtils} locale='fr'/> */}
-                {/* <Slider className="slider-temps" value={this.state.index_temps} marks={marks} min={0} max={this.state.donnees[0].evolution.length - 1} onChange={this.onSliderChange}/> */}
+        {/* <Slider className="slider-temps" value={this.state.index_temps} marks={marks} min={0} max={this.state.donnees[0].evolution.length - 1} onChange={this.onSliderChange}/> */}
 
-              {/* </div> */}
-            {/* </div> */}
-          </div>
+        {/* </div> */}
+        {/* </div> */}
+        {/* </div>
+        </div> */}
 
+        <div className="section is-small" id="breakdown">
+          {/* <div className="container"> */}
+            <Breakdown />
+          {/* </div> */}
         </div>
       </React.Fragment>
 

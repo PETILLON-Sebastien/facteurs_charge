@@ -12,6 +12,7 @@ class PowerSource extends React.Component {
 
     constructor(props) {
         super(props);
+        console.log(this.props);
 
         this.state = {};
 
@@ -20,12 +21,14 @@ class PowerSource extends React.Component {
         const capacity = this.props.capacity;
         const type = this.props.type;
 
+        const cssClass = this.props.cssClass;
 
-        const kpis = this.buildKPIs(load, production, capacity);
+        const kpis = this.buildKPIs(load, production, capacity, cssClass);
         [this.state.svg, this.state.classes, this.state.name] = this.buildProperVisualization(type, load);
         this.state.loadBar = this.buildProgressBar(load);
 
         this.state.kpis = kpis;
+
     }
 
     buildProgressBar(load) {
@@ -35,27 +38,27 @@ class PowerSource extends React.Component {
     }
 
 
-    buildKPIs(load, production, capacity) {
+    buildKPIs(load, production, capacity, cssClass) {
         let kpis = {};
 
         if (load != undefined) {
             const loadValue = Math.round(load.value);
             const loadUnit = load.unit;
-            const loadKPI = <PowerSourceKPI title="Taux de charge" value={loadValue} unit={loadUnit} />
+            const loadKPI = <PowerSourceKPI title="Taux de charge" value={loadValue} unit={loadUnit} cssClass={cssClass} />
             kpis.load = loadKPI;
         }
 
         if (production != undefined) {
             const productionValue = Math.round(production.value);
             const productionUnit = production.unit;
-            const productionKPI = <PowerSourceKPI title="Production" value={productionValue} unit={productionUnit} />
+            const productionKPI = <PowerSourceKPI title="Production" value={productionValue} unit={productionUnit} cssClass={cssClass} />
             kpis.production = productionKPI;
         }
 
         if (capacity != undefined) {
             const capacityValue = Math.round(capacity.value);
             const capacityUnit = capacity.unit;
-            const capacityKPI = <PowerSourceKPI title="Capacité" value={capacityValue} unit={capacityUnit} />
+            const capacityKPI = <PowerSourceKPI title="Capacité" value={capacityValue} unit={capacityUnit} cssClass={cssClass} />
             kpis.capacity = capacityKPI;
         }
 
@@ -127,7 +130,7 @@ class PowerSource extends React.Component {
         const cssClass = this.props.cssClass;
         return (
             <React.Fragment>
-                <div className="columns is-gapless is-vcentered representation">
+                <div className={`columns is-gapless is-vcentered ${cssClass}-power-source`}>
                     <div className="column is-4-fullhd is-4-widescreen is-4-desktop is-4-tablet is-10-mobile is-offset-2 is-vcentered has-text-centered">
                         <figure className={`image ${cssClass}-logo-mix`}>
                             {this.state.svg}
@@ -135,7 +138,7 @@ class PowerSource extends React.Component {
                     </div>
                     <div className="column is-8-fullhd is-8-widescreen is-8-desktop is-8-tablet is-10-mobile is-offset-2">
                         <span className={this.state.classes}></span>
-                        <span className="representation-name is-size-5">{this.state.name}</span>
+                        <span className={`${cssClass}-source-name`}>{this.state.name}</span>
 
                         <div className="content statistiques representation-data-text">
                             {this.state.loadBar}

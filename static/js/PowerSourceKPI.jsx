@@ -9,10 +9,11 @@ class PowerSourceKPI extends React.Component {
         const title = this.props.title;
         const value = Number(this.props.value).toLocaleString('fr');
         const unit = this.props.unit;
-
+        const cssClass = this.props.cssClass;
+        
         return (
-            <div>
-                <span className="titre">{title}&nbsp;:</span>
+            <div className={`${cssClass}-power-source-wrapper`}>
+                <span className="value">{title}&nbsp;:</span>
                 <span>{value} </span>
                 <span className="unit">{unit}</span>
             </div>

@@ -9,6 +9,7 @@
     border: white solid 1px;
 }
 
+
 .legende-solar {
     background-color: $solar-color;
 }
@@ -31,9 +32,4 @@
 
 .legende-thermal {
     background-color:$thermal-color;
-}
-
-.power-sources-logo-mix, .power-sources-logo-mix > svg {
-    height: 5rem;
-    max-width: 5rem; 
 }

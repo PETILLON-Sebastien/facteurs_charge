@@ -9,7 +9,12 @@ $navbar-item-color:#b5b5b5;
 @import "../../node_modules/bulma-pageloader/dist/css/bulma-pageloader";
 @import "../../node_modules/@fortawesome/fontawesome-free/css/all.css";
 @import "_overrides.scss";
-@import "power-sources.scss";
+
+@import "power-source.scss";
+
+@import "slide-powerSources.scss";
+@import "slide-breakdown.scss";
+
 
 // body {
 //     display: flex;
@@ -62,9 +67,9 @@ $navbar-item-color:#b5b5b5;
     margin-top: 3rem;
 }
 
-.representations-wrapper > .column {
-    margin-bottom: 3rem;
-}
+// .representations-wrapper > .column {
+//     margin-bottom: 3rem;
+// }
 
 .rc-slider {
     width: 95% !important;
