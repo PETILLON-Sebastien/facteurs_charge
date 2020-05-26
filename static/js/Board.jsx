@@ -2,7 +2,7 @@ import React, { createRef } from 'react'
 import TimeSlider from './TimeSlider';
 
 // import Breakdown from "./Breakdown"
-import PowerSources from "./PowerSources"
+import SlideBreakdown from "./SlideBreakdown"
 // import GrapheCharge from "./graphe-charge";
 // import GrapheProduction from "./graphe-production";
 // import GrapheProductionOnly from "./graphe-production-only";
@@ -17,7 +17,7 @@ import 'react-day-picker/lib/style.css';
 
 import 'moment/locale/fr';
 import DayPicker from 'react-day-picker';
-import Breakdown from './Breakdown';
+import SlideLoad from './SlideLoad';
 
 var SERVER_URL = process.env.API_URL;;
 console.warn("Server API's URL was set to", SERVER_URL); // Delete me :)
@@ -151,7 +151,7 @@ export default class Board extends React.Component {
 
         <div className="section is-medium">
           <div className="container">
-            <PowerSources />
+            <SlideBreakdown />
              </div>
         </div>
         {/* <Breakdown className="representations representation-name" donnees={this.state.donnees_zone} index_temps={this.state.index_temps} /> */}
@@ -184,7 +184,7 @@ export default class Board extends React.Component {
 
         <div className="section is-small" id="breakdown">
           {/* <div className="container"> */}
-            <Breakdown />
+            <SlideLoad />
           {/* </div> */}
         </div>
       </React.Fragment>

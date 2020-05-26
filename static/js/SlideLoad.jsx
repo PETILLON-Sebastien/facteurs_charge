@@ -1,7 +1,7 @@
 import React from "react";
 import PowerSource from "./PowerSource";
 
-class Breakdown extends React.Component {
+class SlideLoad extends React.Component {
 
     constructor(props) {
         super(props);
@@ -92,4 +92,4 @@ class Breakdown extends React.Component {
     }
 }
 
-export default Breakdown;
+export default SlideLoad;

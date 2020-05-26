@@ -2,7 +2,7 @@ import React from "react";
 import PowerSource from "./PowerSource";
 import ProductionBySourcesGraph from "./ProductionBySourcesGraph";
 
-class PowerSources extends React.Component {
+class SlideBreakdown extends React.Component {
 
     constructor(props) {
         super(props);
@@ -81,4 +81,4 @@ Actuellement, en FRANCE, l’énergie NUCLEAIRE contribue le plus à la grille.<
     }
 }
 
-export default PowerSources;
+export default SlideBreakdown;

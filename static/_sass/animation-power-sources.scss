@@ -1,0 +1,51 @@
+.pales {
+    animation-name: rotation;
+    /* Things added */
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    transform-origin: 88.5px 63px;
+    display: inline-block;
+}
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.ecoulement-gauche {
+    transform-origin: 38px 0px;
+}
+.ecoulement-central {
+    transform-origin: 62px 0px;
+}
+.ecoulement-droite {
+    transform-origin: 86px 0px;
+}
+.fumee {
+    animation-name: montee;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+.fumee-petite {
+    animation-name: montee-petite;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+@keyframes montee {
+    0% {
+        transform: translate(0px, 1px);
+    }
+    100% {
+        transform: translate(0.5px, -37px)
+    }
+}
+@keyframes montee-petite {
+    0% {
+        transform: translate(0px, 1px);
+    }
+    100% {
+        transform: translate(0px, -29px)
+    }
+}
