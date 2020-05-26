@@ -28,6 +28,7 @@ class Breakdown extends React.Component {
 
         return (
             <div className="columns">
+                <div className="column "></div>
                 <div className="column is-one-fifth">
                     <div id="breakdown" className="columns has-text-centered is-variable is-centered is-mobile is-multiline representations-wrapper">
                         <div className="column is-full">
@@ -86,7 +87,6 @@ class Breakdown extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="column is-8"></div>
             </div>
         );
     }
