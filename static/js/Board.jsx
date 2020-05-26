@@ -2,7 +2,7 @@ import React, { createRef } from 'react'
 import TimeSlider from './TimeSlider';
 
 // import Breakdown from "./Breakdown"
-import SlideBreakdown from "./SlideBreakdown"
+import SlidePowerSources from "./SlidePowerSources"
 // import GrapheCharge from "./graphe-charge";
 // import GrapheProduction from "./graphe-production";
 // import GrapheProductionOnly from "./graphe-production-only";
@@ -151,7 +151,7 @@ export default class Board extends React.Component {
 
         <div className="section is-medium">
           <div className="container">
-            <SlideBreakdown />
+            <SlidePowerSources />
              </div>
         </div>
         {/* <Breakdown className="representations representation-name" donnees={this.state.donnees_zone} index_temps={this.state.index_temps} /> */}
@@ -182,7 +182,7 @@ export default class Board extends React.Component {
         {/* </div>
         </div> */}
 
-        <div className="section is-small" id="breakdown">
+        <div className="section is-small" id="load">
           {/* <div className="container"> */}
             <SlideLoad />
           {/* </div> */}

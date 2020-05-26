@@ -12,7 +12,6 @@ class PowerSource extends React.Component {
 
     constructor(props) {
         super(props);
-        console.log(this.props);
 
         this.state = {};
 
@@ -126,16 +125,20 @@ class PowerSource extends React.Component {
 
     render() {
 
-        const load = this.props.load;
         const cssClass = this.props.cssClass;
+        const mirrored = this.props.mirrored == undefined ? false : this.props.mirrored;
+
         return (
             <React.Fragment>
                 <div className={`columns is-gapless is-vcentered ${cssClass}-power-source`}>
-                    <div className="column is-4-fullhd is-4-widescreen is-4-desktop is-4-tablet is-10-mobile is-offset-2 is-vcentered has-text-centered">
-                        <figure className={`image ${cssClass}-logo-mix`}>
-                            {this.state.svg}
-                        </figure>
-                    </div>
+
+                    { !mirrored && 
+                        <div className="column is-4-fullhd is-4-widescreen is-4-desktop is-4-tablet is-10-mobile is-offset-2 is-vcentered has-text-centered">
+                            <figure className={`image ${cssClass}-logo-mix`}>
+                                {this.state.svg}
+                            </figure>
+                        </div>
+                    }
                     <div className="column is-8-fullhd is-8-widescreen is-8-desktop is-8-tablet is-10-mobile is-offset-2">
                         <span className={this.state.classes}></span>
                         <span className={`${cssClass}-source-name`}>{this.state.name}</span>
@@ -147,6 +150,14 @@ class PowerSource extends React.Component {
                             {this.state.kpis.capacity}
                         </div>
                     </div>
+
+                    { mirrored && 
+                        <div className="column is-4-fullhd is-4-widescreen is-4-desktop is-4-tablet is-10-mobile is-offset-2 is-vcentered has-text-centered">
+                            <figure className={`image ${cssClass}-logo-mix`}>
+                                {this.state.svg}
+                            </figure>
+                        </div>
+                    }
 
                 </div>
             </React.Fragment>

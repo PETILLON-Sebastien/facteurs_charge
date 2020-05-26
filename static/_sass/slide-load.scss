@@ -1,13 +1,13 @@
-#breakdown {
+#load {
     background-color: #121212;
 }
 
-.breakdown-logo-mix, .breakdown-logo-mix > svg {
+.load-logo-mix, .load-logo-mix > svg {
     height: 6rem;
     max-width: 6rem; 
 }
 
-.breakdown-power-source-wrapper .value {
+.load-power-source-wrapper .value {
     margin-right: 8px;
     
     color: #888;
@@ -15,17 +15,17 @@
     font-weight: 100;
 } 
 
-.breakdown-power-source-wrapper .unit {
+.load-power-source-wrapper .unit {
     font-weight: 100;
     font-size: 60%;
 }
 
-.breakdown-source-name {
+.load-source-name {
     font-size: 90%;
 }
 
-.breakdown-power-source {
-    background-color : #181818;
+.load-power-source {
+    background-color : #202020;
     // background-color : red;
     // padding-top: 10px;
     // padding-bottom: 10px;

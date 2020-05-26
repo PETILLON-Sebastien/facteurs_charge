@@ -1,34 +1,49 @@
 import React from "react";
 import PowerSource from "./PowerSource";
+import LoadBySourceGraph from "./LoadBySourcesGraph";
 
 class SlideLoad extends React.Component {
 
     constructor(props) {
         super(props);
 
-        const data = JSON.parse(this.get());
+
+        const fakeData = this.get();
+        const [loadHistory, data] = [JSON.parse(fakeData[0]), JSON.parse(fakeData[1])];
         let stub = data[0];
 
         this.state = {
-            currentData: stub.breakdown,
-            history: data
+            breakdown: stub.breakdown,
+            loadHistory: loadHistory
         };
-
-        console.log(this.state);
     }
 
     get() {
-        return '[{"timestamp":"2020-05-26T15:40:36.037Z","zoneId":"MW","breakdown":{"solar":{"capacity":{"value":100,"unit":"MW"},"production":{"value":10,"unit":"MW"},"load":{"value":10,"unit":"%"}},"wind":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"hydraulic":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"nuclear":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"bioenergies":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"thermal":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}}}},{"timestamp":"2020-05-26T15:54:36.037Z","zoneId":"MW","breakdown":{"solar":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"wind":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"hydraulic":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"nuclear":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"bioenergies":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"thermal":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}}}}]';
+        const loadHistory = '[{"timestamp":"2020-05-26T12:00:12.853Z","zoneId":"string","load":{"solar":{"value":1200,"unit":"%"},"wind":{"value":1000,"unit":"%"},"hydraulic":{"value":1000,"unit":"%"},"nuclear":{"value":1000,"unit":"%"},"bioenergies":{"value":1000,"unit":"%"},"thermal":{"value":1900,"unit":"%"}}},      {"timestamp":"2020-05-26T12:19:12.853Z","zoneId":"string","load":{"solar":{"value":300,"unit":"%"},"wind":{"value":330,"unit":"%"},"hydraulic":{"value":300,"unit":"%"},"nuclear":{"value":300,"unit":"%"},"bioenergies":{"value":300,"unit":"%"},"thermal":{"value":300,"unit":"%"}}}]';
+        const breakdown = '[{"timestamp":"2020-05-26T15:40:36.037Z","zoneId":"MW","breakdown":{"solar":{"capacity":{"value":100,"unit":"MW"},"production":{"value":10,"unit":"MW"},"load":{"value":10,"unit":"%"}},"wind":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"hydraulic":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"nuclear":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"bioenergies":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"thermal":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}}}},{"timestamp":"2020-05-26T15:54:36.037Z","zoneId":"MW","breakdown":{"solar":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"wind":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"hydraulic":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"nuclear":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"bioenergies":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"thermal":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}}}}]';
+        return [loadHistory, breakdown];
     }
 
     render() {
-        const currentData = this.state.currentData;
-
-        console.log(currentData);
+        const currentData = this.state.breakdown;
 
         return (
             <div className="columns">
-                <div className="column "></div>
+                <div className="column">
+                    <div className="columns is-multiline ">
+                        <div className="column is-10 is-offset-2 has-text-left">
+                            <h1 className="is-size-1">Facteur de charge</h1>
+                        </div>
+                        <div className="column is-10 is-offset-2  has-text-left">
+                            Une source d’énergie peut produire énormément en quantité, mais être sous-utilisé ! À l’inverse, une source peut être à 100% de sa capacité, et n’avoir qu’un petit impact sur l’apport à la grille…
+                            C’est ce qu’on appelle le facteur charge ! Il représente le taux d’utilisation de chacune des sources d’énergie.
+                            Actuellement, en FRANCE, le SOLAIRE est a son maximum et le NUCLAIRE a son minimum
+                        </div>
+                        <div className="column is-10 is-offset-2 has-text-left">
+                            <LoadBySourceGraph loadsOverTime={this.state.loadHistory} />
+                        </div>
+                    </div>
+                </div>
                 <div className="column is-one-fifth">
                     <div id="breakdown" className="columns has-text-centered is-variable is-centered is-mobile is-multiline representations-wrapper">
                         <div className="column is-full">
@@ -37,7 +52,8 @@ class SlideLoad extends React.Component {
                                 production={currentData.solar.production}
                                 capacity={currentData.solar.capacity}
                                 type="solar"
-                                cssClass="breakdown"
+                                cssClass="load"
+                                mirrored={true}
                             />
                         </div>
                         <div className="column is-full">
@@ -46,7 +62,8 @@ class SlideLoad extends React.Component {
                                 production={currentData.wind.production}
                                 capacity={currentData.wind.capacity}
                                 type="wind"
-                                cssClass="breakdown"
+                                cssClass="load"
+                                mirrored={true}
                             />
                         </div>
                         <div className="column is-full">
@@ -55,7 +72,8 @@ class SlideLoad extends React.Component {
                                 production={currentData.hydraulic.production}
                                 capacity={currentData.hydraulic.capacity}
                                 type="hydraulic"
-                                cssClass="breakdown"
+                                cssClass="load"
+                                mirrored={true}
                             />
                         </div>
                         <div className="column is-full">
@@ -64,7 +82,8 @@ class SlideLoad extends React.Component {
                                 production={currentData.nuclear.production}
                                 capacity={currentData.nuclear.capacity}
                                 type="nuclear"
-                                cssClass="breakdown"
+                                cssClass="load"
+                                mirrored={true}
                             />
                         </div>
                         <div className="column is-full">
@@ -73,7 +92,8 @@ class SlideLoad extends React.Component {
                                 production={currentData.bioenergies.production}
                                 capacity={currentData.bioenergies.capacity}
                                 type="bioenergies"
-                                cssClass="breakdown"
+                                cssClass="load"
+                                mirrored={true}
                             />
                         </div>
                         <div className="column is-full">
@@ -82,7 +102,8 @@ class SlideLoad extends React.Component {
                                 production={currentData.thermal.production}
                                 capacity={currentData.thermal.capacity}
                                 type="thermal"
-                                cssClass="breakdown"
+                                cssClass="load"
+                                mirrored={true}
                             />
                         </div>
                     </div>
