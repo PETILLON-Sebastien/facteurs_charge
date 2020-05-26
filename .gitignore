@@ -9,3 +9,5 @@
 **\**\dist
 **\**\package-lock.json
 **\**\bundle.js
+static/css/*
+static\css\*
