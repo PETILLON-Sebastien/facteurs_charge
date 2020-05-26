@@ -1,5 +1,5 @@
 body {
-    background-color: #17181c;
+    background-color: #1c1c1c;
     color: #CCC;
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -406,4 +406,8 @@ body {
     .regroupement-representations {
         padding-left: 20px;
     }
+}
+
+.box-c {
+    /* background-color: rgb(22, 22, 22); */
 }

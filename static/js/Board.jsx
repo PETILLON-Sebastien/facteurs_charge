@@ -4,6 +4,8 @@ import TimeSlider from './TimeSlider';
 import Breakdown from "./Breakdown"
 import GrapheCharge from "./graphe-charge";
 import GrapheProduction from "./graphe-production";
+import GrapheProductionOnly from "./graphe-production-only";
+
 import Navbar from './Navbar';
 
 import 'rc-slider/assets/index.css';
@@ -14,7 +16,7 @@ import 'react-day-picker/lib/style.css';
 
 import 'moment/locale/fr';
 import DayPicker from 'react-day-picker';
-   
+
 var SERVER_URL = process.env.API_URL;;
 console.warn("Server API's URL was set to", SERVER_URL); // Delete me :)
 
@@ -27,6 +29,7 @@ export default class Board extends React.Component {
     that = this;
     this.grapheCharge = createRef();
     this.grapheProduction = createRef();
+    this.grapheProductionOnly = createRef();
     this.regionsDescriptions = regionDescription;
 
     this.state = {};
@@ -56,13 +59,14 @@ export default class Board extends React.Component {
   }
 
   handleSliderChange(index, valeur) {
-    console.log("Board: SliderChanged to " + valeur);
+    // console.log("Board: SliderChanged to " + valeur);
     that.setState({
       index_temps: index,
-      currentHour:valeur
+      currentHour: valeur
     });
     that.grapheCharge.current.modifierTemps(index);
     that.grapheProduction.current.modifierTemps(index);
+    that.grapheProductionOnly.current.modifierTemps(index);
   }
 
   componentDidMount() {
@@ -126,7 +130,7 @@ export default class Board extends React.Component {
       }
     }
 
-    console.log(marks);
+    // console.log(marks);
 
     let donnee_region_selectionnee = _.find(this.regionsDescriptions, { 'id': this.state.id_zone_selectionnee });
     let label_region = donnee_region_selectionnee.label;
@@ -137,35 +141,42 @@ export default class Board extends React.Component {
 
 
       <React.Fragment>
-<header className="section">
-        <Navbar that={that} label_region={label_region} label_date_heure={label_date_heure} marks={marks} max={this.state.donnees[0].evolution.length - 1} />
-        {/* <Slider className="slider-temps" value={this.props.index_temps} marks={this.props.marks} min={0} max={this.props.max} onChange={this.onTimeChange} /> */}
-        <TimeSlider hours={marks} currentTime={this.state.index_temps} endOfTimeframe={this.state.donnees[0].evolution.length - 1} onTimeChange={this.handleSliderChange}/>
+        <header >
+          <Navbar that={that} label_region={label_region} label_date_heure={label_date_heure} marks={marks} max={this.state.donnees[0].evolution.length - 1} />
+          {/* <Slider className="slider-temps" value={this.props.index_temps} marks={this.props.marks} min={0} max={this.props.max} onChange={this.onTimeChange} /> */}
+          <TimeSlider hours={marks} currentTime={this.state.index_temps} endOfTimeframe={this.state.donnees[0].evolution.length - 1} onTimeChange={this.handleSliderChange} />
         </header>
- 
-        <div className="container">
 
-          <Breakdown className="representations representation-name" donnees={this.state.donnees_zone} index_temps={this.state.index_temps} />
+        <div className="section ">
+          <div className="container">
 
-          <div className="columns has-text-centered is-multiline">
-            <div className="column is-6">
+            <Breakdown className="representations representation-name" donnees={this.state.donnees_zone} index_temps={this.state.index_temps} />
 
-              <GrapheCharge donnees={this.state.donnees_zone.evolution} index_temps={this.state.index_temps}
-                ref={this.grapheCharge} actionsVisibles={this.state.actionsVisibles} />
-            </div>
+            <div className="columns has-text-centered is-multiline">
+              <div className="column is-6">
 
-            <div className="column is-6">
-              <GrapheProduction donnees={this.state.donnees_zone.evolution} index_temps={this.state.index_temps}
-                ref={this.grapheProduction} actionsVisibles={this.state.actionsVisibles} />
-            </div>
-            
-            <div className="column is-12">
-            {/* <DayPicker selectedDays={that.jourSelectionne} onDayClick={this.onDateChange}
+                <GrapheCharge donnees={this.state.donnees_zone.evolution} index_temps={this.state.index_temps}
+                  ref={this.grapheCharge} actionsVisibles={this.state.actionsVisibles} />
+              </div>
+
+              <div className="column is-6">
+
+
+                <GrapheProductionOnly donnees={this.state.donnees_zone.evolution} index_temps={this.state.index_temps} ref={this.grapheProductionOnly} actionsVisibles={this.state.actionsVisibles} />
+
+                <GrapheProduction donnees={this.state.donnees_zone.evolution} index_temps={this.state.index_temps} ref={this.grapheProduction} actionsVisibles={this.state.actionsVisibles} />
+
+              </div>
+
+              <div className="column is-12">
+                {/* <DayPicker selectedDays={that.jourSelectionne} onDayClick={this.onDateChange}
           disabledDays={[{before: new Date(2020, 1, 1), after: new Date()}]} localeUtils={MomentLocaleUtils} locale='fr'/> */}
-       {/* <Slider className="slider-temps" value={this.state.index_temps} marks={marks} min={0} max={this.state.donnees[0].evolution.length - 1} onChange={this.onSliderChange}/> */}
-          
+                {/* <Slider className="slider-temps" value={this.state.index_temps} marks={marks} min={0} max={this.state.donnees[0].evolution.length - 1} onChange={this.onSliderChange}/> */}
+
+              </div>
             </div>
           </div>
+
         </div>
       </React.Fragment>
 

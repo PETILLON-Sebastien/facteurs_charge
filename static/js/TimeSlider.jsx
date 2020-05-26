@@ -10,7 +10,7 @@ class TimeSlider extends React.Component {
 
     handleTimeChange(e) {
         // e represents the marks (e.g. 16, or 32)
-        console.log("Slider: time has been changed to " + this.mapping[e]);
+        // console.log("Slider: time has been changed to " + this.mapping[e]);
         this.props.onTimeChange(e, this.mapping[e]);
     }
 

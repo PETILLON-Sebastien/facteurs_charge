@@ -9,7 +9,7 @@ class Breakdown extends React.Component {
 
     render() {
         return (
-            <div className="columns is-0 is-variable is-centered is-mobile is-multiline representations-wrapper has-text-centered">
+            <div id="breakdown" className="columns is-3 is-variable is-centered is-mobile is-multiline representations-wrapper has-text-centered">
                 <PowerSource
                     pourcentage={this.props.donnees.evolution[this.props.index_temps].tch_solaire}
                     production={this.props.donnees.evolution[this.props.index_temps].solaire}

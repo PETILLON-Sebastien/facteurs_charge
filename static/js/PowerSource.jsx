@@ -54,18 +54,20 @@ class PowerSource extends React.Component {
         this.svg = svg;
         this.classes = classes;
         this.name = name;
-        this.taux_charge = taux_charge;
-        this.production = production;
-        this.capacites = capacites;
+        this.taux_charge =  Number(taux_charge).toLocaleString('fr');;
+        this.production = Number(production).toLocaleString('fr');
+        this.capacites = Number(capacites).toLocaleString('fr');;
     }
 
     render() {
+
+
 
         return (
             <React.Fragment>
                 <div className="column is-4-fullhd is-offset-0-fullhd is-4-widescreen is-offset-0-widescreen is-six-desktop is-offset-0-desktop is-5-tablet is-offset-0-tablet is-5-mobile is-offset-1-mobile">
 
-                    <div className="columns is-gapless  is-vcentered representation">
+                    <div className="box-c columns is-gapless  is-vcentered representation">
                         <div className="column is-4-fullhd is-4-widescreen is-4-desktop is-4-tablet is-10-mobile is-offset-2 is-vcentered">
                             <figure className="image logo-mix">
                                 {this.svg}
@@ -75,24 +77,24 @@ class PowerSource extends React.Component {
                             <span className="representation-name is-size-5">{this.name}</span>
 
                             <div className="content statistiques representation-data-text">
-                                <div style={{ width: '75%' }}>
+                                {/* <div style={{ width: '75%' }}>
                                     <progress className={`progress`} value={this.taux_charge} max="100">{this.taux_charge}%</progress>
-                                </div>
-                                <div>
+                                </div> */}
+                                {/* <div>
                                     <span className="titre">Taux de charge&nbsp;:</span>
                                     <span>{this.taux_charge} </span>
                                     <span className="unit">%</span>
-                                </div>
+                                </div> */}
                                 <div>
                                     <span className="titre">Production&nbsp;:</span>
                                     <span>{this.production} </span>
                                     <span className="unit">MW</span>
                                 </div>
-                                <div>
+                                {/* <div>
                                     <span className="titre">Capacites&nbsp;:</span>
                                     <span>{this.capacites} </span>
                                     <span className="unit">MW</span>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>

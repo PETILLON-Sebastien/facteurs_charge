@@ -66,9 +66,19 @@ $navbar-item-color:#b5b5b5;
     margin-bottom: 3rem;
 }
 
-.slider-temps {
-    // bottom:10px;
-    // z-index: 9999;
-    // position:fixed !important;
+.rc-slider {
+    width: 95% !important;
+    margin:auto;
+}
 
+.rc-slider-track {
+    background-color: whitesmoke !important;
+}
+
+.rc-slider-dot-active {
+    border-color: #96dbfa !important;
+}
+
+.rc-slider-dot {
+    border: 2px solid #b5b5b5 !important;
 }
