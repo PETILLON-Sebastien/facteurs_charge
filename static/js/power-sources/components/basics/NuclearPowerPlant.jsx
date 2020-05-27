@@ -1,6 +1,6 @@
 import React from "react";
 
-class Nucleaire extends React.Component {
+class NuclearPowerPlant extends React.Component {
 
     constructor(props) {
         super(props);
@@ -217,4 +217,4 @@ class Nucleaire extends React.Component {
     }
 }
 
-export default Nucleaire;
+export default NuclearPowerPlant;

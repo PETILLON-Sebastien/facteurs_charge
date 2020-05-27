@@ -1,6 +1,6 @@
 import React from "react";
 import Zone from "./Zone";
-import regionDescription from "./regions-descriptions";
+import regionDescription from "../../regions-descriptions";
 
 class Map extends React.Component {
 

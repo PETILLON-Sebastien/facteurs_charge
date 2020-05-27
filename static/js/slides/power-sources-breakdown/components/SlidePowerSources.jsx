@@ -1,6 +1,7 @@
 import React from "react";
-import PowerSource from "./PowerSource";
-import ProductionBySourcesGraph from "./ProductionBySourcesGraph";
+
+import PowerSource from "../../../power-sources/components/PowerSource";
+import GraphPowerSourceBreakdown from "./GraphPowerSourceBreakdown";
 
 class SlidePowerSources extends React.Component {
 
@@ -73,7 +74,7 @@ Actuellement, en FRANCE, l’énergie NUCLEAIRE contribue le plus à la grille.<
                         </div>
                     </div>
                     <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-12-tablet is-12-mobile has-text-centered">
-                        <ProductionBySourcesGraph productionsOverTime={this.state.history} />
+                        <GraphPowerSourceBreakdown productionsOverTime={this.state.history} />
                     </div>
                 </div>
             </React.Fragment>

@@ -1,6 +1,6 @@
 import React from "react";
 
-class PanneauSolaire extends React.Component {
+class SolarPanel extends React.Component {
 
     constructor(props) {
         super(props);
@@ -380,4 +380,4 @@ class PanneauSolaire extends React.Component {
 }
 
 
-export default PanneauSolaire;
+export default SolarPanel;

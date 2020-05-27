@@ -1,13 +1,10 @@
 import React, { createRef } from 'react'
-import TimeSlider from './TimeSlider';
-
-// import Breakdown from "./Breakdown"
-import SlidePowerSources from "./SlidePowerSources"
-// import GrapheCharge from "./graphe-charge";
-// import GrapheProduction from "./graphe-production";
-// import GrapheProductionOnly from "./graphe-production-only";
 
 import Navbar from './Navbar';
+
+import SlidePowerSources from "./slides/power-sources-breakdown/components/SlidePowerSources";
+import SlideLoad from './slides/load-breakdown/components/SlideLoad';
+
 
 import 'rc-slider/assets/index.css';
 import moment from "moment";
@@ -16,8 +13,6 @@ import _ from "lodash";
 import 'react-day-picker/lib/style.css';
 
 import 'moment/locale/fr';
-import DayPicker from 'react-day-picker';
-import SlideLoad from './SlideLoad';
 
 var SERVER_URL = process.env.API_URL;;
 console.warn("Server API's URL was set to", SERVER_URL); // Delete me :)

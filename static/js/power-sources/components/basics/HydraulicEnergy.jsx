@@ -1,6 +1,6 @@
 import React from "react";
 
-class Barrage extends React.Component {
+class HydraulicEnergy extends React.Component {
 
     constructor(props) {
         super(props);
@@ -222,4 +222,4 @@ class Barrage extends React.Component {
         );
     }
 }
-export default Barrage;
+export default HydraulicEnergy;

@@ -1,6 +1,6 @@
 import React from "react";
 
-class Fossile extends React.Component {
+class ThermalEnergy extends React.Component {
 
   constructor(props) {
       super(props);
@@ -382,4 +382,4 @@ class Fossile extends React.Component {
   }
 }
 
-export default Fossile;
+export default ThermalEnergy;

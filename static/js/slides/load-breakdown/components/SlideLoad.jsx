@@ -1,6 +1,6 @@
 import React from "react";
-import PowerSource from "./PowerSource";
-import LoadBySourceGraph from "./LoadBySourcesGraph";
+import PowerSource from "../../../power-sources/components/PowerSource";
+import GraphLoadEvolution from "./GraphLoadEvolution";
 
 class SlideLoad extends React.Component {
 
@@ -40,7 +40,7 @@ class SlideLoad extends React.Component {
                             Actuellement, en FRANCE, le SOLAIRE est a son maximum et le NUCLAIRE a son minimum
                         </div>
                         <div className="column is-10 is-offset-2 has-text-left">
-                            <LoadBySourceGraph loadsOverTime={this.state.loadHistory} />
+                            <GraphLoadEvolution loadsOverTime={this.state.loadHistory} />
                         </div>
                     </div>
                 </div>

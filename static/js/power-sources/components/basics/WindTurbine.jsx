@@ -1,6 +1,6 @@
 import React from "react";
 
-class Eolienne extends React.Component {
+class WindTurbine extends React.Component {
 
     constructor(props) {
         super(props);
@@ -155,4 +155,4 @@ class Eolienne extends React.Component {
     }
 }
 
-export default Eolienne;
+export default WindTurbine;

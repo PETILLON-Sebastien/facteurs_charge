@@ -1,10 +1,12 @@
 import React from "react";
-import Eolienne from "./power-sources/eolienne";
-import PanneauSolaire from "./power-sources/panneau-solaire";
-import Barrage from "./power-sources/barrage";
-import Fossile from "./power-sources/fossile";
-import Nucleaire from "./power-sources/nucleaire";
-import Bioenergies from "./power-sources/bioenergies";
+
+import WindTurbine from "./basics/WindTurbine";
+import SolarPanel from "./basics/SolarPanel";
+import HydraulicEnergy from "./basics/HydraulicEnergy";
+import ThermalEnergy from "./basics/ThermalEnergy";
+import NuclearPowerPlant from "./basics/NuclearPowerPlant";
+import Bioenergies from "./basics/Bioenergies";
+
 import PowerSourceKPI from "./PowerSourceKPI";
 import LoadBar from "./LoadBar";
 
@@ -77,22 +79,22 @@ class PowerSource extends React.Component {
 
         switch (type) {
             case "solar":
-                svg = <PanneauSolaire pourcentage={load} />;
+                svg = <SolarPanel pourcentage={load} />;
                 name = "Photovoltaïque";
                 classes += "solar"
                 break;
             case "wind":
-                svg = <Eolienne pourcentage={load} />;
+                svg = <WindTurbine pourcentage={load} />;
                 name = "Éolien";
                 classes += "wind"
                 break;
             case "hydraulic":
-                svg = <Barrage pourcentage={load} />;
+                svg = <HydraulicEnergy pourcentage={load} />;
                 name = "Hydraulique";
                 classes += "hydraulic"
                 break;
             case "nuclear":
-                svg = <Nucleaire pourcentage={load} />;
+                svg = <NuclearPowerPlant pourcentage={load} />;
                 name = "Nucléaire";
                 classes += "nuclear"
                 break;
@@ -102,25 +104,19 @@ class PowerSource extends React.Component {
                 classes += "bioenergies"
                 break;
             case "thermal":
-                svg = <Fossile pourcentage={load} />;
+                svg = <ThermalEnergy pourcentage={load} />;
                 name = "Thermique";
                 classes += "thermal"
                 break;
             default:
                 console.warn("A unknown type of power-source has been passed (" + type + "). Defaulting values.");
-                svg = <Fossile pourcentage={load} />;
+                svg = <ThermalEnergy pourcentage={load} />;
                 name = "UNKNOWN TYPE " + type;
                 classes += "unknown"
                 break;
         }
 
         return [svg, classes, name];
-
-        // return {
-        //     svg:svg,
-        //     classes:classes,
-        //     name:name
-        // }
     }
 
     render() {
