@@ -4,11 +4,13 @@ import Navbar from './Navbar';
 
 import SlidePowerSources from "./slides/power-sources-breakdown/components/SlidePowerSources";
 import SlideLoad from './slides/load-breakdown/components/SlideLoad';
-
+import SlideMap from './slides/map/components/SlideMap';
 
 import 'rc-slider/assets/index.css';
 import moment from "moment";
-import regionDescription from "./regions-descriptions";
+
+import stubZonesDescription from "./regions-descriptions";
+
 import _ from "lodash";
 import 'react-day-picker/lib/style.css';
 
@@ -24,13 +26,21 @@ export default class Board extends React.Component {
   constructor(props) {
     super(props);
     that = this;
-    this.grapheCharge = createRef();
-    this.grapheProduction = createRef();
-    this.grapheProductionOnly = createRef();
-    this.regionsDescriptions = regionDescription;
+    // this.grapheCharge = createRef();
+    // this.grapheProduction = createRef();
+    // this.grapheProductionOnly = createRef();
 
-    this.state = {};
+    this.zonesDescription = this.getZoneDescriptions();
 
+    this.state = {
+      currentZone:1,
+      // currentDate: 123456789
+    };
+
+  }
+
+  getZoneDescriptions() {
+    return stubZonesDescription;
   }
 
   // Wrapping this into a dedicated context provider would make sense. (https://www.robinwieruch.de/react-usecontext-hook)
@@ -48,8 +58,8 @@ export default class Board extends React.Component {
       .then((donnees) => {
         this.setState({
           donnees: donnees,
-          donnees_zone: donnees[this.state.id_zone_selectionnee],
-          index_temps: date ? 0 : donnees[this.state.id_zone_selectionnee].evolution.length - 1,
+          donnees_zone: donnees[this.state.currentZone],
+          index_temps: date ? 0 : donnees[this.state.currentZone].evolution.length - 1,
         });
       })
       .catch(console.log)
@@ -61,9 +71,9 @@ export default class Board extends React.Component {
       index_temps: index,
       currentHour: valeur
     });
-    that.grapheCharge.current.modifierTemps(index);
-    that.grapheProduction.current.modifierTemps(index);
-    that.grapheProductionOnly.current.modifierTemps(index);
+    // that.grapheCharge.current.modifierTemps(index);
+    // that.grapheProduction.current.modifierTemps(index);
+    // that.grapheProductionOnly.current.modifierTemps(index);
   }
 
   componentDidMount() {
@@ -98,7 +108,7 @@ export default class Board extends React.Component {
     }
     this.setState({
       actionsVisibles: true,
-      id_zone_selectionnee: id_zone
+      currentZone: id_zone
     });
 
     this.updateData();
@@ -106,7 +116,10 @@ export default class Board extends React.Component {
 
   }
 
-
+  zoneChanged(newZoneID) {
+    console.log("New zone : ", newZoneID);
+    // this.setState({currentZone:newZoneID});
+  }
 
   render() {
     if (_.get(this, "state.donnees") === undefined) {
@@ -129,14 +142,11 @@ export default class Board extends React.Component {
 
     // console.log(marks);
 
-    let donnee_region_selectionnee = _.find(this.regionsDescriptions, { 'id': this.state.id_zone_selectionnee });
+    let donnee_region_selectionnee = _.find(this.zonesDescription, { 'id': this.state.currentZone });
     let label_region = donnee_region_selectionnee.label;
     let label_date_heure = moment(this.state.donnees_zone.evolution[this.state.index_temps].date_heure).format("DD/MM/YY HH:mm");
 
     return (
-
-
-
       <React.Fragment>
         <header >
           <Navbar that={that} label_region={label_region} label_date_heure={label_date_heure} marks={marks} max={this.state.donnees[0].evolution.length - 1} />
@@ -146,9 +156,15 @@ export default class Board extends React.Component {
 
         <div className="section is-medium">
           <div className="container">
-            <SlidePowerSources />
+              <SlideMap zoneChanged={this.zoneChanged} zonesDescription={this.zonesDescription}/>
              </div>
         </div>
+
+        {/* <div className="section is-medium">
+          <div className="container">
+            <SlidePowerSources />
+             </div>
+        </div> */}
         {/* <Breakdown className="representations representation-name" donnees={this.state.donnees_zone} index_temps={this.state.index_temps} /> */}
 
         {/* <div className="columns has-text-centered is-multiline">
@@ -177,11 +193,11 @@ export default class Board extends React.Component {
         {/* </div>
         </div> */}
 
-        <div className="section is-small" id="load">
-          {/* <div className="container"> */}
+        {/* <div className="section is-small" id="load">
+
             <SlideLoad />
-          {/* </div> */}
-        </div>
+
+        </div> */}
       </React.Fragment>
 
     )
