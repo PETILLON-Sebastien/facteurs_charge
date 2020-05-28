@@ -9,50 +9,14 @@ info:
 host: "www.facteurs-charge.fr"
 basePath: "/api/v1"
 tags:
-- name: Breakdown
 - name: Consumption
 - name: Exchange
-- name: Production
-- name: Zone
+- name: Installation
 schemes:
 - "https"
 
 paths:
-  /breakdowns:
-    get:
-      tags:
-      - Breakdown
-      summary: Retrieve breakdowns
-      operationId: getBreakdowns
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      parameters:
-        - $ref: '#/parameters/from'
-        - $ref: '#/parameters/to'
-        - $ref: '#/parameters/zoneId'
-        - $ref: '#/parameters/valueFilter'
-        - $ref: '#/parameters/loadFilter'
-        - $ref: '#/parameters/powerSourceFilter'
-      responses:
-        "200":
-          description: "All data retreived"
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/breakdown'
-        "400":
-          description: "Bad parameter"
-        "404":
-          description: "No data"
-        "409":
-          description: "Partial content"
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/breakdown'
-  /consumptions:
+  /zones/consumption:
     get:
       tags:
       - Consumption
@@ -65,14 +29,13 @@ paths:
       parameters:
         - $ref: '#/parameters/from'
         - $ref: '#/parameters/to'
-        - $ref: '#/parameters/zoneId'
       responses:
         "200":
           description: "All data retreived"
           schema:
             type: array
             items:
-              $ref: '#/definitions/consumption'
+              $ref: '#/definitions/consumptionSnapshotZone'
         "400":
           description: "Bad parameter"
         "404":
@@ -82,8 +45,39 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/consumption'
-  /exchanges:
+              $ref: '#/definitions/consumptionSnapshotZone'
+  /zones/{zoneId}/consumption:
+    get:
+      tags:
+      - Consumption
+      summary: Retrieve consumptions for the zone
+      operationId: getZoneConsumptions
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+        - $ref: '#/parameters/zoneId'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/consumptionSnapshot'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/consumptionSnapshot'
+  /zones/exchanges:
     get:
       tags:
       - Exchange
@@ -96,14 +90,13 @@ paths:
       parameters:
         - $ref: '#/parameters/from'
         - $ref: '#/parameters/to'
-        - $ref: '#/parameters/zoneId'
       responses:
         "200":
           description: "All data retreived"
           schema:
             type: array
             items:
-              $ref: '#/definitions/exchange'
+              $ref: '#/definitions/exchangeSnapshot'
         "400":
           description: "Bad parameter"
         "404":
@@ -113,13 +106,13 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/exchange'
-  /productions:
+              $ref: '#/definitions/exchangeSnapshot'
+  /zones/{zoneId}/exchanges:
     get:
       tags:
-      - Production
-      summary: Retrieve productions
-      operationId: getProductions
+      - Exchange
+      summary: Retrieve exchanges of the zone
+      operationId: getZoneExchanges
       consumes:
       - "application/json"
       produces:
@@ -134,7 +127,7 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/production'
+              $ref: '#/definitions/exchangeSnapshot'
         "400":
           description: "Bad parameter"
         "404":
@@ -144,105 +137,785 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/production'
-  /zones:
+              $ref: '#/definitions/exchangeSnapshot'
+  /zones/installations:
     get:
       tags:
-      - Zone
-      summary: Retrieve zones
-      operationId: getZones
+      - Installation
+      summary: Retrieve installations
+      operationId: getInstallations
       consumes:
       - "application/json"
       produces:
       - "application/json"
+      parameters:
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
       responses:
         "200":
           description: "All data retreived"
           schema:
             type: array
             items:
-              $ref: '#/definitions/zone'
-  /zones/{id}:
+              $ref: '#/definitions/installationSnapshotZone'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/installationSnapshotZone'
+  /zones/installations/breakdown:
     get:
       tags:
-      - Zone
-      summary: Retrieve zone
-      operationId: getZone
+      - Installation
+      summary: Retrieve the breadkdowns
+      operationId: getBreakdowns
       consumes:
       - "application/json"
       produces:
       - "application/json"
       parameters:
-      - in: "path"
-        name: "id"
-        required: true
-        description: "The zone id"
-        type: string
-        pattern: "[A-Z]{2}(-[0-9]{1-2})?$"
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
       responses:
         "200":
           description: "All data retreived"
           schema:
-            $ref: '#/definitions/zone'
+            type: array
+            items:
+              $ref: '#/definitions/breakdownSnapshotZone'
         "400":
           description: "Bad parameter"
         "404":
           description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/breakdownSnapshotZone'
+  /zones/installations/{installationType}:
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the specified installations
+      operationId: getInstallation
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/installationType'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/installationSnapshotZone'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/installationSnapshotZone'
+  /zones/installations/load:
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the load of the installations
+      operationId: getInstallationsLoad
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/loadSnapshotZone'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/loadSnapshotZone'
+  /zones/installations/load/breakdown:
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the load breakdown of the installations
+      operationId: getInstallationsLoadBreakdown
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/loadBreakdownSnapshotZone'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/loadBreakdownSnapshotZone'
+  /zones/installations/load/{installationType}:
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the load of the specified installation
+      operationId: getInstallationLoad
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/installationType'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/loadSnapshotZone'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/loadSnapshotZone'
+  /zones/installations/production:
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the production of the installations
+      operationId: getInstallationsProduction
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshotZone'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshotZone'
+  /zones/installations/production/breakdown:
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the production breakdown of the installations
+      operationId: getInstallationsProductionBreakdown
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerBreakdownSnapshotZone'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerBreakdownSnapshotZone'
+  /zones/installations/production/{installationType}:
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the production of the specified installation
+      operationId: getInstallationProduction
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/installationType'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshotZone'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshotZone'
+  /zones/installations/capacity:
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the capacity of the installations
+      operationId: getInstallationsCapacity
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshotZone'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshotZone'
+  /zones/installations/capacity/breakdown:
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the capacity breakdown of the installations
+      operationId: getInstallationsCapacityBreakdown
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerBreakdownSnapshotZone'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerBreakdownSnapshotZone'
+  /zones/installations/capacity/{installationType}:
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the capacity of the specified installation
+      operationId: getInstallationCapacity
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/installationType'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshotZone'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshotZone'
+  /zones/{zoneId}/installations:
+    get:
+      tags:
+      - Installation
+      summary: Retrieve installation for this zone
+      operationId: getZoneInstallations
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/installationSnapshot'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/installationSnapshot'
+  /zones/{zoneId}/installations/breakdown:
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the breadkdown for this zone
+      operationId: getZoneBreakdown
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/breakdownSnapshot'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/breakdownSnapshot'
+  /zones/{zoneId}/installations/{installationType}:
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the specified installation for this zone
+      operationId: getZoneInstallation
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/installationType'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/installationSnapshot'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/installationSnapshot'
+  /zones/{zoneId}/installations/load:
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the load of the installations for this zone
+      operationId: getZoneInstallationsLoad
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/loadSnapshot'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/loadSnapshot'
+  /zones/{zoneId}/installations/load/breakdown:
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the load breakdown of the installations for this zone
+      operationId: getZoneInstallationsLoadBreakdown
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/loadBreakdownSnapshot'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/loadBreakdownSnapshot'
+  /zones/{zoneId}/installations/load/{installationType}:
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the load of the specified installation for this zone
+      operationId: getZoneInstallationLoad
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/installationType'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/loadSnapshot'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/loadSnapshot'
+  /zones/{zoneId}/installations/production:
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the production of the installations for this zone
+      operationId: getZoneInstallationsProduction
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshot'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshot'
+  /zones/{zoneId}/installations/production/breakdown:
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the production breakdown of the installations for this zone
+      operationId: getZoneInstallationsProductionBreakdown
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerBreakdownSnapshot'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerBreakdownSnapshot'
+  /zones/{zoneId}/installations/production/{installationType}:
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the production of the specified installation for this zone
+      operationId: getZoneInstallationProduction
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/installationType'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshot'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshot'
+  /zones/{zoneId}/installations/capacity:
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the capacity of the installations for this zone
+      operationId: getZoneInstallationsCapacity
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshot'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshot'
+  /zones/{zoneId}/installations/capacity/breakdown:
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the capacity breakdown of the installations for this zone
+      operationId: getZoneInstallationsCapacityBreakdown
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerBreakdownSnapshot'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerBreakdownSnapshot'
+  /zones/{zoneId}/installations/capacity/{installationType}:
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the capacity of the specified installation for this zone
+      operationId: getZoneInstallationCapacity
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/installationType'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshot'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshot'
+  
 definitions:
-  breakdown:
+  consumptionSnapshotZone:
     type: object
     properties:
-      timestamp:
-        type: string
-        format: date-time
       zoneId:
         type: string
-        pattern: "[A-Z]{2}-[0-9]{1-2}$"
-      breakdown:
-        type: object
-        properties:
-          photovoltaic:
-            $ref: '#/definitions/powerSource'
-          windEnergy:
-            $ref: '#/definitions/powerSource'
-          hydraulic:
-            $ref: '#/definitions/powerSource'
-          nuclear:
-            $ref: '#/definitions/powerSource'
-          bioenergies:
-            $ref: '#/definitions/powerSource'
-          fossil:
-            $ref: '#/definitions/powerSource'
+        pattern: "[A-Z]{2}(-[0-9]{1-2})?$"
+      snapshots:
+        type: array
+        items:
+          $ref: '#/definitions/consumptionSnapshot'
+  consumptionSnapshot:
+    type: object
+    properties:
+      description:
+        $ref: '#/definitions/consumption'
+      datetime:
+        type: string
+        format: date-time
   consumption:
     type: object
     properties:
-      timestamp:
-        type: string
-        format: date-time
-      zoneId:
-        type: string
-        pattern: "[A-Z]{2}-[0-9]{1-2}$"
       used:
         $ref: '#/definitions/power'
       stepStorage:
         $ref: '#/definitions/power'
-  production:
+  exchangeSnapshot:
     type: object
     properties:
-      timestamp:
+      description:
+        $ref: '#/definitions/exchange'
+      datetime:
         type: string
         format: date-time
-      zoneId:
-        type: string
-        pattern: "[A-Z]{2}-[0-9]{1-2}$"
-      production:
-        $ref: '#/definitions/power'
   exchange:
     type: object
     properties:
-      timestamp:
-        type: string
-        format: date-time
       sourceZone:
         type: string
         pattern: "[A-Z]{2}-[0-9]{1-2}$"
@@ -255,6 +928,150 @@ definitions:
       unit:
         type: string
         pattern: "^W|MW|GW$"
+  breakdownSnapshotZone:
+    type: object
+    properties:
+      zoneId:
+        type: string
+        pattern: "[A-Z]{2}(-[0-9]{1-2})?$"
+      snapshots:
+        type: array
+        items:
+          $ref: '#/definitions/breakdownSnapshot'
+  breakdownSnapshot:
+    type: object
+    properties:
+      breakdown:
+        $ref: '#/definitions/breakdown'
+      datetime:
+        type: string
+        format: date-time
+  breakdown:
+    type: object
+    properties:
+      solar:
+        $ref: '#/definitions/installation'
+      wind:
+        $ref: '#/definitions/installation'
+      hydraulic:
+        $ref: '#/definitions/installation'
+      nuclear:
+        $ref: '#/definitions/installation'
+      bioenergy:
+        $ref: '#/definitions/installation'
+      fossil:
+        $ref: '#/definitions/installation'
+  loadBreakdownSnapshotZone:
+    type: object
+    properties:
+      zoneId:
+        type: string
+        pattern: "[A-Z]{2}(-[0-9]{1-2})?$"
+      snapshots:
+        type: array
+        items:
+          $ref: '#/definitions/loadBreakdownSnapshot'
+  loadBreakdownSnapshot:
+    type: object
+    properties:
+      loadBreakdown:
+        $ref: '#/definitions/loadBreakdown'
+      datetime:
+        type: string
+        format: date-time
+  loadBreakdown:
+    type: object
+    properties:
+      solar:
+        $ref: '#/definitions/load'
+      wind:
+        $ref: '#/definitions/load'
+      hydraulic:
+        $ref: '#/definitions/load'
+      nuclear:
+        $ref: '#/definitions/load'
+      bioenergy:
+        $ref: '#/definitions/load'
+      fossil:
+        $ref: '#/definitions/load'
+  powerBreakdownSnapshotZone:
+    type: object
+    properties:
+      zoneId:
+        type: string
+        pattern: "[A-Z]{2}(-[0-9]{1-2})?$"
+      snapshots:
+        type: array
+        items:
+          $ref: '#/definitions/powerBreakdownSnapshot'
+  powerBreakdownSnapshot:
+    type: object
+    properties:
+      powerBreakdown:
+        $ref: '#/definitions/powerBreakdown'
+      datetime:
+        type: string
+        format: date-time
+  powerBreakdown:
+    type: object
+    properties:
+      solar:
+        $ref: '#/definitions/power'
+      wind:
+        $ref: '#/definitions/power'
+      hydraulic:
+        $ref: '#/definitions/power'
+      nuclear:
+        $ref: '#/definitions/power'
+      bioenergy:
+        $ref: '#/definitions/power'
+      fossil:
+        $ref: '#/definitions/power'
+  installationSnapshotZone:
+    type: object
+    properties:
+      zoneId:
+        type: string
+        pattern: "[A-Z]{2}(-[0-9]{1-2})?$"
+      snapshots:
+        type: array
+        items:
+          $ref: '#/definitions/installationSnapshot'
+  installationSnapshot:
+    type: object
+    properties:
+      installation:
+        $ref: '#/definitions/installation'
+      datetime:
+        type: string
+        format: date-time
+  installation:
+    type: object
+    properties:
+      capacity:
+        $ref: '#/definitions/power'
+      production:
+        $ref: '#/definitions/power'
+      load:
+        $ref: '#/definitions/load'
+  powerSnapshotZone:
+    type: object
+    properties:
+      zoneId:
+        type: string
+        pattern: "[A-Z]{2}(-[0-9]{1-2})?$"
+      snapshots:
+        type: array
+        items:
+          $ref: '#/definitions/powerSnapshot'
+  powerSnapshot:
+    type: object
+    properties:
+      power:
+        $ref: '#/definitions/power'
+      datetime:
+        type: string
+        format: date-time
   power:
     type: object
     properties:
@@ -264,29 +1081,31 @@ definitions:
       unit:
         type: string
         pattern: "^W|MW|GW$"
-  powerSource:
+  loadSnapshotZone:
     type: object
     properties:
-      capacity:
-        $ref: '#/definitions/power'
-      production:
-        $ref: '#/definitions/power'
-      loadFactor:
-        type: number
-        format: double
-  zone:
-    type: object
-    properties:
-      id:
+      zoneId:
         type: string
         pattern: "[A-Z]{2}(-[0-9]{1-2})?$"
-      name:
-        type: string
-      connections:
+      snapshots:
         type: array
         items:
-          type: string
-          pattern: "[A-Z]{2}(-[0-9]{1-2})?$"
+          $ref: '#/definitions/loadSnapshot'
+  loadSnapshot:
+    type: object
+    properties:
+      load:
+        $ref: '#/definitions/load'
+      datetime:
+        type: string
+        format: date-time
+  load:
+    type: object
+    properties:
+      value:
+        type: number
+        format: double
+
 parameters:
   from:
     in: "query"
@@ -294,42 +1113,25 @@ parameters:
     description: "Start of the period"
     required: false
     type: "string"
-    format: "date-time"
+    format: date-time
   to:
     in: "query"
     name: "to"
     description: "End of the period"
     required: false
     type: "string"
-    format: "date-time"
+    format: date-time
   zoneId:
-    in: "query"
+    in: "path"
     name: "zoneId"
     description: "Zone to retrieve data from"
-    required: false
+    required: true
     type: string
     pattern: "[A-Z]{2}(-[0-9]{1-2})?$"
-  valueFilter:
-    in: "query"
-    name: "value"
-    description: "Filter on values"
+  installationType:
+    in: "path"
+    name: "installationType"
+    description: "Installation type"
+    required: true
     type: string
-    pattern: "lowest|highest"
-  loadFilter:
-    in: "query"
-    name: "load"
-    description: "Filter on load factors"
-    type: string
-    pattern: "lowest|highest"
-  powerSourceFilter:
-    in: "query"
-    name: "source"
-    description: "Filter on sources"
-    type: string
-    pattern: "photovoltaic|windEnergy|hydraulic|nuclear|bioenergies|fossil"
-  consumptionFilter:
-    in: "query"
-    name: "target"
-    description: "Filter on consumptions"
-    type: string
-    pattern: "used|stepStorage"
+    pattern: "solar|wind|hydraulic|nuclear|bioenergy|fossil"
