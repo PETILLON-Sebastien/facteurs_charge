@@ -18,6 +18,9 @@ $navbar-item-color:#b5b5b5;
 @import "../js/slides/power-sources-breakdown/styles/slide-power-sources.scss";
 @import "../js/slides/map/styles/map.scss";
 
+html {
+    scroll-behavior: smooth;
+}
 
 
 // body {

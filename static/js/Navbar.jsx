@@ -26,7 +26,7 @@ class Navbar extends React.Component {
         return (
 
             <div className="container">
-                <nav className="navbar" role="navigation" aria-label="main navigation">
+                <nav className="navbar  is-fixed-top" role="navigation" aria-label="main navigation">
                     <div className="navbar-brand">
                         <span className="navbar-item">
                             Facteurs Charge
@@ -54,10 +54,28 @@ class Navbar extends React.Component {
                     <div id="navbarBasicExample" className={`navbar-menu ${that.state.showMobileMenu ? "is-active" : ""}`}>
                         <div className="navbar-start">
 
-                            <span className="navbar-item" onClick={() => this.changeTab('map')} >
-                                <span className={`button is-dark ${that.state.activeTab == 'map' ? "is-active" : ""}`}>
-                                    Carte
-                                    </span>
+                        <span className="navbar-item">
+                                <a href="#slide-map">
+                                    <button class={`${that.state.activeTab == 'map' ? "is-active" : ""} is-dark button`}>
+                                        Carte
+                                </button>
+                                </a>
+                            </span>
+
+                            <span className="navbar-item">
+                                <a href="#slide-installations">
+                                    <button class={`${that.state.activeTab == 'installations' ? "is-active" : ""} is-dark button`}>
+                                        Installations
+                                </button>
+                                </a>
+                            </span>
+
+                            <span className="navbar-item">
+                                <a href="#slide-load">
+                                    <button class={`${that.state.activeTab == 'load' ? "is-active" : ""} is-dark button`}>
+                                        Charge
+                                </button>
+                                </a>
                             </span>
 
                             <span className="navbar-item">

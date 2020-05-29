@@ -59,19 +59,19 @@ export default class Board extends React.Component {
           <Navbar that={that} label_region={this.state.currentZone.label} />
         </header>
 
-        <div className="section is-medium">
+        <div className="section is-medium" id="slide-map">
           <div className="container">
             <SlideMap zoneChanged={this.zoneChanged} zonesDescription={this.zonesDescription} />
           </div>
         </div>
 
         <ZoneContext.Provider value={{ currentZone: this.state.currentZone }}>
-          <div className="section is-medium">
+          <div className="section is-medium" id="slide-installations">
             <div className="container">
               <SlidePowerSources />
             </div>
           </div>
-          <div className="section is-small" id="load">
+          <div className="section is-small" id="slide-load">
             <div className="container">
 
               <SlideLoad />
