@@ -5,8 +5,11 @@ class Navbar extends React.Component {
 
     constructor(props) {
         super(props);
-        that = this;
-        this.state = { showMobileMenu: false, activeTab: 'mix' };
+
+        this.menuToggle = this.menuToggle.bind(this);
+        this.setCurrentSlide = this.setCurrentSlide.bind(this);
+
+        this.state = { showMobileMenu: false, activeTab: 'map' };
     }
 
     componentDidMount() {
@@ -14,9 +17,13 @@ class Navbar extends React.Component {
     }
 
     menuToggle() {
-        that.setState(state => ({
+        this.setState(state => ({
             showMobileMenu: !state.showMobileMenu
         }));
+    }
+
+    setCurrentSlide(newSlide) {
+        this.setState({ activeTab: newSlide });
     }
 
 
@@ -29,58 +36,85 @@ class Navbar extends React.Component {
                 <nav className="navbar  is-fixed-top" role="navigation" aria-label="main navigation">
                     <div className="navbar-brand">
                         <span className="navbar-item">
-                            Facteurs Charge
-                            </span>
-                        <a className="navbar-item is-size-2" href="https://github.com/PETILLON-Sebastien/facteurs_charge" target="_blank">
-                            <span className="icon has-text-white	is-hidden-desktop">
+                            <img style={{ "maxHeight": "3.5rem", "width":"3.5rem" }} src="./images/logo.png" width="64" height="64" />
+                        </span>
+                        <a className="navbar-item is-size-2 is-hidden-desktop" href="https://github.com/PETILLON-Sebastien/facteurs_charge" target="_blank">
+                            <span className="icon has-text-white">
                                 <i className="fab fa-github-square"></i>
                             </span>
                         </a>
 
-                        <a className="navbar-item is-size-2" href="https://twitter.com/FacteursC">
-                            <span className="icon has-text-white	is-hidden-desktop">
+                        <a className="navbar-item is-size-2  is-hidden-desktop" href="https://twitter.com/FacteursC">
+                            <span className="icon has-text-white">
                                 <i className="fab fa-twitter-square"></i>
                             </span>
                         </a>
 
+                        <span className="navbar-item is-hidden-desktop">
+                            <span className="icon">
+                                <i className="fas fa-map-marker-alt"></i>
+                            </span>
+                            <span className="is-size-5">{this.props.label_region}</span>
+                        </span>
 
-                        <a role="button" className={`navbar-burger burger ${that.state.showMobileMenu ? "is-active" : ""}`} onClick={this.menuToggle} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                        <a role="button" className={`navbar-burger burger ${this.state.showMobileMenu ? "is-active" : ""}`} onClick={this.menuToggle} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                             <span aria-hidden="true"></span>
                             <span aria-hidden="true"></span>
                             <span aria-hidden="true"></span>
                         </a>
                     </div>
 
-                    <div id="navbarBasicExample" className={`navbar-menu ${that.state.showMobileMenu ? "is-active" : ""}`}>
+                    <div id="navbarBasicExample" className={`navbar-menu ${this.state.showMobileMenu ? "is-active" : ""}`}>
                         <div className="navbar-start">
 
-                        <span className="navbar-item">
+                            <span className="navbar-item">
                                 <a href="#slide-map">
-                                    <button className={`${that.state.activeTab == 'map' ? "is-active" : ""} is-dark button`}>
-                                        Carte
-                                </button>
+                                    <button className={`${this.state.activeTab == 'map' ? "is-success" : ""} is-primary button`}
+                                        onClick={() => this.setCurrentSlide('map')}>
+                                        <span className="icon">
+                                            <i className="fas fa-map-marker-alt"></i>
+                                        </span>
+                                        <span>
+                                            Carte
+                                        </span>
+                                    </button>
                                 </a>
                             </span>
 
                             <span className="navbar-item">
-                                <a href="#slide-installations">
-                                    <button className={`${that.state.activeTab == 'installations' ? "is-active" : ""} is-dark button`}>
-                                        Installations
-                                </button>
+                                <a href="#slide-installations" >
+                                    <button className={`${this.state.activeTab == 'installations' ? "is-success" : ""} is-primary button`}
+                                        onClick={() => this.setCurrentSlide('installations')}>
+                                        <span className="icon">
+                                            <i className="fas fa-solar-panel"></i>
+                                        </span>
+                                        <span>
+                                            Installations
+                                        </span>
+                                    </button>
                                 </a>
                             </span>
 
                             <span className="navbar-item">
                                 <a href="#slide-load">
-                                    <button className={`${that.state.activeTab == 'load' ? "is-active" : ""} is-dark button`}>
-                                        Charge
-                                </button>
+                                    <button className={`${this.state.activeTab == 'load' ? "is-success" : ""} is-primary button`}
+                                        onClick={() => this.setCurrentSlide('load')}>
+                                        <span className="icon">
+                                            <i className="fas fa-battery-three-quarters"></i>
+                                        </span>
+                                        <span>
+                                            Charge
+                                        </span>
+                                    </button>
                                 </a>
                             </span>
 
                             <span className="navbar-item">
-                                <span className="navbar-item-name">
-                                    {this.props.label_region}
+                                <span className="navbar-item-name" style={{ "marginLeft": "2.5rem" }}>
+                                    <span className="icon">
+                                        <i className="fas fa-map-marker-alt"></i>
+                                    </span>
+                                    <span className="is-size-5">{this.props.label_region}</span>
                                 </span>
                             </span>
 

@@ -72,11 +72,7 @@ export default class Board extends React.Component {
             </div>
           </div>
           <div className="section is-medium" id="slide-load">
-            {/* <div className="container"> */}
-
             <SlideLoad />
-            {/* </div> */}
-
           </div>
         </ZoneContext.Provider>
       </React.Fragment>
