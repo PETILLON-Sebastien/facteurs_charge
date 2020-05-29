@@ -28,87 +28,95 @@ class SlideLoad extends React.Component {
         const currentData = this.state.breakdown;
 
         return (
-            <div className="columns">
-                <div className="column">
-                    <div className="columns is-multiline ">
-                        <div className="column is-10 is-offset-2 has-text-left">
-                            <h1 className="is-size-1">Facteur de charge</h1>
-                        </div>
-                        <div className="column is-10 is-offset-2  has-text-left">
-                            Une source d’énergie peut produire énormément en quantité, mais être sous-utilisé ! À l’inverse, une source peut être à 100% de sa capacité, et n’avoir qu’un petit impact sur l’apport à la grille…
-                            C’est ce qu’on appelle le facteur charge ! Il représente le taux d’utilisation de chacune des sources d’énergie.
-                            Actuellement, en FRANCE, le SOLAIRE est a son maximum et le NUCLAIRE a son minimum
-                        </div>
-                        <div className="column is-10 is-offset-2 has-text-left">
-                            <GraphLoadEvolution loadsOverTime={this.state.loadHistory} />
-                        </div>
+            <React.Fragment>
+                <div className="columns is-centered" >
+                    <div className="column has-text-centered">
+                        <h1 className="is-size-1">Facteur de charge</h1>
                     </div>
                 </div>
-                <div className="column is-one-fifth">
-                    <div id="breakdown" className="columns has-text-centered is-variable is-centered is-mobile is-multiline representations-wrapper">
-                        <div className="column is-full">
-                            <PowerSource
-                                load={currentData.solar.load}
-                                production={currentData.solar.production}
-                                capacity={currentData.solar.capacity}
-                                type="solar"
-                                cssClass="load"
-                                mirrored={true}
-                            />
-                        </div>
-                        <div className="column is-full">
-                            <PowerSource
-                                load={currentData.wind.load}
-                                production={currentData.wind.production}
-                                capacity={currentData.wind.capacity}
-                                type="wind"
-                                cssClass="load"
-                                mirrored={true}
-                            />
-                        </div>
-                        <div className="column is-full">
-                            <PowerSource
-                                load={currentData.hydraulic.load}
-                                production={currentData.hydraulic.production}
-                                capacity={currentData.hydraulic.capacity}
-                                type="hydraulic"
-                                cssClass="load"
-                                mirrored={true}
-                            />
-                        </div>
-                        <div className="column is-full">
-                            <PowerSource
-                                load={currentData.nuclear.load}
-                                production={currentData.nuclear.production}
-                                capacity={currentData.nuclear.capacity}
-                                type="nuclear"
-                                cssClass="load"
-                                mirrored={true}
-                            />
-                        </div>
-                        <div className="column is-full">
-                            <PowerSource
-                                load={currentData.bioenergies.load}
-                                production={currentData.bioenergies.production}
-                                capacity={currentData.bioenergies.capacity}
-                                type="bioenergies"
-                                cssClass="load"
-                                mirrored={true}
-                            />
-                        </div>
-                        <div className="column is-full">
-                            <PowerSource
-                                load={currentData.thermal.load}
-                                production={currentData.thermal.production}
-                                capacity={currentData.thermal.capacity}
-                                type="thermal"
-                                cssClass="load"
-                                mirrored={true}
-                            />
+                <div className="columns  is-centered" style={{ "marginBottom": "4rem" }}>
+                    <div className="column is-three-quarters has-text-centered">
+                        Une source d’énergie peut produire énormément en quantité, mais être sous-utilisé ! À l’inverse, une source peut être à 100% de sa capacité, et n’avoir qu’un petit impact sur l’apport à la grille…
+                        C’est ce qu’on appelle le facteur charge ! Il représente le taux d’utilisation de chacune des sources d’énergie.
+                        Actuellement, en FRANCE, le SOLAIRE est a son maximum et le NUCLAIRE a son minimum
+                     </div>
+                </div>
+                <div className="columns is-centered">
+                    <div className="column is-one-fifth">
+                        <div id="breakdown" className="columns has-text-centered is-variable is-centered is-mobile is-multiline representations-wrapper">
+                            <div className="column is-full">
+                                <PowerSource
+                                    load={currentData.solar.load}
+                                    production={currentData.solar.production}
+                                    capacity={currentData.solar.capacity}
+                                    type="solar"
+                                    cssClass="load"
+                                    mirrored={false}
+                                />
+                            </div>
+                            <div className="column is-full">
+                                <PowerSource
+                                    load={currentData.wind.load}
+                                    production={currentData.wind.production}
+                                    capacity={currentData.wind.capacity}
+                                    type="wind"
+                                    cssClass="load"
+                                    mirrored={false}
+                                />
+                            </div>
+                            <div className="column is-full">
+                                <PowerSource
+                                    load={currentData.hydraulic.load}
+                                    production={currentData.hydraulic.production}
+                                    capacity={currentData.hydraulic.capacity}
+                                    type="hydraulic"
+                                    cssClass="load"
+                                    mirrored={false}
+                                />
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
+
+                    <div className="column is-6">
+                        <GraphLoadEvolution loadsOverTime={this.state.loadHistory} />
+
+                    </div>
+                    <div className="column is-one-fifth">
+                        <div id="breakdown" className="columns has-text-centered is-variable is-centered is-mobile is-multiline representations-wrapper">
+                            <div className="column is-full">
+                                <PowerSource
+                                    load={currentData.nuclear.load}
+                                    production={currentData.nuclear.production}
+                                    capacity={currentData.nuclear.capacity}
+                                    type="nuclear"
+                                    cssClass="load"
+                                    mirrored={true}
+                                />
+                            </div>
+                            <div className="column is-full">
+                                <PowerSource
+                                    load={currentData.bioenergies.load}
+                                    production={currentData.bioenergies.production}
+                                    capacity={currentData.bioenergies.capacity}
+                                    type="bioenergies"
+                                    cssClass="load"
+                                    mirrored={true}
+                                />
+                            </div>
+                            <div className="column is-full">
+                                <PowerSource
+                                    load={currentData.thermal.load}
+                                    production={currentData.thermal.production}
+                                    capacity={currentData.thermal.capacity}
+                                    type="thermal"
+                                    cssClass="load"
+                                    mirrored={true}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div >
+            </React.Fragment >
         );
     }
 }

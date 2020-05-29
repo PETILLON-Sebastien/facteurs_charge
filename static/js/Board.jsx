@@ -71,11 +71,11 @@ export default class Board extends React.Component {
               <SlidePowerSources />
             </div>
           </div>
-          <div className="section is-small" id="slide-load">
-            <div className="container">
+          <div className="section is-medium" id="slide-load">
+            {/* <div className="container"> */}
 
-              <SlideLoad />
-            </div>
+            <SlideLoad />
+            {/* </div> */}
 
           </div>
         </ZoneContext.Provider>

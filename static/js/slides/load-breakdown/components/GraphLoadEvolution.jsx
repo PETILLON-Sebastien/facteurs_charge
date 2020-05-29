@@ -171,7 +171,7 @@ class LoadBySourcesGraph extends React.Component {
             time: {
                 timezoneOffset: -60
             },
-            chart: {        height: 400,
+            chart: {        height: 280,
 
                 // type: 'areaspline',
                 // stacking: 'normal',

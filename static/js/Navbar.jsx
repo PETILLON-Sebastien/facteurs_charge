@@ -56,7 +56,7 @@ class Navbar extends React.Component {
 
                         <span className="navbar-item">
                                 <a href="#slide-map">
-                                    <button class={`${that.state.activeTab == 'map' ? "is-active" : ""} is-dark button`}>
+                                    <button className={`${that.state.activeTab == 'map' ? "is-active" : ""} is-dark button`}>
                                         Carte
                                 </button>
                                 </a>
@@ -64,7 +64,7 @@ class Navbar extends React.Component {
 
                             <span className="navbar-item">
                                 <a href="#slide-installations">
-                                    <button class={`${that.state.activeTab == 'installations' ? "is-active" : ""} is-dark button`}>
+                                    <button className={`${that.state.activeTab == 'installations' ? "is-active" : ""} is-dark button`}>
                                         Installations
                                 </button>
                                 </a>
@@ -72,7 +72,7 @@ class Navbar extends React.Component {
 
                             <span className="navbar-item">
                                 <a href="#slide-load">
-                                    <button class={`${that.state.activeTab == 'load' ? "is-active" : ""} is-dark button`}>
+                                    <button className={`${that.state.activeTab == 'load' ? "is-active" : ""} is-dark button`}>
                                         Charge
                                 </button>
                                 </a>
