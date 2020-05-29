@@ -57,7 +57,7 @@ class SlideMap extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="columns is-centered" style={{ "marginTop": "7.5rem", "color":"#888" }}>
+                <div className="columns is-centered" style={{ "marginTop": "7.5rem", "color":"#666" }}>
                     <div className="column is-full has-text-centered">
                         Projet open-source exploitant les données d’Open API sous license ouverte Etalab. Code source sous license MIT
                     </div>

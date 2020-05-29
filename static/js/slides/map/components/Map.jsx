@@ -15,10 +15,11 @@ class Map extends React.Component {
   }
   
   getRandomColor() {
-    var letters = '0123456789ABCDEF';
+    var letters = '789ABCDEF';
     var color = '#';
+    const c = Math.floor(Math.random() * 9);
     for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
+      color += letters[c];
     }
     return color;
   }
@@ -34,9 +35,6 @@ class Map extends React.Component {
           description={regionsDescriptions[i]}
           color={this.getRandomColor()}
           zoneChanged={this.zoneChanged}
-          // meilleurs_facteurs={this.props.meilleurs_facteurs[this.regionsDescriptions[i].id]}
-          // index_temps={this.props.index_temps}
-          // zone_selectionnee={this.props.zone_selectionnee} 
           onClick={(i) => this.zoneChanged(i)}
         />
       );
