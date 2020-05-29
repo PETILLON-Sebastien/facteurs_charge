@@ -129,13 +129,13 @@ class PowerSource extends React.Component {
                 <div className={`columns is-gapless is-vcentered ${cssClass}-power-source`}>
 
                     { !mirrored && 
-                        <div className="column is-4-fullhd is-4-widescreen is-4-desktop is-4-tablet is-10-mobile is-offset-2 is-vcentered ">
+                        <div className="column is-5-fullhd is-5-widescreen is-5-desktop is-5-tablet is-10-mobile is-offset-2 is-vcentered ">
                             <figure className={`image ${cssClass}-logo-mix`}>
                                 {this.state.svg}
                             </figure>
                         </div>
                     }
-                    <div className={`column is-8-fullhd is-8-widescreen is-8-desktop is-8-tablet is-10-mobile is-offset-2 ${mirrored ? "has-text-right" : "has-text-left"}`}>
+                    <div className={`column is-7-fullhd is-7-widescreen is-7-desktop is-7-tablet is-10-mobile is-offset-2 ${mirrored ? "has-text-right" : "has-text-left"}`}>
                         <span className={this.state.classes}></span>
                         <span className={`${cssClass}-source-name`}>{this.state.name}</span>
 
