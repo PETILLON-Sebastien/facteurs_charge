@@ -66,10 +66,11 @@ class Navbar extends React.Component {
                                 </span>
                             </span>
 
-                            <span className="navbar-item">
+                            {/* <span className="navbar-item">
                                 <span className="navbar-item-name">
                                     {this.props.label_date_heure}
-                                </span></span>
+                                </span>
+                            </span> */}
                         </div>
 
                         <div className="navbar-end">
