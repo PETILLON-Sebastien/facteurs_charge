@@ -23,7 +23,7 @@ html {
     scroll-behavior: smooth;
 }
 
-section:nth-child(2n) {
+.section:nth-child(2n) {
     background-color: black !important;
 }
 
