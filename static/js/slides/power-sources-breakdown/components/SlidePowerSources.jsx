@@ -3,6 +3,8 @@ import React from "react";
 import PowerSource from "../../../power-sources/components/PowerSource";
 import GraphPowerSourceBreakdown from "./GraphPowerSourceBreakdown";
 
+import {ZoneContext} from '../../../ZoneContext';
+
 class SlidePowerSources extends React.Component {
 
     constructor(props) {
@@ -39,16 +41,19 @@ class SlidePowerSources extends React.Component {
 
     render() {
         const currentData = this.state.currentData;
+        const currentZoneID = this.context.currentZone.id;
+        const currentZoneName = this.context.currentZone.label;
 
         return (
             <React.Fragment>
+
                 <div className="columns" style={{"marginTop":"3rem"}}>
                     <div className="column is-full"><h1 className="is-size-1 has-text-centered">Source d'énergie</h1></div>
                 </div>
                 <div className="columns" style={{"marginBottom":"3rem"}}>
                     <div className="column is-full  has-text-centered"><span className="is-size-4">La FRANCE produit de l’énergie de différentes manières, c’est ce qu’on appelle un « mix » énergétique.
                     Ce mix est injecté dans la grille française de production.
-Actuellement, en FRANCE, l’énergie NUCLEAIRE contribue le plus à la grille.</span></div>
+Actuellement, en {currentZoneName} (#{currentZoneID}), l’énergie NUCLEAIRE contribue le plus à la grille.</span></div>
                 </div>
                 <div className="columns is-multiline">
                     <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-11-tablet is-11-mobile is-offset-1-mobile">
@@ -81,5 +86,7 @@ Actuellement, en FRANCE, l’énergie NUCLEAIRE contribue le plus à la grille.<
         );
     }
 }
+
+SlidePowerSources.contextType = ZoneContext;
 
 export default SlidePowerSources;

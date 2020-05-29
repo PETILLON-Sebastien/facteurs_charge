@@ -16,6 +16,9 @@ import 'react-day-picker/lib/style.css';
 
 import 'moment/locale/fr';
 
+
+import { ZoneContext } from './ZoneContext';
+
 var SERVER_URL = process.env.API_URL;;
 console.warn("Server API's URL was set to", SERVER_URL); // Delete me :)
 
@@ -31,9 +34,9 @@ export default class Board extends React.Component {
     // this.grapheProductionOnly = createRef();
 
     this.zonesDescription = this.getZoneDescriptions();
-
+    this.zoneChanged = this.zoneChanged.bind(this);
     this.state = {
-      currentZone:1,
+      currentZone: 1,
       // currentDate: 123456789
     };
 
@@ -118,7 +121,11 @@ export default class Board extends React.Component {
 
   zoneChanged(newZoneID) {
     console.log("New zone : ", newZoneID);
-    // this.setState({currentZone:newZoneID});
+    this.setState({ currentZone: newZoneID });
+  }
+
+  timeChanged(newTime) {
+    // todo
   }
 
   render() {
@@ -156,15 +163,18 @@ export default class Board extends React.Component {
 
         <div className="section is-medium">
           <div className="container">
-              <SlideMap zoneChanged={this.zoneChanged} zonesDescription={this.zonesDescription}/>
-             </div>
+            <SlideMap zoneChanged={this.zoneChanged} zonesDescription={this.zonesDescription} />
+          </div>
         </div>
 
-        {/* <div className="section is-medium">
-          <div className="container">
-            <SlidePowerSources />
-             </div>
-        </div> */}
+        <ZoneContext.Provider value={{ "currentZone": { "id": this.state.currentZone, "label": donnee_region_selectionnee.label } }}>
+          <div className="section is-medium">
+            <div className="container">
+              <SlidePowerSources />
+            </div>
+          </div>
+        </ZoneContext.Provider>
+
         {/* <Breakdown className="representations representation-name" donnees={this.state.donnees_zone} index_temps={this.state.index_temps} /> */}
 
         {/* <div className="columns has-text-centered is-multiline">

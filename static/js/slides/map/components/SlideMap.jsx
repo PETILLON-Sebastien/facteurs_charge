@@ -21,7 +21,6 @@ class SlideMap extends React.Component {
         }); 
 
 
-
         const hookZoneChanged = this.props.zoneChanged;
 
         return (
