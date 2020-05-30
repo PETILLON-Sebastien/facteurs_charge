@@ -1,6 +1,8 @@
 import React from "react";
 import Map from "./Map";
 
+
+
 class SlideMap extends React.Component {
 
     constructor(props) {

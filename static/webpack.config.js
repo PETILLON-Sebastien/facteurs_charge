@@ -19,6 +19,11 @@ const config = (env) => {
     module: {
       rules: [
         {
+          parser: {
+            amd:false
+          }
+        },
+        {
           test: /\.jsx?/,
           exclude: /node_modules/,
           loader: 'babel-loader',

@@ -6,7 +6,6 @@ import SlidePowerSources from "./slides/power-sources-breakdown/components/Slide
 import SlideLoad from './slides/load-breakdown/components/SlideLoad';
 import SlideMap from './slides/map/components/SlideMap';
 
-
 import stubZonesDescription from "./regions-descriptions";
 
 import _ from "lodash";
@@ -15,6 +14,8 @@ import 'moment/locale/fr';
 
 
 import { ZoneContext } from './ZoneContext';
+
+
 
 
 var that;
@@ -30,6 +31,24 @@ export default class Board extends React.Component {
     this.state = {
       currentZone: { "id": 0, "label": "France" },
     };
+
+    var FacteursCharge = require('facteurs_charge');
+
+    var api = new FacteursCharge.InstallationApi()
+    
+    var opts = { 
+      'from': new Date("2013-10-20T19:20:30+01:00"), // {Date} Start of the period
+      'to': new Date("2013-10-20T19:20:30+01:00") // {Date} End of the period
+    };
+    
+    var callback = function(error, data, response) {
+      if (error) {
+        console.error(error);
+      } else {
+        console.log('API called successfully. Returned data: ' + JSON.stringify(data));
+      }
+    };
+    api.getInstallationsLoad({}, callback);
 
   }
 
