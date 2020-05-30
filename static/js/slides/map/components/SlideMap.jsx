@@ -10,7 +10,6 @@ class SlideMap extends React.Component {
     render() {
         const zonesDescription = this.props.zonesDescription;
 
-
         let listOfZonesNames = '';
         let first = true;
         zonesDescription.forEach(element => {
@@ -20,7 +19,6 @@ class SlideMap extends React.Component {
             first = first && false;
             listOfZonesNames = listOfZonesNames.concat(element.label);
         });
-
 
         const hookZoneChanged = this.props.zoneChanged;
 

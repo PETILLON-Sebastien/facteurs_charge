@@ -56,7 +56,7 @@ export default class Board extends React.Component {
     return (
       <React.Fragment>
         <header >
-          <Navbar that={that} label_region={this.state.currentZone.label} />
+          <Navbar that={that} label_region={this.state.currentZone.label} hookZoneChanged={this.zoneChanged} zonesDescription={this.zonesDescription} />
         </header>
 
         <div className="section is-medium" id="slide-map">
