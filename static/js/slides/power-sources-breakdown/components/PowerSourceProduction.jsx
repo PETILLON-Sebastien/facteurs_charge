@@ -40,7 +40,7 @@ class PowerSourceProduction extends React.Component {
                     <PowerSourceLogo type={type} cssClass={cssClass} />
                 </div>
 
-                <div className={`column is-9-fullhd is-9-widescreen is-9-desktop is-8-tablet is-12-mobile has-text-left`}>
+                <div className={`column is-9-fullhd is-9-widescreen is-9-desktop is-8-tablet is-12-mobile has-text-left has-text-centered-mobile`}>
                     <PowerSourceNameLegend type={type} cssClass={cssClass} />
 
                     <div className="content statistiques representation-data-text">

@@ -68,10 +68,10 @@ class SlidePowerSources extends React.Component {
                 <div className="columns" style={{ "marginTop": "3rem" }}>
                     <div className="column is-full"><h1 className="is-size-1 has-text-centered">Source d'énergie</h1></div>
                 </div>
-                <div className="columns" style={{ "marginBottom": "3rem" }}>
+                <div className="columns" style={{ "marginBottom": "2rem" }}>
                     <div className="column is-full has-text-centered">
-                        <div className="is-size-5"><span className="has-background-grey text-inline-highlighted">{currentZoneName}</span> produit de l’énergie de différentes manières, c’est ce qu’on appelle un « mix » énergétique. Ce mix est injecté dans la grille française de production.</div>
-                        <div className="is-size-4" style={{"marginTop":"2rem"}}>
+                        <div className="is-size-6"><span className="has-background-grey text-inline-highlighted">{currentZoneName}</span> produit de l’énergie de différentes manières, c’est ce qu’on appelle un « mix » énergétique. Ce mix est injecté dans la grille française de production.</div>
+                        <div className="is-size-5" style={{"marginTop":"2rem"}}>
                             Actuellement, en <span className="has-background-grey text-inline-highlighted">{currentZoneName}</span>, l’énergie {this.state.bestProductor} contribue le plus à la grille.
                         </div>
                     </div>
@@ -79,7 +79,7 @@ class SlidePowerSources extends React.Component {
                 <div className="columns is-multiline">
                     <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-12-tablet is-12-mobile">
                         <div className="columns is-multiline is-mobile is-vcentered">
-                            <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-4-tablet is-6-mobile" style={{ "marginTop": "10px" }}>
+                            <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-4-tablet is-6-mobile " style={{ "marginTop": "10px" }}>
                                 <PowerSourceProduction production={currentData.solar.production} type="solar" cssClass="power-sources" />
                             </div>
                             <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-4-tablet is-6-mobile" style={{ "marginTop": "10px" }}>
@@ -100,7 +100,7 @@ class SlidePowerSources extends React.Component {
                         </div>
                     </div>
 
-                    <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-12-tablet is-12-mobile has-text-centered">
+                    <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-12-tablet is-12-mobile has-text-centered" style={{"marginTop":"2rem"}}>
                         <GraphPowerSourceBreakdown productionsOverTime={this.state.history} currentZoneName={currentZoneName}/>
                     </div>
                 </div>

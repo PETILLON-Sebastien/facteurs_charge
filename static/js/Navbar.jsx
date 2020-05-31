@@ -43,8 +43,7 @@ class Navbar extends React.Component {
                             <span className="navbar-item">
                                 <img style={{ "maxHeight": "3.5rem", "width": "3.5rem" }} src="./images/logo.png" width="64" height="64" />
                             </span>
-                            {/* </div> */}
-                            {/* <div className="navbar-start"> */}
+
                             <a className="navbar-item is-size-2 is-hidden-desktop" href="https://github.com/PETILLON-Sebastien/facteurs_charge" target="_blank">
                                 <span className="icon has-text-white">
                                     <i className="fab fa-github-square"></i>
@@ -56,6 +55,7 @@ class Navbar extends React.Component {
                                     <i className="fab fa-twitter-square"></i>
                                 </span>
                             </a>
+
 
                             <a role="button" className={`navbar-burger burger ${this.state.showMobileMenu ? "is-active" : ""}`} onClick={this.menuToggle} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                                 <span aria-hidden="true"></span>

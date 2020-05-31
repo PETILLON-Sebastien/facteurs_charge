@@ -46,7 +46,7 @@ class SlideMap extends React.Component {
                         <p style={{ "textAlign": "justify", "marginTop": "8px" }}>
                             Grâce aux données ouvertes d'Open API,nous avons des données concernant {zonesDescription.length} zones: {listOfZonesNames}.
                         </p>
-                        <p className="is-size-5" style={{ "textAlign": "justify", "marginTop": "8px" }}>
+                        <p className="is-size-5" style={{ "textAlign": "justify", "marginTop": "5%" }}>
                             Commencez par naviguer sur ce site, ou sélectionnez une zone en particulier sur la carte !
                         </p>
                     </div>
