@@ -43,8 +43,8 @@ class Navbar extends React.Component {
                             <span className="navbar-item">
                                 <img style={{ "maxHeight": "3.5rem", "width": "3.5rem" }} src="./images/logo.png" width="64" height="64" />
                             </span>
-                        {/* </div> */}
-                        {/* <div className="navbar-start"> */}
+                            {/* </div> */}
+                            {/* <div className="navbar-start"> */}
                             <a className="navbar-item is-size-2 is-hidden-desktop" href="https://github.com/PETILLON-Sebastien/facteurs_charge" target="_blank">
                                 <span className="icon has-text-white">
                                     <i className="fab fa-github-square"></i>
@@ -69,7 +69,7 @@ class Navbar extends React.Component {
 
                                 <span className="navbar-item">
                                     <a href="#slide-map">
-                                        <button className={`${this.state.activeTab == 'map' ? "is-success" : ""} is-primary button`}
+                                        <button className={`${this.state.activeTab == 'map' ? "is-success" : ""} is-primary button is-fullwidth`}
                                             onClick={() => this.setCurrentSlide('map')}>
                                             <span className="icon">
                                                 <i className="fas fa-map-marker-alt"></i>
@@ -83,7 +83,7 @@ class Navbar extends React.Component {
 
                                 <span className="navbar-item">
                                     <a href="#slide-installations" >
-                                        <button className={`${this.state.activeTab == 'installations' ? "is-success" : ""} is-primary button`}
+                                        <button className={`${this.state.activeTab == 'installations' ? "is-success" : ""} is-primary button is-fullwidth`}
                                             onClick={() => this.setCurrentSlide('installations')}>
                                             <span className="icon">
                                                 <i className="fas fa-solar-panel"></i>
@@ -97,7 +97,7 @@ class Navbar extends React.Component {
 
                                 <span className="navbar-item">
                                     <a href="#slide-load">
-                                        <button className={`${this.state.activeTab == 'load' ? "is-success" : ""} is-primary button`}
+                                        <button className={`${this.state.activeTab == 'load' ? "is-success" : ""} is-primary button is-fullwidth`}
                                             onClick={() => this.setCurrentSlide('load')}>
                                             <span className="icon">
                                                 <i className="fas fa-battery-three-quarters"></i>
@@ -109,7 +109,7 @@ class Navbar extends React.Component {
                                     </a>
                                 </span>
                                 <span className="navbar-item">
-                                    <a className="button is-dark" onClick={() => this.setState({ showModal: true })}>
+                                    <a className="button is-dark is-fullwidth" onClick={() => this.setState({ showModal: true })}>
                                         <span className="icon">
                                             <i className="fas fa-map-marker-alt"></i>
                                         </span>
