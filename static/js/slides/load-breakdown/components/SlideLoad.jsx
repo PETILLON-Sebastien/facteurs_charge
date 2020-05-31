@@ -43,10 +43,10 @@ class SlideLoad extends React.Component {
                         Actuellement, en {currentZoneName} (#{currentZoneID}), le SOLAIRE est a son maximum et le NUCLAIRE a son minimum
                      </div>
                 </div>
-                <div className="columns is-centered">
+                <div className="columns is-multiline is-centered">
                     <div className="column is-one-fifth">
                         <div id="breakdown" className="columns has-text-centered is-variable is-centered is-mobile is-multiline representations-wrapper">
-                            <div className="column is-full">
+                            <div className="column is-12-widescreen is-12-full-hd is-12-desktop is-4-tablet is-4-mobile ">
                                 <PowerSourceLoad
                                     load={currentData.solar.load}
                                     production={currentData.solar.production}
@@ -56,7 +56,7 @@ class SlideLoad extends React.Component {
                                     mirrored={false}
                                 />
                             </div>
-                            <div className="column is-full">
+                            <div className="column is-12-widescreen is-12-full-hd is-12-desktop is-4-tablet is-4-mobile ">
                                 <PowerSourceLoad
                                     load={currentData.wind.load}
                                     production={currentData.wind.production}
@@ -66,7 +66,7 @@ class SlideLoad extends React.Component {
                                     mirrored={false}
                                 />
                             </div>
-                            <div className="column is-full">
+                            <div className="column is-12-widescreen is-12-full-hd is-12-desktop is-4-tablet is-4-mobile ">
                                 <PowerSourceLoad
                                     load={currentData.hydraulic.load}
                                     production={currentData.hydraulic.production}
@@ -85,7 +85,7 @@ class SlideLoad extends React.Component {
                     </div>
                     <div className="column is-one-fifth">
                         <div id="breakdown" className="columns has-text-centered is-variable is-centered is-mobile is-multiline representations-wrapper">
-                            <div className="column is-full">
+                        <div className="column is-12-widescreen is-12-full-hd is-12-desktop is-4-tablet is-4-mobile ">
                                 <PowerSourceLoad
                                     load={currentData.nuclear.load}
                                     production={currentData.nuclear.production}
@@ -95,7 +95,7 @@ class SlideLoad extends React.Component {
                                     mirrored={true}
                                 />
                             </div>
-                            <div className="column is-full">
+                            <div className="column is-12-widescreen is-12-full-hd is-12-desktop is-4-tablet is-4-mobile ">
                                 <PowerSourceLoad
                                     load={currentData.bioenergies.load}
                                     production={currentData.bioenergies.production}
@@ -105,7 +105,7 @@ class SlideLoad extends React.Component {
                                     mirrored={true}
                                 />
                             </div>
-                            <div className="column is-full">
+                            <div className="column is-12-widescreen is-12-full-hd is-12-desktop is-4-tablet is-4-mobile ">
                                 <PowerSourceLoad
                                     load={currentData.thermal.load}
                                     production={currentData.thermal.production}
