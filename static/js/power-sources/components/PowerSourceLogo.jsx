@@ -13,9 +13,10 @@ class PowerSourceLogo extends React.Component {
         super(props);
 
         this.state = {};
+        console.warn(this.props.load);
 
         const type = this.props.type;
-        const load = this.props.load || 50;
+        const load = (this.props.load == undefined) ? 50 : this.props.load;
 
         this.buildProperVisualization(type, load);
     }

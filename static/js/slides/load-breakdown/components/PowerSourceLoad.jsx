@@ -46,11 +46,12 @@ class PowerSourceLoad extends React.Component {
     render() {
         const cssClass = this.state.cssClass;
         const type = this.state.type;
+        const load = this.props.load.value;
 
         return (
             <div className={`columns is-gapless is-vcentered ${cssClass}-power-source`}>
                 <div className="column is-5-fullhd is-5-widescreen is-5-desktop is-5-tablet is-10-mobile is-offset-2 is-vcentered ">
-                    <PowerSourceLogo type={type} cssClass={cssClass} />
+                    <PowerSourceLogo type={type} load={load} cssClass={cssClass} />
                 </div>
 
                 <div className={`column is-7-fullhd is-7-widescreen is-7-desktop is-7-tablet is-10-mobile is-offset-2 has-text-left`}>
