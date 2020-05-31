@@ -66,12 +66,12 @@ export default class Board extends React.Component {
         </div>
 
         <ZoneContext.Provider value={{ currentZone: this.state.currentZone }}>
-          <div className="section is-medium" id="slide-installations">
+          <div className="section is-medium" id="slide-installations"  style={{"paddingTop":"5rem"}}>
             <div className="container">
               <SlidePowerSources />
             </div>
           </div>
-          <div className="section is-medium" id="slide-load">
+          <div className="section is-medium" id="slide-load"  style={{"paddingTop":"5rem"}}>
             <SlideLoad />
           </div>
         </ZoneContext.Provider>
