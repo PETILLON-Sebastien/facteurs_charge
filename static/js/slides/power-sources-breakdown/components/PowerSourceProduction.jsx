@@ -36,11 +36,11 @@ class PowerSourceProduction extends React.Component {
 
         return (
             <div className={`columns is-gapless is-vcentered ${cssClass}-power-source`}>
-                <div className="column is-3-fullhd is-3-widescreen is-3-desktop is-4-tablet is-10-mobile has-text-centered is-vcentered ">
+                <div className="column is-3-fullhd is-3-widescreen is-3-desktop is-4-tablet is-12-mobile has-text-centered is-vcentered ">
                     <PowerSourceLogo type={type} cssClass={cssClass} />
                 </div>
 
-                <div className={`column is-9-fullhd is-9-widescreen is-9-desktop is-8-tablet is-10-mobile has-text-left`}>
+                <div className={`column is-9-fullhd is-9-widescreen is-9-desktop is-8-tablet is-12-mobile has-text-left`}>
                     <PowerSourceNameLegend type={type} cssClass={cssClass} />
 
                     <div className="content statistiques representation-data-text">

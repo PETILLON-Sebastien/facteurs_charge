@@ -77,7 +77,7 @@ class SlidePowerSources extends React.Component {
                     </div>
                 </div>
                 <div className="columns is-multiline">
-                    <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-11-tablet is-11-mobile is-offset-1-mobile">
+                    <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-12-tablet is-12-mobile">
                         <div className="columns is-multiline is-mobile is-vcentered">
                             <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-4-tablet is-6-mobile" style={{ "marginTop": "10px" }}>
                                 <PowerSourceProduction production={currentData.solar.production} type="solar" cssClass="power-sources" />
