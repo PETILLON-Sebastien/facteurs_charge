@@ -65,7 +65,7 @@ class SlidePowerSources extends React.Component {
         return (
             <React.Fragment>
 
-                <div className="columns" style={{ "marginTop": "3rem" }}>
+                <div className="columns">
                     <div className="column is-full"><h1 className="is-size-1 has-text-centered">Source d'énergie</h1></div>
                 </div>
                 <div className="columns" style={{ "marginBottom": "2rem" }}>
