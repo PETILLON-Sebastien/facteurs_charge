@@ -15,9 +15,9 @@ class Map extends React.Component {
   }
   
   getRandomColor() {
-    var letters = '789ABCDEF';
+    var letters = '56789ABCDEF';
     var color = '#';
-    const c = Math.floor(Math.random() * 9);
+    const c = Math.floor(Math.random() * 11);
     for (var i = 0; i < 6; i++) {
       color += letters[c];
     }

@@ -1,6 +1,7 @@
 import React from "react";
-import PowerSource from "../../../power-sources/components/PowerSource";
+import PowerSourceLoad from './PowerSourceLoad';
 import GraphLoadEvolution from "./GraphLoadEvolution";
+import {ZoneContext} from '../../../ZoneContext';
 
 class SlideLoad extends React.Component {
 
@@ -26,7 +27,8 @@ class SlideLoad extends React.Component {
 
     render() {
         const currentData = this.state.breakdown;
-
+        const currentZoneID = this.context.currentZone.id;
+        const currentZoneName = this.context.currentZone.label;
         return (
             <React.Fragment>
                 <div className="columns is-centered" >
@@ -38,14 +40,14 @@ class SlideLoad extends React.Component {
                     <div className="column is-three-quarters has-text-centered">
                         Une source d’énergie peut produire énormément en quantité, mais être sous-utilisé ! À l’inverse, une source peut être à 100% de sa capacité, et n’avoir qu’un petit impact sur l’apport à la grille…
                         C’est ce qu’on appelle le facteur charge ! Il représente le taux d’utilisation de chacune des sources d’énergie.
-                        Actuellement, en FRANCE, le SOLAIRE est a son maximum et le NUCLAIRE a son minimum
+                        Actuellement, en {currentZoneName} (#{currentZoneID}), le SOLAIRE est a son maximum et le NUCLAIRE a son minimum
                      </div>
                 </div>
                 <div className="columns is-centered">
                     <div className="column is-one-fifth">
                         <div id="breakdown" className="columns has-text-centered is-variable is-centered is-mobile is-multiline representations-wrapper">
                             <div className="column is-full">
-                                <PowerSource
+                                <PowerSourceLoad
                                     load={currentData.solar.load}
                                     production={currentData.solar.production}
                                     capacity={currentData.solar.capacity}
@@ -55,7 +57,7 @@ class SlideLoad extends React.Component {
                                 />
                             </div>
                             <div className="column is-full">
-                                <PowerSource
+                                <PowerSourceLoad
                                     load={currentData.wind.load}
                                     production={currentData.wind.production}
                                     capacity={currentData.wind.capacity}
@@ -65,7 +67,7 @@ class SlideLoad extends React.Component {
                                 />
                             </div>
                             <div className="column is-full">
-                                <PowerSource
+                                <PowerSourceLoad
                                     load={currentData.hydraulic.load}
                                     production={currentData.hydraulic.production}
                                     capacity={currentData.hydraulic.capacity}
@@ -84,7 +86,7 @@ class SlideLoad extends React.Component {
                     <div className="column is-one-fifth">
                         <div id="breakdown" className="columns has-text-centered is-variable is-centered is-mobile is-multiline representations-wrapper">
                             <div className="column is-full">
-                                <PowerSource
+                                <PowerSourceLoad
                                     load={currentData.nuclear.load}
                                     production={currentData.nuclear.production}
                                     capacity={currentData.nuclear.capacity}
@@ -94,7 +96,7 @@ class SlideLoad extends React.Component {
                                 />
                             </div>
                             <div className="column is-full">
-                                <PowerSource
+                                <PowerSourceLoad
                                     load={currentData.bioenergies.load}
                                     production={currentData.bioenergies.production}
                                     capacity={currentData.bioenergies.capacity}
@@ -104,7 +106,7 @@ class SlideLoad extends React.Component {
                                 />
                             </div>
                             <div className="column is-full">
-                                <PowerSource
+                                <PowerSourceLoad
                                     load={currentData.thermal.load}
                                     production={currentData.thermal.production}
                                     capacity={currentData.thermal.capacity}
@@ -120,5 +122,7 @@ class SlideLoad extends React.Component {
         );
     }
 }
+
+SlideLoad.contextType = ZoneContext;
 
 export default SlideLoad;

@@ -1,6 +1,6 @@
 import React from "react";
 
-import PowerSource from "../../../power-sources/components/PowerSource";
+import PowerSourceProduction from "./PowerSourceProduction";
 import GraphPowerSourceBreakdown from "./GraphPowerSourceBreakdown";
 
 import {ZoneContext} from '../../../ZoneContext';
@@ -53,28 +53,28 @@ class SlidePowerSources extends React.Component {
                 <div className="columns" style={{"marginBottom":"3rem"}}>
                     <div className="column is-full  has-text-centered"><span className="is-size-4">La FRANCE produit de l’énergie de différentes manières, c’est ce qu’on appelle un « mix » énergétique.
                     Ce mix est injecté dans la grille française de production.
-Actuellement, en {currentZoneName} (#{currentZoneID}), l’énergie NUCLEAIRE contribue le plus à la grille.</span></div>
+Actuellement, en <span className="has-background-info" style={{"paddingLeft":"0.5rem","paddingRight":"0.5rem", "borderRadius":"3px"}}>{currentZoneName}</span> (#{currentZoneID}), l’énergie NUCLEAIRE contribue le plus à la grille.</span></div>
                 </div>
                 <div className="columns is-multiline">
                     <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-11-tablet is-11-mobile is-offset-1-mobile">
                         <div className="columns is-multiline is-mobile is-vcentered">
                             <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-4-tablet is-6-mobile" style={{ "marginTop": "10px" }}>
-                                <PowerSource production={currentData.solar.production} type="solar" cssClass="power-sources" />
+                                <PowerSourceProduction production={currentData.solar.production} type="solar" cssClass="power-sources" />
                             </div>
                             <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-4-tablet is-6-mobile" style={{ "marginTop": "10px" }}>
-                                <PowerSource production={currentData.wind.production} type="wind" cssClass="power-sources" />
+                                <PowerSourceProduction production={currentData.wind.production} type="wind" cssClass="power-sources" />
                             </div>
                             <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-4-tablet is-6-mobile" style={{ "marginTop": "10px" }}>
-                                <PowerSource production={currentData.hydraulic.production} type="hydraulic" cssClass="power-sources" />
+                                <PowerSourceProduction production={currentData.hydraulic.production} type="hydraulic" cssClass="power-sources" />
                             </div>
                             <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-4-tablet is-6-mobile" style={{ "marginTop": "10px" }}>
-                                <PowerSource production={currentData.nuclear.production} type="nuclear" cssClass="power-sources" />
+                                <PowerSourceProduction production={currentData.nuclear.production} type="nuclear" cssClass="power-sources" />
                             </div>
                             <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-4-tablet is-6-mobile" style={{ "marginTop": "10px" }}>
-                                <PowerSource production={currentData.bioenergies.production} type="bioenergies" cssClass="power-sources" />
+                                <PowerSourceProduction production={currentData.bioenergies.production} type="bioenergies" cssClass="power-sources" />
                             </div>
                             <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-4-tablet is-6-mobile" style={{ "marginTop": "10px" }}>
-                                <PowerSource production={currentData.thermal.production} type="thermal" cssClass="power-sources" />
+                                <PowerSourceProduction production={currentData.thermal.production} type="thermal" cssClass="power-sources" />
                             </div>
                         </div>
                     </div>

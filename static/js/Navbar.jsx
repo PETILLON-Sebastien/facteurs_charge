@@ -115,7 +115,7 @@ class Navbar extends React.Component {
                                         </span>
                                         <span className="is-size-5">{this.props.label_region}</span>
                                         <span className="icon">
-                                            <i class="fas fa-chevron-down"></i>
+                                            <i className="fas fa-chevron-down"></i>
                                         </span>
                                     </a>
 
