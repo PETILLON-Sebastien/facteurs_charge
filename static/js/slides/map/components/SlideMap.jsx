@@ -5,10 +5,43 @@ class SlideMap extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            data: this.get()
+        }
+    }
+
+    getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max));
+    }
+
+    get() {
+        const installationsArray = ["solar", "wind", "nuclear", "hydraulic", "fossil", "bioenergies"];
+        let data = [];
+        for (let i = 0; i < 14; i++) {
+            data.push({
+                "id": i,
+                "highestLoad": {
+                    "installation": installationsArray[this.getRandomInt(installationsArray.length - 1)],
+                    "value": this.getRandomInt(101)
+                }
+            })
+        }
+
+        return data;
     }
 
     render() {
         const zonesDescription = this.props.zonesDescription;
+
+        // fixme
+        // link zone with highestload (fake data)
+        zonesDescription.forEach((e, i) => {
+            e.highestLoad = this.state.data[i].highestLoad.installation
+        });
+
+
+        console.log(zonesDescription);
 
         let listOfZonesNames = '';
         let first = true;
