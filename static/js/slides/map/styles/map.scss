@@ -1,3 +1,23 @@
-.zone-solar {
-    fill: red;
+.region-solar {
+    fill: $solar-color;
+}
+
+.region-wind {
+    fill: $wind-color;
+}
+
+.region-hydraulic {
+    fill: $hydraulic-color;
+}
+
+.region-nuclear {
+    fill: $nuclear-color;
+}
+
+.region-bioenergies {
+    fill: $bioenergies-color;
+}
+
+.region-fossil {
+    fill: $thermal-color;
 }
