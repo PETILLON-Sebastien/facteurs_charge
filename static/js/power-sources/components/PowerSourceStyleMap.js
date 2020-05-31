@@ -25,9 +25,9 @@ class PowerSourceStyleMap {
                 this.name = "Bioénergies";
                 this.classes += "bioenergies"
                 break;
-            case "thermal":
-                this.name = "Thermique";
-                this.classes += "thermal"
+            case "fossil":
+                this.name = "Fossiles";
+                this.classes += "fossil"
                 break;
             default:
                 console.warn("A unknown type of power-source has been passed (" + type + "). Defaulting values.");
