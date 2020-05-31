@@ -3,7 +3,8 @@ import React from "react";
 import PowerSourceProduction from "./PowerSourceProduction";
 import GraphPowerSourceBreakdown from "./GraphPowerSourceBreakdown";
 
-import {ZoneContext} from '../../../ZoneContext';
+import { ZoneContext } from '../../../ZoneContext';
+import PowerSourceNameInline from "../../../power-sources/components/PowerSourceNameInline";
 
 class SlidePowerSources extends React.Component {
 
@@ -14,10 +15,12 @@ class SlidePowerSources extends React.Component {
         let stub = data[0].production;
 
         const updatedStub = this.adaptData(stub);
+        const bestProductor = this.findBestProductor(updatedStub);
 
         this.state = {
             currentData: updatedStub,
-            history: data
+            history: data,
+            bestProductor: bestProductor
         };
     }
 
@@ -39,6 +42,21 @@ class SlidePowerSources extends React.Component {
         return '[{"timestamp":"2020-05-26T12:00:12.853Z","zoneId":"string","production":{"solar":{"value":1200,"unit":"MW"},"wind":{"value":1000,"unit":"MW"},"hydraulic":{"value":1000,"unit":"MW"},"nuclear":{"value":1000,"unit":"MW"},"bioenergies":{"value":1000,"unit":"MW"},"thermal":{"value":1900,"unit":"MW"}}},      {"timestamp":"2020-05-26T12:19:12.853Z","zoneId":"string","production":{"solar":{"value":300,"unit":"MW"},"wind":{"value":330,"unit":"MW"},"hydraulic":{"value":300,"unit":"MW"},"nuclear":{"value":300,"unit":"MW"},"bioenergies":{"value":300,"unit":"MW"},"thermal":{"value":300,"unit":"MW"}}}]';
     }
 
+    findBestProductor(currentData) {
+        let best = undefined;
+        Object.keys(currentData).forEach((installation) => {
+            if (best == undefined) {
+                best = <PowerSourceNameInline type={installation} />;
+            } else {
+                if (installation.production > best.production) {
+                    best = <PowerSourceNameInline type={installation} />;
+                }
+            }
+        });
+
+        return best;
+    }
+
     render() {
         const currentData = this.state.currentData;
         const currentZoneID = this.context.currentZone.id;
@@ -47,13 +65,16 @@ class SlidePowerSources extends React.Component {
         return (
             <React.Fragment>
 
-                <div className="columns" style={{"marginTop":"3rem"}}>
+                <div className="columns" style={{ "marginTop": "3rem" }}>
                     <div className="column is-full"><h1 className="is-size-1 has-text-centered">Source d'énergie</h1></div>
                 </div>
-                <div className="columns" style={{"marginBottom":"3rem"}}>
-                    <div className="column is-full  has-text-centered"><span className="is-size-4">La FRANCE produit de l’énergie de différentes manières, c’est ce qu’on appelle un « mix » énergétique.
-                    Ce mix est injecté dans la grille française de production.
-Actuellement, en <span className="has-background-info" style={{"paddingLeft":"0.5rem","paddingRight":"0.5rem", "borderRadius":"3px"}}>{currentZoneName}</span> (#{currentZoneID}), l’énergie NUCLEAIRE contribue le plus à la grille.</span></div>
+                <div className="columns" style={{ "marginBottom": "3rem" }}>
+                    <div className="column is-full  has-text-centered">
+                        <div className="is-size-5"><span className="has-background-grey text-inline-highlighted">{currentZoneName}</span> produit de l’énergie de différentes manières, c’est ce qu’on appelle un « mix » énergétique. Ce mix est injecté dans la grille française de production.</div>
+                        <div className="is-size-4" style={{"marginTop":"2rem"}}>
+                            Actuellement, en <span className="has-background-grey text-inline-highlighted">{currentZoneName}</span>, l’énergie {this.state.bestProductor} contribue le plus à la grille.
+                        </div>
+                    </div>
                 </div>
                 <div className="columns is-multiline">
                     <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-11-tablet is-11-mobile is-offset-1-mobile">
@@ -78,8 +99,9 @@ Actuellement, en <span className="has-background-info" style={{"paddingLeft":"0.
                             </div>
                         </div>
                     </div>
+
                     <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-12-tablet is-12-mobile has-text-centered">
-                        <GraphPowerSourceBreakdown productionsOverTime={this.state.history} />
+                        <GraphPowerSourceBreakdown productionsOverTime={this.state.history} currentZoneName={currentZoneName}/>
                     </div>
                 </div>
             </React.Fragment>

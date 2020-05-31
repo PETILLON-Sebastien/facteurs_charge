@@ -1,7 +1,7 @@
 import React from "react";
 
 import PowerSourceLogo from '../../../power-sources/components/PowerSourceLogo';
-import PowerSourceName from "../../../power-sources/components/PowerSourceName";
+import PowerSourceNameLegend from "../../../power-sources/components/PowerSourceNameLegend";
 import PowerSourceKPI from "../../../power-sources/components/PowerSourceKPI";
 import LoadBar from "../../../power-sources/components/LoadBar";
 
@@ -54,7 +54,7 @@ class PowerSourceLoad extends React.Component {
                 </div>
 
                 <div className={`column is-7-fullhd is-7-widescreen is-7-desktop is-7-tablet is-10-mobile is-offset-2 has-text-left`}>
-                    <PowerSourceName type={type} cssClass={cssClass} />
+                    <PowerSourceNameLegend type={type} cssClass={cssClass} />
 
                     <div className="content statistiques representation-data-text">
                         {this.state.loadBar}

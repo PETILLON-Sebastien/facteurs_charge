@@ -29,9 +29,10 @@ class ProductionBySourcesGraph extends React.Component {
     }
 
     render() {
-  
+
         var sourcesSimples = ["solar", "wind", "hydraulic", "bioenergies", "thermal", "nuclear"];
 
+        const currentZoneName = this.props.currentZoneName;
 
         const dataArray = this.props.productionsOverTime;
         let productionsArrayPerSource = {};
@@ -129,14 +130,14 @@ class ProductionBySourcesGraph extends React.Component {
             },
             xAxis: {
                 type: 'datetime',
-            //     title: {
-            //         text: 'Heure'
-            //     },
-            //     // plotLines: [{
-            //     //     color: '#FFF',
-            //     //     width: 1,
-            //     //     value: heure_courante
-            //     // }],
+                //     title: {
+                //         text: 'Heure'
+                //     },
+                //     // plotLines: [{
+                //     //     color: '#FFF',
+                //     //     width: 1,
+                //     //     value: heure_courante
+                //     // }],
                 labels: {
                     style: {
                         color: "#ffffff"
@@ -172,7 +173,8 @@ class ProductionBySourcesGraph extends React.Component {
             time: {
                 timezoneOffset: -60
             },
-            chart: {        height: 260,
+            chart: {
+                height: 260,
 
                 // type: 'areaspline',
                 // stacking: 'normal',
@@ -196,7 +198,7 @@ class ProductionBySourcesGraph extends React.Component {
         }
         return (
             <div className="chart-wrapping">
-                <span>Production & Consommation</span>
+                <span>Répartition de la production en <span className="has-background-grey text-inline-highlighted">{currentZoneName}</span> </span>
                 <ReactHighcharts config={config} ref={this.chart}></ReactHighcharts>
             </div>
             // <h1>test?</h1>

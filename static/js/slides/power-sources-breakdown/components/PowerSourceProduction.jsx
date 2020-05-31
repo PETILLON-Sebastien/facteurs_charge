@@ -1,8 +1,8 @@
 import React from "react";
 
 import PowerSourceLogo from '../../../power-sources/components/PowerSourceLogo';
-import PowerSourceName from "../../../power-sources/components/PowerSourceName";
 import PowerSourceKPI from "../../../power-sources/components/PowerSourceKPI";
+import PowerSourceNameLegend from "../../../power-sources/components/PowerSourceNameLegend";
 
 class PowerSourceProduction extends React.Component {
 
@@ -36,12 +36,12 @@ class PowerSourceProduction extends React.Component {
 
         return (
             <div className={`columns is-gapless is-vcentered ${cssClass}-power-source`}>
-                <div className="column is-5-fullhd is-5-widescreen is-5-desktop is-5-tablet is-10-mobile is-offset-2 is-vcentered ">
+                <div className="column is-3-fullhd is-3-widescreen is-3-desktop is-4-tablet is-10-mobile has-text-centered is-vcentered ">
                     <PowerSourceLogo type={type} cssClass={cssClass} />
                 </div>
 
-                <div className={`column is-7-fullhd is-7-widescreen is-7-desktop is-7-tablet is-10-mobile is-offset-2 has-text-left`}>
-                    <PowerSourceName type={type} cssClass={cssClass} />
+                <div className={`column is-9-fullhd is-9-widescreen is-9-desktop is-8-tablet is-10-mobile has-text-left`}>
+                    <PowerSourceNameLegend type={type} cssClass={cssClass} />
 
                     <div className="content statistiques representation-data-text">
                         {this.state.production}
