@@ -55,9 +55,9 @@ class PowerSourceLogo extends React.Component {
         const cssClass = this.props.cssClass || '';
 
         return (
-            <figure className={`image ${cssClass}-logo`}>
+            <span className={`image ${cssClass}-logo`}>
                 {this.state.svg}
-            </figure>
+            </span>
         );
     }
 }
