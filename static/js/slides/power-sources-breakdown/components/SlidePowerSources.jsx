@@ -33,13 +33,13 @@ class SlidePowerSources extends React.Component {
         updatedStub.hydraulic = { production: stub.hydraulic };
         updatedStub.nuclear = { production: stub.nuclear };
         updatedStub.bioenergies = { production: stub.bioenergies };
-        updatedStub.thermal = { production: stub.thermal };
+        updatedStub.fossil = { production: stub.fossil };
 
         return updatedStub;
     }
 
     get() {
-        return '[{"timestamp":"2020-05-26T12:00:12.853Z","zoneId":"string","production":{"solar":{"value":1200,"unit":"MW"},"wind":{"value":1000,"unit":"MW"},"hydraulic":{"value":1000,"unit":"MW"},"nuclear":{"value":1000,"unit":"MW"},"bioenergies":{"value":1000,"unit":"MW"},"thermal":{"value":1900,"unit":"MW"}}},      {"timestamp":"2020-05-26T12:19:12.853Z","zoneId":"string","production":{"solar":{"value":300,"unit":"MW"},"wind":{"value":330,"unit":"MW"},"hydraulic":{"value":300,"unit":"MW"},"nuclear":{"value":300,"unit":"MW"},"bioenergies":{"value":300,"unit":"MW"},"thermal":{"value":300,"unit":"MW"}}}]';
+        return '[{"timestamp":"2020-05-26T12:00:12.853Z","zoneId":"string","production":{"solar":{"value":1200,"unit":"MW"},"wind":{"value":1000,"unit":"MW"},"hydraulic":{"value":1000,"unit":"MW"},"nuclear":{"value":1000,"unit":"MW"},"bioenergies":{"value":1000,"unit":"MW"},"fossil":{"value":1900,"unit":"MW"}}},      {"timestamp":"2020-05-26T12:19:12.853Z","zoneId":"string","production":{"solar":{"value":300,"unit":"MW"},"wind":{"value":330,"unit":"MW"},"hydraulic":{"value":300,"unit":"MW"},"nuclear":{"value":300,"unit":"MW"},"bioenergies":{"value":300,"unit":"MW"},"fossil":{"value":300,"unit":"MW"}}}]';
     }
 
     findBestProductor(currentData) {
@@ -95,7 +95,7 @@ class SlidePowerSources extends React.Component {
                                 <PowerSourceProduction production={currentData.bioenergies.production} type="bioenergies" cssClass="power-sources" />
                             </div>
                             <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-4-tablet is-6-mobile" style={{ "marginTop": "10px" }}>
-                                <PowerSourceProduction production={currentData.thermal.production} type="thermal" cssClass="power-sources" />
+                                <PowerSourceProduction production={currentData.fossil.production} type="fossil" cssClass="power-sources" />
                             </div>
                         </div>
                     </div>

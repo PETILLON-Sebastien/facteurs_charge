@@ -3,7 +3,7 @@ import React from "react";
 import WindTurbine from "./basics/WindTurbine";
 import SolarPanel from "./basics/SolarPanel";
 import HydraulicEnergy from "./basics/HydraulicEnergy";
-import ThermalEnergy from "./basics/ThermalEnergy";
+import FossilEnergy from "./basics/FossilEnergy";
 import NuclearPowerPlant from "./basics/NuclearPowerPlant";
 import Bioenergies from "./basics/Bioenergies";
 
@@ -13,7 +13,6 @@ class PowerSourceLogo extends React.Component {
         super(props);
 
         this.state = {};
-        console.warn(this.props.load);
 
         const type = this.props.type;
         const load = (this.props.load == undefined) ? 50 : this.props.load;
@@ -40,12 +39,12 @@ class PowerSourceLogo extends React.Component {
             case "bioenergies":
                 svg = <Bioenergies pourcentage={load} />;
                 break;
-            case "thermal":
-                svg = <ThermalEnergy pourcentage={load} />;
+            case "fossil":
+                svg = <FossilEnergy pourcentage={load} />;
                 break;
             default:
                 console.warn("A unknown type of power-source has been passed (" + type + "). Defaulting values.");
-                svg = <ThermalEnergy pourcentage={load} />;
+                svg = <FossilEnergy pourcentage={load} />;
                 break;
         }
 
