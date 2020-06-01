@@ -52,8 +52,6 @@ class ProductionBySourcesGraph extends React.Component {
             });
         });
 
-        console.log(productionsArrayPerSource);
-
         let series = [
             {
                 name: "Photovoltaïque",
@@ -92,8 +90,6 @@ class ProductionBySourcesGraph extends React.Component {
                 data: productionsArrayPerSource.nuclear
             }
         ];
-
-        console.log(series);
 
         // for (let index in this.props.donnees) {
         //     let donnee = this.props.donnees[index];

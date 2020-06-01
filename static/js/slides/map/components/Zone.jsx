@@ -7,12 +7,8 @@ class Zone extends React.Component {
   }
 
   render() {
-    // const selectionnee = this.props.zone_selectionnee === this.props.description.id ? 'selectionnee' : '';
-    // const couleur = this.props.meilleurs_facteurs[this.props.index_temps] + '_couleur';
-
     const hookCallback = this.props.zoneChanged;
     const zoneDescription = this.props.description;
-    const color =  this.props.color;
 
     const powerSourceStyleMap = new PowerSourceStyleMap(zoneDescription.highestLoad);
 

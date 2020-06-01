@@ -64,6 +64,7 @@ export default class Board extends React.Component {
             <SlideMap zoneChanged={this.zoneChanged} zonesDescription={this.zonesDescription} />
           </div>
         </div>
+        
 
         <ZoneContext.Provider value={{ currentZone: this.state.currentZone }}>
           <div className="section is-medium" id="slide-installations"  style={{"paddingTop":"5rem"}}>

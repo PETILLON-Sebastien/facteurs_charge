@@ -40,9 +40,6 @@ class SlideMap extends React.Component {
             e.highestLoad = this.state.data[i].highestLoad.installation
         });
 
-
-        console.log(zonesDescription);
-
         let listOfZonesNames = '';
         let first = true;
         zonesDescription.forEach(element => {
