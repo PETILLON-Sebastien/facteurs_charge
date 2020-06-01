@@ -1,2 +1,2 @@
 
-var compute = require('../constants.js');
+var compute = require('../utils/constants.js');
