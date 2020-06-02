@@ -25,7 +25,7 @@ const ECO2MIX_NATIONAL_OPTIONS = {
     timezone: 'Europe/Paris'
 };
 
-var construct_regional_api_call = function(from_date, to_date) {
+var construct_api_call = function(from_date, to_date, region_options, regions_number) {
     var defered = Q.defer();
 
     var from = moment(from_date);
@@ -35,13 +35,13 @@ var construct_regional_api_call = function(from_date, to_date) {
     var duration = moment.duration(to.diff(from));
     
     var options = _.clone(ECO2MIX_API);
-    options.query = _.clone(ECO2MIX_REGIONAL_OPTIONS);
+    options.query = _.clone(region_options);
     options.query.q = constants.api_wording.date_hour + ' >= ' + from_format
         + ' AND ' + constants.api_wording.date_hour + ' <= ' + to_format;
-    options.query.rows = constants.french_regions_count * constants.data_per_hour * duration.as("hours");
+    options.query.rows = regions_number * constants.data_per_hour * (duration.as("hours") + 1);
 
     const requestUrl = url.parse(url.format(options));
-    const req = https.get({
+    https.get({
         hostname: requestUrl.hostname,
         path: requestUrl.path,
     }, (res) => {
@@ -58,6 +58,20 @@ var construct_regional_api_call = function(from_date, to_date) {
     });
 
     return defered.promise;
-}
+};
 
-construct_regional_api_call('2020-05-01', '2020-05-02').then(function(data) {console.log(data)});
+var construct_regional_api_call = function(from_date, to_date) {
+    return construct_api_call(from_date, to_date, ECO2MIX_REGIONAL_OPTIONS, constants.french_regions_count);
+};
+
+var construct_national_api_call = function(from_date, to_date) {
+    return construct_api_call(from_date, to_date, ECO2MIX_NATIONAL_OPTIONS, 1);
+};
+
+var api_call = function(from_date, to_date) {
+    var national_call = construct_national_api_call(from_date, to_date);
+    var regional_call = construct_regional_api_call(from_date, to_date);
+    return Q.all([regional_call, national_call]);
+};
+
+exports.api_call = api_call;
