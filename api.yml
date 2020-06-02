@@ -882,6 +882,7 @@ paths:
 definitions:
   consumptionSnapshotZone:
     type: object
+    required: ['zoneId', 'snapshots']
     properties:
       zoneId:
         type: string
@@ -892,6 +893,7 @@ definitions:
           $ref: '#/definitions/consumptionSnapshot'
   consumptionSnapshot:
     type: object
+    required: ['description', 'datetime']
     properties:
       description:
         $ref: '#/definitions/consumption'
@@ -900,6 +902,7 @@ definitions:
         format: date-time
   consumption:
     type: object
+    required: ['used']
     properties:
       used:
         $ref: '#/definitions/power'
@@ -907,6 +910,7 @@ definitions:
         $ref: '#/definitions/power'
   exchangeSnapshot:
     type: object
+    required: ['description', 'datetime']
     properties:
       description:
         $ref: '#/definitions/exchange'
@@ -915,6 +919,7 @@ definitions:
         format: date-time
   exchange:
     type: object
+    required: ['sourceZone', 'targetZone', 'value', 'unit']
     properties:
       sourceZone:
         type: string
@@ -930,6 +935,7 @@ definitions:
         pattern: "^W|MW|GW$"
   breakdownSnapshotZone:
     type: object
+    required: ['zoneId', 'snapshots']
     properties:
       zoneId:
         type: string
@@ -940,6 +946,7 @@ definitions:
           $ref: '#/definitions/breakdownSnapshot'
   breakdownSnapshot:
     type: object
+    required: ['breakdown', 'datetime']
     properties:
       breakdown:
         $ref: '#/definitions/breakdown'
@@ -963,6 +970,7 @@ definitions:
         $ref: '#/definitions/installation'
   loadBreakdownSnapshotZone:
     type: object
+    required: ['zoneId', 'snapshots']
     properties:
       zoneId:
         type: string
@@ -973,6 +981,7 @@ definitions:
           $ref: '#/definitions/loadBreakdownSnapshot'
   loadBreakdownSnapshot:
     type: object
+    required: ['loadBreakdown', 'datetime']
     properties:
       loadBreakdown:
         $ref: '#/definitions/loadBreakdown'
@@ -996,6 +1005,7 @@ definitions:
         $ref: '#/definitions/load'
   powerBreakdownSnapshotZone:
     type: object
+    required: ['zoneId', 'snapshots']
     properties:
       zoneId:
         type: string
@@ -1006,6 +1016,7 @@ definitions:
           $ref: '#/definitions/powerBreakdownSnapshot'
   powerBreakdownSnapshot:
     type: object
+    required: ['powerBreakdown', 'datetime']
     properties:
       powerBreakdown:
         $ref: '#/definitions/powerBreakdown'
@@ -1029,6 +1040,7 @@ definitions:
         $ref: '#/definitions/power'
   installationSnapshotZone:
     type: object
+    required: ['zoneId', 'snapshots']
     properties:
       zoneId:
         type: string
@@ -1039,6 +1051,7 @@ definitions:
           $ref: '#/definitions/installationSnapshot'
   installationSnapshot:
     type: object
+    required: ['installation', 'datetime']
     properties:
       installation:
         $ref: '#/definitions/installation'
@@ -1047,6 +1060,7 @@ definitions:
         format: date-time
   installation:
     type: object
+    required: ['capacity', 'production', 'load']
     properties:
       capacity:
         $ref: '#/definitions/power'
@@ -1056,6 +1070,7 @@ definitions:
         $ref: '#/definitions/load'
   powerSnapshotZone:
     type: object
+    required: ['zoneId', 'snapshots']
     properties:
       zoneId:
         type: string
@@ -1066,14 +1081,32 @@ definitions:
           $ref: '#/definitions/powerSnapshot'
   powerSnapshot:
     type: object
+    required: ['power', 'datetime']
     properties:
       power:
         $ref: '#/definitions/power'
       datetime:
         type: string
         format: date-time
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/detailPower'
+  detailPower:
+    type: object
+    required: ['name', 'power']
+    properties:
+      name:
+        type: string
+      power:
+        $ref: '#/definitions/power'
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/detailPower'
   power:
     type: object
+    required: ['value', 'unit']
     properties:
       value:
         type: number
@@ -1083,6 +1116,7 @@ definitions:
         pattern: "^W|MW|GW$"
   loadSnapshotZone:
     type: object
+    required: ['zoneId', 'snapshots']
     properties:
       zoneId:
         type: string
@@ -1093,14 +1127,32 @@ definitions:
           $ref: '#/definitions/loadSnapshot'
   loadSnapshot:
     type: object
+    required: ['load', 'datetime']
     properties:
       load:
         $ref: '#/definitions/load'
       datetime:
         type: string
         format: date-time
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/detailLoad'
+  detailLoad:
+    type: object
+    required: ['name', 'load']
+    properties:
+      name:
+        type: string
+      load:
+        $ref: '#/definitions/load'
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/detailLoad'
   load:
     type: object
+    required: ['value']
     properties:
       value:
         type: number
