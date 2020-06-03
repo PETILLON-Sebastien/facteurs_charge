@@ -76,8 +76,10 @@ export default class Board extends React.Component {
           <div className="section is-medium" id="slide-load" style={{ "paddingTop": "5rem" }}>
             <SlideLoad />
           </div>
-          <div className="section is-medium" id="slide-load" style={{ "paddingTop": "5rem" }}>
-            <SlidePowerBalance />
+          <div className="section is-medium" id="slide-balance" style={{ "paddingTop": "5rem" }}>
+            <div className="container">
+              <SlidePowerBalance />
+            </div>
           </div>
         </ZoneContext.Provider>
       </React.Fragment>

@@ -36,140 +36,117 @@ class ProductionBySourcesGraph extends React.Component {
         const consumptionsOverTime = this.props.consumptionsOverTime;
         const importationsOverTime = this.props.importationsOverTime;
         const exportationsOverTime = this.props.exportationsOverTime;
-    
+
         let productionsSerie = [];
-        productionsOverTime.forEach( (p) => {
+        productionsOverTime.forEach((p) => {
             productionsSerie.push(p.installation.production.value);
         });
 
         let consumptionsSerie = [];
-        consumptionsOverTime.forEach( (c) => {
+        consumptionsOverTime.forEach((c) => {
             consumptionsSerie.push(- c.description.used.value - c.description.stepStorage.value);
         });
 
         let exportationsSerie = [];
-        exportationsOverTime.forEach( (e) => {
+        exportationsOverTime.forEach((e) => {
             exportationsSerie.push(- e.description.value);
         });
 
         let importationsSerie = [];
-        importationsOverTime.forEach( (c) => {
+        importationsOverTime.forEach((c) => {
             importationsSerie.push(c.description.value);
         });
-        console.log(importationsOverTime);
+
+        let categories = [];
+        importationsOverTime.forEach((i) => {
+            categories.push(moment(i.datetime).format("HH:mm"));
+        });
 
         let series = [
-            {
-                name: "Production",
-                stack: 0,
-                color: "rgb(242, 116, 6)",
-                data: productionsSerie
-            },
+
             {
                 name: "Consommation",
                 stack: 0,
-                color: "rgb(116, 205, 185)",
+                color: "#ecf0f1",
                 data: consumptionsSerie
             },
             {
                 name: "Exportation",
                 stack: 0,
-                color: "rgb(39, 114, 178)",
+                color: "#3298dc",
                 data: exportationsSerie
             },
             {
                 name: "Importation",
-                stack: 0,
-                color: "rgb(22, 106, 87)",
+                stack: 1,
+                color: "#2ecc71",
                 data: importationsSerie
+            }, {
+                name: "Production",
+                stack: 1,
+                color: "#f1b70e",
+                data: productionsSerie
             }
         ];
 
         let config = {
-            title: {
-                text: ''
-            },
-            tooltip: {
-                valueSuffix: ' MW'
+            chart: {
+                type: 'area',
+                color: "#fff",
+                backgroundColor: "#0f0f0f",
+                annotations: [{
+                    labelOptions: {
+                        style: { "color": "#fff" }
+                    }
+                }],
             },
             yAxis: {
-                title: {
-                    text: 'Production'
-                },
+                tickColor: '#fff',
                 labels: {
-                    // formatter: function () {
-                    //     if (this.value > 999 || this.value < 999) {
-                    //         // return Math.round(this.value / 10) / 100 + " GW";
-                    //     }
-                    //     return this.value + " MW";
-                    // },
                     style: {
-                        color: "#ffffff"
+                        color: '#fff',
+                        font: '11px Trebuchet MS, Verdana, sans-serif'
                     }
+                },
+            },
+            title: {
+                text: '',
+                style: {
+                    color: '#fff',
+                    fontWeight: 'bold',
+                    fontSize: '12px',
+                    fontFamily: 'Trebuchet MS, Verdana, sans-serif'
                 }
             },
             xAxis: {
-                type: 'datetime',
-                //     title: {
-                //         text: 'Heure'
-                //     },
-                //     // plotLines: [{
-                //     //     color: '#FFF',
-                //     //     width: 1,
-                //     //     value: heure_courante
-                //     // }],
+                categories: ['7:00', '10:00', '12:00', '15:00', '18:00'],
                 labels: {
                     style: {
-                        color: "#ffffff"
+                        color: '#fff',
+                        font: '11px Trebuchet MS, Verdana, sans-serif'
                     }
-                }
+                },
+
             },
-            legend: {
+            credits: {
                 enabled: false
             },
             plotOptions: {
                 series: {
-                    connectNulls: true
-                },
-                stacking: 'normal',
-                areaspline: {
-                    stacking: 'areaspline',
-                    lineColor: '#222',
-                    lineWidth: 1,
-                    marker: {
-                        lineWidth: 1,
-                        lineColor: '#222',
-                        enabled: false
-                    }
-                },
-                spline: {
-                    marker: {
-                        lineWidth: 1,
-                        lineColor: '#222',
-                        enabled: false
-                    }
+                    stacking: 'normal'
                 }
-            },
-            time: {
-                timezoneOffset: -60
-            },
-            chart: {
-                height: 260,
-
-                type: 'area',
-                // stacking: 'normal',
-                backgroundColor: "rgba(0,0,0,0)"
             },
             series: series,
             responsive: {
                 rules: [{
                     condition: {
-                        maxWidth: 500
+                        maxHeight: 100,
+
                     },
                     chartOptions: {
                         yAxis: {
                             title: {
-                                text: null
+                                text: "Valeur (GW)"
                             }
                         }
                     }
