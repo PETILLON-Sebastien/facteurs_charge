@@ -156,8 +156,8 @@ class ProductionBySourcesGraph extends React.Component {
             chart: {
                 height: 260,
 
-                type: 'areaspline',
-                stacking: 'normal',
+                type: 'area',
+                // stacking: 'normal',
                 backgroundColor: "rgba(0,0,0,0)"
             },
             series: series,
