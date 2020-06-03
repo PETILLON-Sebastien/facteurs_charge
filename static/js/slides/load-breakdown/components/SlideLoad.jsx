@@ -84,10 +84,16 @@ class SlideLoad extends React.Component {
                 </div>
                 <div className="columns  is-centered" style={{ "marginBottom": "4rem" }}>
                     <div className="column is-three-quarters has-text-centered">
-                        Une source d’énergie peut produire énormément en quantité, mais être sous-utilisé ! À l’inverse, une source peut être à 100% de sa capacité, et n’avoir qu’un petit impact sur l’apport à la grille…
-                        C’est ce qu’on appelle le facteur charge ! Il représente le taux d’utilisation de chacune des sources d’énergie.
-                        Actuellement, en {currentZoneName} (#{currentZoneID}), le SOLAIRE est a son maximum et le NUCLAIRE a son minimum
-                     </div>
+                        <div className="is-size-6">
+                            Une source d’énergie peut produire énormément en quantité, mais être sous-utilisé ! À l’inverse, une source peut être à 100% de sa capacité, et n’avoir qu’un petit impact sur l’apport à la grille…
+                        </div>
+                        <div className="is-size-5" style={{ "marginTop": "2rem" }}>
+
+                            C’est ce qu’on appelle le facteur charge ! Il représente le taux d’utilisation de chacune des sources d’énergie.
+                        Actuellement, en <span className="has-background-grey text-inline-highlighted">{currentZoneName}</span>, le {this.state.mostLoaded} est a son maximum et le {this.state.leastLoaded} a son minimum.
+                        </div>
+
+                    </div>
                 </div>
                 <div className="columns is-multiline is-centered">
                     <div className="column is-one-fifth">
@@ -131,7 +137,7 @@ class SlideLoad extends React.Component {
                     </div>
                     <div className="column is-one-fifth">
                         <div id="breakdown" className="columns has-text-centered is-variable is-centered is-mobile is-multiline representations-wrapper">
-                        <div className="column is-12-widescreen is-12-full-hd is-12-desktop is-4-tablet is-4-mobile ">
+                            <div className="column is-12-widescreen is-12-full-hd is-12-desktop is-4-tablet is-4-mobile ">
                                 <PowerSourceLoad
                                     load={currentData.nuclear.load}
                                     production={currentData.nuclear.production}
