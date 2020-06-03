@@ -1,7 +1,8 @@
 import React from "react";
 import PowerSourceLoad from './PowerSourceLoad';
 import GraphLoadEvolution from "./GraphLoadEvolution";
-import {ZoneContext} from '../../../ZoneContext';
+import { ZoneContext } from '../../../ZoneContext';
+import PowerSourceNameInline from "../../../power-sources/components/PowerSourceNameInline";
 
 class SlideLoad extends React.Component {
 
@@ -11,19 +12,64 @@ class SlideLoad extends React.Component {
 
         const fakeData = this.get();
         const [loadHistory, data] = [JSON.parse(fakeData[0]), JSON.parse(fakeData[1])];
-        let stub = data[0];
+        let stub = data[data.length-1];
+
+        const mostLoaded = this.findMostLoaded(stub.breakdown);
+        const leastLoaded = this.findLeastLoaded(stub.breakdown);
+
+        console.log(stub.breakdown);
 
         this.state = {
             breakdown: stub.breakdown,
-            loadHistory: loadHistory
+            loadHistory: loadHistory,
+            mostLoaded: mostLoaded,
+            leastLoaded: leastLoaded
         };
     }
 
     get() {
         const loadHistory = '[{"timestamp":"2020-05-26T12:00:12.853Z","zoneId":"string","load":{"solar":{"value":1200,"unit":"%"},"wind":{"value":1000,"unit":"%"},"hydraulic":{"value":1000,"unit":"%"},"nuclear":{"value":1000,"unit":"%"},"bioenergies":{"value":1000,"unit":"%"},"fossil":{"value":1900,"unit":"%"}}},      {"timestamp":"2020-05-26T12:19:12.853Z","zoneId":"string","load":{"solar":{"value":300,"unit":"%"},"wind":{"value":330,"unit":"%"},"hydraulic":{"value":300,"unit":"%"},"nuclear":{"value":300,"unit":"%"},"bioenergies":{"value":300,"unit":"%"},"fossil":{"value":300,"unit":"%"}}}]';
-        const breakdown = '[{"timestamp":"2020-05-26T15:40:36.037Z","zoneId":"MW","breakdown":{"solar":{"capacity":{"value":100,"unit":"MW"},"production":{"value":10,"unit":"MW"},"load":{"value":10,"unit":"%"}},"wind":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"hydraulic":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"nuclear":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"bioenergies":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"fossil":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}}}},{"timestamp":"2020-05-26T15:54:36.037Z","zoneId":"MW","breakdown":{"solar":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"wind":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"hydraulic":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"nuclear":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"bioenergies":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"fossil":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}}}}]';
+        const breakdown = '[{"timestamp":"2020-05-26T15:40:36.037Z","zoneId":"MW","breakdown":{"solar":{"capacity":{"value":100,"unit":"MW"},"production":{"value":10,"unit":"MW"},"load":{"value":10,"unit":"%"}},"wind":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"hydraulic":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"nuclear":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"bioenergies":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"fossil":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}}}},{"timestamp":"2020-05-26T15:54:36.037Z","zoneId":"MW","breakdown":{"solar":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"wind":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"hydraulic":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"nuclear":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"bioenergies":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"fossil":{"capacity":{"value":100,"unit":"MW"},"production":{"value":10,"unit":"MW"},"load":{"value":10,"unit":"%"}}}}]';
         return [loadHistory, breakdown];
     }
+
+
+    findMostLoaded(currentData) {
+        let bestComponent = undefined;
+        let best = undefined;
+        Object.keys(currentData).forEach((installation) => {
+            if (best == undefined) {
+                bestComponent = <PowerSourceNameInline type={installation} />;
+                best = currentData[installation];
+            } else {
+                if (currentData[installation].load.value > best.load.value) {
+                    bestComponent = <PowerSourceNameInline type={installation} />;
+                    best = currentData[installation];
+                }
+            }
+        });
+
+        return bestComponent;
+    }
+
+    findLeastLoaded(currentData) {
+        let bestComponent = undefined;
+        let best = undefined;
+        Object.keys(currentData).forEach((installation) => {
+            if (best == undefined) {
+                bestComponent = <PowerSourceNameInline type={installation} />;
+                best = currentData[installation];
+            } else {
+                if (currentData[installation].load.value < best.load.value) {
+                    bestComponent = <PowerSourceNameInline type={installation} />;
+                    best = currentData[installation];
+                }
+            }
+        });
+
+        return bestComponent;
+    }
+
 
     render() {
         const currentData = this.state.breakdown;
