@@ -62,8 +62,19 @@ class ProductionBySourcesGraph extends React.Component {
             categories.push(moment(i.datetime).format("HH:mm"));
         });
 
+        let apports = [];
+        importationsOverTime.forEach((i, index) => {
+            apports.push(i.description.value + productionsSerie[index]);
+        });
+
         let series = [
 
+            {
+                name: "Apports",
+                stack: 4,
+                color: "#ff0000",
+                data: apports
+            },
             {
                 name: "Consommation",
                 stack: 0,
@@ -72,18 +83,18 @@ class ProductionBySourcesGraph extends React.Component {
             },
             {
                 name: "Exportation",
-                stack: 0,
+                stack: 1,
                 color: "#3298dc",
                 data: exportationsSerie
             },
             {
                 name: "Importation",
-                stack: 1,
+                stack: 2,
                 color: "#2ecc71",
                 data: importationsSerie
             }, {
                 name: "Production",
-                stack: 1,
+                stack: 3,
                 color: "#f1b70e",
                 data: productionsSerie
             }
