@@ -56,9 +56,27 @@ class SlidePowerBalance extends React.Component {
                 },
                 {
                     "description": {
+                        "sourceZone": "0", 
+                        "targetZone": "2",
+                        "value": 0,
+                        "unit": "GW"
+                    },
+                    "datetime": "2020-06-03T14:00:00.135Z"
+                },
+                {
+                    "description": {
                         "sourceZone": "2", // import
                         "targetZone": "0",
                         "value": 2,
+                        "unit": "GW"
+                    },
+                    "datetime": "2020-06-03T15:00:00.135Z"
+                },
+                {
+                    "description": {
+                        "sourceZone": "0", // import
+                        "targetZone": "2",
+                        "value": 0,
                         "unit": "GW"
                     },
                     "datetime": "2020-06-03T15:00:00.135Z"
@@ -74,6 +92,15 @@ class SlidePowerBalance extends React.Component {
                 },
                 {
                     "description": {
+                        "sourceZone": "0", 
+                        "targetZone": "2",// export
+                        "value": 4,
+                        "unit": "GW"
+                    },
+                    "datetime": "2020-06-03T16:00:00.135Z"
+                },
+                {
+                    "description": {
                         "sourceZone": "2", // import
                         "targetZone": "0",
                         "value": 2,
@@ -83,9 +110,27 @@ class SlidePowerBalance extends React.Component {
                 },
                 {
                     "description": {
+                        "sourceZone": "0", // import
+                        "targetZone": "2",
+                        "value": 0,
+                        "unit": "GW"
+                    },
+                    "datetime": "2020-06-03T17:00:00.135Z"
+                },
+                {
+                    "description": {
                         "sourceZone": "2", // import
                         "targetZone": "0",
                         "value": 2,
+                        "unit": "GW"
+                    },
+                    "datetime": "2020-06-03T18:00:00.135Z"
+                },
+                {
+                    "description": {
+                        "sourceZone": "0", // import
+                        "targetZone": "2",
+                        "value": 0,
                         "unit": "GW"
                     },
                     "datetime": "2020-06-03T18:00:00.135Z"
@@ -201,7 +246,7 @@ class SlidePowerBalance extends React.Component {
                         "unit": "string"
                     },
                     "production": {
-                        "value": 4,
+                        "value": 8,
                         "unit": "string"
                     },
                     "load": {

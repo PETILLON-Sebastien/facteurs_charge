@@ -67,42 +67,66 @@ class ProductionBySourcesGraph extends React.Component {
             apports.push(i.description.value + productionsSerie[index]);
         });
 
+
+        let retraits = [];
+        consumptionsOverTime.forEach((i, index) => {
+            retraits.push(-i.description.used.value + exportationsSerie[index]);
+        });
+
+        console.log(retraits);
+
         let series = [
 
             {
                 name: "Apports",
                 stack: 4,
-                color: "#ff0000",
-                data: apports
+                color: 'rgba(0,0,0,0)',
+                fillColor: 'rgba(255,0,0,0.3)',
+                                data: apports,
+                type:'areaspline'
+            },
+
+            {
+                name: "Retraits",
+                stack: 5,
+                color: 'rgba(0,0,0,0)',
+                fillColor: 'rgba(0,0,255,0.3)',
+                                data: retraits,
+                type:'areaspline'
             },
             {
                 name: "Consommation",
                 stack: 0,
                 color: "#ecf0f1",
-                data: consumptionsSerie
+                data: consumptionsSerie,
+                type:'spline'
+
             },
             {
                 name: "Exportation",
                 stack: 1,
                 color: "#3298dc",
-                data: exportationsSerie
+                data: exportationsSerie,
+                type:'spline'
             },
             {
                 name: "Importation",
                 stack: 2,
                 color: "#2ecc71",
-                data: importationsSerie
+                data: importationsSerie,
+                type:'spline'
             }, {
                 name: "Production",
                 stack: 3,
                 color: "#f1b70e",
-                data: productionsSerie
+                data: productionsSerie,
+                type:'spline'
             }
         ];
 
         let config = {
             chart: {
-                type: 'area',
+                type: 'areaspline',
                 color: "#fff",
                 backgroundColor: "#0f0f0f",
                 annotations: [{
