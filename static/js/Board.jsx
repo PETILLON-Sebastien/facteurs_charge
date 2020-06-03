@@ -5,6 +5,7 @@ import Navbar from './Navbar';
 import SlidePowerSources from "./slides/power-sources-breakdown/components/SlidePowerSources";
 import SlideLoad from './slides/load-breakdown/components/SlideLoad';
 import SlideMap from './slides/map/components/SlideMap';
+import SlidePowerBalance from './slides/power-balance/components/SlidePowerBalance';
 
 
 import stubZonesDescription from "./regions-descriptions";
@@ -59,21 +60,24 @@ export default class Board extends React.Component {
           <Navbar that={that} label_region={this.state.currentZone.label} hookZoneChanged={this.zoneChanged} zonesDescription={this.zonesDescription} />
         </header>
 
-        <div className="section is-medium" id="slide-map" style={{"marginTop":"3rem"}}>
+        <div className="section is-medium" id="slide-map" style={{ "marginTop": "3rem" }}>
           <div className="container">
             <SlideMap zoneChanged={this.zoneChanged} zonesDescription={this.zonesDescription} />
           </div>
         </div>
-        
+
 
         <ZoneContext.Provider value={{ currentZone: this.state.currentZone }}>
-          <div className="section is-medium" id="slide-installations"  style={{"paddingTop":"5rem"}}>
+          <div className="section is-medium" id="slide-installations" style={{ "paddingTop": "5rem" }}>
             <div className="container">
               <SlidePowerSources />
             </div>
           </div>
-          <div className="section is-medium" id="slide-load"  style={{"paddingTop":"5rem"}}>
+          <div className="section is-medium" id="slide-load" style={{ "paddingTop": "5rem" }}>
             <SlideLoad />
+          </div>
+          <div className="section is-medium" id="slide-load" style={{ "paddingTop": "5rem" }}>
+            <SlidePowerBalance />
           </div>
         </ZoneContext.Provider>
       </React.Fragment>
