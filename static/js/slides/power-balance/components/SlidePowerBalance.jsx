@@ -266,7 +266,7 @@ class SlidePowerBalance extends React.Component {
                         <div className="is-size-5">
                             Chaque zone consomme de l’énergie. Cette énergie peut-être produite localement, ou prise des surplus d’autres zones, qui l’auraient mis à disposition sur la grille.</div>
                         <div className="is-size-5" style={{"marginTop":"2rem"}}>
-                            Quoi qu’il en soit, le bilan <span className="has-background-light has-text-black text-inline-highlighted">consommation</span> / <span className="has-background-info text-inline-highlighted">exportation</span> face à <span className="has-background-warning text-inline-highlighted">production</span>/<span className="has-background-success text-inline-highlighted">importation</span> doit être nul. L’énergie est soit produite localement soit importée, pour être soit consommée localement soit exportée.
+                            Quoi qu’il en soit, le bilan entre les <span className="has-background-danger text-inline-highlighted">apports</span>, (<span className="has-background-warning text-inline-highlighted">production</span>/<span className="has-background-success text-inline-highlighted">importation</span> ) et la <span className="has-background-light has-text-black text-inline-highlighted">consommation</span> et <span className="has-background-info text-inline-highlighted">exportation</span> doit être nul. L’énergie est soit produite localement soit importée, pour être soit consommée localement soit exportée.
                         {/* </div> */}
                         </div>
 
