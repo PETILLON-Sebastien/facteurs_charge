@@ -108,6 +108,23 @@ class Navbar extends React.Component {
                                         </button>
                                     </a>
                                 </span>
+
+
+                                <span className="navbar-item">
+                                    <a href="#slide-balance">
+                                        <button className={`${this.state.activeTab == 'balance' ? "is-success" : ""} is-primary button is-fullwidth`}
+                                            onClick={() => this.setCurrentSlide('balance')}>
+                                            <span className="icon">
+                                                <i className="fas fa-balance-scale"></i>
+                                            </span>
+                                            <span>
+                                                Balance
+                                        </span>
+                                        </button>
+                                    </a>
+                                </span>
+
+
                                 <span className="navbar-item">
                                     <a className="button is-dark is-fullwidth" onClick={() => this.setState({ showModal: true })}>
                                         <span className="icon">
