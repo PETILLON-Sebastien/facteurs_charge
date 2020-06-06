@@ -36,7 +36,7 @@ var zone_id_getter = function(name) {
         zone_id += '-' + zone.code_insee_region;
     }
     return zone_id;
-}
+};
 
 /**
  * Extract a single consumption snapshot
@@ -68,7 +68,68 @@ var extract_consumption_snapshot_zones = function(records) {
         return result;
     }, {}));
     return records_zones;
-}
+};
+
+/**
+ * Extract an installation from a snapshot
+ * @param {Object} installation 
+ * @param {Object} snapshot 
+ */
+var extract_installation = function(installation, snapshot) {
+    var extraction = {};
+    var production = _.floor(field_getter(snapshot, installation.name));
+    var load = _.round(field_getter(snapshot, constants.opendatareseaux_wording.load_prefix + installation.name), 2);
+    var capacity = 0;
+    if(_.isNumber(production) && _.isNumber(load) && load > 0) {
+        capacity = _.floor(production * load);
+    }
+
+    _.set(extraction, [constants.api_wording.capacity, constants.api_wording.value], capacity);
+    _.set(extraction, [constants.api_wording.capacity, constants.api_wording.unit], constants.units.mega_watt);
+    _.set(extraction, [constants.api_wording.production, constants.api_wording.value], production);
+    _.set(extraction, [constants.api_wording.production, constants.api_wording.unit], constants.units.mega_watt);
+    _.set(extraction, [constants.api_wording.load, constants.api_wording.value], load);
+    _.set(extraction, [constants.api_wording.load, constants.api_wording.unit], constants.units.mega_watt);
+
+    // If installation has details and the zone is France
+    if(installation.details !== undefined && snapshot[constants.opendatareseaux_wording.fields][constants.opendatareseaux_wording.code_insee_region] === undefined) {
+        _.forOwn(installation.details, function(detail) {
+            _.set(extraction, [constants.api_wording.details, detail.api_name], extract_installation(detail, snapshot));
+        });
+    }
+    return extraction;
+};
+
+/**
+ * Extract the production from a snapshot
+ * @param {Object} snapshot 
+ */
+var extract_production_snapshot = function(snapshot) {
+    var extraction = {};
+    _.forOwn(constants.power_sources, function(installation) {
+        _.set(extraction, [constants.api_wording.breakdown, installation.api_name], extract_installation(installation, snapshot));
+    });
+    _.set(extraction, [constants.api_wording.datetime], field_getter(snapshot, constants.opendatareseaux_wording.date_hour));
+    return extraction;
+};
+
+/**
+ * Extract all the production from the records
+ * @param {Array[Object]} records 
+ */
+var extract_production_snapshot_zones = function(records) {
+    var records_zones = _.values(_.reduce(records, function(result, snapshot) {
+        var zone_id = snapshot_zone_id_getter(snapshot);
+        if(!result[zone_id]) {
+            _.set(result, [zone_id, constants.api_wording.zone_id], zone_id);
+            _.set(result, [zone_id, constants.api_wording.snapshots], []);
+        }
+        var snapshot_extraction = extract_production_snapshot(snapshot);
+        result[zone_id][constants.api_wording.snapshots] = result[zone_id][constants.api_wording.snapshots].concat(snapshot_extraction);
+        return result;
+    }, {}));
+    return records_zones;
+};
 
 /**
  * Extract exchanges from a single snapshot
@@ -111,7 +172,8 @@ var extract_exchanges_snapshot = function(snapshot) {
  */
 var extract_exchanges = function(records) {
     return _.flatten(_.map(records, extract_exchanges_snapshot));
-}
+};
 
 exports.extract_consumption_snapshot_zones = extract_consumption_snapshot_zones;
+exports.extract_production_snapshot_zones = extract_production_snapshot_zones;
 exports.extract_exchanges = extract_exchanges;

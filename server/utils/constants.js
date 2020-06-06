@@ -124,96 +124,118 @@ var zones = [
 var power_sources = [
     {
         name: 'solaire',
+        api_name: 'solar',
         display_name: 'Solaire',
     },
     {
         name: 'eolien',
+        api_name: 'wind',
         display_name: 'Eolien',
     },
     {
         name: 'hydraulique',
+        api_name: 'hydraulic',
         display_name: 'Hydraulique',
         details: [
             {
                 name: 'hydraulique_step_turbinage',
+                api_name: 'hydraulic_pumping_turbine',
                 display_name: 'Turbinage de step'
             },
             {
                 name: 'hydraulique_lacs',
+                api_name: 'hydraulic_lakes',
                 display_name: 'Lacs'
             },
             {
                 name: 'hydraulique_fil_eau_eclusee',
+                api_name: 'hydraulic_along_waterside_lock',
                 display_name: 'Fil de l\'eau et éclusée'
             }
         ]
     },
     {
         name: 'nucleaire',
+        api_name: 'nuclear',
         display_name: 'Nucléaire',
     },
     {
         name: 'bioenergies',
+        api_name: 'bioenergy',
         display_name: 'Bioénergies',
         details: [
             {
                 name: 'bioenergies_biomasse',
+                api_name: 'bioenergy_biomass',
                 display_name: 'Biomasse'
             },
             {
                 name: 'bioenergies_dechets',
+                api_name: 'bioenergy_waste',
                 display_name: 'Déchets'
             },
             {
                 name: 'bioenergies_biogaz',
+                api_name: 'bioenergy_biogas',
                 display_name: 'Biogaz'
             }
         ]
     },
     {
         name: 'thermique',
+        api_name: 'fossil',
         display_name: 'Fossile',
         details: [
             {
                 name: 'charbon',
+                api_name: 'coal',
                 display_name: 'Charbon'
             },
             {
                 name: 'fioul',
                 display_name: 'Fioul',
+                api_name: 'oil',
                 details: [
                     {
                         name: 'fioul_tac',
+                        api_name: 'oil_turbines',
                         display_name: 'Turbines à combustion'
                     },
                     {
                         name: 'fioul_cogen',
+                        api_name: 'oil_cogen',
                         display_name: 'Cogénération'
                     },
                     {
                         name: 'fioul_autres',
+                        api_name: 'oil_others',
                         display_name: 'Autres'
                     }
                 ]
             },
             {
                 name: 'gaz',
+                api_name: 'gas',
                 display_name: 'Gaz',
                 details: [
                     {
                         name: 'gaz_tac',
+                        api_name: 'gas_turbines',
                         display_name: 'Turbines à combustion'
                     },
                     {
                         name: 'gaz_cogen',
+                        api_name: 'gas_cogen',
                         display_name: 'Cogénération'
                     },
                     {
                         name: 'gaz_ccg',
+                        api_name: 'gas_mixed_steam_cycle',
                         display_name: 'Cycle Combiné Gaz'
                     },
                     {
                         name: 'gaz_autres',
+                        api_name: 'gas_others',
                         display_name: 'Autres'
                     }
                 ]
@@ -244,7 +266,8 @@ var opendatareseaux_wording = {
     consumption: 'consommation',
     step_storage: 'pompage',
     code_insee_region: 'code_insee_region',
-    fields: 'fields'
+    fields: 'fields',
+    load_prefix: 'tch_'
 };
 
 var api_wording = {
@@ -257,7 +280,12 @@ var api_wording = {
     unit: 'unit',
     used: 'used',
     step_storage: 'stepStorage',
-    datetime: 'datetime'
+    datetime: 'datetime',
+    capacity: 'capacity',
+    production: 'production',
+    load: 'load',
+    details: 'details',
+    breakdown: 'breakdown'
 };
 
 var units = {
