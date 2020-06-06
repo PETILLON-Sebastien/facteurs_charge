@@ -1,6 +1,12 @@
 var zones = [
     {
         country: 'FR',
+        code_insee_region: null,
+        name: 'france',
+        display_name: 'France',
+    },
+    {
+        country: 'FR',
         code_insee_region: 11,
         name: 'ile_de_france',
         display_name: 'Ile-de-France',
@@ -70,12 +76,6 @@ var zones = [
         code_insee_region: 93,
         name: 'paca',
         display_name: 'Provence-Alpes-Côte d\'Azur',
-    },
-    {
-        country: 'FR',
-        code_insee_region: null,
-        name: 'france',
-        display_name: 'France',
     },
     {
         country: 'DE',
@@ -233,14 +233,37 @@ var consumption_targets = [
     }
 ];
 
-var api_wording = {
+var opendatareseaux_wording = {
     export: 'export',
     import: 'import',
     exchanges_with_region : 'ech_comm',
     exchanges_total: 'ech_physiques',
     date: 'date',
     hour: 'heure',
-    date_hour: 'date_heure'
+    date_hour: 'date_heure',
+    consumption: 'consommation',
+    step_storage: 'pompage',
+    code_insee_region: 'code_insee_region',
+    fields: 'fields'
+};
+
+var api_wording = {
+    zone_id: 'zoneId',
+    snapshots: 'snapshots',
+    source_zone: 'sourceZone',
+    target_zone: 'targetZone',
+    description: 'description',
+    value: 'value',
+    unit: 'unit',
+    used: 'used',
+    step_storage: 'stepStorage',
+    datetime: 'datetime'
+};
+
+var units = {
+    kilo_watt: 'KW',
+    mega_watt: 'MW',
+    giga_watt: 'GW'
 };
 
 var data_per_hour = 4;
@@ -250,5 +273,7 @@ exports.zones = zones;
 exports.power_sources = power_sources;
 exports.consumption_targets = consumption_targets;
 exports.api_wording = api_wording;
+exports.opendatareseaux_wording = opendatareseaux_wording;
+exports.units = units;
 exports.data_per_hour = data_per_hour;
 exports.french_regions_count = french_regions_count;

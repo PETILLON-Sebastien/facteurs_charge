@@ -14,14 +14,14 @@ const ECO2MIX_REGIONAL_OPTIONS = {
     dataset: 'eco2mix-regional-tr',
     facet: 'nature',
     'refine.nature': 'Données temps réel',
-    sort: '-' + constants.api_wording.date_hour,
+    sort: '-' + constants.opendatareseaux_wording.date_hour,
     timezone: 'Europe/Paris'
 };
 const ECO2MIX_NATIONAL_OPTIONS = {
     dataset: 'eco2mix-national-tr',
     facet: 'nature',
     'refine.nature': 'Données temps réel',
-    sort: '-' + constants.api_wording.date_hour,
+    sort: '-' + constants.opendatareseaux_wording.date_hour,
     timezone: 'Europe/Paris'
 };
 
@@ -36,8 +36,8 @@ var construct_api_call = function(from_date, to_date, region_options, regions_nu
     
     var options = _.clone(ECO2MIX_API);
     options.query = _.clone(region_options);
-    options.query.q = constants.api_wording.date_hour + ' >= ' + from_format
-        + ' AND ' + constants.api_wording.date_hour + ' <= ' + to_format;
+    options.query.q = constants.opendatareseaux_wording.date_hour + ' >= ' + from_format
+        + ' AND ' + constants.opendatareseaux_wording.date_hour + ' <= ' + to_format;
     options.query.rows = regions_number * constants.data_per_hour * (duration.as("hours") + 1);
 
     const requestUrl = url.parse(url.format(options));
@@ -52,7 +52,7 @@ var construct_api_call = function(from_date, to_date, region_options, regions_nu
         res.on('end', function() {
             var parsed = JSON.parse(body);
             defered.resolve(parsed);
-        })
+        });
     }, (error) => {
         defered.reject(error);
     });
