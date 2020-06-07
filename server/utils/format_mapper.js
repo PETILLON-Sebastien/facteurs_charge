@@ -45,10 +45,8 @@ var zone_id_getter = function(name) {
 var extract_consumption_snapshot = function(snapshot) {
     var consumption = {};
     _.set(consumption, [constants.api_wording.datetime], field_getter(snapshot, constants.opendatareseaux_wording.date_hour));
-    _.set(consumption, [constants.api_wording.description, constants.api_wording.used, constants.api_wording.value], field_getter(snapshot, constants.opendatareseaux_wording.consumption));
-    _.set(consumption, [constants.api_wording.description, constants.api_wording.used, constants.api_wording.unit], constants.units.mega_watt);
-    _.set(consumption, [constants.api_wording.description, constants.api_wording.step_storage, constants.api_wording.value], field_getter(snapshot, constants.opendatareseaux_wording.step_storage));
-    _.set(consumption, [constants.api_wording.description, constants.api_wording.step_storage, constants.api_wording.unit], constants.units.mega_watt);
+    _.set(consumption, [constants.api_wording.description, constants.api_wording.used], field_getter(snapshot, constants.opendatareseaux_wording.consumption));
+    _.set(consumption, [constants.api_wording.description, constants.api_wording.step_storage], Math.abs(field_getter(snapshot, constants.opendatareseaux_wording.step_storage)));
     return consumption;
 };
 
@@ -79,17 +77,8 @@ var extract_installation = function(installation, snapshot) {
     var extraction = {};
     var production = _.floor(field_getter(snapshot, installation.name));
     var load = _.round(field_getter(snapshot, constants.opendatareseaux_wording.load_prefix + installation.name), 2);
-    var capacity = 0;
-    if(_.isNumber(production) && _.isNumber(load) && load > 0) {
-        capacity = _.floor(production * load);
-    }
-
-    _.set(extraction, [constants.api_wording.capacity, constants.api_wording.value], capacity);
-    _.set(extraction, [constants.api_wording.capacity, constants.api_wording.unit], constants.units.mega_watt);
-    _.set(extraction, [constants.api_wording.production, constants.api_wording.value], production);
-    _.set(extraction, [constants.api_wording.production, constants.api_wording.unit], constants.units.mega_watt);
-    _.set(extraction, [constants.api_wording.load, constants.api_wording.value], load);
-    _.set(extraction, [constants.api_wording.load, constants.api_wording.unit], constants.units.mega_watt);
+    _.set(extraction, [constants.api_wording.production], production);
+    _.set(extraction, [constants.api_wording.load], load);
 
     // If installation has details and the zone is France
     if(installation.details !== undefined && snapshot[constants.opendatareseaux_wording.fields][constants.opendatareseaux_wording.code_insee_region] === undefined) {
@@ -158,7 +147,6 @@ var extract_exchanges_snapshot = function(snapshot) {
                 _.set(exchange, [constants.api_wording.description, constants.api_wording.source_zone], source_zone);
                 _.set(exchange, [constants.api_wording.description, constants.api_wording.target_zone], target_zone);
                 _.set(exchange, [constants.api_wording.description, constants.api_wording.value], saved_value);
-                _.set(exchange, [constants.api_wording.description, constants.api_wording.unit], constants.units.mega_watt);
                 exchanges.push(exchange);
             }
         }
