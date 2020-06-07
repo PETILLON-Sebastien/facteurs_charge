@@ -38,7 +38,7 @@ var construct_api_call = function(from_date, to_date, region_options, regions_nu
     options.query = _.clone(region_options);
     options.query.q = constants.opendatareseaux_wording.date_hour + ' >= ' + from_format
         + ' AND ' + constants.opendatareseaux_wording.date_hour + ' <= ' + to_format;
-    options.query.rows = regions_number * constants.data_per_hour * (duration.as("hours") + 1);
+    options.query.rows = Math.round(regions_number * constants.data_per_hour * (duration.as("hours") + 1));
 
     const requestUrl = url.parse(url.format(options));
     https.get({

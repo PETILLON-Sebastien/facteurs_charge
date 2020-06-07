@@ -7,7 +7,7 @@ var _ = require('lodash');
  * @param {String} field_name 
  */
 var field_getter = function(snapshot, field_name) {
-    return _.get(snapshot, 'fields.' + field_name, 0);
+    return _.get(snapshot, constants.opendatareseaux_wording.fields + '.' + field_name, 0);
 };
 
 /**
@@ -16,7 +16,7 @@ var field_getter = function(snapshot, field_name) {
  */
 var snapshot_zone_id_getter = function(snapshot) {
     var country = constants.zones[0].country;
-    var code = _.get(snapshot, 'fields.' + constants.opendatareseaux_wording.code_insee_region, undefined);
+    var code = _.get(snapshot, constants.opendatareseaux_wording.fields + '.' + constants.opendatareseaux_wording.code_insee_region);
     var zone_id = country;
     if(code !== undefined) {
         zone_id += '-' + code;
