@@ -154,6 +154,19 @@ class ProductionBySourcesGraph extends React.Component {
                     fontFamily: 'Trebuchet MS, Verdana, sans-serif'
                 }
             },
+            legend: {
+                itemStyle: {
+                   font: '8pt Trebuchet MS, Verdana, sans-serif',
+                   color: '#ccc'
+                },
+                itemHoverStyle: {
+                   color: '#FFF'
+                },
+                itemHiddenStyle: {
+                   color: '#444'
+                }
+             
+          },
             xAxis: {
                 categories: ['7:00', '10:00', '12:00', '15:00', '18:00'],
                 labels: {
