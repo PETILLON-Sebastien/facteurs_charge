@@ -77,51 +77,51 @@ class ProductionBySourcesGraph extends React.Component {
 
         let series = [
 
-            {
-                name: "Apports",
-                stack: 0,
-                color: 'rgba(255,0,0,0.5)',
-                fillColor: 'rgba(255,0,0,0.3)',
-                                data: apports,
-                type:'areaspline'
-            },
-
             // {
-            //     name: "Retraits",
-            //     stack: 5,
+            //     name: "Apports",
+            //     stack: 0,
             //     color: 'rgba(0,0,0,0)',
-            //     fillColor: 'rgba(0,0,255,0.3)',
-            //                     data: retraits,
+            //     fillColor: 'rgba(255,0,0,0.3)',
+            //                     data: apports,
             //     type:'areaspline'
             // },
-            // {
-            //     name: "Consommation",
-            //     stack: 0,
-            //     color: "#ecf0f1",
-            //     data: consumptionsSerie,
-            //     type:'spline'
 
-            // },
-            // {
-            //     name: "Exportation",
-            //     stack: 1,
-            //     color: "#3298dc",
-            //     data: exportationsSerie,
-            //     type:'spline'
-            // },
             {
-                name: "Importation",
+                name: "Retraits",
+                stack: 0,
+                color: 'rgba(0,0,255,0.5)',
+                fillColor: 'rgba(0,0,255,0.3)',
+                                data: retraits,
+                type:'areaspline'
+            },
+            {
+                name: "Consommation locale",
                 stack: 1,
-                color: "#2ecc71",
-                data: importationsSerie,
+                color: "#ecf0f1",
+                data: consumptionsSerie,
                 type:'spline'
-            }, {
-                name: "Production locale",
+
+            },
+            {
+                name: "Exportation",
                 stack: 2,
-                color: "#f1b70e",
-                data: productionsSerie,
+                color: "#3298dc",
+                data: exportationsSerie,
                 type:'spline'
-            }
+            },
+            // {
+            //     name: "Importation",
+            //     stack: 1,
+            //     color: "#2ecc71",
+            //     data: importationsSerie,
+            //     type:'spline'
+            // }, {
+            //     name: "Production",
+            //     stack: 2,
+            //     color: "#f1b70e",
+            //     data: productionsSerie,
+            //     type:'spline'
+            // }
         ];
 
         let config = {
@@ -191,7 +191,7 @@ class ProductionBySourcesGraph extends React.Component {
         }
         return (
             <div className="chart-wrapping">
-                <span>Provenance de l'énergie en <span className="has-background-grey text-inline-highlighted">{currentZoneName}</span> </span>
+                <span>Destination de l'énergie en <span className="has-background-grey text-inline-highlighted">{currentZoneName}</span> </span>
                 <ReactHighcharts config={config} ref={this.chart}></ReactHighcharts>
             </div>
             // <h1>test?</h1>
