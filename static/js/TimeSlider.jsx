@@ -1,5 +1,6 @@
 import React from "react";
 import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
 
 class TimeSlider extends React.Component {
     constructor(props) {
@@ -15,13 +16,41 @@ class TimeSlider extends React.Component {
     }
 
     render() {
+
         this.mapping = this.props.hours;
+        const currentTime = this.props.currentTime;
+        const endOfTimeframe = this.props.endOfTimeframe;
+
+console.log("Mapping received", this.mapping);
 
         return (
             <React.Fragment>
                 {/* <Slider className="slider-temps" value={this.props.index_temps} marks={this.props.marks} min={0} max={this.props.max} onChange={this.onTimeChange} /> */}
 
-                <Slider className="slider-temps" value={this.props.currentTime} marks={this.mapping} min={0} max={this.props.endOfTimeframe} onChange={this.handleTimeChange} />
+                <Slider
+                className="slider-temps" 
+          min={0}
+        //   included={false}
+          max={100}
+          marks={this.mapping}
+          defaultValue={0}
+          step={null}
+        //   onChange={this.onSliderChange}
+          railStyle={{
+            height: 2
+          }}
+          handleStyle={{
+            height: 10,
+            width: 10,
+            marginLeft: -1,
+            marginTop: -3,
+            backgroundColor: "green",
+            border: "1px solid white"
+          }}
+          trackStyle={{
+            background: "none"
+          }}
+        />
 
             </React.Fragment>
         )
