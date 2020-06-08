@@ -316,6 +316,11 @@ class SlidePowerBalance extends React.Component {
                         {/* </div> */}
                         </div>
 
+                        <div className="is-size-5" style={{ "marginTop": "2rem" }}>
+                            L'énergie produite localement, et qui n'est pas consommée, et exportée vers d'autres zones.
+                            <i>Rien ne se perd, rien ne se crée, tout se transfère.</i>
+</div>
+
                     </div>
 
                     <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-12-tablet is-12-mobile has-text-centered">

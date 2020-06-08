@@ -1,6 +1,7 @@
 import React, { createRef } from "react";
 import ReactHighcharts from "react-highcharts";
 import moment from "moment";
+import cssVar from '../../../../_sass/_variables.scss';
 
 let that;
 
@@ -90,14 +91,14 @@ class ProductionBySourcesGraph extends React.Component {
                 name: "Retraits",
                 stack: 0,
                 color: 'rgba(50,9,230,0.5)',
-                fillColor: 'rgba(50,9,230,0.3)',
+                fillColor: cssVar.darkBlueBackgroundRGBA,
                                 data: retraits,
                 type:'areaspline'
             },
             {
                 name: "Consommation locale",
                 stack: 1,
-                color: "#4340fc",
+                color: cssVar.blueBackground,
                 data: consumptionsSerie,
                 type:'spline'
 
@@ -105,7 +106,7 @@ class ProductionBySourcesGraph extends React.Component {
             {
                 name: "Exportation",
                 stack: 2,
-                color: "#70c2f8",
+                color: cssVar.lightBlueBackground,
                 data: exportationsSerie,
                 type:'spline'
             },
@@ -129,7 +130,7 @@ class ProductionBySourcesGraph extends React.Component {
                 type: 'areaspline',
                 color: "#fff",
                 backgroundColor: "#0f0f0f",
-                height: (9 / 16 * 65) + '%',
+                height: (9 / 16 * 60) + '%',
                 annotations: [{
                     labelOptions: {
                         style: { "color": "#fff" }

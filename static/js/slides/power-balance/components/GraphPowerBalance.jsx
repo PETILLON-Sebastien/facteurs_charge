@@ -129,7 +129,7 @@ class ProductionBySourcesGraph extends React.Component {
                 type: 'areaspline',
                 color: "#fff",
                 backgroundColor: "#0f0f0f",
-                height: (9 / 16 * 65) + '%',
+                height: (9 / 16 * 60) + '%',
                 annotations: [{
                     labelOptions: {
                         style: { "color": "#fff" }
