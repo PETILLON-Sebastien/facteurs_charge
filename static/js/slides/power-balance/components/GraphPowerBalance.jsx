@@ -78,7 +78,6 @@ class ProductionBySourcesGraph extends React.Component {
             retraits.push(-i.description.used.value + exportationsSerie[index]);
         });
 
-        console.log(apports);
 
         let series = [
             {
@@ -110,19 +109,12 @@ class ProductionBySourcesGraph extends React.Component {
         chartConfiguration.xAxis.categories = categories;
         chartConfiguration.series = series;
 
-        chartConfiguration.responsive = {
-            rules: [{
-                condition: {
-                    maxHeight: 50
-                }
-            }]
-        };
+
         return (
             <div className="chart-wrapping">
                 <span>Provenance de l'énergie en <span className="has-background-grey text-inline-highlighted">{currentZoneName}</span> </span>
                 <ReactHighcharts config={chartConfiguration} ref={this.chart}></ReactHighcharts>
             </div>
-            // <h1>test?</h1>
         );
     }
 }

@@ -51,13 +51,13 @@ class SlidePowerSources extends React.Component {
 
         const stepSize = 100 / (history.length-1);
         let nbOfInstants = 0;
-        console.log("Step size", stepSize);
+
         history.forEach((instant) => {
             const currentTimestamp = instant.timestamp;
             const currentTimestampFormatted = moment(currentTimestamp).format("HH:mm");
             const currentInstantIndex = (nbOfInstants * stepSize);
             marks[currentInstantIndex] = currentTimestampFormatted;
-            console.log("Pushing", currentTimestampFormatted, "at", currentInstantIndex);
+
             nbOfInstants++;
         });
 
@@ -126,9 +126,6 @@ class SlidePowerSources extends React.Component {
                         <GraphPowerSourceBreakdown productionsOverTime={this.state.history} currentZoneName={currentZoneName} />
                         <TimeSlider hours={this.state.timeMarks} currentTime={0} endOfTimeFrame={this.state.timeMarks[this.state.timeMarks.length - 1]} />
                     </div>
-                    {/* <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-12-tablet is-12-mobile has-text-centered" style={{ "marginTop": "2rem" }}>
-                        
-                    </div> */}
                 </div>
             </React.Fragment>
         );

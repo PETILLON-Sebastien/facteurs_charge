@@ -17,8 +17,6 @@ class SlideLoad extends React.Component {
         const mostLoaded = this.findMostLoaded(stub.breakdown);
         const leastLoaded = this.findLeastLoaded(stub.breakdown);
 
-        console.log(stub.breakdown);
-
         this.state = {
             breakdown: stub.breakdown,
             loadHistory: loadHistory,

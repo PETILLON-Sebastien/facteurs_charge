@@ -79,7 +79,6 @@ class ProductionBySourcesGraph extends React.Component {
             retraits.push(-i.description.used.value + exportationsSerie[index]);
         });
 
-        console.log(apports);
 
         let series = [
             {
@@ -119,7 +118,6 @@ class ProductionBySourcesGraph extends React.Component {
                 <span>Destination de l'énergie en <span className="has-background-grey text-inline-highlighted">{currentZoneName}</span> </span>
                 <ReactHighcharts config={chartConfiguration} ref={this.chart}></ReactHighcharts>
             </div>
-            // <h1>test?</h1>
         );
     }
 }
