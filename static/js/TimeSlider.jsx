@@ -24,18 +24,18 @@ class TimeSlider extends React.Component {
 console.log("Mapping received", this.mapping);
 
         return (
-            <React.Fragment>
+            <div style={{"width":"90%", "textAlign":"right","margin":"auto"}}>
                 {/* <Slider className="slider-temps" value={this.props.index_temps} marks={this.props.marks} min={0} max={this.props.max} onChange={this.onTimeChange} /> */}
 
                 <Slider
-                className="slider-temps" 
+                // className="slider-temps" 
           min={0}
         //   included={false}
           max={100}
           marks={this.mapping}
           defaultValue={0}
           step={null}
-        //   onChange={this.onSliderChange}
+          onChange={this.onTimeChange   }
           railStyle={{
             height: 2
           }}
@@ -52,7 +52,7 @@ console.log("Mapping received", this.mapping);
           }}
         />
 
-            </React.Fragment>
+            </div>
         )
     }
 }

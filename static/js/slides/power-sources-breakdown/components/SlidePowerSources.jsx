@@ -124,10 +124,11 @@ class SlidePowerSources extends React.Component {
 
                     <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-12-tablet is-12-mobile has-text-centered" style={{ "marginTop": "2rem" }}>
                         <GraphPowerSourceBreakdown productionsOverTime={this.state.history} currentZoneName={currentZoneName} />
-                    </div>
-                    <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-12-tablet is-12-mobile has-text-centered" style={{ "marginTop": "2rem" }}>
                         <TimeSlider hours={this.state.timeMarks} currentTime={0} endOfTimeFrame={this.state.timeMarks[this.state.timeMarks.length - 1]} />
                     </div>
+                    {/* <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-12-tablet is-12-mobile has-text-centered" style={{ "marginTop": "2rem" }}>
+                        
+                    </div> */}
                 </div>
             </React.Fragment>
         );
