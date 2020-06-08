@@ -112,13 +112,13 @@ class ProductionBySourcesGraph extends React.Component {
             {
                 name: "Importation",
                 stack: 1,
-                color: "#2ecc71",
+                color: "#f1d63b",
                 data: importationsSerie,
                 type:'spline'
             }, {
                 name: "Production locale",
                 stack: 2,
-                color: "#f1b70e",
+                color: "#fca440",
                 data: productionsSerie,
                 type:'spline'
             }

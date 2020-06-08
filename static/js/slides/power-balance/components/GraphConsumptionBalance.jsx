@@ -89,15 +89,15 @@ class ProductionBySourcesGraph extends React.Component {
             {
                 name: "Retraits",
                 stack: 0,
-                color: 'rgba(0,0,255,0.5)',
-                fillColor: 'rgba(0,0,255,0.3)',
+                color: 'rgba(50,9,230,0.5)',
+                fillColor: 'rgba(50,9,230,0.3)',
                                 data: retraits,
                 type:'areaspline'
             },
             {
                 name: "Consommation locale",
                 stack: 1,
-                color: "#ecf0f1",
+                color: "#4340fc",
                 data: consumptionsSerie,
                 type:'spline'
 
@@ -105,7 +105,7 @@ class ProductionBySourcesGraph extends React.Component {
             {
                 name: "Exportation",
                 stack: 2,
-                color: "#3298dc",
+                color: "#70c2f8",
                 data: exportationsSerie,
                 type:'spline'
             },
