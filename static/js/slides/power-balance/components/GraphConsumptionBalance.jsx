@@ -3,6 +3,11 @@ import ReactHighcharts from "react-highcharts";
 import moment from "moment";
 import cssVar from '../../../../_sass/_variables.scss';
 
+
+import _config from './graph-config.js';
+let config = {};
+Object.assign(config, _config);
+
 let that;
 
 class ProductionBySourcesGraph extends React.Component {
@@ -77,16 +82,6 @@ class ProductionBySourcesGraph extends React.Component {
         console.log(apports);
 
         let series = [
-
-            // {
-            //     name: "Apports",
-            //     stack: 0,
-            //     color: 'rgba(0,0,0,0)',
-            //     fillColor: 'rgba(255,0,0,0.3)',
-            //                     data: apports,
-            //     type:'areaspline'
-            // },
-
             {
                 name: "Retraits",
                 stack: 0,
@@ -109,104 +104,20 @@ class ProductionBySourcesGraph extends React.Component {
                 color: cssVar.lightBlueBackground,
                 data: exportationsSerie,
                 type:'spline'
-            },
-            // {
-            //     name: "Importation",
-            //     stack: 1,
-            //     color: "#2ecc71",
-            //     data: importationsSerie,
-            //     type:'spline'
-            // }, {
-            //     name: "Production",
-            //     stack: 2,
-            //     color: "#f1b70e",
-            //     data: productionsSerie,
-            //     type:'spline'
-            // }
+            }
         ];
 
-        let config = {
-            chart: {
-                type: 'areaspline',
-                color: "#fff",
-                backgroundColor: "#0f0f0f",
-                height: (9 / 16 * 60) + '%',
-                annotations: [{
-                    labelOptions: {
-                        style: { "color": "#fff" }
-                    }
-                }],
-            },
-            yAxis: {
-                tickColor: '#fff',
-                labels: {
-                    style: {
-                        color: '#fff',
-                        font: '11px Trebuchet MS, Verdana, sans-serif'
-                    }
-                },
-            },
-            title: {
-                text: '',
-                style: {
-                    color: '#fff',
-                    fontWeight: 'bold',
-                    fontSize: '12px',
-                    fontFamily: 'Trebuchet MS, Verdana, sans-serif'
-                }
-            },
-            legend: {
-                itemStyle: {
-                   font: '8pt Trebuchet MS, Verdana, sans-serif',
-                   color: '#ccc'
-                },
-                itemHoverStyle: {
-                   color: '#FFF'
-                },
-                itemHiddenStyle: {
-                   color: '#444'
-                }
-             
-          },
-            xAxis: {
-                categories: ['7:00', '10:00', '12:00', '15:00', '18:00'],
-                labels: {
-                    style: {
-                        color: '#fff',
-                        font: '11px Trebuchet MS, Verdana, sans-serif'
-                    }
-                },
+        let chartConfiguration = config;
+        chartConfiguration.chart.type = 'areaspline';
+        chartConfiguration.chart.height = (9 / 16 * 60) + '%';
+        chartConfiguration.xAxis.categories = categories;
+        chartConfiguration.series = series;
 
-            },
-            credits: {
-                enabled: false
-            },
-            plotOptions: {
-                series: {
-                    stacking: 'normal'
-                }
-            },
-            series: series,
-            responsive: {
-                rules: [{
-                    condition: {
-                        maxHeight: 50,
 
-                    },
-                    chartOptions: {
-                        yAxis: {
-                            title: {
-                                text: "Valeur (GW)"
-                            }
-                        }
-                    }
-                }]
-            }
-        }
         return (
             <div className="chart-wrapping">
                 <span>Destination de l'énergie en <span className="has-background-grey text-inline-highlighted">{currentZoneName}</span> </span>
-                <ReactHighcharts config={config} ref={this.chart}></ReactHighcharts>
+                <ReactHighcharts config={chartConfiguration} ref={this.chart}></ReactHighcharts>
             </div>
             // <h1>test?</h1>
         );
