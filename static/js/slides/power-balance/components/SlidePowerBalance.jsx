@@ -2,6 +2,7 @@ import React from "react";
 
 import PowerSourceProduction from "./PowerSourceProduction";
 import GraphPowerBalance from "./GraphPowerBalance";
+import GraphConsumptionBalance from "./GraphConsumptionBalance";
 
 import { ZoneContext } from '../../../ZoneContext';
 import PowerSourceNameInline from "../../../power-sources/components/PowerSourceNameInline";
@@ -56,7 +57,7 @@ class SlidePowerBalance extends React.Component {
                 },
                 {
                     "description": {
-                        "sourceZone": "0", 
+                        "sourceZone": "0",
                         "targetZone": "2",
                         "value": 0,
                         "unit": "GW"
@@ -92,7 +93,7 @@ class SlidePowerBalance extends React.Component {
                 },
                 {
                     "description": {
-                        "sourceZone": "0", 
+                        "sourceZone": "0",
                         "targetZone": "2",// export
                         "value": 4,
                         "unit": "GW"
@@ -310,20 +311,33 @@ class SlidePowerBalance extends React.Component {
                         {/* <div className="column is-full has-text-centered"> */}
                         <div className="is-size-5">
                             Chaque zone consomme de l’énergie. Cette énergie peut-être produite localement, ou prise des surplus d’autres zones, qui l’auraient mis à disposition sur la grille.</div>
-                        <div className="is-size-5" style={{"marginTop":"2rem"}}>
-                            Quoi qu’il en soit, le bilan entre les <span className="has-background-danger text-inline-highlighted">apports</span>, (<span className="has-background-warning text-inline-highlighted">production</span>/<span className="has-background-success text-inline-highlighted">importation</span> ) et la <span className="has-background-light has-text-black text-inline-highlighted">consommation</span> et <span className="has-background-info text-inline-highlighted">exportation</span> doit être nul. L’énergie est soit produite localement soit importée, pour être soit consommée localement soit exportée.
+                        <div className="is-size-5" style={{ "marginTop": "2rem" }}>
+                            Quoi qu’il en soit, le bilan entre les <span className="has-background-danger text-inline-highlighted">apports</span>, (<span className="has-background-orange text-inline-highlighted">production</span> + <span className="has-background-yellow text-inline-highlighted">importation</span> ) et les <span className="has-background-dark-blue has-text-white text-inline-highlighted">retraits</span> (<span className="has-background-blue has-text-black text-inline-highlighted">consommation</span> + <span className="has-background-light-blue text-inline-highlighted">exportation</span>) doit être nul. L’énergie provient  d'une production locale ou importée, pour être à destination d'une consommation locale ou exportée.
                         {/* </div> */}
                         </div>
 
                     </div>
 
                     <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-12-tablet is-12-mobile has-text-centered">
-                        <GraphPowerBalance
-                            productionsOverTime={this.state.productions}
-                            consumptionsOverTime={this.state.consumptions}
-                            importationsOverTime={this.state.importations}
-                            exportationsOverTime={this.state.exportations}
-                            currentZoneName={currentZoneName} />
+                        <div className="columns is-multiline" >
+                            <div className="column is-full">
+                                <GraphPowerBalance
+                                    productionsOverTime={this.state.productions}
+                                    consumptionsOverTime={this.state.consumptions}
+                                    importationsOverTime={this.state.importations}
+                                    exportationsOverTime={this.state.exportations}
+                                    currentZoneName={currentZoneName} />
+                            </div>
+                            <div className="column is-full">
+                                <GraphConsumptionBalance
+                                    productionsOverTime={this.state.productions}
+                                    consumptionsOverTime={this.state.consumptions}
+                                    importationsOverTime={this.state.importations}
+                                    exportationsOverTime={this.state.exportations}
+                                    currentZoneName={currentZoneName} />
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </React.Fragment>
