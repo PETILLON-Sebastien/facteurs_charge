@@ -51,6 +51,7 @@ export default class Board extends React.Component {
     let labelCurrentZone = currentZoneSelected.label;
 
     this.setState({ currentZone: { id: newZoneID, label: labelCurrentZone } });
+
   }
 
   render() {
@@ -62,7 +63,7 @@ export default class Board extends React.Component {
 
         <div className="section is-medium" id="slide-map" style={{ "marginTop": "3rem" }}>
           <div className="container">
-            <SlideMap zoneChanged={this.zoneChanged} zonesDescription={this.zonesDescription} />
+            <SlideMap zoneChanged={this.zoneChanged} zonesDescription={this.zonesDescription}  />
           </div>
         </div>
 

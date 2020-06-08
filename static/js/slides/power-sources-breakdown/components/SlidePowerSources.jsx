@@ -57,7 +57,7 @@ class SlidePowerSources extends React.Component {
             const currentTimestampFormatted = moment(currentTimestamp).format("HH:mm");
             const currentInstantIndex = (nbOfInstants * stepSize);
             marks[currentInstantIndex] = currentTimestampFormatted;
-
+            
             nbOfInstants++;
         });
 

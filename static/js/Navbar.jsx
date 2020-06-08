@@ -161,12 +161,17 @@ class Navbar extends React.Component {
                 <div className={`modal ${this.state.showModal ? "is-active" : ""}`}>
                     <div className="modal-background" onClick={() => this.setState({ showModal: false })}></div>
                     <div className="modal-content">
-                        <Map zoneChanged={hookZoneChanged} zonesDescription={zonesDescription} />
+                        <Map zoneChanged={(value) => this.hideModal(hookZoneChanged, value)} zonesDescription={zonesDescription} />
                     </div>
                     <button className="modal-close is-large" aria-label="close" onClick={() => this.setState({ showModal: false })}></button>
                 </div>
             </React.Fragment>
         )
+    }
+
+    hideModal(callBack, value) {
+        callBack(value);
+        this.setState({ showModal: false });
     }
 }
 
