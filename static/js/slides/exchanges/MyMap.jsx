@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createRef } from "react";
 
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
@@ -15,6 +15,9 @@ class MyMap extends React.Component {
     this.state = {
       mapData: null
     };
+
+    this.chart = createRef();
+
 
     // init to get the map data from api
     this.mapData = mapDataRequired;
@@ -40,7 +43,10 @@ class MyMap extends React.Component {
         type: "map",
         map: mapDataRequired
       },
-  
+
+      title: {
+        text: ''
+      },
       mapNavigation: {
         enabled: false,
         enableButtons: false
@@ -50,19 +56,24 @@ class MyMap extends React.Component {
         enabled: false
       },
 
-      colors: ["red", "green", "blue"],
+      colors: [cssVar.solar, cssVar.wind, cssVar.nuclear],
 
       plotOptions: {
 
         map: {
           allAreas: false,
-          joinBy:['hc-key'],
+          joinBy: ['hc-key'],
           dataLabels: {
-            enabled: true,
+            enabled: false,
             color: '#FFFFFF',
             style: {
               fontWeight: 'bold'
             }
+          },
+          tooltip: {
+            // useHTML: true,
+            // headerFormat: '',
+            pointFormat: '{point.name}'
           }
         },
 
@@ -77,17 +88,17 @@ class MyMap extends React.Component {
           }
         }
       },
- 
+
 
 
       series: [
         {
-          name: "solar-best",
+          name: "Photovoltaique",
 
           data: [['fr-bre', 0]],
         },
         {
-          name: "helio-best",
+          name: "Heolien",
           data: [
             ['fr-pdl', 1],
             ['fr-pac', 2],
@@ -99,15 +110,133 @@ class MyMap extends React.Component {
           ],
         },
         {
-          name: "nuclear-best",
- 
+          name: "Nucléaire",
+
           data: [
             ['fr-hdf', 8],
             ['fr-ara', 9],
             ['fr-ges', 10],
             ['fr-nor', 11]
           ],
+        },
+        {
+          "type": "mappoint",
+          "name": "Hubs",
+          "data": [
+            {
+              name: 'Import',
+              x: 4500,
+              y: -3000,
+              marker: {
+                symbol: 'url(/images/arrow.png)',
+                width: 64,
+                height: 64
+              }
+            }
+          ]
         }
+
+        // {
+        //   "type": "mapline",
+        //   "name": "Links",
+        //   "color": "#c77"
+        // },
+        // {
+        //   "type": "mappoint",
+        //   "name": "Hubs",
+        //   "data": [
+        //     {
+        //       "x": 0,
+        //       "y": 0,
+        //       "name": "Hub1"
+        //     },
+        //     {
+        //       "x": 2000,
+        //       "y": -2000,
+        //       "name": "Hub2"
+        //     },
+        //     {
+        //       "x": 4000,
+        //       "y": -4000,
+        //       "name": "Hub3"
+        //     }
+        //   ]
+        // },
+
+        // {
+        //   "type": "mappoint",
+        //   "name": "Nodes",
+        //   "color": "grey",
+        //   "data": [
+        //     {
+        //       "x": -400,
+        //       "y": -1600,
+        //       "name": "Node1",
+        //       "hub": "Hub1"
+        //     },
+        //     {
+        //       "x": 800,
+        //       "y": -2800,
+        //       "name": "Node2",
+        //       "hub": "Hub1"
+        //     },
+        //     {
+        //       "x": 2400,
+        //       "y": -1300,
+        //       "name": "Node3",
+        //       "hub": "Hub1"
+        //     },
+        //     {
+        //       "x": 4000,
+        //       "y": -1700,
+        //       "name": "Node4",
+        //       "hub": "Hub2"
+        //     },
+        //     {
+        //       "x": 7000,
+        //       "y": -2000,
+        //       "name": "Node5",
+        //       "hub": "Hub2"
+        //     },
+        //     {
+        //       "x": 8000,
+        //       "y": -5700,
+        //       "name": "Node6",
+        //       "hub": "Hub2"
+        //     },
+        //     {
+        //       "x": 5800,
+        //       "y": -7000,
+        //       "name": "Node7",
+        //       "hub": "Hub2"
+        //     },
+        //     {
+        //       "x": 3000,
+        //       "y": -6000,
+        //       "name": "Node8",
+        //       "hub": "Hub2"
+        //     },
+        //     {
+        //       "lat": 52.52,
+        //       "lon": 13.405,
+        //       "name": "Berlin",
+        //       "hub": "Hub3"
+        //     },
+        //     {
+        //       "lat": 53.551964,
+        //       "lon": 9.983436,
+        //       "name": "Hamburg",
+        //       "hub": "Hub3"
+        //     },
+        //     {
+        //       "lat": 52.3701,
+        //       "lon": 4.899301,
+        //       "name": "Amsterdam",
+        //       "hub": "Hub3"
+        //     }
+        //   ]
+        // }
+
       ]
     };
 
@@ -122,6 +251,7 @@ class MyMap extends React.Component {
             highcharts={Highcharts}
             constructorType={"mapChart"}
             options={this.state.mapOptions}
+            ref={this.chart}
           />
         ) : (
             ""
