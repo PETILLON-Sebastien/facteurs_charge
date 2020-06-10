@@ -12,6 +12,7 @@ class mapData {
   getWorld = async () => {
     return await axios.get(this.baseUrl + "countries/fr/custom/fr-all-mainland.geo.json");
   };
-}
+}    map = require('@highcharts/map-collection/countries/fr/custom/fr-all-mainland.geo.json');
+
 
 export default mapData;
