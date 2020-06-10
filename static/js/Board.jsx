@@ -72,11 +72,6 @@ export default class Board extends React.Component {
         <ZoneContext.Provider value={{ currentZone: this.state.currentZone }}>
           <div className="section is-medium" id="slide-installations" style={{ "minHeight": "100vh" }}>
             <div className="container">
-              <MyMap />
-            </div>
-          </div>
-          <div className="section is-medium" id="slide-installations" style={{ "minHeight": "100vh" }}>
-            <div className="container">
               <SlidePowerSources />
             </div>
           </div>
@@ -86,6 +81,11 @@ export default class Board extends React.Component {
           <div className="section is-medium" id="slide-balance" style={{ "minHeight": "100vh" }}>
             <div className="container">
               <SlidePowerBalance />
+            </div>
+          </div>
+          <div className="section is-medium" id="slide-exchanges" style={{ "minHeight": "100vh" }}>
+            <div className="container">
+              <MyMap />
             </div>
           </div>
         </ZoneContext.Provider>

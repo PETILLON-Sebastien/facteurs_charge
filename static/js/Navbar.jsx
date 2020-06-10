@@ -95,6 +95,7 @@ class Navbar extends React.Component {
                                     </a>
                                 </span>
 
+{/* THOSE SHOULD A COMPONENT... */}
                                 <span className="navbar-item">
                                     <a href="#slide-load">
                                         <button className={`${this.state.activeTab == 'load' ? "is-success" : ""} is-primary button is-fullwidth`}
@@ -110,6 +111,9 @@ class Navbar extends React.Component {
                                 </span>
 
 
+                           
+
+
                                 <span className="navbar-item">
                                     <a href="#slide-balance">
                                         <button className={`${this.state.activeTab == 'balance' ? "is-success" : ""} is-primary button is-fullwidth`}
@@ -119,6 +123,20 @@ class Navbar extends React.Component {
                                             </span>
                                             <span>
                                                 Balance
+                                        </span>
+                                        </button>
+                                    </a>
+                                </span>
+
+                                <span className="navbar-item">
+                                    <a href="#slide-exchanges">
+                                        <button className={`${this.state.activeTab == 'exchanges' ? "is-success" : ""} is-primary button is-fullwidth`}
+                                            onClick={() => this.setCurrentSlide('exchanges')}>
+                                            <span className="icon">
+                                            <i className="fas fa-arrows-alt-h"></i>
+                                            </span>
+                                            <span>
+                                                Échanges
                                         </span>
                                         </button>
                                     </a>

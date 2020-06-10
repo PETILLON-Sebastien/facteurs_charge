@@ -245,18 +245,38 @@ class MyMap extends React.Component {
 
   render() {
     return (
-      <div>
-        {this.state.mapOptions ? (
-          <HighchartsReact
-            highcharts={Highcharts}
-            constructorType={"mapChart"}
-            options={this.state.mapOptions}
-            ref={this.chart}
-          />
-        ) : (
-            ""
-          )}
-      </div>
+      <React.Fragment>
+        <div className="columns is-centered" >
+          <div className="column is-5 ">
+            <div className="columns is-multiline">
+              <div className="column is-full has-text-centered">
+                <h1 className="is-size-1">Échanges inter-régions</h1>
+              </div>
+              <div className="column is-full has-text-justified">
+                Les régions 'échangent' de l'énergie en exportant des surplus locaux de production, en important pour combler des surplus locaux de consommation, ou encore pour faire zone-tampon entre une zone surproductrice et une (ou plusieurs) zone en demande.
+              </div>
+
+              <div className="column is-full has-text-justified">
+                La région PACA importe 78GW d'électricité depuis la région BOVBJ
+              </div>
+              <div className="column is-full has-text-justified">
+                La région PACA importe 78GW d'électricité depuis la région BOVBJ
+              </div>
+            </div>
+          </div>
+
+          <div className="column is-7 has-text-centered">
+            <HighchartsReact
+              highcharts={Highcharts}
+              constructorType={"mapChart"}
+              options={this.state.mapOptions}
+              ref={this.chart}
+            />
+          </div>
+        </div>
+
+      </React.Fragment>
+
     );
   }
 }
