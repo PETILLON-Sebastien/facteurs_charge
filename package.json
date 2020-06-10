@@ -13,6 +13,8 @@
     "@babel/core": "^7.7.4",
     "@babel/preset-env": "^7.7.4",
     "@babel/preset-react": "^7.7.4",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-transform-runtime": "^7.7.4",
     "autoprefixer": "^9.7.6",
     "css-loader": "3.4.0",
     "express": "4.17.1",
@@ -45,7 +47,8 @@
     "bulma": "^0.8.2",
     "bulma-pageloader": "^0.3.0",
     "concurrently": "^5.2.0",
-    "page-loader": "^1.2.0"
+    "page-loader": "^1.2.0",
+    "highcharts-react-official": "2.2.2"
   },
   "scripts": {
     "build": "npm run css-deploy &&  webpack -p --env.API_URL=https://www.facteurs-charge.fr --progress --config static/webpack.config.js",
