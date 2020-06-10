@@ -128,7 +128,7 @@ class MyMap extends React.Component {
               x: 4500,
               y: -3000,
               marker: {
-                symbol: 'url(/images/arrow.png)',
+                symbol: 'url(images/arrow.png)',
                 width: 64,
                 height: 64
               }
