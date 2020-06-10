@@ -5,6 +5,7 @@ import HighchartsReact from "highcharts-react-official";
 
 require("highcharts/modules/map")(Highcharts);
 
+import cssVar from '../../../_sass/_variables.scss';
 
 const mapDataRequired = require('@highcharts/map-collection/countries/fr/custom/fr-all-mainland.geo.json');
 
@@ -30,17 +31,41 @@ class MyMap extends React.Component {
       ['fr-ara', 9],
       ['fr-ges', 10],
       ['fr-nor', 11]
-  ];
+    ];
 
     // preparing the config of map with empty data
     this.options = {
-      title: {
-        text: "Widget click by location",
-        style: {
-          color: "#fff"
-        }
+      chart: {
+        backgroundColor: "transparent",
+        type: "map",
+        map: mapDataRequired
       },
+  
+      mapNavigation: {
+        enabled: false,
+        enableButtons: false
+      },
+
+      credits: {
+        enabled: false
+      },
+
+      colors: ["red", "green", "blue"],
+
       plotOptions: {
+
+        map: {
+          allAreas: false,
+          joinBy:['hc-key'],
+          dataLabels: {
+            enabled: true,
+            color: '#FFFFFF',
+            style: {
+              fontWeight: 'bold'
+            }
+          }
+        },
+
         series: {
           point: {
             events: {
@@ -50,47 +75,38 @@ class MyMap extends React.Component {
               }
             }
           }
-        } 
+        }
       },
-      chart: {
-        backgroundColor: "transparent",
-        type: "map",
-        map: mapDataRequired
-      },
-      mapNavigation: {
-        enabled: false,
-        enableButtons: false
-      },
-      credits: {
-        enabled: false
-      },
+ 
 
-      
+
       series: [
         {
-          name: "world map",
-          dataLabels: {
-            enabled: true,
-            color: "#FFFFFF",
-            format: "{point.name}",
-            style: {
-              // textTransform: "uppercase"
-            }
-          },
-          tooltip: {
-            ySuffix: " %"
-          },
-          cursor: "pointer",
-          // joinBy: "postal-code",
-          data: data,
-          // point: {
-          //   events: {
-          //     click: function (r) {
-          //       console.log("click - to open popup as 2nd step");
-          //       console.log(r);
-          //     }
-          //   }
-          // }
+          name: "solar-best",
+
+          data: [['fr-bre', 0]],
+        },
+        {
+          name: "helio-best",
+          data: [
+            ['fr-pdl', 1],
+            ['fr-pac', 2],
+            ['fr-occ', 3],
+            ['fr-naq', 4],
+            ['fr-bfc', 5],
+            ['fr-cvl', 6],
+            ['fr-idf', 7]
+          ],
+        },
+        {
+          name: "nuclear-best",
+ 
+          data: [
+            ['fr-hdf', 8],
+            ['fr-ara', 9],
+            ['fr-ges', 10],
+            ['fr-nor', 11]
+          ],
         }
       ]
     };
