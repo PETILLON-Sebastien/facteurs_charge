@@ -1,5 +1,5 @@
 import React, { createRef } from "react";
-import ReactHighcharts from "react-highcharts";
+import HighchartsReact from "highcharts-react-official";
 import moment from "moment";
 
 let that;
@@ -195,7 +195,7 @@ class ProductionBySourcesGraph extends React.Component {
         return (
             <div className="chart-wrapping">
                 <span>Répartition de la production en <span className="has-background-grey text-inline-highlighted">{currentZoneName}</span> </span>
-                <ReactHighcharts config={config} ref={this.chart}></ReactHighcharts>
+                <HighchartsReact options={config} ref={this.chart}></HighchartsReact>
             </div>
             // <h1>test?</h1>
         );

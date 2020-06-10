@@ -1,7 +1,7 @@
 import React, { createRef } from "react";
-import ReactHighcharts from "react-highcharts";
 import moment from "moment";
 import cssVar from '../../../../_sass/_variables.scss';
+import HighchartsReact from "highcharts-react-official";
 
 
 import _config from './graph-config.js';
@@ -116,7 +116,7 @@ class ProductionBySourcesGraph extends React.Component {
         return (
             <div className="chart-wrapping">
                 <span>Destination de l'énergie en <span className="has-background-grey text-inline-highlighted">{currentZoneName}</span> </span>
-                <ReactHighcharts config={chartConfiguration} ref={this.chart}></ReactHighcharts>
+                <HighchartsReact options={chartConfiguration} ref={this.chart}></HighchartsReact>
             </div>
         );
     }
