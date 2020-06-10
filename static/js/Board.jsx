@@ -6,6 +6,7 @@ import SlidePowerSources from "./slides/power-sources-breakdown/components/Slide
 import SlideLoad from './slides/load-breakdown/components/SlideLoad';
 import SlideMap from './slides/map/components/SlideMap';
 import SlidePowerBalance from './slides/power-balance/components/SlidePowerBalance';
+import MyMap from './slides/exchanges/MyMap';
 
 
 import stubZonesDescription from "./regions-descriptions";
@@ -63,12 +64,17 @@ export default class Board extends React.Component {
 
         <div className="section is-medium" id="slide-map" style={{ "marginTop": "3rem" }}>
           <div className="container">
-            <SlideMap zoneChanged={this.zoneChanged} zonesDescription={this.zonesDescription}  />
+            <SlideMap zoneChanged={this.zoneChanged} zonesDescription={this.zonesDescription} />
           </div>
         </div>
 
 
         <ZoneContext.Provider value={{ currentZone: this.state.currentZone }}>
+          <div className="section is-medium" id="slide-installations" style={{ "minHeight": "100vh" }}>
+            <div className="container">
+              <MyMap />
+            </div>
+          </div>
           <div className="section is-medium" id="slide-installations" style={{ "minHeight": "100vh" }}>
             <div className="container">
               <SlidePowerSources />
