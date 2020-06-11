@@ -23,121 +23,29 @@ class MyMap extends React.Component {
 
     // fromID:toID:arrowDesc
     const exchangeZoneIDToArrow = {
-      4: {
-        9: {
-          x: 4800,
-          y: -3500,
-          symbol:'images/arrow-right.png'
-        },
-        3: {
-          x: 3700,
-          y: -1900,
-          symbol:'images/arrow-diag-down-right.png'
-        },
-        6: {
-          x: 3000,
-          y: -4600,
-          symbol:'images/arrow-diag-up-right.png'
-        },
-        1: {
-          x: 2400,
-          y: -4000,
-          symbol:'images/arrow-diag-up-left.png'
-        }
-      },
       3: {
-        9: {
-          x: 5300,
-          y: -1800,
-          symbol:'images/arrow-diag-up-right.png'
-        },
-        4: {
-          x: 3300,
-          y: -1200,
-          symbol:'images/arrow-diag-up-left.png'
-        },
-        2: {
-          x: 6700,
-          y: -1000,
-          symbol:'images/arrow-right.png'
+        1:
+        {
+          "type": "mappoint",
+          "name": "Hubs",
+          "data": [
+            {
+              name: 'Import',
+              x: 4500,
+              y: -3000,
+              marker: {
+                symbol: 'url(images/arrow.png)',
+                width: 64,
+                height: 64
+              }
+            }
+          ]
         }
-      },
-      9: {
-        5: {
-          x: 6500,
-          y: -4000,
-          symbol:'images/arrow-up.png'
-        },
-        6: {
-          x: 5200,
-          y: -4300,
-          symbol:'images/arrow-diag-up-left.png'
-        },
-        4: {
-          x: 4800,
-          y: -2800,
-          symbol:'images/arrow-left.png'
-        },
-        2: {
-          x: 8000,
-          y: -2200,
-          symbol:'images/arrow-diag-down-right.png'
-        },
-        3: {
-          x: 6300,
-          y: -2000,
-          symbol:'images/arrow-diag-down-left.png'
-        }
-      },
-      7: {
-        8: {
-          x: 5200,
-          y: -7500,
-          symbol:'images/arrow-up.png'
-        },
-        10: {
-          x: 5700,
-          y: -7000,
-          symbol:'images/arrow-right.png'
-        },
-        5: {
-          x: 5300,
-          y: -6700,
-          symbol:'images/arrow-diag-down-right.png'
-        },
-        11: {
-          x: 4500,
-          y: -7400,
-          symbol:'images/arrow-diag-up-left.png'
-        },
-        6: {
-          x: 5000,
-          y: -6600,
-          symbol:'images/arrow-diag-down-left.png'
-        }
-      },
+
+      }
+
     };
 
-
-    const stubArray = [];
-    Object.keys(exchangeZoneIDToArrow).forEach( (key) => {
-      Object.keys(exchangeZoneIDToArrow[key]).forEach( (subKey) => {
-        stubArray.push(
-          {
-            name: '',
-            x: exchangeZoneIDToArrow[key][subKey].x,
-            y: exchangeZoneIDToArrow[key][subKey].y,
-            marker: {
-              symbol: 'url(' + exchangeZoneIDToArrow[key][subKey].symbol + ')',
-              width: 24,
-              height: 24
-            }
-          }
-        );
-      });
-    });
-
-    console.log(stubArray);
 
     this.chart = createRef();
 
@@ -145,8 +53,8 @@ class MyMap extends React.Component {
     // init to get the map data from api
     this.mapData = mapDataRequired;
     var data = [
-      // ['fr-bre', 0],
-      // ['fr-pdl', 1],
+      ['fr-bre', 0],
+      ['fr-pdl', 1],
       ['fr-pac', 2],
       ['fr-occ', 3],
       ['fr-naq', 4],
@@ -187,12 +95,11 @@ class MyMap extends React.Component {
           allAreas: false,
           joinBy: ['hc-key'],
           dataLabels: {
-            enabled: true,
+            enabled: false,
             color: '#FFFFFF',
             style: {
               fontWeight: 'bold'
-            },
-            format:'{point.index}'
+            }
           },
           tooltip: {
             // useHTML: true,
@@ -219,28 +126,31 @@ class MyMap extends React.Component {
         {
           name: "Photovoltaique",
 
+          data: [['fr-bre', 0]],
+        },
+        {
+          name: "Heolien",
           data: [
-            // ['fr-bre', 0],
-          // ['fr-pdl', 1],
-          // ['fr-pac', 2],
-          // ['fr-occ', 3],
-          // ['fr-naq', 4],
-          ['fr-bfc', 5],
-          ['fr-cvl', 6],
-          ['fr-idf', 7],
-          ['fr-hdf', 8],
-          // ['fr-ara', 9],
-          ['fr-ges', 10],
-          ['fr-nor', 11]
+            ['fr-pdl', 1],
+            ['fr-pac', 2],
+            ['fr-occ', 3],
+            ['fr-naq', 4],
+            ['fr-bfc', 5],
+            ['fr-cvl', 6],
+            ['fr-idf', 7]
           ],
         },
         {
-          "type": "mappoint",
-          "name": "Hubs",
-          "data": 
-            stubArray
-          
-        }
+          name: "Nucléaire",
+
+          data: [
+            ['fr-hdf', 8],
+            ['fr-ara', 9],
+            ['fr-ges', 10],
+            ['fr-nor', 11]
+          ],
+        },
+        exchangeZoneIDToArrow[3][1],
 
         // {
         //   "type": "mapline",
