@@ -15,9 +15,11 @@ var retrieve = function(start, end) {
             var consumption = format_mapper.extract_consumption_snapshot_zones(records);
             var production = format_mapper.extract_production_snapshot_zones(records);
             var exchanges = format_mapper.extract_exchanges(records);
+            var capacity = format_mapper.extract_capacity_snapshot_zones(records);
             defered.resolve({
                 consumption: consumption,
                 production: production,
+                capacity: capacity,
                 exchanges: exchanges
             });
         }
