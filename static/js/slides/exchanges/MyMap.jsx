@@ -21,107 +21,188 @@ class MyMap extends React.Component {
     };
 
 
+    const adjacentMatrix = {
+      'fr-hdr': ['fr-idf', 'fr-nor', 'fr-ges'],
+      'fr-nor': ['fr-hdf', 'fr-idf', 'fr-cvl', 'fr-bre', 'fr-pdl'],
+      'fr-bre': ['fr-nor', 'fr-pdl'],
+      'fr-idf': ['fr-nor', 'fr-hdf', 'fr-ges', 'fr-cvl', 'fr-bfc'],
+      'fr-ges': ['fr-idf', 'fr-bfc'],
+      'fr-pdl': ['fr-bre', 'fr-nor', 'fr-cvl', 'fr-naq'],
+      'fr-cvl': ['fr-naq', 'fr-pdl', 'fr-nor', 'fr-idf', 'fr-bfc', 'fr-ara'],
+      'fr-bfc': ['fr-ara', 'fr-cvl', 'fr-idf', 'fr-ges'],
+      'fr-naq': ['fr-pdl', 'fr-cvl', 'fr-ara', 'fr-occ'],
+      'fr-ara': ['fr-occ', 'fr-naq', 'fr-cvl', 'fr-bfc', 'fr-pac'],
+      'fr-occ': ['fr-naq', 'fr-ara', 'fr-pac'],
+      'fr-pac': ['fr-occ', 'fr-ara']
+    }
+
+
+
     // fromID:toID:arrowDesc
     const exchangeZoneIDToArrow = {
-      4: {
-        9: {
+      'fr-naq': {
+        'fr-ara': {
           x: 4800,
           y: -3500,
-          symbol:'images/arrow-right.png'
+          symbol: 'images/arrow-right.png'
         },
-        3: {
+        'fr-occ': {
           x: 3700,
           y: -1900,
-          symbol:'images/arrow-diag-down-right.png'
+          symbol: 'images/arrow-diag-down-right.png'
         },
-        6: {
+        'fr-cvl': {
           x: 3000,
           y: -4600,
-          symbol:'images/arrow-diag-up-right.png'
+          symbol: 'images/arrow-diag-up-right.png'
         },
-        1: {
+        'fr-pdl': {
           x: 2400,
           y: -4000,
-          symbol:'images/arrow-diag-up-left.png'
+          symbol: 'images/arrow-diag-up-left.png'
         }
       },
-      3: {
-        9: {
+      'fr-occ': {
+        'fr-ara': {
           x: 5300,
           y: -1800,
-          symbol:'images/arrow-diag-up-right.png'
+          symbol: 'images/arrow-diag-up-right.png'
         },
-        4: {
+        'fr-naq': {
           x: 3300,
           y: -1200,
-          symbol:'images/arrow-diag-up-left.png'
+          symbol: 'images/arrow-diag-up-left.png'
         },
-        2: {
+        'fr-pac': {
           x: 6700,
           y: -1000,
-          symbol:'images/arrow-right.png'
+          symbol: 'images/arrow-right.png'
         }
       },
-      9: {
-        5: {
+      'fr-ara': {
+        'fr-bfc': {
           x: 6500,
           y: -4000,
-          symbol:'images/arrow-up.png'
+          symbol: 'images/arrow-up.png'
         },
-        6: {
+        'fr-fr-cvl': {
           x: 5200,
           y: -4300,
-          symbol:'images/arrow-diag-up-left.png'
+          symbol: 'images/arrow-diag-up-left.png'
         },
-        4: {
+        'fr-naq': {
           x: 4800,
           y: -2800,
-          symbol:'images/arrow-left.png'
+          symbol: 'images/arrow-left.png'
         },
-        2: {
+        'fr-pac': {
           x: 8000,
           y: -2200,
-          symbol:'images/arrow-diag-down-right.png'
+          symbol: 'images/arrow-diag-down-right.png'
         },
-        3: {
+        'fr-occ': {
           x: 6300,
           y: -2000,
-          symbol:'images/arrow-diag-down-left.png'
+          symbol: 'images/arrow-diag-down-left.png'
         }
       },
-      7: {
-        8: {
+      'fr-idf': {
+        'fr-hdf': {
           x: 5200,
           y: -7500,
-          symbol:'images/arrow-up.png'
+          symbol: 'images/arrow-up.png'
         },
-        10: {
+        'fr-ges': {
           x: 5700,
           y: -7000,
-          symbol:'images/arrow-right.png'
+          symbol: 'images/arrow-right.png'
         },
-        5: {
+        'fr-bfc': {
           x: 5300,
           y: -6700,
-          symbol:'images/arrow-diag-down-right.png'
+          symbol: 'images/arrow-diag-down-right.png'
         },
-        11: {
+        'fr-nor': {
           x: 4500,
           y: -7400,
-          symbol:'images/arrow-diag-up-left.png'
+          symbol: 'images/arrow-diag-up-left.png'
         },
-        6: {
+        'fr-cvl': {
           x: 5000,
           y: -6600,
-          symbol:'images/arrow-diag-down-left.png'
+          symbol: 'images/arrow-diag-down-left.png'
+        }
+      },
+      'fr-bre': {
+        'fr-nor': {
+          x: 1950,
+          y: -6700,
+          symbol: 'images/arrow-diag-up-right.png'
+        },
+        'fr-pdl': {
+          x: 1700,
+          y: -6200,
+          symbol: 'images/arrow-diag-down-right.png'
+        }
+      },
+
+      'fr-pdl': {
+        'fr-bre': {
+          x: 1200,
+          y: -5800,
+          symbol: 'images/arrow-diag-up-left.png'
+        },
+        'fr-nor': {
+          x: 2800,
+          y: -6500,
+          symbol: 'images/arrow-up.png'
+        },
+        'fr-cvl': {
+          x: 3400,
+          y: -5900,
+          symbol: 'images/arrow-right.png'
+        },
+        'fr-naq': {
+          x: 2200,
+          y: -5100,
+          symbol: 'images/arrow-diag-down-right.png'
+        }
+      },
+
+      // BELOW TODO 
+      'fr-nor': {
+        'fr-hdf': {
+          x: 1200,
+          y: -5800,
+          symbol: 'images/arrow-diag-up-left.png'
+        },
+        'fr-idf': {
+          x: 2800,
+          y: -6500,
+          symbol: 'images/arrow-up.png'
+        },
+        'fr-cvl': {
+          x: 3400,
+          y: -5900,
+          symbol: 'images/arrow-right.png'
+        },
+        'fr-pdl': {
+          x: 2200,
+          y: -5100,
+          symbol: 'images/arrow-diag-down-right.png'
+        },
+        'fr-bre': {
+          x: 2200,
+          y: -5100,
+          symbol: 'images/arrow-diag-down-right.png'
         }
       },
     };
 
 
     const stubArray = [];
-    Object.keys(exchangeZoneIDToArrow).forEach( (key) => {
-      Object.keys(exchangeZoneIDToArrow[key]).forEach( (subKey) => {
+    Object.keys(exchangeZoneIDToArrow).forEach((key) => {
+      Object.keys(exchangeZoneIDToArrow[key]).forEach((subKey) => {
         stubArray.push(
           {
             name: '',
@@ -144,20 +225,6 @@ class MyMap extends React.Component {
 
     // init to get the map data from api
     this.mapData = mapDataRequired;
-    var data = [
-      // ['fr-bre', 0],
-      // ['fr-pdl', 1],
-      ['fr-pac', 2],
-      ['fr-occ', 3],
-      ['fr-naq', 4],
-      ['fr-bfc', 5],
-      ['fr-cvl', 6],
-      ['fr-idf', 7],
-      ['fr-hdf', 8],
-      ['fr-ara', 9],
-      ['fr-ges', 10],
-      ['fr-nor', 11]
-    ];
 
     // preparing the config of map with empty data
     this.options = {
@@ -184,7 +251,7 @@ class MyMap extends React.Component {
       plotOptions: {
 
         map: {
-          allAreas: false,
+          allAreas: true,
           joinBy: ['hc-key'],
           dataLabels: {
             enabled: true,
@@ -192,12 +259,12 @@ class MyMap extends React.Component {
             style: {
               fontWeight: 'bold'
             },
-            format:'{point.index}'
+            format: '{point.hc-key}'
           },
           tooltip: {
             // useHTML: true,
             // headerFormat: '',
-            pointFormat: '{point.name}'
+            pointFormat: '{point.hc-key}'
           }
         },
 
@@ -220,26 +287,26 @@ class MyMap extends React.Component {
           name: "Photovoltaique",
 
           data: [
-            // ['fr-bre', 0],
-          // ['fr-pdl', 1],
-          // ['fr-pac', 2],
-          // ['fr-occ', 3],
-          // ['fr-naq', 4],
-          ['fr-bfc', 5],
-          ['fr-cvl', 6],
-          ['fr-idf', 7],
-          ['fr-hdf', 8],
-          // ['fr-ara', 9],
-          ['fr-ges', 10],
-          ['fr-nor', 11]
+            ['fr-bre', 0],
+            ['fr-pdl', 1],
+            ['fr-pac', 2],
+            ['fr-occ', 3],
+            ['fr-naq', 4],
+            ['fr-bfc', 5],
+            ['fr-cvl', 6],
+            ['fr-idf', 7],
+            ['fr-hdf', 8],
+            ['fr-ara', 9],
+            ['fr-ges', 10],
+            ['fr-nor', 11]
           ],
         },
         {
           "type": "mappoint",
-          "name": "Hubs",
-          "data": 
+          "name": "Échange",
+          "data":
             stubArray
-          
+
         }
 
         // {
