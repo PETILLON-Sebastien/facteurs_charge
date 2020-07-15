@@ -17,7 +17,7 @@ var update = function() {
                 if(err) {
                     return console.log(err);
                 }
-                console.log(key + " data saved for " + current + ' at ' + moment().format('YYYY-MM-DD[T]HH:mm:ss'));
+                console.log('current ' + key + ' data saved at ' + moment().format('YYYY-MM-DD[T]HH:mm:ss'));
             });
         });
         setTimeout(update, INTERVAL);
