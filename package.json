@@ -32,7 +32,8 @@
     "highcharts-export-server": "2.0.24",
     "q": "1.5.1",
     "node-ffmpeg": "0.0.0",
-    "ffmpeg-stream": "0.6.0"
+    "ffmpeg-stream": "0.6.0",
+    "forever": "3.0.0"
   },
   "dependencies": {
     "babel-loader": "^8.0.6"
@@ -41,6 +42,7 @@
     "build": "webpack -p --env.API_URL=https://www.facteurs-charge.fr --progress --config static/webpack.config.js",
     "dev-build": "webpack --env.API_URL=http://localhost:8080 --progress -d --config static/webpack.config.js",
     "watch": "webpack --env.API_URL=http://localhost:8080 --progress -d --config static/webpack.config.js --watch",
-    "start": "node server.js"
+    "start": "forever forever/config.json",
+    "stop": "forever stopall"
   }
 }

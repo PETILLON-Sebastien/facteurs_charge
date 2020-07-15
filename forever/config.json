@@ -1,0 +1,8 @@
+[
+    {
+      "uid": "last_24_hours_daemon",
+      "append": true,
+      "watch": false,
+      "script": "server/daemons/last_24_hours.js"
+    }
+]
