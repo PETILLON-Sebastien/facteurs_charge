@@ -285,7 +285,8 @@ var api_wording = {
     production: 'production',
     load: 'load',
     details: 'details',
-    breakdown: 'breakdown'
+    breakdown: 'breakdown',
+    installation: 'installation'
 };
 
 var units = {
