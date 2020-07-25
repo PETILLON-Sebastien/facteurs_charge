@@ -14,12 +14,25 @@ exports.manage_time_window = function(from, to) {
   }
   return result;
 };
+exports.manage_time_window_day_before = function(from, to) {
+  var result = {};
+  if(!from || !to) {
+    result.from = moment().add(-1, 'day');
+    result.to = moment();
+  } else {
+    result.from = moment(from).add(-1, 'day');
+    result.to = moment(to);
+  }
+  return result;
+};
 
 exports.format_values = function(object) {
   var formatted = {};
   _.forOwn(object, function(value, key) {
     var newObject = {};
-    newObject[constants.api_wording.unit] = constants.units.mega_watt;
+    if(key == constants.api_wording.production || key == constants.api_wording.capacity) {
+      newObject[constants.api_wording.unit] = constants.units.mega_watt;
+    }
     newObject[constants.api_wording.value] = value;
     formatted[key] = newObject;
   });

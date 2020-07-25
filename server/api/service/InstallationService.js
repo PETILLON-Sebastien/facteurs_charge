@@ -1,5 +1,52 @@
 'use strict';
+var _ = require('lodash');
+var Q = require('q');
+var path = require('path');
+var api_common = require(path.join('..', 'utils', 'api_common.js'));
+var constants = require(path.join('..', '..', 'utils', 'constants.js'));
+var file_reading = require(path.join('..', '..', 'utils', 'file_reading.js'));
 
+var customizer = function(objValue, srcValue) {
+  if (_.isArray(objValue)) {
+    return _.uniqWith(objValue.concat(srcValue), _.isEqual);
+  }
+};
+
+function fulfill(production, capacity) {
+  _.mergeWith(production, capacity, customizer);
+  _.forOwn(production, function(value, key) {
+    if(value[constants.api_wording.details]) {
+      fulfill(value[constants.api_wording.details], capacity[key][constants.api_wording.details]);
+    } else {
+      if (_.isNumber(value[constants.api_wording.production])
+        && _.isNumber(value[constants.api_wording.capacity])) {
+        value[constants.api_wording.load] = value[constants.api_wording.production] / value[constants.api_wording.capacity];
+      }
+      production[key] = api_common.format_values(value);
+    }
+  });
+}
+
+function retrieve_all(from, to) {
+  var defered = Q.defer();
+  var time_window = api_common.manage_time_window(from, to);
+  var time_window_day_before = api_common.manage_time_window_day_before(from, to);
+  var production = file_reading.retrieve_period(time_window.from, time_window.to, constants.production);
+  var capacity = file_reading.retrieve_period(time_window_day_before.from, time_window_day_before.to, constants.capacity);
+  Q.all([production, capacity]).then(function(data) {
+    var production = data[0];
+    var capacity = data[1];
+    _.forOwn(production, function(zone) {
+      var zone_id = zone[constants.api_wording.zone_id];
+      _.forOwn(zone[constants.api_wording.snapshots], function(snapshot) {
+        var date = snapshot[constants.api_wording.datetime].slice(0, 10);
+        fulfill(snapshot[constants.api_wording.breakdown], capacity[date][zone_id][constants.api_wording.breakdown]);
+      });
+    });
+    defered.resolve(production);
+  });
+  return defered.promise;
+};
 
 /**
  * Retrieve the breadkdowns
@@ -8,350 +55,10 @@
  * to Date End of the period (optional)
  * returns List
  **/
-exports.get_breakdowns = function(from,to) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "snapshots" : [ {
-    "datetime" : "2000-01-23T04:56:07.000+00:00",
-    "breakdown" : {
-      "hydraulic" : {
-        "load" : {
-          "value" : 0.8008281904610115
-        },
-        "production" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        },
-        "capacity" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        }
-      },
-      "bioenergy" : {
-        "load" : {
-          "value" : 0.8008281904610115
-        },
-        "production" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        },
-        "capacity" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        }
-      },
-      "solar" : {
-        "load" : {
-          "value" : 0.8008281904610115
-        },
-        "production" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        },
-        "capacity" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        }
-      },
-      "nuclear" : {
-        "load" : {
-          "value" : 0.8008281904610115
-        },
-        "production" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        },
-        "capacity" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        }
-      },
-      "fossil" : {
-        "load" : {
-          "value" : 0.8008281904610115
-        },
-        "production" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        },
-        "capacity" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        }
-      },
-      "wind" : {
-        "load" : {
-          "value" : 0.8008281904610115
-        },
-        "production" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        },
-        "capacity" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        }
-      }
-    }
-  }, {
-    "datetime" : "2000-01-23T04:56:07.000+00:00",
-    "breakdown" : {
-      "hydraulic" : {
-        "load" : {
-          "value" : 0.8008281904610115
-        },
-        "production" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        },
-        "capacity" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        }
-      },
-      "bioenergy" : {
-        "load" : {
-          "value" : 0.8008281904610115
-        },
-        "production" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        },
-        "capacity" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        }
-      },
-      "solar" : {
-        "load" : {
-          "value" : 0.8008281904610115
-        },
-        "production" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        },
-        "capacity" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        }
-      },
-      "nuclear" : {
-        "load" : {
-          "value" : 0.8008281904610115
-        },
-        "production" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        },
-        "capacity" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        }
-      },
-      "fossil" : {
-        "load" : {
-          "value" : 0.8008281904610115
-        },
-        "production" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        },
-        "capacity" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        }
-      },
-      "wind" : {
-        "load" : {
-          "value" : 0.8008281904610115
-        },
-        "production" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        },
-        "capacity" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        }
-      }
-    }
-  } ],
-  "zoneId" : "zoneId"
-}, {
-  "snapshots" : [ {
-    "datetime" : "2000-01-23T04:56:07.000+00:00",
-    "breakdown" : {
-      "hydraulic" : {
-        "load" : {
-          "value" : 0.8008281904610115
-        },
-        "production" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        },
-        "capacity" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        }
-      },
-      "bioenergy" : {
-        "load" : {
-          "value" : 0.8008281904610115
-        },
-        "production" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        },
-        "capacity" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        }
-      },
-      "solar" : {
-        "load" : {
-          "value" : 0.8008281904610115
-        },
-        "production" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        },
-        "capacity" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        }
-      },
-      "nuclear" : {
-        "load" : {
-          "value" : 0.8008281904610115
-        },
-        "production" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        },
-        "capacity" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        }
-      },
-      "fossil" : {
-        "load" : {
-          "value" : 0.8008281904610115
-        },
-        "production" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        },
-        "capacity" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        }
-      },
-      "wind" : {
-        "load" : {
-          "value" : 0.8008281904610115
-        },
-        "production" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        },
-        "capacity" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        }
-      }
-    }
-  }, {
-    "datetime" : "2000-01-23T04:56:07.000+00:00",
-    "breakdown" : {
-      "hydraulic" : {
-        "load" : {
-          "value" : 0.8008281904610115
-        },
-        "production" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        },
-        "capacity" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        }
-      },
-      "bioenergy" : {
-        "load" : {
-          "value" : 0.8008281904610115
-        },
-        "production" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        },
-        "capacity" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        }
-      },
-      "solar" : {
-        "load" : {
-          "value" : 0.8008281904610115
-        },
-        "production" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        },
-        "capacity" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        }
-      },
-      "nuclear" : {
-        "load" : {
-          "value" : 0.8008281904610115
-        },
-        "production" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        },
-        "capacity" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        }
-      },
-      "fossil" : {
-        "load" : {
-          "value" : 0.8008281904610115
-        },
-        "production" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        },
-        "capacity" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        }
-      },
-      "wind" : {
-        "load" : {
-          "value" : 0.8008281904610115
-        },
-        "production" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        },
-        "capacity" : {
-          "unit" : "unit",
-          "value" : 0.80082819046101150206595775671303272247314453125
-        }
-      }
-    }
-  } ],
-  "zoneId" : "zoneId"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+exports.get_breakdowns = function(from, to) {
+    var defered = Q.defer();
+    var time_window = api_common.manage_time_window(from, to);
+    return retrieve_all(time_window.from, time_window.to);
 }
 
 
@@ -2431,4 +2138,3 @@ exports.get_zone_installations_production_breakdown = function(zoneId,from,to) {
     }
   });
 }
-

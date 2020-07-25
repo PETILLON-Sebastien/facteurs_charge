@@ -199,7 +199,7 @@ var extract_capacity_snapshot_zones = function(records) {
         _.set(result, [zone_id], merge_capacity(result[zone_id], extract_capacity_snapshot(snapshot)));
         return result;
     }, {});
-    _.set(records_zones, constants.api_wording.datetime, field_getter(records[0], constants.opendatareseaux_wording.date_hour));
+    _.set(records_zones, constants.api_wording.datetime, field_getter(records[records.length - 1], constants.opendatareseaux_wording.date_hour));
     return records_zones;
 }
 
