@@ -256,8 +256,8 @@ var consumption_targets = [
 ];
 
 var opendatareseaux_wording = {
-    export: 'export',
-    import: 'import',
+    flow: 'flux_physiques_de_',
+    to: '_vers_',
     exchanges_with_region : 'ech_comm',
     exchanges_total: 'ech_physiques',
     date: 'date',
@@ -305,3 +305,7 @@ exports.opendatareseaux_wording = opendatareseaux_wording;
 exports.units = units;
 exports.data_per_hour = data_per_hour;
 exports.french_regions_count = french_regions_count;
+exports.consumption = 'consumption';
+exports.capacity = 'capacity';
+exports.exchanges = 'exchanges';
+exports.production = 'production';

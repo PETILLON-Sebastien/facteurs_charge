@@ -10,12 +10,12 @@ var store_day_data = function(date) {
     var date_formatted = moment(date).format('YYYY-MM-DD');
     data_retrieval.retrieve(start, end).then(function(data) {
         _.forOwn(data, function(value, key) {
-            var pathToFile = path.resolve(__dirname, '..', 'data', current + '_' + key + '.json');
+            var pathToFile = path.resolve(__dirname, '..', 'data', date_formatted + '_' + key + '.json');
             fs.writeFile(pathToFile, JSON.stringify(value), function(err) {
                 if(err) {
                     return console.log(err);
                 }
-                console.log(key + " data saved for " + date_formatted);
+                console.log(key + ' data saved for ' + date_formatted);
             });
         });
     }).catch(function(error) {

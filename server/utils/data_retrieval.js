@@ -8,7 +8,7 @@ var retrieve = function(start, end) {
     api_provider.api_call(start, end)
     .then(function(data) {
         if(_.get(data, '[0].records') === undefined || _.get(data, '[1].records') === undefined) {
-            defered.reject("Missing data");
+            defered.reject('Missing data');
             console.log(data)
         } else {
             var records = _.concat(data[0].records, data[1].records);

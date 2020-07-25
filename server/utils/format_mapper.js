@@ -3,8 +3,8 @@ var _ = require('lodash');
 
 /**
  * Get the value of the field from the snapshot
- * @param {Object} snapshot 
- * @param {String} field_name 
+ * @param {Object} snapshot
+ * @param {String} field_name
  */
 var field_getter = function(snapshot, field_name) {
     return _.get(snapshot, constants.opendatareseaux_wording.fields + '.' + field_name, 0);
@@ -12,7 +12,7 @@ var field_getter = function(snapshot, field_name) {
 
 /**
  * Compute the zone id from the snapshot's information
- * @param {Object} snapshot 
+ * @param {Object} snapshot
  */
 var snapshot_zone_id_getter = function(snapshot) {
     var country = constants.zones[0].country;
@@ -26,7 +26,7 @@ var snapshot_zone_id_getter = function(snapshot) {
 
 /**
  * Compute the zone id from the zone's name
- * @param {String} name 
+ * @param {String} name
  */
 var zone_id_getter = function(name) {
     var zone_id;
@@ -40,7 +40,7 @@ var zone_id_getter = function(name) {
 
 /**
  * Extract a single consumption snapshot
- * @param {Object} snapshot 
+ * @param {Object} snapshot
  */
 var extract_consumption_snapshot = function(snapshot) {
     var consumption = {};
@@ -52,7 +52,7 @@ var extract_consumption_snapshot = function(snapshot) {
 
 /**
  * Extracts all the consumption records by zone
- * @param {Array[Object]} records 
+ * @param {Array[Object]} records
  */
 var extract_consumption_snapshot_zones = function(records) {
     var records_zones = _.values(_.reduce(records, function(result, snapshot) {
@@ -70,8 +70,8 @@ var extract_consumption_snapshot_zones = function(records) {
 
 /**
  * Extract an installation production from a snapshot
- * @param {Object} installation 
- * @param {Object} snapshot 
+ * @param {Object} installation
+ * @param {Object} snapshot
  */
 var extract_installation_production = function(installation, snapshot) {
     var extraction = {};
@@ -89,7 +89,7 @@ var extract_installation_production = function(installation, snapshot) {
 
 /**
  * Extract the production from a snapshot
- * @param {Object} snapshot 
+ * @param {Object} snapshot
  */
 var extract_production_snapshot = function(snapshot) {
     var extraction = {};
@@ -102,7 +102,7 @@ var extract_production_snapshot = function(snapshot) {
 
 /**
  * Extract all the production from the records
- * @param {Array[Object]} records 
+ * @param {Array[Object]} records
  */
 var extract_production_snapshot_zones = function(records) {
     var records_zones = _.values(_.reduce(records, function(result, snapshot) {
@@ -120,8 +120,8 @@ var extract_production_snapshot_zones = function(records) {
 
 /**
  * Keep the higher estimation of capacity of the installation
- * @param {Object} capacity1 
- * @param {Object} capacity2 
+ * @param {Object} capacity1
+ * @param {Object} capacity2
  */
 var merge_installation_capacity = function(capacity1, capacity2) {
     var result = {};
@@ -138,8 +138,8 @@ var merge_installation_capacity = function(capacity1, capacity2) {
 
 /**
  * Keep the higher estimation of capacity
- * @param {Object} capacity1 
- * @param {Object} capacity2 
+ * @param {Object} capacity1
+ * @param {Object} capacity2
  */
 var merge_capacity = function(capacity1, capacity2) {
     if(capacity1 === undefined) {
@@ -158,8 +158,8 @@ var merge_capacity = function(capacity1, capacity2) {
 
 /**
  * Extract an installation capacity from a snapshot
- * @param {Object} installation 
- * @param {Object} snapshot 
+ * @param {Object} installation
+ * @param {Object} snapshot
  */
 var extract_installation_capacity = function(installation, snapshot) {
     var extraction = {};
@@ -179,7 +179,7 @@ var extract_installation_capacity = function(installation, snapshot) {
 
 /**
  * Extract the capacity from a snapshot
- * @param {Object} snapshot 
+ * @param {Object} snapshot
  */
 var extract_capacity_snapshot = function(snapshot) {
     var extraction = {};
@@ -191,7 +191,7 @@ var extract_capacity_snapshot = function(snapshot) {
 
 /**
  * Extract the capacity from the records
- * @param {Array[Object]} records 
+ * @param {Array[Object]} records
  */
 var extract_capacity_snapshot_zones = function(records) {
     var records_zones = _.reduce(records, function(result, snapshot) {
@@ -199,35 +199,29 @@ var extract_capacity_snapshot_zones = function(records) {
         _.set(result, [zone_id], merge_capacity(result[zone_id], extract_capacity_snapshot(snapshot)));
         return result;
     }, {});
+    _.set(records_zones, constants.api_wording.datetime, field_getter(records[0], constants.opendatareseaux_wording.date_hour));
     return records_zones;
 }
 
 /**
  * Extract exchanges from a single snapshot
- * @param {Object} snapshot 
+ * @param {Object} snapshot
  */
 var extract_exchanges_snapshot = function(snapshot) {
     var exchanges = [];
     var zone_id = snapshot_zone_id_getter(snapshot);
-    var target_zone;
-    var source_zone;
     _.forOwn(snapshot[constants.opendatareseaux_wording.fields], function(value, name) {
-        if(_.startsWith(name, constants.opendatareseaux_wording.import) || _.startsWith(name, constants.opendatareseaux_wording.export)) {
-            var zone_name = _.replace(name, _.split(name, '_')[0] + '_', '');
-            var field_zone_id = zone_id_getter(zone_name);
-            if(_.startsWith(name, constants.opendatareseaux_wording.import)) {
-                source_zone = field_zone_id;
-                target_zone = zone_id;
-            } else {
-                source_zone = zone_id;
-                target_zone = field_zone_id;
-            }
+        if(_.startsWith(name, constants.opendatareseaux_wording.flow)) {
+            var zones = _.split(name, constants.opendatareseaux_wording.to);
+            zones[0] = _.replace(zones[0], constants.opendatareseaux_wording.flow, '');
+            var zone_source_id = zone_id_getter(zones[0]);
+            var zone_target_id = zone_id_getter(zones[1]);
             if(_.isNumber(value)) {
                 var saved_value = Math.abs(value);
                 var exchange = {};
                 _.set(exchange, [constants.api_wording.datetime], field_getter(snapshot, constants.opendatareseaux_wording.date_hour));
-                _.set(exchange, [constants.api_wording.description, constants.api_wording.source_zone], source_zone);
-                _.set(exchange, [constants.api_wording.description, constants.api_wording.target_zone], target_zone);
+                _.set(exchange, [constants.api_wording.description, constants.api_wording.source_zone], zone_source_id);
+                _.set(exchange, [constants.api_wording.description, constants.api_wording.target_zone], zone_target_id);
                 _.set(exchange, [constants.api_wording.description, constants.api_wording.value], saved_value);
                 exchanges.push(exchange);
             }
@@ -238,7 +232,7 @@ var extract_exchanges_snapshot = function(snapshot) {
 
 /**
  * Extract all the exchanges from the records
- * @param {Array[Object]} records 
+ * @param {Array[Object]} records
  */
 var extract_exchanges = function(records) {
     return _.flatten(_.map(records, extract_exchanges_snapshot));
