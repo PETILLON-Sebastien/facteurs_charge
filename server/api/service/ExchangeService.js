@@ -1,4 +1,10 @@
 'use strict';
+var _ = require('lodash');
+var Q = require('q');
+var path = require('path');
+var api_common = require(path.join('..', 'utils', 'api_common.js'));
+var constants = require(path.join('..', '..', 'utils', 'constants.js'));
+var file_reading = require(path.join('..', '..', 'utils', 'file_reading.js'));
 
 
 /**
@@ -9,31 +15,8 @@
  * returns List
  **/
 exports.get_exchanges = function(from,to) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "datetime" : "2000-01-23T04:56:07.000+00:00",
-  "description" : {
-    "unit" : "unit",
-    "sourceZone" : "sourceZone",
-    "target_zone" : "target_zone",
-    "value" : 0.80082819046101150206595775671303272247314453125
-  }
-}, {
-  "datetime" : "2000-01-23T04:56:07.000+00:00",
-  "description" : {
-    "unit" : "unit",
-    "sourceZone" : "sourceZone",
-    "target_zone" : "target_zone",
-    "value" : 0.80082819046101150206595775671303272247314453125
-  }
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+  var time_window = api_common.manage_time_window(from, to);
+  return file_reading.retrieve_period(time_window.from, time_window.to, constants.exchanges);
 }
 
 
@@ -45,31 +28,15 @@ exports.get_exchanges = function(from,to) {
  * to Date End of the period (optional)
  * returns List
  **/
-exports.get_zone_exchanges = function(zoneId,from,to) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "datetime" : "2000-01-23T04:56:07.000+00:00",
-  "description" : {
-    "unit" : "unit",
-    "sourceZone" : "sourceZone",
-    "target_zone" : "target_zone",
-    "value" : 0.80082819046101150206595775671303272247314453125
-  }
-}, {
-  "datetime" : "2000-01-23T04:56:07.000+00:00",
-  "description" : {
-    "unit" : "unit",
-    "sourceZone" : "sourceZone",
-    "target_zone" : "target_zone",
-    "value" : 0.80082819046101150206595775671303272247314453125
-  }
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+exports.get_zone_exchanges = function(zoneId, from, to) {
+    var defered = Q.defer();
+    var time_window = api_common.manage_time_window(from, to);
+    file_reading.retrieve_period(time_window.from, time_window.to, constants.exchanges).then(function(data) {
+      defered.resolve(_.filter(data, function(snapshot) {
+        var source_zone = _.get(snapshot, [constants.api_wording.description, constants.api_wording.source_zone]);
+        var target_zone = _.get(snapshot, [constants.api_wording.description, constants.api_wording.target_zone]);
+        return source_zone == zoneId || target_zone == zoneId;
+      }));
+    });
+    return defered.promise;
 }
-
