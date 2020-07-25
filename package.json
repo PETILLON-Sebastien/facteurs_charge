@@ -33,7 +33,10 @@
     "q": "1.5.1",
     "node-ffmpeg": "0.0.0",
     "ffmpeg-stream": "0.6.0",
-    "forever": "3.0.0"
+    "forever": "3.0.0",
+    "connect": "^3.2.0",
+    "js-yaml": "^3.3.0",
+    "swagger-tools": "0.10.1"
   },
   "dependencies": {
     "babel-loader": "^8.0.6"

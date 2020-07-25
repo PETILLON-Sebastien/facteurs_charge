@@ -16,6 +16,9 @@ var get_string_list_dates = function(start, end) {
     start_date = moment(start_date.add(1, 'day'));
       dates.push(start_date.format('YYYY-MM-DD'));
   }
+  if(end_date.isSame(moment(), 'day')) {
+    dates.push('current');
+  }
   return dates;
 };
 
@@ -47,12 +50,12 @@ var compute_exchanges = function(input_files) {
   return _.uniqWith(_.flatten(_.merge(input_files)), _.isEqual);
 }
 
-var retrieve_period = function(start, end, data_type, current_data) {
+var retrieve_period = function(start, end, data_type) {
   var dates = get_string_list_dates(start, end);
   var global_defered = Q.defer();
 
   var files_requests = Q.all(_.map(dates, function(date) {
-    var file_name = path.resolve('..', 'data', date + '_' + data_type + '.json');
+    var file_name = path.resolve(__dirname, '..', 'data', date + '_' + data_type + '.json');
     var defered = Q.defer();
     try {
       fs.readFile(file_name, 'UTF-8', function(err, data) {
@@ -66,9 +69,6 @@ var retrieve_period = function(start, end, data_type, current_data) {
 
   files_requests.then(function(data) {
     var files = _.map(_.reject(data, _.isUndefined), JSON.parse);
-    if(moment(end).isSame(moment(), 'day') && current_data) {
-      files.push(current_data);
-    }
     var result;
     if(data_type === constants.consumption || data_type === constants.production) {
       global_defered.resolve(compute_consumption_production(files))
@@ -81,6 +81,4 @@ var retrieve_period = function(start, end, data_type, current_data) {
   return global_defered.promise;
 };
 
-retrieve_period('2020-07-24', '2020-07-25', 'production').then(function(result) {
-  console.log(result)
-});
+exports.retrieve_period = retrieve_period;
