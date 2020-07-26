@@ -6,8 +6,8 @@ var constants = require(path.join('..', '..', 'utils', 'constants.js'));
 exports.manage_time_window = function(from, to) {
   var result = {};
   if(!from || !to) {
-    result.from = moment();
-    result.to = result.from;
+    result.from = moment().add(-1, 'day');
+    result.to = moment();
   } else {
     result.from = moment(from);
     result.to = moment(to);
@@ -17,7 +17,7 @@ exports.manage_time_window = function(from, to) {
 exports.manage_time_window_day_before = function(from, to) {
   var result = {};
   if(!from || !to) {
-    result.from = moment().add(-1, 'day');
+    result.from = moment().add(-2, 'day');
     result.to = moment();
   } else {
     result.from = moment(from).add(-1, 'day');
