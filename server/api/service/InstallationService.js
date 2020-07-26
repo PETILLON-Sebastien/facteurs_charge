@@ -48,6 +48,61 @@ function retrieve_all(from, to) {
   return defered.promise;
 };
 
+function format_capacity(data) {
+  var zones = {};
+  _.forOwn(data, function(date_value, date_key) {
+    _.forOwn(date_value, function(zone_value, zone_key) {
+      if(zone_key !== constants.api_wording.datetime) {
+        if(!zones[zone_key]) {
+          zones[zone_key] = {};
+          zones[zone_key][constants.api_wording.zone_id] = zone_key;
+          zones[zone_key][constants.api_wording.snapshots] = [];
+        }
+        var snapshot = {};
+        snapshot[constants.api_wording.datetime] = date_key;
+        snapshot[constants.api_wording.breakdown] = zone_value[constants.api_wording.breakdown];
+        zones[zone_key][constants.api_wording.snapshots].push(snapshot);
+      }
+    });
+  });
+  return _.values(zones);
+}
+
+function filter_load(all_data) {
+  _.forOwn(all_data, function(part) {
+    if(_.isObject(part) && (part[constants.api_wording.load] != undefined || part[constants.api_wording.production] != undefined || part[constants.api_wording.consumption] != undefined)) {
+      delete part[constants.api_wording.production];
+      delete part[constants.api_wording.capacity];
+    }
+    if (_.isObject(part)) {
+      filter_load(part);
+    }
+  });
+  return all_data;
+}
+
+function filter_installation_type(all_data, installationType) {
+  _.forOwn(all_data, function(part) {
+    if(part[constants.api_wording.breakdown]) {
+      _.merge(part, part[constants.api_wording.breakdown][installationType]);
+      delete part[constants.api_wording.breakdown];
+    } else if (_.isObject(part)) {
+      filter_installation_type(part, installationType);
+    }
+  });
+}
+
+function format_all_values(all_data) {
+  _.forOwn(all_data, function(part, key) {
+    if(_.isObject(part) && (part[constants.api_wording.capacity] != undefined || part[constants.api_wording.production] != undefined || part[constants.api_wording.load] != undefined)) {
+      all_data[key] = api_common.format_values(part);
+    }
+    if (_.isObject(part)) {
+      format_all_values(part);
+    }
+  });
+}
+
 /**
  * Retrieve the breadkdowns
  *
@@ -73,14 +128,8 @@ exports.get_installation = function(installationType, from, to) {
   var defered = Q.defer();
   var time_window = api_common.manage_time_window(from, to);
   retrieve_all(time_window.from, time_window.to).then(function (data) {
-    _.forOwn(data, function(zone) {
-      zone[constants.api_wording.snapshots] = _.map(zone[constants.api_wording.snapshots], function(snapshot) {
-        var result = {};
-        result[constants.api_wording.datetime] = snapshot[constants.api_wording.datetime];
-        result[constants.api_wording.installation] = snapshot[constants.api_wording.breakdown][installationType];
-        return result;
-      });
-    });
+    filter_installation_type(data, installationType);
+    format_all_values(capacity_formatted);
     defered.resolve(data);
   });
   return defered.promise;
@@ -95,106 +144,16 @@ exports.get_installation = function(installationType, from, to) {
  * to Date End of the period (optional)
  * returns List
  **/
-exports.get_installation_capacity = function(installationType,from,to) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "snapshots" : [ {
-    "datetime" : "2000-01-23T04:56:07.000+00:00",
-    "details" : [ {
-      "name" : "name",
-      "details" : [ null, null ],
-      "power" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      }
-    }, {
-      "name" : "name",
-      "details" : [ null, null ],
-      "power" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      }
-    } ],
-    "power" : {
-      "unit" : "unit",
-      "value" : 0.80082819046101150206595775671303272247314453125
-    }
-  }, {
-    "datetime" : "2000-01-23T04:56:07.000+00:00",
-    "details" : [ {
-      "name" : "name",
-      "details" : [ null, null ],
-      "power" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      }
-    }, {
-      "name" : "name",
-      "details" : [ null, null ],
-      "power" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      }
-    } ],
-    "power" : {
-      "unit" : "unit",
-      "value" : 0.80082819046101150206595775671303272247314453125
-    }
-  } ],
-  "zoneId" : "zoneId"
-}, {
-  "snapshots" : [ {
-    "datetime" : "2000-01-23T04:56:07.000+00:00",
-    "details" : [ {
-      "name" : "name",
-      "details" : [ null, null ],
-      "power" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      }
-    }, {
-      "name" : "name",
-      "details" : [ null, null ],
-      "power" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      }
-    } ],
-    "power" : {
-      "unit" : "unit",
-      "value" : 0.80082819046101150206595775671303272247314453125
-    }
-  }, {
-    "datetime" : "2000-01-23T04:56:07.000+00:00",
-    "details" : [ {
-      "name" : "name",
-      "details" : [ null, null ],
-      "power" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      }
-    }, {
-      "name" : "name",
-      "details" : [ null, null ],
-      "power" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      }
-    } ],
-    "power" : {
-      "unit" : "unit",
-      "value" : 0.80082819046101150206595775671303272247314453125
-    }
-  } ],
-  "zoneId" : "zoneId"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+exports.get_installation_capacity = function(installationType, from, to) {
+    var defered = Q.defer();
+    var time_window = api_common.manage_time_window(from, to);
+    file_reading.retrieve_period(time_window.from, time_window.to, constants.capacity).then(function(data) {
+      var capacity_formatted = format_capacity(data);
+      filter_installation_type(capacity_formatted, installationType);
+      format_all_values(capacity_formatted);
+      defered.resolve(capacity_formatted);
+    });
+    return defered.promise;
 }
 
 
@@ -207,95 +166,15 @@ exports.get_installation_capacity = function(installationType,from,to) {
  * returns List
  **/
 exports.get_installation_load = function(installationType,from,to) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "snapshots" : [ {
-    "datetime" : "2000-01-23T04:56:07.000+00:00",
-    "load" : {
-      "value" : 0.8008281904610115
-    },
-    "details" : [ {
-      "load" : {
-        "value" : 0.8008281904610115
-      },
-      "name" : "name",
-      "details" : [ null, null ]
-    }, {
-      "load" : {
-        "value" : 0.8008281904610115
-      },
-      "name" : "name",
-      "details" : [ null, null ]
-    } ]
-  }, {
-    "datetime" : "2000-01-23T04:56:07.000+00:00",
-    "load" : {
-      "value" : 0.8008281904610115
-    },
-    "details" : [ {
-      "load" : {
-        "value" : 0.8008281904610115
-      },
-      "name" : "name",
-      "details" : [ null, null ]
-    }, {
-      "load" : {
-        "value" : 0.8008281904610115
-      },
-      "name" : "name",
-      "details" : [ null, null ]
-    } ]
-  } ],
-  "zoneId" : "zoneId"
-}, {
-  "snapshots" : [ {
-    "datetime" : "2000-01-23T04:56:07.000+00:00",
-    "load" : {
-      "value" : 0.8008281904610115
-    },
-    "details" : [ {
-      "load" : {
-        "value" : 0.8008281904610115
-      },
-      "name" : "name",
-      "details" : [ null, null ]
-    }, {
-      "load" : {
-        "value" : 0.8008281904610115
-      },
-      "name" : "name",
-      "details" : [ null, null ]
-    } ]
-  }, {
-    "datetime" : "2000-01-23T04:56:07.000+00:00",
-    "load" : {
-      "value" : 0.8008281904610115
-    },
-    "details" : [ {
-      "load" : {
-        "value" : 0.8008281904610115
-      },
-      "name" : "name",
-      "details" : [ null, null ]
-    }, {
-      "load" : {
-        "value" : 0.8008281904610115
-      },
-      "name" : "name",
-      "details" : [ null, null ]
-    } ]
-  } ],
-  "zoneId" : "zoneId"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+    var defered = Q.defer();
+    var time_window = api_common.manage_time_window(from, to);
+    retrieve_all(time_window.from, time_window.to, constants.capacity).then(function(data) {
+      var load = filter_load(data, constants.api_wording.load);
+      filter_installation_type(load, installationType);
+      defered.resolve(load);
+    });
+    return defered.promise;
 }
-
 
 /**
  * Retrieve the production of the specified installation

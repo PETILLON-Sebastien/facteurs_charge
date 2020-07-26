@@ -29,12 +29,22 @@ exports.manage_time_window_day_before = function(from, to) {
 exports.format_values = function(object) {
   var formatted = {};
   _.forOwn(object, function(value, key) {
-    var newObject = {};
-    if(key == constants.api_wording.production || key == constants.api_wording.capacity) {
-      newObject[constants.api_wording.unit] = constants.units.mega_watt;
+    if(key === constants.api_wording.production || key == constants.api_wording.capacity || key == constants.api_wording.load) {
+      var number_of_properties = _.filter(_.keys(object), function(key) {
+        return key == constants.api_wording.production || key == constants.api_wording.capacity || key == constants.api_wording.load;
+      }).length;
+      var newObject = {};
+      if(key == constants.api_wording.production || key == constants.api_wording.capacity) {
+        newObject[constants.api_wording.unit] = constants.units.mega_watt;
+      }
+      newObject[constants.api_wording.value] = value;
+      var used_key = key == constants.api_wording.load
+        ? constants.api_wording.load
+        : (number_of_properties == 1 ? constants.api_wording.power : key);
+      formatted[used_key] = newObject;
+    } else {
+      formatted[key] = value;
     }
-    newObject[constants.api_wording.value] = value;
-    formatted[key] = newObject;
   });
   return formatted;
 };

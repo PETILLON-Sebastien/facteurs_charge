@@ -125,7 +125,7 @@ var extract_production_snapshot_zones = function(records) {
  */
 var merge_installation_capacity = function(capacity1, capacity2) {
     var result = {};
-    result[constants.api_wording.capacity] = _.max([capacity1[constants.api_wording.capacity], capacity2[constants.api_wording.capacity]]);
+    result[constants.api_wording.capacity] = _.max([capacity1[constants.api_wording.capacity], capacity2[constants.api_wording.capacity], 0]);
     if(capacity1[constants.api_wording.details] !== undefined) {
         _.forOwn(capacity1[constants.api_wording.details], function(value, key) {
             var c1 = capacity1[constants.api_wording.details][key];
