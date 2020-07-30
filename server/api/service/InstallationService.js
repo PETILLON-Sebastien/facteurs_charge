@@ -122,6 +122,8 @@ function sum_all(data) {
         }
         return result;
       }, init);
+      var load = snapshot[constants.api_wording.installation][constants.api_wording.production][constants.api_wording.value] / snapshot[constants.api_wording.installation][constants.api_wording.capacity][constants.api_wording.value];
+      _.set(init, [constants.api_wording.load, constants.api_wording.value], load);
       delete snapshot[constants.api_wording.breakdown];
     });
   });
@@ -1309,46 +1311,14 @@ exports.get_zone_installation_production = function(zoneId,installationType,from
  * to Date End of the period (optional)
  * returns List
  **/
-exports.get_zone_installations = function(zoneId,from,to) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "datetime" : "2000-01-23T04:56:07.000+00:00",
-  "installation" : {
-    "load" : {
-      "value" : 0.8008281904610115
-    },
-    "production" : {
-      "unit" : "unit",
-      "value" : 0.80082819046101150206595775671303272247314453125
-    },
-    "capacity" : {
-      "unit" : "unit",
-      "value" : 0.80082819046101150206595775671303272247314453125
-    }
-  }
-}, {
-  "datetime" : "2000-01-23T04:56:07.000+00:00",
-  "installation" : {
-    "load" : {
-      "value" : 0.8008281904610115
-    },
-    "production" : {
-      "unit" : "unit",
-      "value" : 0.80082819046101150206595775671303272247314453125
-    },
-    "capacity" : {
-      "unit" : "unit",
-      "value" : 0.80082819046101150206595775671303272247314453125
-    }
-  }
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+exports.get_zone_installations = function(zoneId, from, to) {
+  var defered = Q.defer();
+  var time_window = api_common.manage_time_window(from, to);
+  retrieve_all(time_window.from, time_window.to).then(function(data) {
+    sum_all(data);
+    defered.resolve(keep_zone(data, zoneId));
   });
+  return defered.promise;
 }
 
 
