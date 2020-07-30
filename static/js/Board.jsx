@@ -29,9 +29,8 @@ export default class Board extends React.Component {
 
     this.zonesDescription = this.getZoneDescriptions();
     this.zoneChanged = this.zoneChanged.bind(this);
-    this.state = {
-      currentZone: { "id": 0, "label": "France" },
-    };
+    this.state = {      currentZone: { id: "FR", label: "France" } //fixme
+  };
 
   }
 
@@ -42,16 +41,23 @@ export default class Board extends React.Component {
   componentDidMount() {
     this.setState({
       actionsVisibles: true,
-      currentZone: { id: 0, label: "France" } //fixme
+      currentZone: { id: "FR", label: "France" } //fixme
     });
   }
 
   zoneChanged(newZoneID) {
-    console.log("New zone : ", newZoneID);
     let currentZoneSelected = _.find(this.zonesDescription, { 'id': newZoneID });
     let labelCurrentZone = currentZoneSelected.label;
 
-    this.setState({ currentZone: { id: newZoneID, label: labelCurrentZone } });
+    let ISOZoneId = "FR";
+
+    if(newZoneID != 0) {
+      ISOZoneId = ISOZoneId.concat("-").concat(newZoneID);
+    }
+
+    console.log("New zone : ", ISOZoneId);
+
+    this.setState({ currentZone: { id: ISOZoneId, label: labelCurrentZone } });
 
   }
 

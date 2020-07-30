@@ -16,48 +16,87 @@ class SlidePowerSources extends React.Component {
     constructor(props) {
         super(props);
 
+
         this.state = {
             latestPowerBreakdown: [],
             powerBreakdownHistory: [],
             highestSourceOfPower: {},
             timeMarks: {},
-            isLoaded: false
+            isLoaded: false,
+            currentZone: 0
         }
     }
 
     componentDidMount() {
-        const currentZoneId =  this.context.currentZone.id; // todo this is the internal mapping
-        fetch(root_endpoint + "/zones/FR/installations/production/breakdown")
+        this.setState({ currentZone: this.context.currentZone });
+        this.fetchCurrentZoneData();
+    }
+
+    // static getDerivedStateFromProps(props, state) {
+    //      console.log(props, state);
+    //      return state;
+    // }
+
+    // componentDidUpdate(prevProps) {
+    //     // Typical usage (don't forget to compare props):
+    //     // if (this.props.userID !== prevProps.userID) {
+    //     //   this.fetchData(this.props.userID);
+    //     // }
+    //     console.log(prevProps);
+    //   }
+
+    // componentWillUnmount() {
+    //     // this.fetchCurrentZoneData();
+    //     console.log("Will unmount");
+    //     return true;
+    // }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        // this.fetchCurrentZoneData();
+        console.log("ZEUBI");
+        console.log(nextProps, nextState);
+        return false;
+    }
+
+    fetchCurrentZoneData() {
+        console.log("Fetching data");
+        const currentZoneId = this.context.currentZone.id; // todo this is the internal mapping
+        fetch(root_endpoint + "/zones/"+currentZoneId+"/installations/production/breakdown")
             .then((data) => data.json()).then((data) => {
                 // PRECONDITION: Considering timely ordered data
-                const latestData = data[data.length-1].breakdown;
+                const latestData = data[data.length - 1].breakdown;
                 const highestSourceOfPower = this.findHighestSourceOfPower(latestData);
                 const timeMarks = this.buildTimeMarks(data);
 
-                this.setState({ 
+                this.setState({
                     isLoaded: true,
                     latestPowerBreakdown: latestData,
                     powerBreakdownHistory: data,
                     highestSourceOfPower: highestSourceOfPower,
-                    timeMarks:timeMarks
-                 });
+                    timeMarks: timeMarks
+                });
             });
     }
 
-
+    // TODO this should be part of the Graph's responsability
     buildTimeMarks(history) {
         let marks = {};
 
         const stepSize = 100 / (history.length - 1);
         let nbOfInstants = 0;
 
+        const hardcodedTickTime = [0, 6, 12, 18];
+
         history.forEach((instant) => {
             const currentTimestamp = instant.datetime;
-            const currentTimestampFormatted = moment(currentTimestamp).format("HH:mm");
-            const currentInstantIndex = (nbOfInstants * stepSize);
-            marks[currentInstantIndex] = currentTimestampFormatted;
+            // fixme console.log(hardcodedTickTime, moment(currentTimestamp).hours(), (hardcodedTickTime.lastIndexOf(moment(currentTimestamp).hours()) != -1));
+            if (hardcodedTickTime.lastIndexOf(moment(currentTimestamp).hours()) != -1) {
+                const currentTimestampFormatted = moment(currentTimestamp).format("HH:mm");
+                const currentInstantIndex = (nbOfInstants * stepSize);
+                marks[moment(currentTimestamp).hours()] = currentTimestampFormatted;
 
-            nbOfInstants++;
+                nbOfInstants++;
+            }
         });
 
         return marks;
@@ -81,6 +120,7 @@ class SlidePowerSources extends React.Component {
     }
 
     render() {
+        console.log("Refreshing slide.");
 
         if (this.state.isLoaded) {
             const currentData = this.state.latestPowerBreakdown;
@@ -88,6 +128,7 @@ class SlidePowerSources extends React.Component {
             const currentZoneName = this.context.currentZone.label;
 
             return (
+
                 <React.Fragment>
 
                     <div className="columns">
@@ -127,10 +168,12 @@ class SlidePowerSources extends React.Component {
 
                         <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-12-tablet is-12-mobile has-text-centered" style={{ "marginTop": "2rem" }}>
                             <GraphPowerSourceBreakdown productionsOverTime={this.state.powerBreakdownHistory} currentZoneName={currentZoneName} />
-                            <TimeSlider hours={this.state.timeMarks} currentTime={0} endOfTimeFrame={this.state.timeMarks[this.state.timeMarks.length - 1]} />
+                            {/* <TimeSlider hours={this.state.timeMarks} currentTime={0} endOfTimeFrame={this.state.timeMarks[this.state.timeMarks.length - 1]} /> */}
                         </div>
                     </div>
+
                 </React.Fragment>
+
             );
         }
         else {

@@ -22,13 +22,12 @@ class SlideLoad extends React.Component {
             timeMarks: {},
             isLoaded: false
         }
-
     }
 
 
     componentDidMount() {
         const currentZoneId = this.context.currentZone.id; // todo this is the internal mapping
-        fetch(root_endpoint + "/zones/FR-11/installations/breakdown")
+        fetch(root_endpoint + "/zones/"+currentZoneId+"/installations/breakdown")
             .then((data) => data.json()).then((data) => {
                 console.log("Receiving breakdown of installations for zone", currentZoneId, data);
                 // PRECONDITION: Considering timely ordered data
