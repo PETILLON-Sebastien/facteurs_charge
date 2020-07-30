@@ -76,14 +76,19 @@ var extract_consumption_snapshot_zones = function(records) {
 var extract_installation_production = function(installation, snapshot) {
     var extraction = {};
     var production = _.floor(field_getter(snapshot, installation.name));
-    _.set(extraction, [constants.api_wording.production], production);
 
     // If installation has details and the zone is France
     if(installation.details !== undefined && snapshot[constants.opendatareseaux_wording.fields][constants.opendatareseaux_wording.code_insee_region] === undefined) {
+        var recompute_sum = production === 0;
         _.forOwn(installation.details, function(detail) {
             _.set(extraction, [constants.api_wording.details, detail.api_name], extract_installation_production(detail, snapshot));
+            // Compute fossil data as the national API does not serve it anymore
+            if(recompute_sum) {
+              production += field_getter(snapshot, detail.name);
+            }
         });
     }
+    _.set(extraction, [constants.api_wording.production], production);
     return extraction;
 };
 
@@ -170,6 +175,7 @@ var extract_installation_capacity = function(installation, snapshot) {
 
     // If installation has details and the zone is France
     if(installation.details !== undefined && snapshot[constants.opendatareseaux_wording.fields][constants.opendatareseaux_wording.code_insee_region] === undefined) {
+        var sum = 0;
         _.forOwn(installation.details, function(detail) {
             _.set(extraction, [constants.api_wording.details, detail.api_name], extract_installation_capacity(detail, snapshot));
         });
