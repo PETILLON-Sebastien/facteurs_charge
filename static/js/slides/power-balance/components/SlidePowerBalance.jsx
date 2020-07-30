@@ -298,7 +298,7 @@ class SlidePowerBalance extends React.Component {
         const currentZoneID = this.context.currentZone.id;
         const currentZoneName = this.context.currentZone.label;
 
-        console.log("GET");
+        // console.log("GET");
 
         return (
             <React.Fragment>

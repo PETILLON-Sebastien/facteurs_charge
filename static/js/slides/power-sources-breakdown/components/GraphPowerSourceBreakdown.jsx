@@ -30,7 +30,7 @@ class ProductionBySourcesGraph extends React.Component {
 
     render() {
 
-        var sourcesSimples = ["solar", "wind", "hydraulic", "bioenergies", "thermal", "nuclear"];
+        var sourcesSimples = ["solar", "wind", "hydraulic", "bioenergy", "thermal", "nuclear"];
 
         const currentZoneName = this.props.currentZoneName;
 
@@ -39,18 +39,22 @@ class ProductionBySourcesGraph extends React.Component {
 
         // For each moment in time in the data
         dataArray.forEach((datedData) => {
+            const currentBreakdown = datedData.powerBreakdown;
 
             // For each type of production recorded that moment
-            Object.keys(datedData.production).forEach((typeOfSource) => {
+            Object.keys(currentBreakdown).forEach((typeOfSource) => {
                 let overallProductionsForCurrentSource = productionsArrayPerSource[typeOfSource] || [];
 
                 // Add the value of production of this source for the given time
-                const productionOfThisSourceThatDay = datedData.production[typeOfSource].value;
-                const date = moment(datedData.timestamp).valueOf();
+                const productionOfThisSourceThatDay = currentBreakdown[typeOfSource].value;
+                const date = moment(datedData.datetime).valueOf();
                 overallProductionsForCurrentSource.push([date, productionOfThisSourceThatDay]);
                 productionsArrayPerSource[typeOfSource] = overallProductionsForCurrentSource;
             });
         });
+
+        // console.log(productionsArrayPerSource);
+
 
         let series = [
             {
@@ -75,7 +79,7 @@ class ProductionBySourcesGraph extends React.Component {
                 name: "Bioénergies",
                 stack: 0,
                 color: "rgb(22, 106, 87)",
-                data: productionsArrayPerSource.bioenergies
+                data: productionsArrayPerSource.bioenergy
             },
             {
                 name: "Fossile",

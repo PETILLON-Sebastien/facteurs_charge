@@ -4,11 +4,13 @@ import GraphLoadEvolution from "./GraphLoadEvolution";
 import { ZoneContext } from '../../../ZoneContext';
 import PowerSourceNameInline from "../../../power-sources/components/PowerSourceNameInline";
 
+
+// const API_ENDPOINT = process.env.API_ENDPOINT;
+
 class SlideLoad extends React.Component {
 
     constructor(props) {
         super(props);
-
 
         const fakeData = this.get();
         const [loadHistory, data] = [JSON.parse(fakeData[0]), JSON.parse(fakeData[1])];
@@ -26,6 +28,10 @@ class SlideLoad extends React.Component {
     }
 
     get() {
+        // fetch(process.env.API_URL + "/api/v1/zones/installations/load/breakdown").then((data) => data.json()).then((data) => {
+        //     console.log(data);
+        // });
+
         const loadHistory = '[{"timestamp":"2020-05-26T12:00:12.853Z","zoneId":"string","load":{"solar":{"value":1200,"unit":"%"},"wind":{"value":1000,"unit":"%"},"hydraulic":{"value":1000,"unit":"%"},"nuclear":{"value":1000,"unit":"%"},"bioenergies":{"value":1000,"unit":"%"},"fossil":{"value":1900,"unit":"%"}}},      {"timestamp":"2020-05-26T12:19:12.853Z","zoneId":"string","load":{"solar":{"value":300,"unit":"%"},"wind":{"value":330,"unit":"%"},"hydraulic":{"value":300,"unit":"%"},"nuclear":{"value":300,"unit":"%"},"bioenergies":{"value":300,"unit":"%"},"fossil":{"value":300,"unit":"%"}}}]';
         const breakdown = '[{"timestamp":"2020-05-26T15:40:36.037Z","zoneId":"MW","breakdown":{"solar":{"capacity":{"value":100,"unit":"MW"},"production":{"value":10,"unit":"MW"},"load":{"value":10,"unit":"%"}},"wind":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"hydraulic":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"nuclear":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"bioenergies":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"fossil":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}}}},{"timestamp":"2020-05-26T15:54:36.037Z","zoneId":"MW","breakdown":{"solar":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"wind":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"hydraulic":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"nuclear":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"bioenergies":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"fossil":{"capacity":{"value":100,"unit":"MW"},"production":{"value":10,"unit":"MW"},"load":{"value":10,"unit":"%"}}}}]';
         return [loadHistory, breakdown];
@@ -77,7 +83,7 @@ class SlideLoad extends React.Component {
             <React.Fragment>
                 <div className="columns is-centered" >
                     <div className="column has-text-centered">
-                        <h1 className="is-size-1">Facteur de charge</h1>
+        <h1 className="is-size-1">Facteur de charge </h1>
                     </div>
                 </div>
                 <div className="columns  is-centered" style={{ "marginBottom": "4rem" }}>

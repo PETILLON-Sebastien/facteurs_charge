@@ -36,7 +36,7 @@ class PowerSourceLogo extends React.Component {
             case "nuclear":
                 svg = <NuclearPowerPlant pourcentage={load} />;
                 break;
-            case "bioenergies":
+            case "bioenergy":
                 svg = <Bioenergies pourcentage={load} />;
                 break;
             case "fossil":

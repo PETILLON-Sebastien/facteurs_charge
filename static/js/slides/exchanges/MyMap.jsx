@@ -218,7 +218,7 @@ class MyMap extends React.Component {
       });
     });
 
-    console.log(stubArray);
+    // console.log(stubArray);
 
     this.chart = createRef();
 

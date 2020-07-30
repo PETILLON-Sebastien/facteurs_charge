@@ -54,9 +54,9 @@
   "scripts": {
     "build": "npm run css-deploy &&  webpack -p --env.API_URL=https://www.facteurs-charge.fr --progress --config static/webpack.config.js",
     "dev-build": "npm run css-deploy && webpack --env.API_URL=http://localhost:8080 --progress -d --config static/webpack.config.js",
-    "watch": "concurrently  \"npm run client-watch\" \"npm run server-watch\" \"npm run css-watch\"",
+    "watch": "concurrently  \"npm run client-watch\" \"npm run css-watch\"",
     "client-watch": "webpack --env.API_URL=http://localhost:8080 --progress -d --config static/webpack.config.js --watch",
-    "server-watch": "ENVIRONMENT=test nodemon server.js",
+    "server-watch": "set ENVIRONMENT=test nodemon server.js",
     "css-deploy": "npm run css-build && npm run css-postcss",
     "css-build": "node-sass static/_sass/main.scss static/css/main.css",
     "css-postcss": "postcss --use autoprefixer --output static/css/main.css static/css/main.css",

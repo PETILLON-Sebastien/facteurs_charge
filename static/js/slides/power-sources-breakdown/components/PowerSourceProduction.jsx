@@ -22,6 +22,7 @@ class PowerSourceProduction extends React.Component {
     }
 
     buildKPI(kpiName, kpiDescription, cssClass = '') {
+        console.log(kpiName, kpiDescription, cssClass);
         if (kpiDescription != undefined) {
             const kpiValue = Math.round(kpiDescription.value);
             const kpiUnit = kpiDescription.unit;

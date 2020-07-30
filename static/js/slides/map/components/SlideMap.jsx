@@ -16,7 +16,7 @@ class SlideMap extends React.Component {
     }
 
     get() {
-        const installationsArray = ["solar", "wind", "nuclear", "hydraulic", "fossil", "bioenergies"];
+        const installationsArray = ["solar", "wind", "nuclear", "hydraulic", "fossil", "bioenergy"];
         let data = [];
         for (let i = 0; i < 14; i++) {
             data.push({

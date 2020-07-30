@@ -21,7 +21,7 @@ class PowerSourceStyleMap {
                 this.name = "Nucléaire";
                 this.classes += "nuclear"
                 break;
-            case "bioenergies":
+            case "bioenergy":
                 this.name = "Bioénergies";
                 this.classes += "bioenergies"
                 break;
