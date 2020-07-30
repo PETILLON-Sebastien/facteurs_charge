@@ -143,6 +143,12 @@ function sum_all_capacity(data) {
   });
 }
 
+function keep_zone(data, zone_id) {
+  var to_find = {};
+  to_find[constants.api_wording.zone_id] = zone_id;
+  return _.get(_.find(data, to_find), constants.api_wording.snapshots);
+}
+
 /**
  * Retrieve the breadkdowns
  *
@@ -1679,70 +1685,12 @@ exports.get_zone_installations_production = function(zoneId,from,to) {
  * to Date End of the period (optional)
  * returns List
  **/
-exports.get_zone_installations_production_breakdown = function(zoneId,from,to) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "datetime" : "2000-01-23T04:56:07.000+00:00",
-  "powerBreakdown" : {
-    "hydraulic" : {
-      "unit" : "unit",
-      "value" : 0.80082819046101150206595775671303272247314453125
-    },
-    "bioenergy" : {
-      "unit" : "unit",
-      "value" : 0.80082819046101150206595775671303272247314453125
-    },
-    "solar" : {
-      "unit" : "unit",
-      "value" : 0.80082819046101150206595775671303272247314453125
-    },
-    "nuclear" : {
-      "unit" : "unit",
-      "value" : 0.80082819046101150206595775671303272247314453125
-    },
-    "fossil" : {
-      "unit" : "unit",
-      "value" : 0.80082819046101150206595775671303272247314453125
-    },
-    "wind" : {
-      "unit" : "unit",
-      "value" : 0.80082819046101150206595775671303272247314453125
-    }
-  }
-}, {
-  "datetime" : "2000-01-23T04:56:07.000+00:00",
-  "powerBreakdown" : {
-    "hydraulic" : {
-      "unit" : "unit",
-      "value" : 0.80082819046101150206595775671303272247314453125
-    },
-    "bioenergy" : {
-      "unit" : "unit",
-      "value" : 0.80082819046101150206595775671303272247314453125
-    },
-    "solar" : {
-      "unit" : "unit",
-      "value" : 0.80082819046101150206595775671303272247314453125
-    },
-    "nuclear" : {
-      "unit" : "unit",
-      "value" : 0.80082819046101150206595775671303272247314453125
-    },
-    "fossil" : {
-      "unit" : "unit",
-      "value" : 0.80082819046101150206595775671303272247314453125
-    },
-    "wind" : {
-      "unit" : "unit",
-      "value" : 0.80082819046101150206595775671303272247314453125
-    }
-  }
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+exports.get_zone_installations_production_breakdown = function(zoneId, from, to) {
+    var defered = Q.defer();
+    var time_window = api_common.manage_time_window(from, to);
+    file_reading.retrieve_period(time_window.from, time_window.to, constants.production).then(function(data) {
+      format_all_values(data);
+      defered.resolve(keep_zone(data, zoneId));
+    });
+    return defered.promise;
 }
