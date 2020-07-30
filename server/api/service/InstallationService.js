@@ -103,6 +103,46 @@ function format_all_values(all_data) {
   });
 }
 
+function sum_all(data) {
+  _.forOwn(data, function(zone) {
+    _.forOwn(zone[constants.api_wording.snapshots], function(snapshot) {
+      var init = {};
+      _.set(init, [constants.api_wording.production, constants.api_wording.value], 0);
+      _.set(init, [constants.api_wording.capacity, constants.api_wording.value], 0);
+      snapshot[constants.api_wording.installation] = _.reduce(snapshot[constants.api_wording.breakdown], function(result, value, key) {
+        var production_value = _.get(value, [constants.api_wording.production, constants.api_wording.value]);
+        var capacity_value = _.get(value, [constants.api_wording.capacity, constants.api_wording.value]);
+        result[constants.api_wording.production][constants.api_wording.value] += production_value ? production_value : 0;
+        if(production_value && !result[constants.api_wording.production][constants.api_wording.unit]) {
+          result[constants.api_wording.production][constants.api_wording.unit] = value[constants.api_wording.production][constants.api_wording.unit];
+        }
+        result[constants.api_wording.capacity][constants.api_wording.value] += capacity_value ? capacity_value : 0;
+        if(capacity_value && !result[constants.api_wording.capacity][constants.api_wording.unit]) {
+          result[constants.api_wording.capacity][constants.api_wording.unit] = value[constants.api_wording.capacity][constants.api_wording.unit];
+        }
+        return result;
+      }, init);
+      delete snapshot[constants.api_wording.breakdown];
+    });
+  });
+}
+
+function sum_all_capacity(data) {
+  _.forOwn(data, function(zone) {
+    _.forOwn(zone[constants.api_wording.snapshots], function(snapshot) {
+      var init = {};
+      _.set(init, [constants.api_wording.value], 0);
+      snapshot[constants.api_wording.power] = _.reduce(snapshot[constants.api_wording.breakdown], function(result, value, key) {
+        var capacity_value = _.get(value, [constants.api_wording.capacity]);
+        result[constants.api_wording.value] += capacity_value ? capacity_value : 0;
+        result[constants.api_wording.unit] = constants.units.mega_watt;
+        return result;
+      }, init);
+      delete snapshot[constants.api_wording.breakdown];
+    });
+  });
+}
+
 /**
  * Retrieve the breadkdowns
  *
@@ -165,10 +205,10 @@ exports.get_installation_capacity = function(installationType, from, to) {
  * to Date End of the period (optional)
  * returns List
  **/
-exports.get_installation_load = function(installationType,from,to) {
+exports.get_installation_load = function(installationType, from, to) {
     var defered = Q.defer();
     var time_window = api_common.manage_time_window(from, to);
-    retrieve_all(time_window.from, time_window.to, constants.capacity).then(function(data) {
+    retrieve_all(time_window.from, time_window.to).then(function(data) {
       var load = filter_load(data, constants.api_wording.load);
       filter_installation_type(load, installationType);
       defered.resolve(load);
@@ -184,106 +224,15 @@ exports.get_installation_load = function(installationType,from,to) {
  * to Date End of the period (optional)
  * returns List
  **/
-exports.get_installation_production = function(installationType,from,to) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "snapshots" : [ {
-    "datetime" : "2000-01-23T04:56:07.000+00:00",
-    "details" : [ {
-      "name" : "name",
-      "details" : [ null, null ],
-      "power" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      }
-    }, {
-      "name" : "name",
-      "details" : [ null, null ],
-      "power" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      }
-    } ],
-    "power" : {
-      "unit" : "unit",
-      "value" : 0.80082819046101150206595775671303272247314453125
-    }
-  }, {
-    "datetime" : "2000-01-23T04:56:07.000+00:00",
-    "details" : [ {
-      "name" : "name",
-      "details" : [ null, null ],
-      "power" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      }
-    }, {
-      "name" : "name",
-      "details" : [ null, null ],
-      "power" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      }
-    } ],
-    "power" : {
-      "unit" : "unit",
-      "value" : 0.80082819046101150206595775671303272247314453125
-    }
-  } ],
-  "zoneId" : "zoneId"
-}, {
-  "snapshots" : [ {
-    "datetime" : "2000-01-23T04:56:07.000+00:00",
-    "details" : [ {
-      "name" : "name",
-      "details" : [ null, null ],
-      "power" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      }
-    }, {
-      "name" : "name",
-      "details" : [ null, null ],
-      "power" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      }
-    } ],
-    "power" : {
-      "unit" : "unit",
-      "value" : 0.80082819046101150206595775671303272247314453125
-    }
-  }, {
-    "datetime" : "2000-01-23T04:56:07.000+00:00",
-    "details" : [ {
-      "name" : "name",
-      "details" : [ null, null ],
-      "power" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      }
-    }, {
-      "name" : "name",
-      "details" : [ null, null ],
-      "power" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      }
-    } ],
-    "power" : {
-      "unit" : "unit",
-      "value" : 0.80082819046101150206595775671303272247314453125
-    }
-  } ],
-  "zoneId" : "zoneId"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+exports.get_installation_production = function(installationType, from, to) {
+      var defered = Q.defer();
+      var time_window = api_common.manage_time_window(from, to);
+      file_reading.retrieve_period(time_window.from, time_window.to, constants.production).then(function(data) {
+        filter_installation_type(data, installationType);
+        format_all_values(data);
+        defered.resolve(data);
+      });
+      return defered.promise;
 }
 
 
@@ -295,81 +244,13 @@ exports.get_installation_production = function(installationType,from,to) {
  * returns List
  **/
 exports.get_installations = function(from,to) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "snapshots" : [ {
-    "datetime" : "2000-01-23T04:56:07.000+00:00",
-    "installation" : {
-      "load" : {
-        "value" : 0.8008281904610115
-      },
-      "production" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      },
-      "capacity" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      }
-    }
-  }, {
-    "datetime" : "2000-01-23T04:56:07.000+00:00",
-    "installation" : {
-      "load" : {
-        "value" : 0.8008281904610115
-      },
-      "production" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      },
-      "capacity" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      }
-    }
-  } ],
-  "zoneId" : "zoneId"
-}, {
-  "snapshots" : [ {
-    "datetime" : "2000-01-23T04:56:07.000+00:00",
-    "installation" : {
-      "load" : {
-        "value" : 0.8008281904610115
-      },
-      "production" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      },
-      "capacity" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      }
-    }
-  }, {
-    "datetime" : "2000-01-23T04:56:07.000+00:00",
-    "installation" : {
-      "load" : {
-        "value" : 0.8008281904610115
-      },
-      "production" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      },
-      "capacity" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      }
-    }
-  } ],
-  "zoneId" : "zoneId"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+      var defered = Q.defer();
+      var time_window = api_common.manage_time_window(from, to);
+      retrieve_all(time_window.from, time_window.to).then(function(data) {
+        sum_all(data);
+        defered.resolve(data);
+      });
+      return defered.promise;
 }
 
 
@@ -381,105 +262,15 @@ exports.get_installations = function(from,to) {
  * returns List
  **/
 exports.get_installations_capacity = function(from,to) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = [ {
-  "snapshots" : [ {
-    "datetime" : "2000-01-23T04:56:07.000+00:00",
-    "details" : [ {
-      "name" : "name",
-      "details" : [ null, null ],
-      "power" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      }
-    }, {
-      "name" : "name",
-      "details" : [ null, null ],
-      "power" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      }
-    } ],
-    "power" : {
-      "unit" : "unit",
-      "value" : 0.80082819046101150206595775671303272247314453125
-    }
-  }, {
-    "datetime" : "2000-01-23T04:56:07.000+00:00",
-    "details" : [ {
-      "name" : "name",
-      "details" : [ null, null ],
-      "power" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      }
-    }, {
-      "name" : "name",
-      "details" : [ null, null ],
-      "power" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      }
-    } ],
-    "power" : {
-      "unit" : "unit",
-      "value" : 0.80082819046101150206595775671303272247314453125
-    }
-  } ],
-  "zoneId" : "zoneId"
-}, {
-  "snapshots" : [ {
-    "datetime" : "2000-01-23T04:56:07.000+00:00",
-    "details" : [ {
-      "name" : "name",
-      "details" : [ null, null ],
-      "power" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      }
-    }, {
-      "name" : "name",
-      "details" : [ null, null ],
-      "power" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      }
-    } ],
-    "power" : {
-      "unit" : "unit",
-      "value" : 0.80082819046101150206595775671303272247314453125
-    }
-  }, {
-    "datetime" : "2000-01-23T04:56:07.000+00:00",
-    "details" : [ {
-      "name" : "name",
-      "details" : [ null, null ],
-      "power" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      }
-    }, {
-      "name" : "name",
-      "details" : [ null, null ],
-      "power" : {
-        "unit" : "unit",
-        "value" : 0.80082819046101150206595775671303272247314453125
-      }
-    } ],
-    "power" : {
-      "unit" : "unit",
-      "value" : 0.80082819046101150206595775671303272247314453125
-    }
-  } ],
-  "zoneId" : "zoneId"
-} ];
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
+    var defered = Q.defer();
+    var time_window = api_common.manage_time_window(from, to);
+    file_reading.retrieve_period(time_window.from, time_window.to, constants.capacity).then(function(data) {;
+      var capacity_formatted = format_capacity(data);
+      sum_all_capacity(capacity_formatted)
+      format_all_values(capacity_formatted);
+      defered.resolve(capacity_formatted);
+    });
+    return defered.promise;
 }
 
 
