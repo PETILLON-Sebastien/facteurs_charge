@@ -27,7 +27,7 @@ class SlidePowerSources extends React.Component {
 
     componentDidMount() {
         const currentZoneId =  this.context.currentZone.id; // todo this is the internal mapping
-        fetch(root_endpoint + "/zones/FR-11/installations/production/breakdown")
+        fetch(root_endpoint + "/zones/FR/installations/production/breakdown")
             .then((data) => data.json()).then((data) => {
                 // PRECONDITION: Considering timely ordered data
                 const latestData = data[data.length-1].breakdown;

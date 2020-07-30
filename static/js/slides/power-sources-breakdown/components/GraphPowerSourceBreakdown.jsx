@@ -29,10 +29,7 @@ class ProductionBySourcesGraph extends React.Component {
     }
 
     render() {
-
-        var sourcesSimples = ["solar", "wind", "hydraulic", "bioenergy", "thermal", "nuclear"];
-
-        const currentZoneName = this.props.currentZoneName;
+        const currentZoneName = this.props.currentZoneName; // todo should be taken from the context
 
         const dataArray = this.props.productionsOverTime;
         let productionsArrayPerSource = {};
@@ -46,14 +43,14 @@ class ProductionBySourcesGraph extends React.Component {
                 let overallProductionsForCurrentSource = productionsArrayPerSource[typeOfSource] || [];
 
                 // Add the value of production of this source for the given time
-                const productionOfThisSourceThatDay = currentBreakdown[typeOfSource].value;
+                const productionOfThisSourceThatDay = currentBreakdown[typeOfSource].power.value;
                 const date = moment(datedData.datetime).valueOf();
                 overallProductionsForCurrentSource.push([date, productionOfThisSourceThatDay]);
                 productionsArrayPerSource[typeOfSource] = overallProductionsForCurrentSource;
             });
         });
 
-        // console.log(productionsArrayPerSource);
+        console.log(productionsArrayPerSource);
 
 
         let series = [
