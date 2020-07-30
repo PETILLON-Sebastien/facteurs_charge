@@ -5,50 +5,60 @@ import { ZoneContext } from '../../../ZoneContext';
 import PowerSourceNameInline from "../../../power-sources/components/PowerSourceNameInline";
 
 
-// const API_ENDPOINT = process.env.API_ENDPOINT;
+// TODO this should be shared accross components somehow
+const root_endpoint = process.env.API_URL + "/api/v1";
 
 class SlideLoad extends React.Component {
 
     constructor(props) {
         super(props);
 
-        const fakeData = this.get();
-        const [loadHistory, data] = [JSON.parse(fakeData[0]), JSON.parse(fakeData[1])];
-        let stub = data[data.length-1];
-
-        const mostLoaded = this.findMostLoaded(stub.breakdown);
-        const leastLoaded = this.findLeastLoaded(stub.breakdown);
 
         this.state = {
-            breakdown: stub.breakdown,
-            loadHistory: loadHistory,
-            mostLoaded: mostLoaded,
-            leastLoaded: leastLoaded
-        };
-    }
+            latestBreakdownData: [],
+            breakdownHistory: [],
+            mostLoadedInstallation: {},
+            leastLoadedInstallation: {},
+            timeMarks: {},
+            isLoaded: false
+        }
 
-    get() {
-        // fetch(process.env.API_URL + "/api/v1/zones/installations/load/breakdown").then((data) => data.json()).then((data) => {
-        //     console.log(data);
-        // });
-
-        const loadHistory = '[{"timestamp":"2020-05-26T12:00:12.853Z","zoneId":"string","load":{"solar":{"value":1200,"unit":"%"},"wind":{"value":1000,"unit":"%"},"hydraulic":{"value":1000,"unit":"%"},"nuclear":{"value":1000,"unit":"%"},"bioenergies":{"value":1000,"unit":"%"},"fossil":{"value":1900,"unit":"%"}}},      {"timestamp":"2020-05-26T12:19:12.853Z","zoneId":"string","load":{"solar":{"value":300,"unit":"%"},"wind":{"value":330,"unit":"%"},"hydraulic":{"value":300,"unit":"%"},"nuclear":{"value":300,"unit":"%"},"bioenergies":{"value":300,"unit":"%"},"fossil":{"value":300,"unit":"%"}}}]';
-        const breakdown = '[{"timestamp":"2020-05-26T15:40:36.037Z","zoneId":"MW","breakdown":{"solar":{"capacity":{"value":100,"unit":"MW"},"production":{"value":10,"unit":"MW"},"load":{"value":10,"unit":"%"}},"wind":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"hydraulic":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"nuclear":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"bioenergies":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"fossil":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}}}},{"timestamp":"2020-05-26T15:54:36.037Z","zoneId":"MW","breakdown":{"solar":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"wind":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"hydraulic":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"nuclear":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"bioenergies":{"capacity":{"value":0,"unit":"MW"},"production":{"value":0,"unit":"MW"},"load":{"value":0,"unit":"%"}},"fossil":{"capacity":{"value":100,"unit":"MW"},"production":{"value":10,"unit":"MW"},"load":{"value":10,"unit":"%"}}}}]';
-        return [loadHistory, breakdown];
     }
 
 
-    findMostLoaded(currentData) {
-        let bestComponent = undefined;
-        let best = undefined;
-        Object.keys(currentData).forEach((installation) => {
-            if (best == undefined) {
-                bestComponent = <PowerSourceNameInline type={installation} />;
-                best = currentData[installation];
+    componentDidMount() {
+        const currentZoneId = this.context.currentZone.id; // todo this is the internal mapping
+        fetch(root_endpoint + "/zones/FR-11/installations/breakdown")
+            .then((data) => data.json()).then((data) => {
+                console.log("Receiving breakdown of installations for zone", currentZoneId, data);
+                // PRECONDITION: Considering timely ordered data
+                const latestBreakdownData = data[data.length - 1].breakdown;
+                const mostLoadedInstallation = this.findMostLoaded(latestBreakdownData);
+                const leastLoadedInstallation = this.findLeastLoaded(latestBreakdownData);
+
+                this.setState({
+                    latestBreakdownData: latestBreakdownData,
+                    breakdownHistory: data,
+                    mostLoadedInstallation: mostLoadedInstallation,
+                    leastLoadedInstallation: leastLoadedInstallation,
+                    isLoaded: true
+                });
+            });
+    }
+
+    findMostLoaded(breakdownData) {
+        let bestComponent = undefined, bestLoadValue = undefined;
+        Object.keys(breakdownData).forEach((installationType) => {
+            console.log(breakdownData, installationType);
+            const currentLoadValue = breakdownData[installationType].load.value;
+
+            if (bestComponent == undefined) {
+                bestComponent = <PowerSourceNameInline type={installationType} />;
+                bestLoadValue = currentLoadValue;
             } else {
-                if (currentData[installation].load.value > best.load.value) {
-                    bestComponent = <PowerSourceNameInline type={installation} />;
-                    best = currentData[installation];
+                if (currentLoadValue > bestLoadValue) {
+                    bestComponent = <PowerSourceNameInline type={installationType} />;
+                    bestLoadValue = currentLoadValue;
                 }
             }
         });
@@ -56,17 +66,17 @@ class SlideLoad extends React.Component {
         return bestComponent;
     }
 
-    findLeastLoaded(currentData) {
+    findLeastLoaded(breakdownData) {
         let bestComponent = undefined;
         let best = undefined;
-        Object.keys(currentData).forEach((installation) => {
+        Object.keys(breakdownData).forEach((installationType) => {
             if (best == undefined) {
-                bestComponent = <PowerSourceNameInline type={installation} />;
-                best = currentData[installation];
+                bestComponent = <PowerSourceNameInline type={installationType} />;
+                best = breakdownData[installationType];
             } else {
-                if (currentData[installation].load.value < best.load.value) {
-                    bestComponent = <PowerSourceNameInline type={installation} />;
-                    best = currentData[installation];
+                if (breakdownData[installationType].load.value < best.load.value) {
+                    bestComponent = <PowerSourceNameInline type={installationType} />;
+                    best = breakdownData[installationType];
                 }
             }
         });
@@ -76,106 +86,111 @@ class SlideLoad extends React.Component {
 
 
     render() {
-        const currentData = this.state.breakdown;
-        const currentZoneID = this.context.currentZone.id;
-        const currentZoneName = this.context.currentZone.label;
-        return (
-            <React.Fragment>
-                <div className="columns is-centered" >
-                    <div className="column has-text-centered">
-        <h1 className="is-size-1">Facteur de charge </h1>
-                    </div>
-                </div>
-                <div className="columns  is-centered" style={{ "marginBottom": "4rem" }}>
-                    <div className="column is-three-quarters has-text-centered">
-                        <div className="is-size-6">
-                            Une source d’énergie peut produire énormément en quantité, mais être sous-utilisé ! À l’inverse, une source peut être à 100% de sa capacité, et n’avoir qu’un petit impact sur l’apport à la grille…
-                        </div>
-                        <div className="is-size-5" style={{ "marginTop": "2rem" }}>
-
-                            C’est ce qu’on appelle le facteur charge ! Il représente le taux d’utilisation de chacune des sources d’énergie.
-                        Actuellement, en <span className="has-background-grey text-inline-highlighted">{currentZoneName}</span>, le {this.state.mostLoaded} est a son maximum et le {this.state.leastLoaded} a son minimum.
-                        </div>
-
-                    </div>
-                </div>
-                <div className="columns is-multiline is-centered">
-                    <div className="column is-one-fifth">
-                        <div id="breakdown" className="columns has-text-centered is-variable is-centered is-mobile is-multiline representations-wrapper">
-                            <div className="column is-12-widescreen is-12-full-hd is-12-desktop is-4-tablet is-4-mobile ">
-                                <PowerSourceLoad
-                                    load={currentData.solar.load}
-                                    production={currentData.solar.production}
-                                    capacity={currentData.solar.capacity}
-                                    type="solar"
-                                    cssClass="load"
-                                    mirrored={false}
-                                />
-                            </div>
-                            <div className="column is-12-widescreen is-12-full-hd is-12-desktop is-4-tablet is-4-mobile ">
-                                <PowerSourceLoad
-                                    load={currentData.wind.load}
-                                    production={currentData.wind.production}
-                                    capacity={currentData.wind.capacity}
-                                    type="wind"
-                                    cssClass="load"
-                                    mirrored={false}
-                                />
-                            </div>
-                            <div className="column is-12-widescreen is-12-full-hd is-12-desktop is-4-tablet is-4-mobile ">
-                                <PowerSourceLoad
-                                    load={currentData.hydraulic.load}
-                                    production={currentData.hydraulic.production}
-                                    capacity={currentData.hydraulic.capacity}
-                                    type="hydraulic"
-                                    cssClass="load"
-                                    mirrored={false}
-                                />
-                            </div>
+        if (this.state.isLoaded) {
+            const currentData = this.state.latestBreakdownData;
+            const currentZoneID = this.context.currentZone.id;
+            const currentZoneName = this.context.currentZone.label;
+            return (
+                <React.Fragment>
+                    <div className="columns is-centered" >
+                        <div className="column has-text-centered">
+                            <h1 className="is-size-1">Facteur de charge ({currentZoneID})</h1>
                         </div>
                     </div>
+                    <div className="columns  is-centered" style={{ "marginBottom": "4rem" }}>
+                        <div className="column is-three-quarters has-text-centered">
+                            <div className="is-size-6">
+                                Une source d’énergie peut produire énormément en quantité, mais être sous-utilisé ! À l’inverse, une source peut être à 100% de sa capacité, et n’avoir qu’un petit impact sur l’apport à la grille…
+                        </div>
+                            <div className="is-size-5" style={{ "marginTop": "2rem" }}>
 
-                    <div className="column is-6">
-                        <GraphLoadEvolution loadsOverTime={this.state.loadHistory} />
+                                C’est ce qu’on appelle le facteur charge ! Il représente le taux d’utilisation de chacune des sources d’énergie.
+                        Actuellement, en <span className="has-background-grey text-inline-highlighted">{currentZoneName}</span>, les installations {this.state.mostLoadedInstallation} sont à leur maximum et les installations {this.state.leastLoadedInstallation} à leur minimum.
+                        </div>
 
-                    </div>
-                    <div className="column is-one-fifth">
-                        <div id="breakdown" className="columns has-text-centered is-variable is-centered is-mobile is-multiline representations-wrapper">
-                            <div className="column is-12-widescreen is-12-full-hd is-12-desktop is-4-tablet is-4-mobile ">
-                                <PowerSourceLoad
-                                    load={currentData.nuclear.load}
-                                    production={currentData.nuclear.production}
-                                    capacity={currentData.nuclear.capacity}
-                                    type="nuclear"
-                                    cssClass="load"
-                                    mirrored={true}
-                                />
-                            </div>
-                            <div className="column is-12-widescreen is-12-full-hd is-12-desktop is-4-tablet is-4-mobile ">
-                                <PowerSourceLoad
-                                    load={currentData.bioenergies.load}
-                                    production={currentData.bioenergies.production}
-                                    capacity={currentData.bioenergies.capacity}
-                                    type="bioenergies"
-                                    cssClass="load"
-                                    mirrored={true}
-                                />
-                            </div>
-                            <div className="column is-12-widescreen is-12-full-hd is-12-desktop is-4-tablet is-4-mobile ">
-                                <PowerSourceLoad
-                                    load={currentData.fossil.load}
-                                    production={currentData.fossil.production}
-                                    capacity={currentData.fossil.capacity}
-                                    type="fossil"
-                                    cssClass="load"
-                                    mirrored={true}
-                                />
-                            </div>
                         </div>
                     </div>
-                </div >
-            </React.Fragment >
-        );
+                    <div className="columns is-multiline is-centered">
+                        <div className="column is-one-fifth">
+                            <div id="breakdown" className="columns has-text-centered is-variable is-centered is-mobile is-multiline representations-wrapper">
+                                <div className="column is-12-widescreen is-12-full-hd is-12-desktop is-4-tablet is-4-mobile ">
+                                    <PowerSourceLoad
+                                        load={currentData.solar.load}
+                                        production={currentData.solar.production}
+                                        capacity={currentData.solar.capacity}
+                                        type="solar"
+                                        cssClass="load"
+                                        mirrored={false}
+                                    />
+                                </div>
+                                <div className="column is-12-widescreen is-12-full-hd is-12-desktop is-4-tablet is-4-mobile ">
+                                    <PowerSourceLoad
+                                        load={currentData.wind.load}
+                                        production={currentData.wind.production}
+                                        capacity={currentData.wind.capacity}
+                                        type="wind"
+                                        cssClass="load"
+                                        mirrored={false}
+                                    />
+                                </div>
+                                <div className="column is-12-widescreen is-12-full-hd is-12-desktop is-4-tablet is-4-mobile ">
+                                    <PowerSourceLoad
+                                        load={currentData.hydraulic.load}
+                                        production={currentData.hydraulic.production}
+                                        capacity={currentData.hydraulic.capacity}
+                                        type="hydraulic"
+                                        cssClass="load"
+                                        mirrored={false}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="column is-6">
+                            <GraphLoadEvolution loadsOverTime={this.state.breakdownHistory} />
+
+                        </div>
+                        <div className="column is-one-fifth">
+                            <div id="breakdown" className="columns has-text-centered is-variable is-centered is-mobile is-multiline representations-wrapper">
+                                <div className="column is-12-widescreen is-12-full-hd is-12-desktop is-4-tablet is-4-mobile ">
+                                    <PowerSourceLoad
+                                        load={currentData.nuclear.load}
+                                        production={currentData.nuclear.production}
+                                        capacity={currentData.nuclear.capacity}
+                                        type="nuclear"
+                                        cssClass="load"
+                                        mirrored={true}
+                                    />
+                                </div>
+                                <div className="column is-12-widescreen is-12-full-hd is-12-desktop is-4-tablet is-4-mobile ">
+                                    <PowerSourceLoad
+                                        load={currentData.bioenergy.load}
+                                        production={currentData.bioenergy.production}
+                                        capacity={currentData.bioenergy.capacity}
+                                        type="bioenergy"
+                                        cssClass="load"
+                                        mirrored={true}
+                                    />
+                                </div>
+                                <div className="column is-12-widescreen is-12-full-hd is-12-desktop is-4-tablet is-4-mobile ">
+                                    <PowerSourceLoad
+                                        load={currentData.fossil.load}
+                                        production={currentData.fossil.production}
+                                        capacity={currentData.fossil.capacity}
+                                        type="fossil"
+                                        cssClass="load"
+                                        mirrored={true}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div >
+                </React.Fragment >
+            );
+        }
+        else {
+            return <h1>LOADING BITCH</h1>
+        }
     }
 }
 

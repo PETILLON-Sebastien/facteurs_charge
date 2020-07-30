@@ -31,20 +31,21 @@ class LoadBySourcesGraph extends React.Component {
 
     render() {
   
-        var sourcesSimples = ["solar", "wind", "hydraulic", "bioenergies", "thermal", "nuclear"];
+        var sourcesSimples = ["solar", "wind", "hydraulic", "bioenergy", "thermal", "nuclear"];
 
         const dataArray = this.props.loadsOverTime;
         let loadsArrayPerSource = {};
 
         // For each moment in time in the data
         dataArray.forEach((datedData) => {
+            const currentBreakdown = datedData.breakdown;
 
-            // For each type of production recorded that moment
-            Object.keys(datedData.load).forEach((typeOfSource) => {
+            // For each type of installation recorded that moment
+            Object.keys(currentBreakdown).forEach((typeOfSource) => {
                 let overallLoadsForCurrentSource = loadsArrayPerSource[typeOfSource] || [];
 
                 // Add the value of production of this source for the given time
-                const productionOfThisSourceThatDay = datedData.load[typeOfSource].value;
+                const productionOfThisSourceThatDay = currentBreakdown[typeOfSource].value;
                 const date = moment(datedData.timestamp).valueOf();
                 overallLoadsForCurrentSource.push([date, productionOfThisSourceThatDay]);
                 loadsArrayPerSource[typeOfSource] = overallLoadsForCurrentSource;

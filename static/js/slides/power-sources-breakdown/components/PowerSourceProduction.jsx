@@ -22,10 +22,9 @@ class PowerSourceProduction extends React.Component {
     }
 
     buildKPI(kpiName, kpiDescription, cssClass = '') {
-        console.log(kpiName, kpiDescription, cssClass);
         if (kpiDescription != undefined) {
             const kpiValue = Math.round(kpiDescription.value);
-            const kpiUnit = kpiDescription.unit;
+            const kpiUnit = kpiDescription.unit || "%"; //fixme this clause was added to patch the fact that the server does not provide a unit when returning load values
             const kpi = <PowerSourceKPI title={kpiName} value={kpiValue} unit={kpiUnit} cssClass={cssClass} />
             this.state.production = kpi;
         }
