@@ -215,15 +215,18 @@ var extract_exchanges_snapshot = function(snapshot) {
             var zones = _.split(name, constants.opendatareseaux_wording.to);
             zones[0] = _.replace(zones[0], constants.opendatareseaux_wording.flow, '');
             var zone_source_id = zone_id_getter(zones[0]);
-            var zone_target_id = zone_id_getter(zones[1]);
-            if(_.isNumber(value)) {
-                var saved_value = Math.abs(value);
-                var exchange = {};
-                _.set(exchange, [constants.api_wording.datetime], field_getter(snapshot, constants.opendatareseaux_wording.date_hour));
-                _.set(exchange, [constants.api_wording.description, constants.api_wording.source_zone], zone_source_id);
-                _.set(exchange, [constants.api_wording.description, constants.api_wording.target_zone], zone_target_id);
-                _.set(exchange, [constants.api_wording.description, constants.api_wording.value], saved_value);
-                exchanges.push(exchange);
+            // Exclude auto-exchanges
+            if(!_.includes(zones[1], zones[0]) && !_.includes(zones[0], zones[1])) {
+                var zone_target_id = zone_id_getter(zones[1]);
+                if(_.isNumber(value)) {
+                    var saved_value = Math.abs(value);
+                    var exchange = {};
+                    _.set(exchange, [constants.api_wording.datetime], field_getter(snapshot, constants.opendatareseaux_wording.date_hour));
+                    _.set(exchange, [constants.api_wording.description, constants.api_wording.source_zone], zone_source_id);
+                    _.set(exchange, [constants.api_wording.description, constants.api_wording.target_zone], zone_target_id);
+                    _.set(exchange, [constants.api_wording.description, constants.api_wording.value], saved_value);
+                    exchanges.push(exchange);
+                }
             }
         }
     });
