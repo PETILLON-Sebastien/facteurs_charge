@@ -66,14 +66,13 @@ class SlidePowerSources extends React.Component {
     findHighestSourceOfPower(powerBreakdown) {
         let bestValue = 0, bestComponent = undefined;
         Object.keys(powerBreakdown).forEach((installationType) => {
-
             if (bestComponent == undefined) {
                 bestComponent = <PowerSourceNameInline type={installationType} />;
-                bestValue = powerBreakdown[installationType];
+                bestValue = powerBreakdown[installationType].power.value;
             } else {
-                if (powerBreakdown[installationType] > bestValue) {
+                if (powerBreakdown[installationType].power.value > bestValue) {
                     bestComponent = <PowerSourceNameInline type={installationType} />;
-                    bestValue = powerBreakdown[installationType];
+                    bestValue = powerBreakdown[installationType].power.value;
                 }
             }
         });
