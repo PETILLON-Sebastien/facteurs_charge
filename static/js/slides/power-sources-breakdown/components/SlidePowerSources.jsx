@@ -30,7 +30,7 @@ class SlidePowerSources extends React.Component {
         fetch(root_endpoint + "/zones/FR-11/installations/production/breakdown")
             .then((data) => data.json()).then((data) => {
                 // PRECONDITION: Considering timely ordered data
-                const latestData = data[data.length-1].powerBreakdown;
+                const latestData = data[data.length-1].breakdown;
                 const highestSourceOfPower = this.findHighestSourceOfPower(latestData);
                 const timeMarks = this.buildTimeMarks(data);
 
@@ -106,22 +106,22 @@ class SlidePowerSources extends React.Component {
                         <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-12-tablet is-12-mobile">
                             <div className="columns is-multiline is-mobile is-vcentered">
                                 <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-4-tablet is-6-mobile " style={{ "marginTop": "10px" }}>
-                                    <PowerSourceProduction production={currentData.solar} type="solar" cssClass="power-sources" />
+                                    <PowerSourceProduction production={currentData.solar.power} type="solar" cssClass="power-sources" />
                                 </div>
                                 <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-4-tablet is-6-mobile" style={{ "marginTop": "10px" }}>
-                                    <PowerSourceProduction production={currentData.wind} type="wind" cssClass="power-sources" />
+                                    <PowerSourceProduction production={currentData.wind.power} type="wind" cssClass="power-sources" />
                                 </div>
                                 <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-4-tablet is-6-mobile" style={{ "marginTop": "10px" }}>
-                                    <PowerSourceProduction production={currentData.hydraulic} type="hydraulic" cssClass="power-sources" />
+                                    <PowerSourceProduction production={currentData.hydraulic.power} type="hydraulic" cssClass="power-sources" />
                                 </div>
                                 <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-4-tablet is-6-mobile" style={{ "marginTop": "10px" }}>
-                                    <PowerSourceProduction production={currentData.nuclear} type="nuclear" cssClass="power-sources" />
+                                    <PowerSourceProduction production={currentData.nuclear.power} type="nuclear" cssClass="power-sources" />
                                 </div>
                                 <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-4-tablet is-6-mobile" style={{ "marginTop": "10px" }}>
-                                    <PowerSourceProduction production={currentData.bioenergy} type="bioenergy" cssClass="power-sources" />
+                                    <PowerSourceProduction production={currentData.bioenergy.power} type="bioenergy" cssClass="power-sources" />
                                 </div>
                                 <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-4-tablet is-6-mobile" style={{ "marginTop": "10px" }}>
-                                    <PowerSourceProduction production={currentData.fossil} type="fossil" cssClass="power-sources" />
+                                    <PowerSourceProduction production={currentData.fossil.power} type="fossil" cssClass="power-sources" />
                                 </div>
                             </div>
                         </div>

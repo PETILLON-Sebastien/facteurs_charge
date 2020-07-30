@@ -39,7 +39,7 @@ class ProductionBySourcesGraph extends React.Component {
 
         // For each moment in time in the data
         dataArray.forEach((datedData) => {
-            const currentBreakdown = datedData.powerBreakdown;
+            const currentBreakdown = datedData.breakdown;
 
             // For each type of production recorded that moment
             Object.keys(currentBreakdown).forEach((typeOfSource) => {

@@ -75,7 +75,7 @@ export default class Board extends React.Component {
               <SlidePowerSources />
             </div>
           </div>
-          <div className="section is-medium" id="slide-load" style={{ "minHeight": "100vh" }}>
+          {/* <div className="section is-medium" id="slide-load" style={{ "minHeight": "100vh" }}>
             <SlideLoad />
           </div>
           <div className="section is-medium" id="slide-balance" style={{ "minHeight": "100vh" }}>
@@ -87,7 +87,7 @@ export default class Board extends React.Component {
             <div className="container">
               <MyMap />
             </div>
-          </div>
+          </div> */}
         </ZoneContext.Provider>
       </React.Fragment>
     )
