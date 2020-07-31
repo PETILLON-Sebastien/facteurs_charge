@@ -17,6 +17,7 @@ import 'moment/locale/fr';
 
 
 import { ZoneContext } from './ZoneContext';
+const root_endpoint = process.env.API_URL + "/api/v1";
 
 
 var that;
@@ -29,8 +30,10 @@ export default class Board extends React.Component {
 
     this.zonesDescription = this.getZoneDescriptions();
     this.zoneChanged = this.zoneChanged.bind(this);
-    this.state = {      currentZone: { id: "FR", label: "France" } //fixme
-  };
+    this.state = {
+      currentZone: { id: "FR", label: "France" }, //fixme,
+      powerSourceBreakdown: { isLoaded: false }
+    };
 
   }
 
@@ -43,6 +46,8 @@ export default class Board extends React.Component {
       actionsVisibles: true,
       currentZone: { id: "FR", label: "France" } //fixme
     });
+    this.fetchPowerSourcesBreakdown();
+
   }
 
   zoneChanged(newZoneID) {
@@ -51,17 +56,47 @@ export default class Board extends React.Component {
 
     let ISOZoneId = "FR";
 
-    if(newZoneID != 0) {
+    if (newZoneID != 0) {
       ISOZoneId = ISOZoneId.concat("-").concat(newZoneID);
     }
 
     console.log("New zone : ", ISOZoneId);
 
     this.setState({ currentZone: { id: ISOZoneId, label: labelCurrentZone } });
-
+    this.fetchPowerSourcesBreakdown();
   }
 
+
+  fetchPowerSourcesBreakdown() {
+    const targetUrl = root_endpoint + "/zones/" + this.state.currentZone.id + "/installations/production/breakdown?from=2020-07-29&to=2020-07-30";
+    console.log("Fetching data", targetUrl);
+
+    fetch(targetUrl)
+      .then((data) => data.json()).then((data) => {
+        // PRECONDITION: Considering timely ordered data
+        const latestData = data[data.length - 1].breakdown;
+
+        this.setState({
+          powerSourceBreakdown: {
+            isLoaded: true,
+            latestPowerBreakdown: latestData,
+            powerBreakdownHistory: data,
+
+          }
+        });
+      });
+  }
+
+
   render() {
+
+    let powerSourceSlide = null;
+    if (this.state.powerSourceBreakdown.isLoaded) {
+      powerSourceSlide = <SlidePowerSources currentZone={this.state.currentZone} data={this.state.powerSourceBreakdown} />
+    } else {
+      powerSourceSlide = <h1>I AM LOADING</h1>
+    }
+
     return (
       <React.Fragment>
         <header >
@@ -74,14 +109,10 @@ export default class Board extends React.Component {
           </div>
         </div>
 
+        {powerSourceSlide}
+        {/* <ZoneContext.Provider value={{ currentZone: this.state.currentZone }}> */}
 
-        <ZoneContext.Provider value={{ currentZone: this.state.currentZone }}>
-          <div className="section is-medium" id="slide-installations" style={{ "minHeight": "100vh" }}>
-            <div className="container">
-              <SlidePowerSources />
-            </div>
-          </div>
-          <div className="section is-medium" id="slide-load" style={{ "minHeight": "100vh" }}>
+        {/* <div className="section is-medium" id="slide-load" style={{ "minHeight": "100vh" }}>
             <SlideLoad />
           </div> 
           <div className="section is-medium" id="slide-balance" style={{ "minHeight": "100vh" }}>
@@ -93,8 +124,8 @@ export default class Board extends React.Component {
             <div className="container">
               <MyMap />
             </div>
-          </div>
-        </ZoneContext.Provider>
+          </div> */}
+        {/* </ZoneContext.Provider> */}
       </React.Fragment>
     )
   }
