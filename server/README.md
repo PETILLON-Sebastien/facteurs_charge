@@ -7,7 +7,7 @@ Warning : the error handling as not being done yet.
 ## Get some data
 
 ```
-node daemons/last_24_hours.js
+node daemons/current_day.js
 ```
 Retrieves fresh data (will be used as a deamon on the server).
 ```

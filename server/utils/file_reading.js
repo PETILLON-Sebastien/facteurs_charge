@@ -24,7 +24,7 @@ var get_string_list_dates = function(start, end) {
 
 var customizer = function(objValue, srcValue) {
   if (_.isArray(objValue)) {
-    return _.uniqWith(objValue.concat(srcValue), _.isEqual);
+    return objValue.concat(srcValue);
   }
 };
 
@@ -47,7 +47,7 @@ var compute_capactity = function(input_files) {
 };
 
 var compute_exchanges = function(input_files) {
-  return _.uniqWith(_.flatten(_.merge(input_files)), _.isEqual);
+  return_.flatten(_.merge(input_files));
 }
 
 var retrieve_period = function(start, end, data_type) {

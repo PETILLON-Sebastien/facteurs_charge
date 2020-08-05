@@ -8,7 +8,7 @@ var file_reading = require(path.join('..', '..', 'utils', 'file_reading.js'));
 
 var customizer = function(objValue, srcValue) {
   if (_.isArray(objValue)) {
-    return _.uniqWith(objValue.concat(srcValue), _.isEqual);
+    return objValue.concat(srcValue);
   }
 };
 

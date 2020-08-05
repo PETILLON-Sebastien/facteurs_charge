@@ -1,8 +1,8 @@
 [
     {
-      "uid": "last_24_hours_daemon",
+      "uid": "current_day_daemon",
       "append": true,
       "watch": false,
-      "script": "server/daemons/last_24_hours.js"
+      "script": "server/daemons/current_day.js"
     }
 ]
