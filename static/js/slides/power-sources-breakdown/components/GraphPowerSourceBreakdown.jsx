@@ -13,7 +13,8 @@ class ProductionBySourcesGraph extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return nextProps.donnees != this.props.donnees || nextProps.actionsVisibles != this.props.actionsVisibles;
+        // return nextProps.donnees != this.props.donnees || nextProps.actionsVisibles != this.props.actionsVisibles;
+        return true; 
     }
 
     modifierTemps(valeur) {
@@ -29,7 +30,9 @@ class ProductionBySourcesGraph extends React.Component {
     }
 
     render() {
-        const currentZoneName = this.props.currentZoneName; // todo should be taken from the context
+        console.log(this.props);
+    
+        const currentZoneName = this.props.currentZoneName;
 
         const dataArray = this.props.productionsOverTime;
         let productionsArrayPerSource = {};

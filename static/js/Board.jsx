@@ -41,16 +41,24 @@ export default class Board extends React.Component {
     return stubZonesDescription;
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+
+    let data = await this.fetchPowerSourcesBreakdown("FR");
+    // PRECONDITION: Considering timely ordered data
+    const latestData = data[data.length - 1].breakdown;
+
     this.setState({
       actionsVisibles: true,
-      currentZone: { id: "FR", label: "France" } //fixme
+      currentZone: { id: "FR", label: "France" }, //fixme
+      powerSourceBreakdown: {
+        isLoaded: true,
+        latestPowerBreakdown: latestData,
+        powerBreakdownHistory: data,
+      }
     });
-    this.fetchPowerSourcesBreakdown();
-
   }
 
-  zoneChanged(newZoneID) {
+  async zoneChanged(newZoneID) {
     let currentZoneSelected = _.find(this.zonesDescription, { 'id': newZoneID });
     let labelCurrentZone = currentZoneSelected.label;
 
@@ -62,29 +70,29 @@ export default class Board extends React.Component {
 
     console.log("New zone : ", ISOZoneId);
 
-    this.setState({ currentZone: { id: ISOZoneId, label: labelCurrentZone } });
-    this.fetchPowerSourcesBreakdown();
+    // this.setState({ });
+
+    let data = await this.fetchPowerSourcesBreakdown(ISOZoneId);
+    // PRECONDITION: Considering timely ordered data
+    const latestData = data[data.length - 1].breakdown;
+
+    this.setState({
+      currentZone: { id: ISOZoneId, label: labelCurrentZone },
+      powerSourceBreakdown: {
+        isLoaded: true,
+        latestPowerBreakdown: latestData,
+        powerBreakdownHistory: data,
+      }
+    });
   }
 
 
-  fetchPowerSourcesBreakdown() {
-    const targetUrl = root_endpoint + "/zones/" + this.state.currentZone.id + "/installations/production/breakdown?from=2020-07-29&to=2020-07-30";
+  async fetchPowerSourcesBreakdown(ISOZoneId) {
+    const targetUrl = root_endpoint + "/zones/" + ISOZoneId + "/installations/production/breakdown?from=2020-07-29&to=2020-07-30";
     console.log("Fetching data", targetUrl);
 
-    fetch(targetUrl)
-      .then((data) => data.json()).then((data) => {
-        // PRECONDITION: Considering timely ordered data
-        const latestData = data[data.length - 1].breakdown;
-
-        this.setState({
-          powerSourceBreakdown: {
-            isLoaded: true,
-            latestPowerBreakdown: latestData,
-            powerBreakdownHistory: data,
-
-          }
-        });
-      });
+    const data = await fetch(targetUrl);
+    return await data.json();
   }
 
 

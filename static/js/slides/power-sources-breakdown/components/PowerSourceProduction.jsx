@@ -15,6 +15,10 @@ class PowerSourceProduction extends React.Component {
             kpis: {}
         };
 
+        // this.refreshKPIs();
+    }
+
+    refreshKPIs() {
         const production = this.props.production;
         const cssClass = this.props.cssClass;
 
@@ -22,6 +26,7 @@ class PowerSourceProduction extends React.Component {
     }
 
     buildKPI(kpiName, kpiDescription, cssClass = '') {
+        // console.log("Building KPI with", kpiDescription);
         if (kpiDescription != undefined) {
             const kpiValue = Math.round(kpiDescription.value);
             const kpiUnit = kpiDescription.unit || "%"; //fixme this clause was added to patch the fact that the server does not provide a unit when returning load values
@@ -31,6 +36,8 @@ class PowerSourceProduction extends React.Component {
     }
 
     render() {
+        // console.log("Refreshing source of power subcomponent");
+        this.refreshKPIs();
         const cssClass = this.state.cssClass;
         const type = this.state.type;
 

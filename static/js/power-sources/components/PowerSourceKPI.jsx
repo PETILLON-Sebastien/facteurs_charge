@@ -14,7 +14,7 @@ class PowerSourceKPI extends React.Component {
         return (
             <div className={`${cssClass}-power-source-wrapper`}>
                 <span className="value">{title}&nbsp;:</span>
-                <span>{value} </span>
+                <span className="value_value">{value} </span>
                 <span className="unit">{unit}</span>
             </div>
         );

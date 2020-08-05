@@ -18,6 +18,29 @@
 .load-power-source-wrapper .unit {
     font-weight: 100;
     font-size: 60%;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+
+
+.power-sources-power-source-wrapper .value {
+    margin-right: 8px;
+    
+    color: #888;
+    font-size: 85%;
+    font-weight: 100;
+
+} 
+
+.power-sources-power-source-wrapper .value_value {
+    font-size: 85%;
+    font-weight: 100;
+}
+
+.power-sources-power-source-wrapper .unit {
+    font-weight: 100;
+    font-size: 60%;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .load-source-name {
