@@ -1,6 +1,8 @@
 import React, { createRef } from "react";
 import HighchartsReact from "highcharts-react-official";
 import moment from "moment";
+import cssVar from '../../../../_sass/_variables.scss';
+import PowerSourceStyleMap from '../../../power-sources/components/PowerSourceStyleMap.js';
 
 let that;
 
@@ -14,7 +16,7 @@ class ProductionBySourcesGraph extends React.Component {
 
     shouldComponentUpdate(nextProps, nextState) {
         // return nextProps.donnees != this.props.donnees || nextProps.actionsVisibles != this.props.actionsVisibles;
-        return true; 
+        return true;
     }
 
     modifierTemps(valeur) {
@@ -31,7 +33,7 @@ class ProductionBySourcesGraph extends React.Component {
 
     render() {
         console.log(this.props);
-    
+
         const currentZoneName = this.props.currentZoneName;
 
         const dataArray = this.props.productionsOverTime;
@@ -53,44 +55,44 @@ class ProductionBySourcesGraph extends React.Component {
             });
         });
 
-        console.log(productionsArrayPerSource);
+        console.log(cssVar.fossil);
 
 
         let series = [
             {
-                name: "Photovoltaïque",
+                name: new PowerSourceStyleMap("solar").name,
                 stack: 0,
-                color: "rgb(242, 116, 6)",
+                color: cssVar.solar,
                 data: productionsArrayPerSource.solar
             },
             {
-                name: "Éolien",
+                name: new PowerSourceStyleMap("wind").name,
                 stack: 0,
-                color: "rgb(116, 205, 185)",
+                color: cssVar.wind,
                 data: productionsArrayPerSource.wind
             },
             {
-                name: "Hydraulique",
+                name: new PowerSourceStyleMap("hydraulic").name,
                 stack: 0,
-                color: "rgb(39, 114, 178)",
+                color: cssVar.hydraulic,
                 data: productionsArrayPerSource.hydraulic
             },
             {
-                name: "Bioénergies",
+                name: new PowerSourceStyleMap("bioenergy").name,
                 stack: 0,
-                color: "rgb(22, 106, 87)",
+                color: cssVar.bioenergy,
                 data: productionsArrayPerSource.bioenergy
             },
             {
-                name: "Fossile",
+                name: new PowerSourceStyleMap("fossil").name,
                 stack: 0,
-                color: "rgb(134, 125, 102)",
+                color: cssVar.fossil,
                 data: productionsArrayPerSource.fossil
             },
             {
-                name: "Nucléaire",
+                name: new PowerSourceStyleMap("nuclear").name,
                 stack: 0,
-                color: "rgb(174, 184, 0)",
+                color: cssVar.nuclear,
                 data: productionsArrayPerSource.nuclear
             }
         ];
