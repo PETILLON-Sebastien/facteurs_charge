@@ -3,6 +3,7 @@ import HighchartsReact from "highcharts-react-official";
 import moment from "moment";
 import cssVar from '../../../../_sass/_variables.scss';
 import PowerSourceStyleMap from '../../../power-sources/components/PowerSourceStyleMap.js';
+import { now } from "lodash";
 
 let that;
 
@@ -33,10 +34,13 @@ class ProductionBySourcesGraph extends React.Component {
 
     render() {
         console.log(this.props);
-
         const currentZoneName = this.props.currentZoneName;
 
-        const dataArray = this.props.productionsOverTime;
+        let dataArray = this.props.productionsOverTime;
+
+
+
+
         let productionsArrayPerSource = {};
 
         // For each moment in time in the data
@@ -55,8 +59,19 @@ class ProductionBySourcesGraph extends React.Component {
             });
         });
 
-        console.log(cssVar.fossil);
 
+        // Check if data is ordered
+        // ISSUE https://github.com/PETILLON-Sebastien/facteurs_charge/issues/53 and https://github.com/PETILLON-Sebastien/facteurs_charge/issues/52
+        let targetArray = productionsArrayPerSource.nuclear;
+        let lowest = targetArray[0][0];
+        for (let i = 1; i < targetArray.length; i++) {
+            let current = targetArray[i][0];
+            if (current < lowest) {
+                console.log("ERROR", i, current, lowest);
+            }
+            lowest = current;
+        }
+        // ------------------------------------------------------------------------
 
         let series = [
             {

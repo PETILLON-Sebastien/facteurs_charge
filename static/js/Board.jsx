@@ -12,6 +12,7 @@ import MyMap from './slides/exchanges/MyMap';
 import stubZonesDescription from "./regions-descriptions";
 
 import _ from "lodash";
+import moment from "moment";
 
 import 'moment/locale/fr';
 
@@ -43,22 +44,11 @@ export default class Board extends React.Component {
 
   async componentDidMount() {
 
-    let data = await this.fetchPowerSourcesBreakdown("FR");
-    // PRECONDITION: Considering timely ordered data
-    const latestData = data[data.length - 1].breakdown;
-
-    this.setState({
-      actionsVisibles: true,
-      currentZone: { id: "FR", label: "France" }, //fixme
-      powerSourceBreakdown: {
-        isLoaded: true,
-        latestPowerBreakdown: latestData,
-        powerBreakdownHistory: data,
-      }
-    });
+    this.zoneChanged(0);
   }
 
   async zoneChanged(newZoneID) {
+    this.setState({ powerSourceBreakdown: { isLoaded: false } });
     let currentZoneSelected = _.find(this.zonesDescription, { 'id': newZoneID });
     let labelCurrentZone = currentZoneSelected.label;
 
@@ -107,7 +97,7 @@ export default class Board extends React.Component {
 
 
   async fetchPowerSourcesBreakdown(ISOZoneId) {
-    const targetUrl = root_endpoint + "/zones/" + ISOZoneId + "/installations/production/breakdown?from=2020-07-29&to=2020-07-30";
+    const targetUrl = root_endpoint + "/zones/" + ISOZoneId + "/installations/production/breakdown";
     console.log("Fetching data", targetUrl);
 
     const data = await fetch(targetUrl);
@@ -121,7 +111,15 @@ export default class Board extends React.Component {
     if (this.state.powerSourceBreakdown.isLoaded) {
       powerSourceSlide = <SlidePowerSources currentZone={this.state.currentZone} data={this.state.powerSourceBreakdown} />
     } else {
-      powerSourceSlide = <h1>I AM LOADING</h1>
+      powerSourceSlide =
+        <div className="section is-medium" style={{ "minHeight": "100vh" }}>
+          <div className="container">
+            <div className="columns is-vcentered has-text-centered"  style={{ "marginTop": "30vh" }}>
+              <div className="column is-full">
+                <div className="lds-dual-ring"></div>
+              </div>
+            </div>
+          </div></div>
     }
 
     return (
