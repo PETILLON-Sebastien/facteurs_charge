@@ -22,7 +22,6 @@ class PowerSourceNameInline extends React.Component {
 
     render() {
         this.buildProperVisualization(this.props.type);
-        console.log("Rendering Power Source Name Inline");
         const cssClass = this.props.cssClass || '';
 
         return (

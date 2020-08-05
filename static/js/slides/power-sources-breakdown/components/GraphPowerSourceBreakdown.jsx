@@ -85,7 +85,7 @@ class ProductionBySourcesGraph extends React.Component {
                 name: "Fossile",
                 stack: 0,
                 color: "rgb(134, 125, 102)",
-                data: productionsArrayPerSource.thermal
+                data: productionsArrayPerSource.fossil
             },
             {
                 name: "Nucléaire",
