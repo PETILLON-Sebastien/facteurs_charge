@@ -73,6 +73,25 @@ export default class Board extends React.Component {
     // this.setState({ });
 
     let data = await this.fetchPowerSourcesBreakdown(ISOZoneId);
+    console.log(data.length);
+    // Sort data 
+    // ISSUE https://github.com/PETILLON-Sebastien/facteurs_charge/issues/52
+    data.sort((breakdownA, breakdownB) => {
+      return moment(breakdownA.datetime).valueOf() - moment(breakdownB.datetime).valueOf();
+    });
+
+    let now = moment().valueOf();
+    data = data.filter((element) => {
+      return moment(element.datetime).valueOf() < now;
+    });
+    // Remove the last one (likely 0)
+    // https://github.com/PETILLON-Sebastien/facteurs_charge/issues/53
+    data.pop();
+    data.pop();
+    data.pop();
+    // ------------------------------------------------------------------------
+
+    console.log(data.length);
     // PRECONDITION: Considering timely ordered data
     const latestData = data[data.length - 1].breakdown;
 
