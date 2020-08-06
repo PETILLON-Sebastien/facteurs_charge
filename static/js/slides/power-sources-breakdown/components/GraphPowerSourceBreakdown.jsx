@@ -33,7 +33,6 @@ class ProductionBySourcesGraph extends React.Component {
     }
 
     render() {
-        console.log(this.props);
         const currentZoneName = this.props.currentZoneName;
 
         let dataArray = this.props.productionsOverTime;

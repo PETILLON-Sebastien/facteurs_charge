@@ -20,7 +20,6 @@ export default class App extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <div className={`pageloader is-dark ${this.state.done ? "" : "is-active"}`} ref="spinner"><span className="title">Facteurs charge préchauffe... On arrive!</span></div>
                 <BrowserRouter>
                     <Route path="/" component={Board} />
                     <Route path="/regions/.*" component={Board} />

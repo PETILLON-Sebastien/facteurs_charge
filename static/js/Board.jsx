@@ -32,23 +32,30 @@ export default class Board extends React.Component {
     this.zonesDescription = this.getZoneDescriptions();
     this.zoneChanged = this.zoneChanged.bind(this);
     this.state = {
-      currentZone: { id: "FR", label: "France" }, //fixme,
-      powerSourceBreakdown: { isLoaded: false }
+      currentZone: { id: "xxx", label: "xxxx" }, //fixme,
+      isLoaded: false
     };
 
+    console.log("Board built.", "isLoaded?", this.state.isLoaded);
   }
 
   getZoneDescriptions() {
     return stubZonesDescription;
   }
 
-  async componentDidMount() {
+  shouldComponentUpdate(nextProps, nextState) {
+    const shouldBoardUpdate = (this.state.isLoaded && nextState.isLoaded) || this.state.currentZone.id != nextState.currentZone.id;
+    console.log("Should Board update?", shouldBoardUpdate);
+    console.log(this.state, nextState);
+    return shouldBoardUpdate;
+  }
 
-    this.zoneChanged(0);
+  async componentDidMount() {
+    console.log("Board mounted.");
+    await this.zoneChanged(0);
   }
 
   async zoneChanged(newZoneID) {
-    this.setState({ powerSourceBreakdown: { isLoaded: false } });
     let currentZoneSelected = _.find(this.zonesDescription, { 'id': newZoneID });
     let labelCurrentZone = currentZoneSelected.label;
 
@@ -57,13 +64,20 @@ export default class Board extends React.Component {
     if (newZoneID != 0) {
       ISOZoneId = ISOZoneId.concat("-").concat(newZoneID);
     }
+    console.log("Zone has changed!", "Old:", this.state.currentZone.id, "New:", ISOZoneId);
 
-    console.log("New zone : ", ISOZoneId);
+    if (this.state.currentZone.id == ISOZoneId) {
+      console.log("Zone hasn't changed.");
+      this.setState({ powerSourceBreakdown: { isLoaded: true } });
+      return;
+    }
 
-    // this.setState({ });
+    console.log("Putting the slide power source breakdown in loading mode...");
+    this.setState({ powerSourceBreakdown: { isLoaded: false } });
 
     let data = await this.fetchPowerSourcesBreakdown(ISOZoneId);
-    console.log(data.length);
+    console.log("Data fetched.");
+
     // Sort data 
     // ISSUE https://github.com/PETILLON-Sebastien/facteurs_charge/issues/52
     data.sort((breakdownA, breakdownB) => {
@@ -81,12 +95,13 @@ export default class Board extends React.Component {
     data.pop();
     // ------------------------------------------------------------------------
 
-    console.log(data.length);
     // PRECONDITION: Considering timely ordered data
     const latestData = data[data.length - 1].breakdown;
 
+    console.log("Modifying state of Board and setting loading state of power source slide to loaded.");
     this.setState({
       currentZone: { id: ISOZoneId, label: labelCurrentZone },
+      isLoaded: true,
       powerSourceBreakdown: {
         isLoaded: true,
         latestPowerBreakdown: latestData,
@@ -106,6 +121,12 @@ export default class Board extends React.Component {
 
 
   render() {
+    console.log("Rendering Board...");
+
+    if (!this.state.isLoaded) {
+      console.log("Board has not been fully loaded yet, aborting the rendering and displaying loading screen instead.");
+      return <div className={`pageloader is-dark ${this.state.done ? "" : "is-active"}`} ref="spinner"><span className="title">Facteurs charge préchauffe... On arrive!</span></div>
+    }
 
     let powerSourceSlide = null;
     if (this.state.powerSourceBreakdown.isLoaded) {
@@ -114,13 +135,14 @@ export default class Board extends React.Component {
       powerSourceSlide =
         <div className="section is-medium" style={{ "minHeight": "100vh" }}>
           <div className="container">
-            <div className="columns is-vcentered has-text-centered"  style={{ "marginTop": "30vh" }}>
+            <div className="columns is-vcentered has-text-centered" style={{ "marginTop": "30vh" }}>
               <div className="column is-full">
                 <div className="lds-dual-ring"></div>
               </div>
             </div>
           </div></div>
     }
+
 
     return (
       <React.Fragment>
