@@ -18,6 +18,7 @@ import 'moment/locale/fr';
 
 
 import { ZoneContext } from './ZoneContext';
+import { element } from 'prop-types';
 const root_endpoint = process.env.API_URL + "/api/v1";
 
 
@@ -52,7 +53,7 @@ export default class Board extends React.Component {
 
   async componentDidMount() {
     console.log("Board mounted.");
-    await this.zoneChanged(0);
+    await this.zoneChanged(11);
   }
 
   async zoneChanged(newZoneID) {
@@ -73,10 +74,51 @@ export default class Board extends React.Component {
     }
 
     console.log("Putting the slide power source breakdown in loading mode...");
-    this.setState({ powerSourceBreakdown: { isLoaded: false } });
+    this.setState({ powerSourceBreakdown: { isLoaded: false }, loadBreakdown: { isLoaded: false } });
 
-    let data = await this.fetchPowerSourcesBreakdown(ISOZoneId);
-    console.log("Data fetched.");
+    let powerSourceData = await this.fetchPowerSourcesBreakdown(ISOZoneId);
+    console.log("Power sources Data fetched.");
+
+    // PRECONDITION: Considering timely ordered data
+    const powerSourcesLatestData = powerSourceData[powerSourceData.length - 1].breakdown;
+
+
+
+    let loadData = await this.fetchLoadsBreakdown(ISOZoneId);
+    console.log("Load data fetched");
+
+    // PRECONDITION: Considering timely ordered data
+    const latestBreakdownData = loadData[loadData.length - 1].breakdown;
+
+
+
+
+
+    console.log("Modifying state of Board and setting loading state of power source slide to loaded.");
+    this.setState({
+      currentZone: { id: ISOZoneId, label: labelCurrentZone },
+      isLoaded: true,
+      powerSourceBreakdown: {
+        isLoaded: true,
+        latestPowerBreakdown: powerSourcesLatestData,
+        powerBreakdownHistory: powerSourceData,
+      },
+      loadBreakdown:
+      {
+        isLoaded: true,
+        latestBreakdownData: latestBreakdownData,
+        breakdownHistory: loadData
+      }
+    });
+  }
+
+
+  async fetchPowerSourcesBreakdown(ISOZoneId) {
+    const targetUrl = root_endpoint + "/zones/" + ISOZoneId + "/installations/production/breakdown";
+    console.log("Fetching power sources", targetUrl);
+
+    let data = await fetch(targetUrl);
+    data = await data.json();
 
     // Sort data 
     // ISSUE https://github.com/PETILLON-Sebastien/facteurs_charge/issues/52
@@ -95,28 +137,37 @@ export default class Board extends React.Component {
     data.pop();
     // ------------------------------------------------------------------------
 
-    // PRECONDITION: Considering timely ordered data
-    const latestData = data[data.length - 1].breakdown;
-
-    console.log("Modifying state of Board and setting loading state of power source slide to loaded.");
-    this.setState({
-      currentZone: { id: ISOZoneId, label: labelCurrentZone },
-      isLoaded: true,
-      powerSourceBreakdown: {
-        isLoaded: true,
-        latestPowerBreakdown: latestData,
-        powerBreakdownHistory: data,
-      }
-    });
+    return data;
   }
 
+  async fetchLoadsBreakdown(ISOZoneId) {
+    const targetUrl = root_endpoint + "/zones/" + ISOZoneId + "/installations/breakdown";
+    console.log("Fetching loads", targetUrl);
 
-  async fetchPowerSourcesBreakdown(ISOZoneId) {
-    const targetUrl = root_endpoint + "/zones/" + ISOZoneId + "/installations/production/breakdown";
-    console.log("Fetching data", targetUrl);
+    let data = await fetch(targetUrl);
 
-    const data = await fetch(targetUrl);
-    return await data.json();
+    data = await data.json();
+
+    let i = 0, j = 0;
+
+    data.forEach(breakdown => {
+      i++;
+      // console.log(breakdown);
+      Object.keys(breakdown.breakdown).forEach((installationBreakdown) => {
+        j++;
+        // console.log(breakdown.breakdown[installationBreakdown].load);
+        if (breakdown.breakdown[installationBreakdown].load == null || breakdown.breakdown[installationBreakdown].load.value == null) {
+          console.error("Load specified is NULL",breakdown.breakdown[installationBreakdown].load.value, breakdown.breakdown, installationBreakdown, breakdown.breakdown[installationBreakdown], i, j);
+        }
+        console.log(breakdown.breakdown[installationBreakdown].load.value, breakdown.breakdown[installationBreakdown].load.value * 100);
+        breakdown.breakdown[installationBreakdown].load.value = breakdown.breakdown[installationBreakdown].load.value * 100;
+      });
+      // console.log(breakdown);
+
+    });
+
+
+    return data;
   }
 
 
@@ -140,7 +191,25 @@ export default class Board extends React.Component {
                 <div className="lds-dual-ring"></div>
               </div>
             </div>
-          </div></div>
+          </div>
+        </div>
+    }
+
+    let loadBreakdownSlide = null;
+    if (this.state.loadBreakdown.isLoaded) {
+      loadBreakdownSlide = <SlideLoad currentZone={this.state.currentZone} data={this.state.loadBreakdown} />
+
+    } else {
+      loadBreakdownSlide =
+        <div className="section is-medium" style={{ "minHeight": "100vh" }}>
+          <div className="container">
+            <div className="columns is-vcentered has-text-centered" style={{ "marginTop": "30vh" }}>
+              <div className="column is-full">
+                <div className="lds-dual-ring"></div>
+              </div>
+            </div>
+          </div>
+        </div>
     }
 
 
@@ -157,6 +226,7 @@ export default class Board extends React.Component {
         </div>
 
         {powerSourceSlide}
+        {loadBreakdownSlide}
         {/* <ZoneContext.Provider value={{ currentZone: this.state.currentZone }}> */}
 
         {/* <div className="section is-medium" id="slide-load" style={{ "minHeight": "100vh" }}>
