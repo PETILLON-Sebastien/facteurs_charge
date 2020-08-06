@@ -1,0 +1,8 @@
+[
+    {
+      "uid": "current_day_daemon",
+      "append": true,
+      "watch": false,
+      "script": "server/daemons/current_day.js"
+    }
+]

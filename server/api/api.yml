@@ -1,0 +1,1217 @@
+swagger: "2.0"
+info:
+  description: "This is the facteurs-charge website's API."
+  version: "1.0.0"
+  title: "Facteurs-charge"
+  license:
+    name: "GPL-3.0"
+    url: "https://www.gnu.org/licenses/gpl-3.0.fr.html"
+host: "www.facteurs-charge.fr"
+basePath: "/api/v1"
+tags:
+- name: Consumption
+- name: Exchange
+- name: Installation
+schemes:
+- "https"
+
+paths:
+  /zones/consumption:
+    x-swagger-router-controller: "Consumption"
+    get:
+      tags:
+      - Consumption
+      summary: Retrieve consumptions
+      operationId: get_consumptions
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/consumptionSnapshotZone'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/consumptionSnapshotZone'
+  /zones/{zoneId}/consumption:
+    x-swagger-router-controller: "Consumption"
+    get:
+      tags:
+      - Consumption
+      summary: Retrieve consumptions for the zone
+      operationId: get_zone_consumptions
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+        - $ref: '#/parameters/zoneId'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/consumptionSnapshot'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/consumptionSnapshot'
+  /zones/exchanges:
+    x-swagger-router-controller: "Exchange"
+    get:
+      tags:
+      - Exchange
+      summary: Retrieve exchanges
+      operationId: get_exchanges
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/exchangeSnapshot'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/exchangeSnapshot'
+  /zones/{zoneId}/exchanges:
+    x-swagger-router-controller: "Exchange"
+    get:
+      tags:
+      - Exchange
+      summary: Retrieve exchanges of the zone
+      operationId: get_zone_exchanges
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+        - $ref: '#/parameters/zoneId'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/exchangeSnapshot'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/exchangeSnapshot'
+  /zones/installations:
+    x-swagger-router-controller: "Installation"
+    get:
+      tags:
+      - Installation
+      summary: Retrieve installations
+      operationId: get_installations
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/installationSnapshotZone'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/installationSnapshotZone'
+  /zones/installations/breakdown:
+    x-swagger-router-controller: "Installation"
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the breadkdowns
+      operationId: get_breakdowns
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/breakdownSnapshotZone'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/breakdownSnapshotZone'
+  /zones/installations/{installationType}:
+    x-swagger-router-controller: "Installation"
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the specified installations
+      operationId: get_installation
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/installationType'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/installationSnapshotZone'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/installationSnapshotZone'
+  /zones/installations/load:
+    x-swagger-router-controller: "Installation"
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the load of the installations
+      operationId: get_installations_load
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/loadSnapshotZone'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/loadSnapshotZone'
+  /zones/installations/load/breakdown:
+    x-swagger-router-controller: "Installation"
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the load breakdown of the installations
+      operationId: get_installations_load_breakdown
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/loadBreakdownSnapshotZone'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/loadBreakdownSnapshotZone'
+  /zones/installations/load/{installationType}:
+    x-swagger-router-controller: "Installation"
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the load of the specified installation
+      operationId: get_installation_load
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/installationType'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/loadSnapshotZone'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/loadSnapshotZone'
+  /zones/installations/production:
+    x-swagger-router-controller: "Installation"
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the production of the installations
+      operationId: get_installations_production
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshotZone'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshotZone'
+  /zones/installations/production/breakdown:
+    x-swagger-router-controller: "Installation"
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the production breakdown of the installations
+      operationId: get_installations_production_breakdown
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerBreakdownSnapshotZone'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerBreakdownSnapshotZone'
+  /zones/installations/production/{installationType}:
+    x-swagger-router-controller: "Installation"
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the production of the specified installation
+      operationId: get_installation_production
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/installationType'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshotZone'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshotZone'
+  /zones/installations/capacity:
+    x-swagger-router-controller: "Installation"
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the capacity of the installations
+      operationId: get_installations_capacity
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshotZone'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshotZone'
+  /zones/installations/capacity/breakdown:
+    x-swagger-router-controller: "Installation"
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the capacity breakdown of the installations
+      operationId: get_installations_capacity_breakdown
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerBreakdownSnapshotZone'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerBreakdownSnapshotZone'
+  /zones/installations/capacity/{installationType}:
+    x-swagger-router-controller: "Installation"
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the capacity of the specified installation
+      operationId: get_installation_capacity
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/installationType'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshotZone'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshotZone'
+  /zones/{zoneId}/installations:
+    x-swagger-router-controller: "Installation"
+    get:
+      tags:
+      - Installation
+      summary: Retrieve installation for this zone
+      operationId: get_zone_installations
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/installationSnapshot'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/installationSnapshot'
+  /zones/{zoneId}/installations/breakdown:
+    x-swagger-router-controller: "Installation"
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the breadkdown for this zone
+      operationId: get_zone_breakdown
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/breakdownSnapshot'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/breakdownSnapshot'
+  /zones/{zoneId}/installations/{installationType}:
+    x-swagger-router-controller: "Installation"
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the specified installation for this zone
+      operationId: get_zone_installation
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/installationType'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/installationSnapshot'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/installationSnapshot'
+  /zones/{zoneId}/installations/load:
+    x-swagger-router-controller: "Installation"
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the load of the installations for this zone
+      operationId: get_zone_installations_load
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/loadSnapshot'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/loadSnapshot'
+  /zones/{zoneId}/installations/load/breakdown:
+    x-swagger-router-controller: "Installation"
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the load breakdown of the installations for this zone
+      operationId: get_zone_installations_load_breakdown
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/loadBreakdownSnapshot'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/loadBreakdownSnapshot'
+  /zones/{zoneId}/installations/load/{installationType}:
+    x-swagger-router-controller: "Installation"
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the load of the specified installation for this zone
+      operationId: get_zone_installation_load
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/installationType'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/loadSnapshot'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/loadSnapshot'
+  /zones/{zoneId}/installations/production:
+    x-swagger-router-controller: "Installation"
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the production of the installations for this zone
+      operationId: get_zone_installations_production
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshot'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshot'
+  /zones/{zoneId}/installations/production/breakdown:
+    x-swagger-router-controller: "Installation"
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the production breakdown of the installations for this zone
+      operationId: get_zone_installations_production_breakdown
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerBreakdownSnapshot'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerBreakdownSnapshot'
+  /zones/{zoneId}/installations/production/{installationType}:
+    x-swagger-router-controller: "Installation"
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the production of the specified installation for this zone
+      operationId: get_zone_installation_production
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/installationType'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshot'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshot'
+  /zones/{zoneId}/installations/capacity:
+    x-swagger-router-controller: "Installation"
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the capacity of the installations for this zone
+      operationId: get_zone_installations_capacity
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshot'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshot'
+  /zones/{zoneId}/installations/capacity/breakdown:
+    x-swagger-router-controller: "Installation"
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the capacity breakdown of the installations for this zone
+      operationId: get_zone_installations_capacity_breakdown
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerBreakdownSnapshot'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerBreakdownSnapshot'
+  /zones/{zoneId}/installations/capacity/{installationType}:
+    x-swagger-router-controller: "Installation"
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the capacity of the specified installation for this zone
+      operationId: get_zone_installation_capacity
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/zoneId'
+        - $ref: '#/parameters/installationType'
+        - $ref: '#/parameters/from'
+        - $ref: '#/parameters/to'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshot'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/powerSnapshot'
+
+definitions:
+  consumptionSnapshotZone:
+    type: object
+    required: ['zoneId', 'snapshots']
+    properties:
+      zoneId:
+        type: string
+        pattern: "[A-Z]{2}(-[0-9]{2})?$"
+      snapshots:
+        type: array
+        items:
+          $ref: '#/definitions/consumptionSnapshot'
+  consumptionSnapshot:
+    type: object
+    required: ['description', 'datetime']
+    properties:
+      description:
+        $ref: '#/definitions/consumption'
+      datetime:
+        type: string
+        format: date-time
+  consumption:
+    type: object
+    required: ['used']
+    properties:
+      used:
+        $ref: '#/definitions/power'
+      stepStorage:
+        $ref: '#/definitions/power'
+  exchangeSnapshot:
+    type: object
+    required: ['description', 'datetime']
+    properties:
+      description:
+        $ref: '#/definitions/exchange'
+      datetime:
+        type: string
+        format: date-time
+  exchange:
+    type: object
+    required: ['sourceZone', 'target_zone', 'value', 'unit']
+    properties:
+      sourceZone:
+        type: string
+        pattern: "[A-Z]{2}-[0-9]{2}$"
+      target_zone:
+        type: string
+        pattern: "[A-Z]{2}-[0-9]{2}$"
+      value:
+        type: number
+        format: int64
+      unit:
+        type: string
+        pattern: "^W|MW|GW$"
+  breakdownSnapshotZone:
+    type: object
+    required: ['zoneId', 'snapshots']
+    properties:
+      zoneId:
+        type: string
+        pattern: "[A-Z]{2}(-[0-9]{2})?$"
+      snapshots:
+        type: array
+        items:
+          $ref: '#/definitions/breakdownSnapshot'
+  breakdownSnapshot:
+    type: object
+    required: ['breakdown', 'datetime']
+    properties:
+      breakdown:
+        $ref: '#/definitions/breakdown'
+      datetime:
+        type: string
+        format: date-time
+  breakdown:
+    type: object
+    properties:
+      solar:
+        $ref: '#/definitions/installation'
+      wind:
+        $ref: '#/definitions/installation'
+      hydraulic:
+        $ref: '#/definitions/installation'
+      nuclear:
+        $ref: '#/definitions/installation'
+      bioenergy:
+        $ref: '#/definitions/installation'
+      fossil:
+        $ref: '#/definitions/installation'
+  loadBreakdownSnapshotZone:
+    type: object
+    required: ['zoneId', 'snapshots']
+    properties:
+      zoneId:
+        type: string
+        pattern: "[A-Z]{2}(-[0-9]{2})?$"
+      snapshots:
+        type: array
+        items:
+          $ref: '#/definitions/loadBreakdownSnapshot'
+  loadBreakdownSnapshot:
+    type: object
+    required: ['loadBreakdown', 'datetime']
+    properties:
+      loadBreakdown:
+        $ref: '#/definitions/loadBreakdown'
+      datetime:
+        type: string
+        format: date-time
+  loadBreakdown:
+    type: object
+    properties:
+      solar:
+        $ref: '#/definitions/load'
+      wind:
+        $ref: '#/definitions/load'
+      hydraulic:
+        $ref: '#/definitions/load'
+      nuclear:
+        $ref: '#/definitions/load'
+      bioenergy:
+        $ref: '#/definitions/load'
+      fossil:
+        $ref: '#/definitions/load'
+  powerBreakdownSnapshotZone:
+    type: object
+    required: ['zoneId', 'snapshots']
+    properties:
+      zoneId:
+        type: string
+        pattern: "[A-Z]{2}(-[0-9]{2})?$"
+      snapshots:
+        type: array
+        items:
+          $ref: '#/definitions/powerBreakdownSnapshot'
+  powerBreakdownSnapshot:
+    type: object
+    required: ['powerBreakdown', 'datetime']
+    properties:
+      powerBreakdown:
+        $ref: '#/definitions/powerBreakdown'
+      datetime:
+        type: string
+        format: date-time
+  powerBreakdown:
+    type: object
+    properties:
+      solar:
+        $ref: '#/definitions/power'
+      wind:
+        $ref: '#/definitions/power'
+      hydraulic:
+        $ref: '#/definitions/power'
+      nuclear:
+        $ref: '#/definitions/power'
+      bioenergy:
+        $ref: '#/definitions/power'
+      fossil:
+        $ref: '#/definitions/power'
+  installationSnapshotZone:
+    type: object
+    required: ['zoneId', 'snapshots']
+    properties:
+      zoneId:
+        type: string
+        pattern: "[A-Z]{2}(-[0-9]{2})?$"
+      snapshots:
+        type: array
+        items:
+          $ref: '#/definitions/installationSnapshot'
+  installationSnapshot:
+    type: object
+    required: ['installation', 'datetime']
+    properties:
+      installation:
+        $ref: '#/definitions/installation'
+      datetime:
+        type: string
+        format: date-time
+  installation:
+    type: object
+    required: ['capacity', 'production', 'load']
+    properties:
+      capacity:
+        $ref: '#/definitions/power'
+      production:
+        $ref: '#/definitions/power'
+      load:
+        $ref: '#/definitions/load'
+  powerSnapshotZone:
+    type: object
+    required: ['zoneId', 'snapshots']
+    properties:
+      zoneId:
+        type: string
+        pattern: "[A-Z]{2}(-[0-9]{2})?$"
+      snapshots:
+        type: array
+        items:
+          $ref: '#/definitions/powerSnapshot'
+  powerSnapshot:
+    type: object
+    required: ['power', 'datetime']
+    properties:
+      power:
+        $ref: '#/definitions/power'
+      datetime:
+        type: string
+        format: date-time
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/detailPower'
+  detailPower:
+    type: object
+    required: ['name', 'power']
+    properties:
+      name:
+        type: string
+      power:
+        $ref: '#/definitions/power'
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/detailPower'
+  power:
+    type: object
+    required: ['value', 'unit']
+    properties:
+      value:
+        type: number
+        format: int64
+      unit:
+        type: string
+        pattern: "^W|MW|GW$"
+  loadSnapshotZone:
+    type: object
+    required: ['zoneId', 'snapshots']
+    properties:
+      zoneId:
+        type: string
+        pattern: "[A-Z]{2}(-[0-9]{2})?$"
+      snapshots:
+        type: array
+        items:
+          $ref: '#/definitions/loadSnapshot'
+  loadSnapshot:
+    type: object
+    required: ['load', 'datetime']
+    properties:
+      load:
+        $ref: '#/definitions/load'
+      datetime:
+        type: string
+        format: date-time
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/detailLoad'
+  detailLoad:
+    type: object
+    required: ['name', 'load']
+    properties:
+      name:
+        type: string
+      load:
+        $ref: '#/definitions/load'
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/detailLoad'
+  load:
+    type: object
+    required: ['value']
+    properties:
+      value:
+        type: number
+        format: double
+
+parameters:
+  from:
+    in: "query"
+    name: "from"
+    description: "Start of the period"
+    required: false
+    type: "string"
+    format: date-time
+  to:
+    in: "query"
+    name: "to"
+    description: "End of the period"
+    required: false
+    type: "string"
+    format: date-time
+  zoneId:
+    in: "path"
+    name: "zoneId"
+    description: "Zone to retrieve data from"
+    required: true
+    type: string
+    pattern: "[A-Z]{2}(-[0-9]{2})?$"
+  installationType:
+    in: "path"
+    name: "installationType"
+    description: "Installation type"
+    required: true
+    type: string
+    pattern: "solar|wind|hydraulic|nuclear|bioenergy|fossil"

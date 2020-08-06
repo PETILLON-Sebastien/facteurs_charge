@@ -1,0 +1,13 @@
+**/**/bundle.js
+**.DS_Store
+**\node_modules
+**\include
+**\lib
+**\scripts
+**\tcl
+**\donnees
+**\**\dist
+**\**\package-lock.json
+**\**\bundle.js
+static/css/*
+static\css\*
