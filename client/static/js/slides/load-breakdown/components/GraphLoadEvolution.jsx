@@ -1,5 +1,7 @@
 import React, { createRef } from "react";
 import HighchartsReact from "highcharts-react-official";
+import PowerSourceStyleMap from '../../../power-sources/components/PowerSourceStyleMap.js';
+import cssVar from '../../../../_sass/_variables.scss';
 
 import moment from "moment";
 
@@ -30,9 +32,6 @@ class LoadBySourcesGraph extends React.Component {
     }
 
     render() {
-  
-        var sourcesSimples = ["solar", "wind", "hydraulic", "bioenergy", "thermal", "nuclear"];
-
         const dataArray = this.props.loadsOverTime;
         let loadsArrayPerSource = {};
 
@@ -45,53 +44,54 @@ class LoadBySourcesGraph extends React.Component {
                 let overallLoadsForCurrentSource = loadsArrayPerSource[typeOfSource] || [];
 
                 // Add the value of production of this source for the given time
-                const productionOfThisSourceThatDay = currentBreakdown[typeOfSource].value;
-                const date = moment(datedData.timestamp).valueOf();
+                const productionOfThisSourceThatDay = currentBreakdown[typeOfSource].load.value;
+                const date = moment(datedData.datetime).valueOf();
                 overallLoadsForCurrentSource.push([date, productionOfThisSourceThatDay]);
                 loadsArrayPerSource[typeOfSource] = overallLoadsForCurrentSource;
             });
         });
 
-        // console.log(loadsArrayPerSource);
+        console.log("Load array per source", loadsArrayPerSource);
 
         let series = [
             {
-                name: "Photovoltaïque",
+                name: new PowerSourceStyleMap("solar").name,
                 stack: 0,
-                color: "rgb(242, 116, 6)",
+                color: cssVar.solar,
                 data: loadsArrayPerSource.solar
             },
             {
-                name: "Éolien",
+                name: new PowerSourceStyleMap("wind").name,
                 stack: 0,
-                color: "rgb(116, 205, 185)",
+                color: cssVar.wind,
                 data: loadsArrayPerSource.wind
             },
             {
-                name: "Hydraulique",
+                name: new PowerSourceStyleMap("hydraulic").name,
                 stack: 0,
-                color: "rgb(39, 114, 178)",
+                color: cssVar.hydraulic,
                 data: loadsArrayPerSource.hydraulic
             },
             {
-                name: "Bioénergies",
+                name: new PowerSourceStyleMap("bioenergy").name,
                 stack: 0,
-                color: "rgb(22, 106, 87)",
-                data: loadsArrayPerSource.bioenergies
+                color: cssVar.bioenergy,
+                data: loadsArrayPerSource.bioenergy
             },
             {
-                name: "Fossile",
+                name: new PowerSourceStyleMap("fossil").name,
                 stack: 0,
-                color: "rgb(134, 125, 102)",
-                data: loadsArrayPerSource.thermal
+                color: cssVar.fossil,
+                data: loadsArrayPerSource.fossil
             },
             {
-                name: "Nucléaire",
+                name: new PowerSourceStyleMap("nuclear").name,
                 stack: 0,
-                color: "rgb(174, 184, 0)",
+                color: cssVar.nuclear,
                 data: loadsArrayPerSource.nuclear
             }
         ];
+
 
         // console.log(series);
 
