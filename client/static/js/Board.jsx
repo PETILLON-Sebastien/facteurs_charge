@@ -45,7 +45,7 @@ export default class Board extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    const shouldBoardUpdate = (this.state.isLoaded && nextState.isLoaded) || this.state.currentZone.id != nextState.currentZone.id;
+    const shouldBoardUpdate = (nextState.isLoaded) && this.state.currentZone.id != nextState.currentZone.id;
     console.log("Should Board update?", shouldBoardUpdate);
     console.log(this.state, nextState);
     return shouldBoardUpdate;
