@@ -94,7 +94,7 @@ class ProductionBySourcesGraph extends React.Component {
             {
                 name: new PowerSourceStyleMap("bioenergy").name,
                 stack: 0,
-                color: cssVar.bioenergy,
+                color: cssVar.bioenergies,
                 data: productionsArrayPerSource.bioenergy
             },
             {

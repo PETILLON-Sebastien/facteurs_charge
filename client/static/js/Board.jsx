@@ -152,7 +152,7 @@ export default class Board extends React.Component {
     data.pop();
     data.pop();
     data.pop();
-    
+
     let i = 0, j = 0;
 
     for (i = 0; i < data.length; i++) {
@@ -165,7 +165,7 @@ export default class Board extends React.Component {
         const currentLoad = currentBreakdown[currentKey].load.value;
         if (currentKey == "fossil") {
           console.log(currentBreakdown, currentLoad, currentKey);
-          const updatedLoad = currentLoad * 10000;
+          const updatedLoad = currentLoad * 100;
           currentBreakdown[currentKey].load.value = updatedLoad;
         } else {
         const updatedLoad = currentLoad * 100;
@@ -238,7 +238,7 @@ export default class Board extends React.Component {
           <Navbar that={that} label_region={this.state.currentZone.label} hookZoneChanged={this.zoneChanged} zonesDescription={this.zonesDescription} />
         </header>
 
-        <div className="section is-medium" id="slide-map" style={{ "marginTop": "3rem" }}>
+        <div className="section is-medium" id="slide-map" style={{ "marginTop": "0rem" }}>
           <div className="container">
             <SlideMap zoneChanged={this.zoneChanged} zonesDescription={this.zonesDescription} />
           </div>

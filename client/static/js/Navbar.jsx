@@ -113,7 +113,7 @@ class Navbar extends React.Component {
 
                            
 
-
+{/* 
                                 <span className="navbar-item">
                                     <a href="#slide-balance">
                                         <button className={`${this.state.activeTab == 'balance' ? "is-success" : ""} is-primary button is-fullwidth`}
@@ -140,7 +140,7 @@ class Navbar extends React.Component {
                                         </span>
                                         </button>
                                     </a>
-                                </span>
+                                </span> */}
 
 
                                 <span className="navbar-item">
