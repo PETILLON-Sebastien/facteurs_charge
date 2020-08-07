@@ -16,7 +16,8 @@ class LoadBySourcesGraph extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return nextProps.donnees != this.props.donnees || nextProps.actionsVisibles != this.props.actionsVisibles;
+        // return nextProps.donnees != this.props.donnees || nextProps.actionsVisibles != this.props.actionsVisibles;
+        return true;
     }
 
     modifierTemps(valeur) {
@@ -110,7 +111,7 @@ class LoadBySourcesGraph extends React.Component {
                 text: ''
             },
             tooltip: {
-                valueSuffix: ' MW'
+                valueSuffix: ' %'
             },
             yAxis: {
                 title: {
@@ -118,10 +119,10 @@ class LoadBySourcesGraph extends React.Component {
                 },
                 labels: {
                     formatter: function () {
-                        if (this.value > 999 || this.value < 999) {
-                            return Math.round(this.value / 10) / 100 + " GW";
-                        }
-                        return this.value + " MW";
+                        // if (this.value > 999 || this.value < 999) {
+                        //     return Math.round(this.value / 10) / 100 + " GW";
+                        // }
+                        return this.value + " %";
                     },
                     style: {
                         color: "#ffffff"
