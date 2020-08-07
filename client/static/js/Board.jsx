@@ -150,21 +150,35 @@ export default class Board extends React.Component {
 
     let i = 0, j = 0;
 
-    data.forEach(breakdown => {
-      i++;
-      // console.log(breakdown);
-      Object.keys(breakdown.breakdown).forEach((installationBreakdown) => {
-        j++;
-        // console.log(breakdown.breakdown[installationBreakdown].load);
-        if (breakdown.breakdown[installationBreakdown].load == null || breakdown.breakdown[installationBreakdown].load.value == null) {
-          console.error("Load specified is NULL",breakdown.breakdown[installationBreakdown].load.value, breakdown.breakdown, installationBreakdown, breakdown.breakdown[installationBreakdown], i, j);
-        }
-        console.log(breakdown.breakdown[installationBreakdown].load.value, breakdown.breakdown[installationBreakdown].load.value * 100);
-        breakdown.breakdown[installationBreakdown].load.value = breakdown.breakdown[installationBreakdown].load.value * 100;
-      });
-      // console.log(breakdown);
+    for (i = 0; i < data.length; i++) {
+      let currentBreakdown = data[i].breakdown;
+      // console.log("CurrentBreakdown", currentBreakdown);
+      let keys = Object.keys(currentBreakdown);
+      for (j = 0; j < keys.length; j++) {
+        const currentKey = keys[j];
 
-    });
+        const currentLoad = currentBreakdown[currentKey].load.value;
+        if (currentKey == "fossil") {
+          console.log(currentBreakdown, currentLoad, currentKey);
+          const updatedLoad = currentLoad * 10000;
+          currentBreakdown[currentKey].load.value = updatedLoad;
+        } else {
+        const updatedLoad = currentLoad * 100;
+        currentBreakdown[currentKey].load.value = updatedLoad;
+        }
+      }
+    }
+
+    // data.forEach(breakdown => {
+    //   Object.keys(breakdown.breakdown).forEach((installationBreakdown) => {
+    //     let currentLoad = breakdown.breakdown[installationBreakdown].load;
+    //     if (currentLoad == null || currentLoad.value == null) {
+    //       console.error("Load specified is NULL", breakdown.breakdown, installationBreakdown, breakdown.breakdown[installationBreakdown],currentLoad, currentLoad.value, breakdown.breakdown[installationBreakdown].load.value, i, j);
+    //     }
+    //     console.log(currentLoad.value, currentLoad.value * 100);
+    //     currentLoad.value = currentLoad.value * 100;
+    //   });
+    // });
 
 
     return data;
