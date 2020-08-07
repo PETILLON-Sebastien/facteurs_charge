@@ -148,6 +148,11 @@ export default class Board extends React.Component {
 
     data = await data.json();
 
+    data.pop();
+    data.pop();
+    data.pop();
+    data.pop();
+    
     let i = 0, j = 0;
 
     for (i = 0; i < data.length; i++) {
