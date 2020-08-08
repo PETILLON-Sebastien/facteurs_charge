@@ -1,5 +1,6 @@
 'use strict';
 var _ = require('lodash');
+var moment = require('moment');
 var Q = require('q');
 var path = require('path');
 var api_common = require(path.join('..', 'utils', 'api_common.js'));
@@ -66,6 +67,15 @@ function format_capacity(data) {
     });
   });
   return _.values(zones);
+}
+
+function keep_one(data, order) {
+  _.forOwn(data, function(date_value, date_key) {
+    date_value[constants.api_wording.snapshots] = _.orderBy(date_value[constants.api_wording.snapshots], function(value) {
+      return moment(value[constants.api_wording.datetime]).valueOf();
+    }, [order]);
+    date_value[constants.api_wording.snapshots] = [date_value[constants.api_wording.snapshots][0]];
+  });
 }
 
 function filter_load(all_data) {
@@ -515,6 +525,17 @@ exports.get_installations_load = function(from,to) {
       resolve();
     }
   });
+}
+
+exports.get_installations_load_last = function(filter) {
+    var defered = Q.defer();
+    var time_window = api_common.manage_time_window();
+    retrieve_all(time_window.from, time_window.to).then(function(data) {
+      var load = filter_load(data, constants.api_wording.load);
+      keep_one(data, 'desc');
+      defered.resolve(data);
+    });
+    return defered.promise;
 }
 
 

@@ -267,6 +267,36 @@ paths:
             type: array
             items:
               $ref: '#/definitions/loadSnapshotZone'
+  /zones/installations/load/last:
+    x-swagger-router-controller: "Installation"
+    get:
+      tags:
+      - Installation
+      summary: Retrieve the load of the installations
+      operationId: get_installations_load_last
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - $ref: '#/parameters/filter'
+      responses:
+        "200":
+          description: "All data retreived"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/loadSnapshotZone'
+        "400":
+          description: "Bad parameter"
+        "404":
+          description: "No data"
+        "409":
+          description: "Partial content"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/loadSnapshotZone'
   /zones/installations/load/breakdown:
     x-swagger-router-controller: "Installation"
     get:
@@ -1215,3 +1245,10 @@ parameters:
     required: true
     type: string
     pattern: "solar|wind|hydraulic|nuclear|bioenergy|fossil"
+  filter:
+    in: "query"
+    name: "filter"
+    description: "Highest / Lowest"
+    required: false
+    type: string
+    pattern: "lowest|highest"

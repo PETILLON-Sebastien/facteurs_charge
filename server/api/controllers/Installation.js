@@ -115,6 +115,17 @@ module.exports.get_installations_load = function get_installations_load (req, re
     });
 };
 
+module.exports.get_installations_load_last = function get_installations_load_last (req, res, next) {
+  var filter = req.swagger.params['filter'].value;
+  Installation.get_installations_load_last(filter)
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
 module.exports.get_installations_load_breakdown = function get_installations_load_breakdown (req, res, next) {
   var from = req.swagger.params['from'].value;
   var to = req.swagger.params['to'].value;
