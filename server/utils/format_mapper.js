@@ -7,7 +7,7 @@ var _ = require('lodash');
  * @param {String} field_name
  */
 var field_getter = function(snapshot, field_name) {
-    return _.get(snapshot, constants.opendatareseaux_wording.fields + '.' + field_name, 0);
+    return _.get(snapshot, constants.opendatareseaux_wording.fields + '.' + field_name);
 };
 
 /**
@@ -75,7 +75,8 @@ var extract_consumption_snapshot_zones = function(records) {
  */
 var extract_installation_production = function(installation, snapshot) {
     var extraction = {};
-    var production = _.floor(field_getter(snapshot, installation.name));
+    var value = field_getter(snapshot, installation.name);
+    var production = value === undefined ? undefined : _.floor(value);
 
     // If installation has details and the zone is France
     if(installation.details !== undefined && snapshot[constants.opendatareseaux_wording.fields][constants.opendatareseaux_wording.code_insee_region] === undefined) {
@@ -168,7 +169,8 @@ var merge_capacity = function(capacity1, capacity2) {
  */
 var extract_installation_capacity = function(installation, snapshot) {
     var extraction = {};
-    var production = _.floor(field_getter(snapshot, installation.name));
+    var value = field_getter(snapshot, installation.name);
+    var production = value === undefined ? undefined : _.floor(value);
     var load = field_getter(snapshot, constants.opendatareseaux_wording.load_prefix + installation.name);
     var capacity = _.round(production / load * 100, 2);
     _.set(extraction, [constants.api_wording.capacity], capacity);
