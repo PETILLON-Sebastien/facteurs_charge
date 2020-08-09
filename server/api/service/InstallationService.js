@@ -551,7 +551,9 @@ exports.get_installations_load_last = function(filter) {
     retrieve_all(time_window.from, time_window.to, false).then(function(data) {
       var load = filter_load(data, constants.api_wording.load);
       keep_one(data, 'desc');
-      keep_filter(data, filter);
+      if(filter) {
+        keep_filter(data, filter);
+      }
       defered.resolve(data);
     });
     return defered.promise;
