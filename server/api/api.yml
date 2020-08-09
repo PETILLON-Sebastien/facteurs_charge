@@ -286,7 +286,7 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/loadSnapshotZone'
+              $ref: '#/definitions/loadFilterSnapshotZone'
         "400":
           description: "Bad parameter"
         "404":
@@ -1183,6 +1183,17 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/loadSnapshot'
+  loadFilterSnapshotZone:
+    type: object
+    required: ['zoneId', 'snapshots']
+    properties:
+      zoneId:
+        type: string
+        pattern: "[A-Z]{2}(-[0-9]{2})?$"
+      snapshots:
+        type: array
+        items:
+          $ref: '#/definitions/loadFilterSnapshot'
   loadSnapshot:
     type: object
     required: ['load', 'datetime']
@@ -1196,6 +1207,19 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/detailLoad'
+  loadFilterSnapshot:
+    type: object
+    required: ['datetime']
+    properties:
+      datetime:
+        type: string
+        format: date-time
+      highest:
+        type: string
+        pattern: "solar|wind|hydraulic|nuclear|bioenergy|fossil"
+      lowest:
+        type: string
+        pattern: "solar|wind|hydraulic|nuclear|bioenergy|fossil"
   detailLoad:
     type: object
     required: ['name', 'load']
