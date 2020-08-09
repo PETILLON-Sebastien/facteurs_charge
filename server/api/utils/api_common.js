@@ -26,7 +26,7 @@ exports.manage_time_window_day_before = function(from, to) {
   return result;
 };
 
-exports.format_values = function(object) {
+exports.format_values = function(object, format_single_property) {
   var formatted = {};
   _.forOwn(object, function(value, key) {
     if(key === constants.api_wording.production || key == constants.api_wording.capacity || key == constants.api_wording.load) {
@@ -40,7 +40,7 @@ exports.format_values = function(object) {
       newObject[constants.api_wording.value] = value;
       var used_key = key == constants.api_wording.load
         ? constants.api_wording.load
-        : (number_of_properties == 1 ? constants.api_wording.power : key);
+        : ((number_of_properties == 1 && format_single_property) ? constants.api_wording.power : key);
       formatted[used_key] = newObject;
     } else {
       formatted[key] = value;

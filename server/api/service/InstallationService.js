@@ -13,22 +13,22 @@ var customizer = function(objValue, srcValue) {
   }
 };
 
-function fulfill(production, capacity) {
+function fulfill(production, capacity, format_single_property) {
   _.mergeWith(production, capacity, customizer);
   _.forOwn(production, function(value, key) {
     if(value[constants.api_wording.details]) {
-      fulfill(value[constants.api_wording.details], capacity[key][constants.api_wording.details]);
+      fulfill(value[constants.api_wording.details], capacity[key][constants.api_wording.details], format_single_property);
     } else {
       if (_.isNumber(value[constants.api_wording.production])
         && _.isNumber(value[constants.api_wording.capacity])) {
         value[constants.api_wording.load] = value[constants.api_wording.production] / value[constants.api_wording.capacity];
       }
-      production[key] = api_common.format_values(value);
+      production[key] = api_common.format_values(value, format_single_property !== undefined ? format_single_property : true);
     }
   });
 }
 
-function retrieve_all(from, to) {
+function retrieve_all(from, to, format_single_property) {
   var defered = Q.defer();
   var time_window = api_common.manage_time_window(from, to);
   var time_window_day_before = api_common.manage_time_window_day_before(from, to);
@@ -41,7 +41,7 @@ function retrieve_all(from, to) {
       var zone_id = zone[constants.api_wording.zone_id];
       _.forOwn(zone[constants.api_wording.snapshots], function(snapshot) {
         var date = snapshot[constants.api_wording.datetime].slice(0, 10);
-        fulfill(snapshot[constants.api_wording.breakdown], capacity[date][zone_id][constants.api_wording.breakdown]);
+        fulfill(snapshot[constants.api_wording.breakdown], capacity[date][zone_id][constants.api_wording.breakdown], format_single_property);
       });
     });
     defered.resolve(production);
@@ -78,9 +78,13 @@ function keep_one(data, order) {
   });
 }
 
+function keep_filter(data, filter) {
+  console.log()
+}
+
 function filter_load(all_data) {
   _.forOwn(all_data, function(part) {
-    if(_.isObject(part) && (part[constants.api_wording.load] != undefined || part[constants.api_wording.production] != undefined || part[constants.api_wording.consumption] != undefined)) {
+    if(_.isObject(part)) {
       delete part[constants.api_wording.production];
       delete part[constants.api_wording.capacity];
     }
@@ -530,9 +534,10 @@ exports.get_installations_load = function(from,to) {
 exports.get_installations_load_last = function(filter) {
     var defered = Q.defer();
     var time_window = api_common.manage_time_window();
-    retrieve_all(time_window.from, time_window.to).then(function(data) {
+    retrieve_all(time_window.from, time_window.to, false).then(function(data) {
       var load = filter_load(data, constants.api_wording.load);
       keep_one(data, 'desc');
+      keep_filter(data, filter);
       defered.resolve(data);
     });
     return defered.promise;
