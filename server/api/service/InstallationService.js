@@ -123,7 +123,7 @@ function filter_installation_type(all_data, installationType) {
 function format_all_values(all_data) {
   _.forOwn(all_data, function(part, key) {
     if(_.isObject(part) && (part[constants.api_wording.capacity] != undefined || part[constants.api_wording.production] != undefined || part[constants.api_wording.load] != undefined)) {
-      all_data[key] = api_common.format_values(part);
+      all_data[key] = api_common.format_values(part, true);
     }
     if (_.isObject(part)) {
       format_all_values(part);
