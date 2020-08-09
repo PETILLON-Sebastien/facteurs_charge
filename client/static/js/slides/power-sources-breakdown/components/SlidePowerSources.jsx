@@ -22,10 +22,12 @@ class SlidePowerSources extends React.Component {
                 bestComponent = <PowerSourceNameInline type={installationType} />;
                 bestValue = powerBreakdown[installationType].power.value;
             } else {
+                //    else {
                 if (powerBreakdown[installationType].power.value > bestValue) {
                     bestComponent = <PowerSourceNameInline type={installationType} />;
                     bestValue = powerBreakdown[installationType].power.value;
                 }
+                // }
             }
         });
 
@@ -37,6 +39,17 @@ class SlidePowerSources extends React.Component {
         const currentData = this.props.data.latestPowerBreakdown;
         const currentZoneID = this.props.currentZone.id;
         const currentZoneName = this.props.currentZone.label;
+
+
+        let arrayOfPowerSourceComponents = [];
+        Object.keys(currentData).forEach((installationType) => {
+            const newComponent =
+                <div  key={installationType} className="column is-6-widescreen is-6-full-hd is-6-desktop is-4-tablet is-6-mobile " style={{ "marginTop": "10px" }}>
+                    <PowerSourceProduction key={installationType} production={currentData[installationType].power} type={installationType} cssClass="power-sources" />
+                </div>;
+
+            arrayOfPowerSourceComponents.push(newComponent);
+        });
 
         return (
 
@@ -58,7 +71,8 @@ class SlidePowerSources extends React.Component {
                         <div className="columns is-multiline">
                             <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-12-tablet is-12-mobile">
                                 <div className="columns is-multiline is-mobile is-vcentered">
-                                    <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-4-tablet is-6-mobile " style={{ "marginTop": "10px" }}>
+                                    {arrayOfPowerSourceComponents}
+                                    {/* <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-4-tablet is-6-mobile " style={{ "marginTop": "10px" }}>
                                         <PowerSourceProduction production={currentData.solar.power} type="solar" cssClass="power-sources" />
                                     </div>
                                     <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-4-tablet is-6-mobile" style={{ "marginTop": "10px" }}>
@@ -75,7 +89,7 @@ class SlidePowerSources extends React.Component {
                                     </div>
                                     <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-4-tablet is-6-mobile" style={{ "marginTop": "10px" }}>
                                         <PowerSourceProduction production={currentData.fossil.power} type="fossil" cssClass="power-sources" />
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
 

@@ -77,7 +77,7 @@ export default class Board extends React.Component {
     this.setState({ powerSourceBreakdown: { isLoaded: false }, loadBreakdown: { isLoaded: false } });
 
     let powerSourceData = await this.fetchPowerSourcesBreakdown(ISOZoneId);
-    console.log("Power sources Data fetched.");
+    console.log("Power sources Data fetched.", powerSourceData);
 
     // PRECONDITION: Considering timely ordered data
     const powerSourcesLatestData = powerSourceData[powerSourceData.length - 1].breakdown;
@@ -118,7 +118,7 @@ export default class Board extends React.Component {
         latestBreakdownData: latestBreakdownData,
         breakdownHistory: loadData
       },
-      highestLoads:loadDataForAllZones
+      highestLoads: loadDataForAllZones
     });
   }
 
@@ -135,6 +135,25 @@ export default class Board extends React.Component {
     data.sort((breakdownA, breakdownB) => {
       return moment(breakdownA.datetime).valueOf() - moment(breakdownB.datetime).valueOf();
     });
+
+
+    // Handling cases where the server does not send proper data
+    let copyOfData = Object.assign(data);
+
+    data.forEach( (currentData,i) => {
+      const breakdown = currentData.breakdown;
+
+      Object.keys(breakdown).forEach((installationType) => {
+        if (breakdown[installationType] === {} || breakdown[installationType].power === undefined) {
+          console.warn("Slide power source, finding highest source of poweer, installation", installationType, "is not defined or has no power field");
+         delete copyOfData[i].breakdown[installationType];
+        }
+      });
+    })
+
+    data = copyOfData;
+
+
 
     let now = moment().valueOf();
     data = data.filter((element) => {
@@ -189,14 +208,12 @@ export default class Board extends React.Component {
     let data = await fetch(targetUrl);
 
     data = await data.json();
-    console.log(data);
     let i = 0, j = 0;
 
     let result = {};
 
     for (i = 0; i < data.length; i++) {
       let currentData = data[i];
-      console.log(currentData);
       result[currentData.zoneId] = currentData.snapshots[0].highest;
     }
     return result;
