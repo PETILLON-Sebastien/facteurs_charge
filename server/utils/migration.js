@@ -100,8 +100,13 @@ var migrate_consumption_production = function(date) {
   });
 };
 
-var day = moment(process.env.DAY)
-if(day.isValid()) {
-  migrate_consumption_production(day);
-  migrate_capacity(day);
+var start_day = moment(process.env.START_DAY)
+var end_day = moment(process.env.END_DAY)
+if(start_day.isValid() && end_day.isValid()) {
+  current_day = start_day;
+  while(!current_day.isAfter(end_day)) {
+    migrate_consumption_production(moment(current_day));
+    migrate_capacity(moment(current_day));
+    current_day = current_day.add(1, 'day');
+  }
 }
