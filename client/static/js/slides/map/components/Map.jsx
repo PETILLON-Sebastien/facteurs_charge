@@ -5,10 +5,6 @@ class Map extends React.Component {
 
   constructor(props) {
     super(props);
-    // this.regionsDescriptions = regionDescription;
-    this.state = {
-      data: this.get()
-    }
     this.zoneChanged = this.zoneChanged.bind(this);
   }
 
@@ -16,42 +12,15 @@ class Map extends React.Component {
     this.props.zoneChanged(valeur);
   }
 
-  getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
-  }
-
-  get() {
-    const installationsArray = ["solar", "wind", "nuclear", "hydraulic", "fossil", "bioenergy"];
-    let data = [];
-    for (let i = 0; i < 14; i++) {
-      data.push({
-        "id": i,
-        "highestLoad": {
-          "installation": installationsArray[this.getRandomInt(installationsArray.length - 1)],
-          "value": this.getRandomInt(101)
-        }
-      })
-    }
-
-    return data;
-  }
-
-
   render() {
-    const regionsDescriptions = this.props.zonesDescription;
-
-    // fixme
-    // link zone with highestload (fake data)
-    regionsDescriptions.forEach((e, i) => {
-      e.highestLoad = this.state.data[i].highestLoad.installation
-    });
+    const zonesDescription = this.props.zonesDescription;
 
     let regions = [];
-    for (let i = 0; i < regionsDescriptions.length; i++) {
+    for (let i = 0; i < zonesDescription.length; i++) {
       regions.push(
         <Zone
-          key={regionsDescriptions[i].id}
-          description={regionsDescriptions[i]}
+          key={zonesDescription[i].id}
+          description={zonesDescription[i]}
           zoneChanged={this.zoneChanged}
           onClick={(i) => this.zoneChanged(i)}
         />

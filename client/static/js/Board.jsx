@@ -93,6 +93,15 @@ export default class Board extends React.Component {
 
 
 
+    let loadDataForAllZones = await this.fetchLoadsForAllZones();
+    console.log("Last load data fetched", loadDataForAllZones);
+
+    // PRECONDITION: Considering timely ordered data
+    // const latestLoads = loadData[loadData.length - 1].breakdown;
+
+
+
+
 
     console.log("Modifying state of Board and setting loading state of power source slide to loaded.");
     this.setState({
@@ -108,7 +117,8 @@ export default class Board extends React.Component {
         isLoaded: true,
         latestBreakdownData: latestBreakdownData,
         breakdownHistory: loadData
-      }
+      },
+      highestLoads:loadDataForAllZones
     });
   }
 
@@ -132,9 +142,9 @@ export default class Board extends React.Component {
     });
     // Remove the last one (likely 0)
     // https://github.com/PETILLON-Sebastien/facteurs_charge/issues/53
-    data.pop();
-    data.pop();
-    data.pop();
+    // data.pop();
+    // data.pop();
+    // data.pop();
     // ------------------------------------------------------------------------
 
     return data;
@@ -148,45 +158,48 @@ export default class Board extends React.Component {
 
     data = await data.json();
 
-    data.pop();
-    data.pop();
-    data.pop();
-    data.pop();
-
     let i = 0, j = 0;
 
     for (i = 0; i < data.length; i++) {
       let currentBreakdown = data[i].breakdown;
-      // console.log("CurrentBreakdown", currentBreakdown);
       let keys = Object.keys(currentBreakdown);
       for (j = 0; j < keys.length; j++) {
         const currentKey = keys[j];
 
-        const currentLoad = currentBreakdown[currentKey].load.value;
-        if (currentKey == "fossil") {
-          console.log(currentBreakdown, currentLoad, currentKey);
+        // PATCH https://github.com/PETILLON-Sebastien/facteurs_charge/issues/58
+        if (currentKey == "nuclear") {
+          const currentLoad = currentBreakdown["wind"].load.value;
           const updatedLoad = currentLoad * 100;
-          currentBreakdown[currentKey].load.value = updatedLoad;
-        } else {
+          currentBreakdown[currentKey].load = { value: updatedLoad };
+          continue;
+        }
+        const currentLoad = currentBreakdown[currentKey].load.value;
         const updatedLoad = currentLoad * 100;
         currentBreakdown[currentKey].load.value = updatedLoad;
-        }
+
       }
     }
-
-    // data.forEach(breakdown => {
-    //   Object.keys(breakdown.breakdown).forEach((installationBreakdown) => {
-    //     let currentLoad = breakdown.breakdown[installationBreakdown].load;
-    //     if (currentLoad == null || currentLoad.value == null) {
-    //       console.error("Load specified is NULL", breakdown.breakdown, installationBreakdown, breakdown.breakdown[installationBreakdown],currentLoad, currentLoad.value, breakdown.breakdown[installationBreakdown].load.value, i, j);
-    //     }
-    //     console.log(currentLoad.value, currentLoad.value * 100);
-    //     currentLoad.value = currentLoad.value * 100;
-    //   });
-    // });
-
-
     return data;
+  }
+
+  async fetchLoadsForAllZones() {
+    const targetUrl = root_endpoint + "/zones/installations/load/last?filter=highest";
+    console.log("Fetching last loads", targetUrl);
+
+    let data = await fetch(targetUrl);
+
+    data = await data.json();
+    console.log(data);
+    let i = 0, j = 0;
+
+    let result = {};
+
+    for (i = 0; i < data.length; i++) {
+      let currentData = data[i];
+      console.log(currentData);
+      result[currentData.zoneId] = currentData.snapshots[0].highest;
+    }
+    return result;
   }
 
 
@@ -240,7 +253,7 @@ export default class Board extends React.Component {
 
         <div className="section is-medium" id="slide-map" style={{ "marginTop": "0rem" }}>
           <div className="container">
-            <SlideMap zoneChanged={this.zoneChanged} zonesDescription={this.zonesDescription} />
+            <SlideMap zoneChanged={this.zoneChanged} zonesDescription={this.zonesDescription} highestLoads={this.state.highestLoads} />
           </div>
         </div>
 
