@@ -52,7 +52,7 @@
     "page-loader": "^1.2.0"
   },
   "scripts": {
-    "build": "npm run css-deploy &&  webpack -p --env.API_URL=http://51.210.182.41 --progress --config static/webpack.config.js",
+    "build": "npm run css-deploy &&  webpack -p --env.API_URL=http://51.210.182.41:8080 --progress --config static/webpack.config.js",
     "dev-build": "npm run css-deploy && webpack --env.API_URL=http://localhost:8080 --progress -d --config static/webpack.config.js",
     "watch": "concurrently  \"npm run client-watch\" \"npm run css-watch\"",
     "client-watch": "webpack --env.API_URL=http://localhost:8080 --progress -d --config static/webpack.config.js --watch",
