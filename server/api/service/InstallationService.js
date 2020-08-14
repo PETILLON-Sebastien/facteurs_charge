@@ -78,8 +78,8 @@ function keep_one(data, order) {
 }
 
 function keep_filter(data, filter) {
-  _.forOwn(data, function(date_value, date_key) {
-    _.forOwn(date_value[constants.api_wording.snapshots], function(snapshot) {
+  _.forOwn(data, function(zone, date_key) {
+    _.forOwn(zone[constants.api_wording.snapshots], function(snapshot) {
       var best_load = 0;
       snapshot[filter] = _.reduce(snapshot[constants.api_wording.breakdown], function(result, value, key) {
         var current_load = _.get(value, [constants.api_wording.load, constants.api_wording.value]);
@@ -88,7 +88,7 @@ function keep_filter(data, filter) {
           result = key;
         }
         return result;
-      });
+      }, {});
       delete snapshot[constants.api_wording.breakdown];
       delete snapshot[constants.api_wording.details];
     });
