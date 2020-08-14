@@ -7,7 +7,10 @@ const config = (env) => {
     return prev;
   }, {});
 
-  return {
+  return {  performance: {
+    maxEntrypointSize: 1328000,
+    maxAssetSize: 1328000
+  },
     entry: __dirname + '/js/index.jsx',
     output: {
       path: __dirname + '/dist',
