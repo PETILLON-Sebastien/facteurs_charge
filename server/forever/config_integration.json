@@ -1,12 +1,12 @@
 [
   {
-    "uid": "current_day_daemon",
+    "uid": "current_day_daemon_integration",
     "append": true,
     "watch": false,
     "script": "./daemons/current_day.js"
   },
   {
-    "uid": "server_daemon",
+    "uid": "server_daemon_integration",
     "append": true,
     "watch": false,
     "script": "./api/server.js"

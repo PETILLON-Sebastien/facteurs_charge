@@ -46,6 +46,8 @@
     "dev-build": "webpack --env.API_URL=http://localhost:8080 --progress -d --config static/webpack.config.js",
     "watch": "webpack --env.API_URL=http://localhost:8080 --progress -d --config static/webpack.config.js --watch",
     "start": "forever forever/config.json",
-    "stop": "forever stopall"
+    "stop": "forever stop --uid current_day_daemon server_daemon",
+    "start_integration": "FC_PORT=8082 forever forever/config_integration.json",
+    "stop_integration": "forever stop --uid current_day_daemon_integration server_daemon_integration"
   }
 }
