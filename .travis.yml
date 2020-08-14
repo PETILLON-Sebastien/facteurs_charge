@@ -2,7 +2,7 @@ language: node_js
 node_js:
 - 12
 addons:
-  ssh_known_hosts: nabnab@aloadae.feralhosting.com
+  ssh_known_hosts: facteus@sshcloud.cluster024.hosting.ovh.net:44335
 before_script:
 - cd client
 - npm install
@@ -19,8 +19,13 @@ before_deploy:
 - chmod 600 /tmp/deploy_rsa
 - ssh-add /tmp/deploy_rsa 
 deploy:
+# - provider: script
+#   skip_cleanup: true
+#   script: rsync -e 'ssh -p 44335' -r --delete-after $TRAVIS_BUILD_DIR/client/static facteus@sshcloud.cluster024.hosting.ovh.net:~/www/ && rsync -e 'ssh -p 44335' -r --delete-after $TRAVIS_BUILD_DIR/server facteus@sshcloud.cluster024.hosting.ovh.net:~/www/
+#   on:
+#     branch: master
 - provider: script
   skip_cleanup: true
-  script: rsync -e 'ssh' -r --delete-after $TRAVIS_BUILD_DIR/client/static nabnab@aloadae.feralhosting.com:~/private/transmission/data/facteurs_charge/ && rsync -e 'ssh' -r --delete-after $TRAVIS_BUILD_DIR/server nabnab@aloadae.feralhosting.com:~/private/transmission/data/facteurs_charge/server
+  script: rsync -e 'ssh' -r --delete-after $TRAVIS_BUILD_DIR/client/static/* ubuntu@51.210.182.41:~/www/html/ && rsync -e 'ssh' -r --delete-after $TRAVIS_BUILD_DIR/server/* ubuntu@51.210.182.41:~/www/server/
   on:
     branch: integration
