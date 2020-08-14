@@ -61,7 +61,8 @@ class ProductionBySourcesGraph extends React.Component {
 
         // Check if data is ordered
         // ISSUE https://github.com/PETILLON-Sebastien/facteurs_charge/issues/53 and https://github.com/PETILLON-Sebastien/facteurs_charge/issues/52
-        let targetArray = productionsArrayPerSource.nuclear;
+        let targetArray = productionsArrayPerSource.solar;
+        console.log(productionsArrayPerSource);
         let lowest = targetArray[0][0];
         for (let i = 1; i < targetArray.length; i++) {
             let current = targetArray[i][0];
