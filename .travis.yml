@@ -25,6 +25,6 @@ deploy:
 #     branch: master
 - provider: script
   skip_cleanup: true
-  script: rsync -e 'ssh' -r --delete-after $TRAVIS_BUILD_DIR/client/static/* ubuntu@51.210.182.41:~/www/html/ && rsync -e 'ssh' -r --delete-after $TRAVIS_BUILD_DIR/server/* ubuntu@51.210.182.41:~/www/server/
+  script: rsync -e 'ssh' -r --delete-after $TRAVIS_BUILD_DIR/client/static/* ubuntu@51.210.182.41:/var/www/html/ && rsync -e 'ssh' -r --delete-after $TRAVIS_BUILD_DIR/server/* ubuntu@51.210.182.41:/var/www/server/
   on:
     branch: integration
