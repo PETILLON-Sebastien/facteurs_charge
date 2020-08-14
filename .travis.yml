@@ -21,6 +21,6 @@ before_deploy:
 deploy:
 - provider: script
   skip_cleanup: true
-  script: rsync -e 'ssh' -r --delete-after $TRAVIS_BUILD_DIR/client/static $TRAVIS_BUILD_DIR/server/* nabnab@aloadae.feralhosting.com:~/private/transmission/data/facteurs_charge
+  script: rsync -e 'ssh' -r --delete-after $TRAVIS_BUILD_DIR/client/static nabnab@aloadae.feralhosting.com:~/private/transmission/data/facteurs_charge/ && rsync -e 'ssh' -r --delete-after $TRAVIS_BUILD_DIR/server nabnab@aloadae.feralhosting.com:~/private/transmission/data/facteurs_charge/server
   on:
     branch: integration
