@@ -11,6 +11,8 @@ before_script:
 script: 
 - cd ../client
 - npm run build
+- ls $TRAVIS_BUILD_DIR
+- ls $TRAVIS_BUILD_DIR/client/static
 before_deploy:
 - openssl aes-256-cbc -K $encrypted_db2095f63ba3_key -iv $encrypted_db2095f63ba3_iv
   -in deploy_rsa.enc -out /tmp/deploy_rsa -d
