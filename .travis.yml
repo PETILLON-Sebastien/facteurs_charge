@@ -2,7 +2,7 @@ language: node_js
 node_js:
 - 12
 addons:
-  ssh_known_hosts: facteus@sshcloud.cluster024.hosting.ovh.net:44335
+  ssh_known_hosts: nabnab@aloadae.feralhosting.com
 before_script:
 - cd client
 - npm install
