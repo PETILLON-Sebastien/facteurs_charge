@@ -77,7 +77,7 @@ export default class Board extends React.Component {
     this.setState({ powerSourceBreakdown: { isLoaded: false }, loadBreakdown: { isLoaded: false } });
 
     let powerSourceData = await this.fetchPowerSourcesBreakdown(ISOZoneId);
-    console.log("Power sources Data fetched.", powerSourceData);
+    console.log("Power sources Data fetched.");
 
     // PRECONDITION: Considering timely ordered data
     const powerSourcesLatestData = powerSourceData[powerSourceData.length - 1].breakdown;
@@ -85,23 +85,17 @@ export default class Board extends React.Component {
 
 
     let loadData = await this.fetchLoadsBreakdown(ISOZoneId);
-    console.log("Load data fetched");
+    console.log("Load data fetched",);
 
     // PRECONDITION: Considering timely ordered data
     const latestBreakdownData = loadData[loadData.length - 1].breakdown;
-
-
-
+    console.log("Lastest breakdown", latestBreakdownData);
 
     let loadDataForAllZones = await this.fetchLoadsForAllZones();
     console.log("Last load data fetched", loadDataForAllZones);
 
     // PRECONDITION: Considering timely ordered data
     // const latestLoads = loadData[loadData.length - 1].breakdown;
-
-
-
-
 
     console.log("Modifying state of Board and setting loading state of power source slide to loaded.");
     this.setState({
@@ -187,9 +181,7 @@ export default class Board extends React.Component {
 
         // PATCH https://github.com/PETILLON-Sebastien/facteurs_charge/issues/58
         if (currentKey == "nuclear") {
-          const currentLoad = currentBreakdown["wind"].load.value;
-          const updatedLoad = currentLoad * 100;
-          currentBreakdown[currentKey].load = { value: updatedLoad };
+          delete  data[i].breakdown["nuclear"];
           continue;
         }
         const currentLoad = currentBreakdown[currentKey].load.value;

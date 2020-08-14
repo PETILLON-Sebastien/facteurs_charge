@@ -3,6 +3,7 @@ import PowerSourceLoad from './PowerSourceLoad';
 import GraphLoadEvolution from "./GraphLoadEvolution";
 import { ZoneContext } from '../../../ZoneContext';
 import PowerSourceNameInline from "../../../power-sources/components/PowerSourceNameInline";
+import { first } from "lodash";
 
 class SlideLoad extends React.Component {
 
@@ -55,6 +56,50 @@ class SlideLoad extends React.Component {
         const currentZoneName = this.props.currentZone.label;
         const mostLoadedInstallation = this.findMostLoaded(currentData);
         const leastLoadedInstallation = this.findLeastLoaded(currentData);
+
+        const keys = Object.keys(currentData);
+
+        const half = Math.ceil(keys.length / 2);
+
+        const firstHalfOfKeys = keys.splice(0, half)
+        const secondHalfOfKeys = keys.splice(-half)
+
+        let firstColumn = [];
+        for (let i = 0; i < firstHalfOfKeys.length; i++) {
+            const installationType = firstHalfOfKeys[i];
+            const newComponent = <div key={installationType}
+                className="column is-12-widescreen is-12-full-hd is-12-desktop is-4-tablet is-4-mobile ">
+                <PowerSourceLoad
+                    key={installationType}
+                    load={currentData[installationType].load}
+                    production={currentData[installationType].production}
+                    capacity={currentData[installationType].capacity}
+                    type={installationType}
+                    cssClass="load"
+                    mirrored={false}
+                />
+            </div>
+            firstColumn.push(newComponent);
+        }
+
+        let secondColumn = [];
+        for (let i = 0; i < secondHalfOfKeys.length; i++) {
+            const installationType = secondHalfOfKeys[i];
+            const newComponent = <div key={installationType}
+                className="column is-12-widescreen is-12-full-hd is-12-desktop is-4-tablet is-4-mobile ">
+                <PowerSourceLoad
+                    key={installationType}
+                    load={currentData[installationType].load}
+                    production={currentData[installationType].production}
+                    capacity={currentData[installationType].capacity}
+                    type={installationType}
+                    cssClass="load"
+                    mirrored={false}
+                />
+            </div>
+            secondColumn.push(newComponent);
+        }
+
         return (
             <React.Fragment>
                 <div className="section is-medium" id="slide-load" style={{ "minHeight": "100vh" }}>
@@ -80,7 +125,10 @@ class SlideLoad extends React.Component {
                         <div className="columns is-multiline is-centered">
                             <div className="column is-one-fifth">
                                 <div id="breakdown" className="columns has-text-centered is-variable is-centered is-mobile is-multiline representations-wrapper">
-                                    <div className="column is-12-widescreen is-12-full-hd is-12-desktop is-4-tablet is-4-mobile ">
+                                    {firstColumn}
+
+
+                                    {/* <div className="column is-12-widescreen is-12-full-hd is-12-desktop is-4-tablet is-4-mobile ">
                                         <PowerSourceLoad
                                             load={currentData.solar.load}
                                             production={currentData.solar.production}
@@ -109,7 +157,7 @@ class SlideLoad extends React.Component {
                                             cssClass="load"
                                             mirrored={false}
                                         />
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
 
@@ -119,7 +167,10 @@ class SlideLoad extends React.Component {
                             </div>
                             <div className="column is-one-fifth">
                                 <div id="breakdown" className="columns has-text-centered is-variable is-centered is-mobile is-multiline representations-wrapper">
-                                    <div className="column is-12-widescreen is-12-full-hd is-12-desktop is-4-tablet is-4-mobile ">
+
+                                    {secondColumn}
+
+                                    {/* <div className="column is-12-widescreen is-12-full-hd is-12-desktop is-4-tablet is-4-mobile ">
                                         <PowerSourceLoad
                                             load={currentData.nuclear.load}
                                             production={currentData.nuclear.production}
@@ -148,7 +199,7 @@ class SlideLoad extends React.Component {
                                             cssClass="load"
                                             mirrored={true}
                                         />
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </div>
