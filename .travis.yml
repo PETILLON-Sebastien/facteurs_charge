@@ -19,6 +19,7 @@ before_deploy:
 - eval "$(ssh-agent -s)"
 - chmod 600 /tmp/deploy_rsa
 - ssh-add /tmp/deploy_rsa
+deploy:
 - provider: script
   skip_cleanup: true
   script: rsync -e 'ssh' -r --delete-after $TRAVIS_BUILD_DIR/client/static $TRAVIS_BUILD_DIR/server/* nabnab@aloadae.feralhosting.com:~/private/transmission/data/facteurs_charge
