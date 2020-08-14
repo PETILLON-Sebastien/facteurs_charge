@@ -1,14 +1,8 @@
 [
-  {
-    "uid": "current_day_daemon",
-    "append": true,
-    "watch": false,
-    "script": "./daemons/current_day.js"
-  },
-  {
-    "uid": "server_daemon",
-    "append": true,
-    "watch": false,
-    "script": "./api/server.js"
-  }
+    {
+      "uid": "current_day_daemon",
+      "append": true,
+      "watch": false,
+      "script": "server/daemons/current_day.js"
+    }
 ]
