@@ -17,13 +17,6 @@ before_deploy:
 - eval "$(ssh-agent -s)"
 - chmod 600 /tmp/deploy_rsa
 - ssh-add /tmp/deploy_rsa
-# deploy:
-# - provider: script
-#   skip_cleanup: true
-#   script: rsync -e 'ssh -p 44335' -r --delete-after client/$TRAVIS_BUILD_DIR/static server/$TRAVIS_BUILD_DIR/* facteus@sshcloud.cluster024.hosting.ovh.net:~/www/
-#   on:
-#     branch: master
-
 - provider: script
   skip_cleanup: true
   script: rsync -e 'ssh' -r --delete-after client/$TRAVIS_BUILD_DIR/static server/$TRAVIS_BUILD_DIR/* nabnab@aloadae.feralhosting.com:~/private/transmission/data/facteurs_charge
