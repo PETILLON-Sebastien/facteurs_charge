@@ -78,16 +78,23 @@ var extract_installation_production = function(installation, snapshot) {
     var value = field_getter(snapshot, installation.name);
     var production = value === undefined ? undefined : _.floor(value);
 
-    // If installation has details and the zone is France
+    // If installation has details, the zone is France
+    var recompute_sum = production === undefined;
     if(installation.details !== undefined && snapshot[constants.opendatareseaux_wording.fields][constants.opendatareseaux_wording.code_insee_region] === undefined) {
-        var recompute_sum = production === 0;
+        if(recompute_sum) {
+          production = 0;
+        }
         _.forOwn(installation.details, function(detail) {
             _.set(extraction, [constants.api_wording.details, detail.api_name], extract_installation_production(detail, snapshot));
-            // Compute fossil data as the national API does not serve it anymore
-            if(recompute_sum) {
+            if(recompute_sum && _.isNumber(field_getter(snapshot, detail.name))) {
               production += field_getter(snapshot, detail.name);
             }
         });
+        if((!_.isNumber(production) || production === 0) && recompute_sum) {
+          production = undefined;
+        } else if (recompute_sum){
+          production = _.floor(production);
+        }
     }
     _.set(extraction, [constants.api_wording.production], production);
     return extraction;
@@ -198,6 +205,31 @@ var extract_capacity_snapshot = function(snapshot) {
 }
 
 /**
+ * Recompute national capacity as ODRE removed load factors on national api
+ * @param {Object} records
+ */
+var recompute_national_capacity = function(records_zones) {
+  var initializer = {};
+  _.forOwn(constants.power_sources, function(installation) {
+    _.set(initializer, [constants.api_wording.breakdown, installation.api_name, constants.api_wording.capacity], 0);
+  });
+  var national_capacity = _.reduce(records_zones, function(result, zone) {
+    if(result === undefined) {
+      return zone;
+    } else {
+      _.forOwn(zone[constants.api_wording.breakdown], function(value, key) {
+        var result_installation = result[constants.api_wording.breakdown][key];
+        if(_.isNumber(value[constants.api_wording.capacity])) {
+          result_installation[constants.api_wording.capacity] += value[constants.api_wording.capacity];
+        }
+      });
+      return result;
+    }
+  }, initializer);
+  records_zones['FR'] = national_capacity;
+}
+
+/**
  * Extract the capacity from the records
  * @param {Array[Object]} records
  */
@@ -208,6 +240,7 @@ var extract_capacity_snapshot_zones = function(records) {
         return result;
     }, {});
     _.set(records_zones, constants.api_wording.datetime, field_getter(records[records.length - 1], constants.opendatareseaux_wording.date_hour));
+    recompute_national_capacity(records_zones);
     return records_zones;
 }
 

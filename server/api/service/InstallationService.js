@@ -16,15 +16,14 @@ var customizer = function(objValue, srcValue) {
 function fulfill(production, capacity, format_single_property) {
   _.mergeWith(production, capacity, customizer);
   _.forOwn(production, function(value, key) {
-    if(value[constants.api_wording.details]) {
+    if(value[constants.api_wording.details] && capacity[key][constants.api_wording.details]) {
       fulfill(value[constants.api_wording.details], capacity[key][constants.api_wording.details], format_single_property);
-    } else {
-      if (_.isNumber(value[constants.api_wording.production])
-        && _.isNumber(value[constants.api_wording.capacity])) {
-        value[constants.api_wording.load] = value[constants.api_wording.production] / value[constants.api_wording.capacity];
-      }
-      production[key] = api_common.format_values(value, format_single_property !== undefined ? format_single_property : true);
     }
+    if(_.isNumber(value[constants.api_wording.production])
+      && _.isNumber(value[constants.api_wording.capacity])) {
+      value[constants.api_wording.load] = value[constants.api_wording.production] / value[constants.api_wording.capacity];
+    }
+    production[key] = api_common.format_values(value, format_single_property !== undefined ? format_single_property : true);
   });
 }
 
@@ -546,17 +545,17 @@ exports.get_installations_load = function(from,to) {
 }
 
 exports.get_installations_load_last = function(filter) {
-    var defered = Q.defer();
-    var time_window = api_common.manage_time_window();
-    retrieve_all(time_window.from, time_window.to, false).then(function(data) {
-      var load = filter_load(data, constants.api_wording.load);
-      keep_one(data, 'desc');
-      if(filter) {
-        keep_filter(data, filter);
-      }
-      defered.resolve(data);
-    });
-    return defered.promise;
+  var defered = Q.defer();
+  var time_window = api_common.manage_time_window();
+  retrieve_all(time_window.from, time_window.to, false).then(function(data) {
+    var load = filter_load(data, constants.api_wording.load);
+    keep_one(data, 'desc');
+    if(filter) {
+      keep_filter(data, filter);
+    }
+    defered.resolve(data);
+  });
+  return defered.promise;
 }
 
 
