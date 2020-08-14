@@ -23,7 +23,8 @@
     "swagger-tools": "0.10.1"
   },
   "dependencies": {
-    "babel-loader": "^8.0.6"
+    "babel-loader": "^8.0.6",
+    "cors": "^2.8.5"
   },
   "scripts": {
     "start": "forever forever/config.json",
