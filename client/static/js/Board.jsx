@@ -21,6 +21,7 @@ import { ZoneContext } from './ZoneContext';
 import { element } from 'prop-types';
 const root_endpoint = process.env.API_URL + "/api/v1";
 
+const { generate, validate, parse, format } = require('build-number-generator');
 
 var that;
 
@@ -32,7 +33,11 @@ export default class Board extends React.Component {
 
     this.zonesDescription = this.getZoneDescriptions();
     this.zoneChanged = this.zoneChanged.bind(this);
+
+    const buildNumber = generate();
+    console.log("Build number:", buildNumber);
     this.state = {
+      buildNumber: buildNumber,
       currentZone: { id: "xxx", label: "xxxx" }, //fixme,
       isLoaded: false
     };
@@ -134,13 +139,13 @@ export default class Board extends React.Component {
     // Handling cases where the server does not send proper data
     let copyOfData = Object.assign(data);
 
-    data.forEach( (currentData,i) => {
+    data.forEach((currentData, i) => {
       const breakdown = currentData.breakdown;
 
       Object.keys(breakdown).forEach((installationType) => {
         if (breakdown[installationType] === {} || breakdown[installationType].power === undefined) {
           console.warn("Slide power source, finding highest source of poweer, installation", installationType, "is not defined or has no power field");
-         delete copyOfData[i].breakdown[installationType];
+          delete copyOfData[i].breakdown[installationType];
         }
       });
     })
@@ -181,7 +186,7 @@ export default class Board extends React.Component {
 
         // PATCH https://github.com/PETILLON-Sebastien/facteurs_charge/issues/58
         if (currentKey == "nuclear") {
-          delete  data[i].breakdown["nuclear"];
+          delete data[i].breakdown["nuclear"];
           continue;
         }
         const currentLoad = currentBreakdown[currentKey].load.value;
@@ -217,7 +222,9 @@ export default class Board extends React.Component {
 
     if (!this.state.isLoaded) {
       console.log("Board has not been fully loaded yet, aborting the rendering and displaying loading screen instead.");
-      return <div className={`pageloader is-dark ${this.state.done ? "" : "is-active"}`} ref="spinner"><span className="title">Facteurs charge préchauffe... On arrive!</span></div>
+      return <div className={`pageloader is-dark ${this.state.done ? "" : "is-active"}`} ref="spinner">
+        <span className="title">Facteurs charge préchauffe... On arrive! (Build {this.state.buildNumber})</span>
+      </div>
     }
 
     let powerSourceSlide = null;
@@ -262,7 +269,7 @@ export default class Board extends React.Component {
 
         <div className="section is-medium" id="slide-map" style={{ "marginTop": "0rem" }}>
           <div className="container">
-            <SlideMap zoneChanged={this.zoneChanged} zonesDescription={this.zonesDescription} highestLoads={this.state.highestLoads} />
+            <SlideMap zoneChanged={this.zoneChanged} zonesDescription={this.zonesDescription} highestLoads={this.state.highestLoads} buildNumber={this.state.buildNumber}/>
           </div>
         </div>
 
