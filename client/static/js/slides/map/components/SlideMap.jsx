@@ -75,8 +75,8 @@ class SlideMap extends React.Component {
                         Projet open-source exploitant les données d’Open API sous license ouverte Etalab. Code source sous license MIT.
                     </div>
 
-                    <div className="column is-full has-text-centered">
-                        (Build {this.props.buildNumber} - {this.props.buildDate})
+                    <div className="column is-full has-text-centered" id="build_infos">
+                        - Build {this.props.buildNumber} - {this.props.buildDate} -
                     </div>
                 </div>
             </React.Fragment>
