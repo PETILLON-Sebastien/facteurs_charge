@@ -38,10 +38,11 @@
     "bulma-pageloader": "^0.3.0",
     "concurrently": "^5.2.0",
     "highcharts": "^8.1.1",
-    "highcharts-react-official": "2.2.2"
+    "highcharts-react-official": "2.2.2",
+    "node-build-number": "^1.0.2"
   },
   "scripts": {
-    "build": "npm run css-deploy &&  webpack -p --env.API_URL=http://51.210.182.41:8080 --progress --config static/webpack.config.js",
+    "build": "nbn && npm run css-deploy &&  webpack -p --env.API_URL=http://51.210.182.41:8080 --progress --config static/webpack.config.js",
     "dev-build": "npm run css-deploy && webpack --env.API_URL=http://localhost:8080 --progress -d --config static/webpack.config.js",
     "watch": "concurrently  \"npm run client-watch\" \"npm run css-watch\"",
     "client-watch": "webpack --env.API_URL=http://localhost:8080 --progress -d --config static/webpack.config.js --watch",
@@ -49,5 +50,19 @@
     "css-build": "node-sass static/_sass/main.scss static/css/main.css",
     "css-postcss": "postcss --use autoprefixer --output static/css/main.css static/css/main.css",
     "css-watch": "npm run css-build -- --watch"
+  },
+  "build": {
+    "unique": "facteurs_charge_client:v1.0.0-integration[build:1]",
+    "number": 1,
+    "timestamp": "2020-8-15 14:05:54",
+    "git-branch": "integration",
+    "git-user": "Benjamin Benni <benjamin.benni06@gmail.com>",
+    "git-version": "2.27.0",
+    "node-version": "v12.18.3",
+    "computer": "ZEPHYRUS",
+    "os": "Windows_NT",
+    "arch": "AMD64",
+    "user": "Ben",
+    "lang": "fr_FR.UTF-8"
   }
 }
