@@ -21,7 +21,7 @@ before_deploy:
 - build_nb=`cat $TRAVIS_BUILD_DIR/client/package.json | jq .build.unique | sed 's/"//g'`
 - echo "Build number to be deployed:${build_nb}"
 - sed -i -e "s/BUILD_NUMBER_PLACEHOLDER/${build_nb}/g" $TRAVIS_BUILD_DIR/client/static/dist/bundle.js
-- build_date=`cat $TRAVIS_BUILD_DIR/client/package.json | jq .build.timestamp | sed 's/"//g'`
+- build_date=`cat $TRAVIS_BUILD_DIR/client/package.json | jq .build.timestamp | sed 's/"//g' | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n//g'`
 - echo "Build date to be deployed:${build_date}"
 - sed -i -e "s/BUILD_DATE_PLACEHOLDER/${build_date}/g" $TRAVIS_BUILD_DIR/client/static/dist/bundle.js
 deploy:
