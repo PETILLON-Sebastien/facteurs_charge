@@ -117,7 +117,7 @@ class SlideLoad extends React.Component {
                                 <div className="is-size-5" style={{ "marginTop": "2rem" }}>
 
                                     C’est ce qu’on appelle le facteur charge ! Il représente le taux d’utilisation de chacune des sources d’énergie.
-                        Actuellement, en <span className="has-background-grey text-inline-highlighted">{currentZoneName}</span>, les installations {mostLoadedInstallation} sont à leur maximum et les installations {leastLoadedInstallation} à leur minimum.
+                        Actuellement, en <span className="has-background-grey text-inline-highlighted">{currentZoneName}</span>, les installations {mostLoadedInstallation} sont les plus à fond les ballons et les installations {leastLoadedInstallation} les moins surchargées.
                         </div>
 
                             </div>
