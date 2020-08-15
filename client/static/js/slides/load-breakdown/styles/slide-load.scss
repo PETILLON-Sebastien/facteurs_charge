@@ -52,9 +52,19 @@
 }
 
 .load-power-source {
-    background-color : #202020;
+    border : 2px solid #202020;
     // background-color : red;
     // padding-top: 10px;
     // padding-bottom: 10px;
     border-radius: 5px;
+}
+
+.load-logo, .load-logo > svg {
+    height: 4rem;
+    max-width: 4rem;
+    margin: auto;
+}
+
+.load-power-source {
+    padding:5px;
 }
