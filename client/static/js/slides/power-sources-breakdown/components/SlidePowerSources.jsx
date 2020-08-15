@@ -55,7 +55,7 @@ class SlidePowerSources extends React.Component {
 
             <React.Fragment>
                 <div className="section is-medium" id="slide-installations" style={{ "minHeight": "100vh" }}>
-                    <div className="container">
+                    {/* <div className="container"> */}
 
                         <div className="columns">
                             <div className="column is-full"><h1 className="is-size-1 has-text-centered">Source d'énergie</h1></div>
@@ -68,8 +68,8 @@ class SlidePowerSources extends React.Component {
                         </div>
                             </div>
                         </div>
-                        <div className="columns is-multiline">
-                            <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-12-tablet is-12-mobile">
+                        <div className="columns is-multiline is-centered">
+                            <div className="column is-4-widescreen is-4-full-hd is-4-desktop is-12-tablet is-12-mobile">
                                 <div className="columns is-multiline is-mobile is-vcentered">
                                     {arrayOfPowerSourceComponents}
                                     {/* <div className="column is-6-widescreen is-6-full-hd is-6-desktop is-4-tablet is-6-mobile " style={{ "marginTop": "10px" }}>
@@ -98,7 +98,7 @@ class SlidePowerSources extends React.Component {
                                 {/* <TimeSlider hours={this.state.timeMarks} currentTime={0} endOfTimeFrame={this.state.timeMarks[this.state.timeMarks.length - 1]} /> */}
                             </div>
                         </div>
-                    </div>
+                    {/* </div> */}
                 </div>
 
             </React.Fragment>
