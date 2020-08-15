@@ -33,9 +33,11 @@ export default class Board extends React.Component {
     this.zoneChanged = this.zoneChanged.bind(this);
 
     const buildNumber ="BUILD_NUMBER_PLACEHOLDER";
+    const buildDate ="BUILD_DATE_PLACEHOLDER";
     console.log("Build number:", buildNumber);
     this.state = {
       buildNumber: buildNumber,
+      buildDate: buildDate,
       currentZone: { id: "xxx", label: "xxxx" }, //fixme,
       isLoaded: false
     };
@@ -267,7 +269,7 @@ export default class Board extends React.Component {
 
         <div className="section is-medium" id="slide-map" style={{ "marginTop": "0rem" }}>
           <div className="container">
-            <SlideMap zoneChanged={this.zoneChanged} zonesDescription={this.zonesDescription} highestLoads={this.state.highestLoads} buildNumber={this.state.buildNumber}/>
+            <SlideMap zoneChanged={this.zoneChanged} zonesDescription={this.zonesDescription} highestLoads={this.state.highestLoads} buildNumber={this.state.buildNumber} buildDate={this.state.buildDate}/>
           </div>
         </div>
 

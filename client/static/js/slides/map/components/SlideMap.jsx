@@ -17,7 +17,7 @@ class SlideMap extends React.Component {
             let ISOZoneId = "FR";
 
             if (currentZoneId != 0) {
-              ISOZoneId = ISOZoneId.concat("-").concat(currentZoneId);
+                ISOZoneId = ISOZoneId.concat("-").concat(currentZoneId);
             }
 
             const highestLoadForCurrentZone = highestLoads[ISOZoneId];
@@ -72,7 +72,11 @@ class SlideMap extends React.Component {
                 </div>
                 <div className="columns is-centered" style={{ "marginTop": "6%", "color": "#666" }}>
                     <div className="column is-full has-text-centered">
-                        Projet open-source exploitant les données d’Open API sous license ouverte Etalab. Code source sous license MIT. (Build {this.props.buildNumber}) 
+                        Projet open-source exploitant les données d’Open API sous license ouverte Etalab. Code source sous license MIT.
+                    </div>
+
+                    <div className="column is-full has-text-centered">
+                        (Build {this.props.buildNumber} - {this.props.buildDate})
                     </div>
                 </div>
             </React.Fragment>
