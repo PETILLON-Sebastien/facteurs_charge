@@ -223,7 +223,7 @@ export default class Board extends React.Component {
     if (!this.state.isLoaded) {
       console.log("Board has not been fully loaded yet, aborting the rendering and displaying loading screen instead.");
       return <div className={`pageloader is-dark ${this.state.done ? "" : "is-active"}`} ref="spinner">
-        <span className="title">Facteurs charge préchauffe... On arrive! (Build {this.state.buildNumber})</span>
+        <span className="title">Facteurs charge préchauffe... On arrive !</span>
       </div>
     }
 
