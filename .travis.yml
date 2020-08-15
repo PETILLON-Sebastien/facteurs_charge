@@ -28,3 +28,5 @@ deploy:
   script: rsync -e 'ssh' -r --delete-after $TRAVIS_BUILD_DIR/client/static/* ubuntu@51.210.182.41:/var/www/html/ && rsync -e 'ssh' -r --delete-after $TRAVIS_BUILD_DIR/server/* ubuntu@51.210.182.41:/var/www/server/
   on:
     branch: integration
+after_deploy:
+- ssh ubuntu@51.210.182.41 (screen -d -m bash -c 'cd /var/www/server/ && npm run start')
