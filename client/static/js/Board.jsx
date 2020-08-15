@@ -21,8 +21,6 @@ import { ZoneContext } from './ZoneContext';
 import { element } from 'prop-types';
 const root_endpoint = process.env.API_URL + "/api/v1";
 
-const { generate, validate, parse, format } = require('build-number-generator');
-
 var that;
 
 export default class Board extends React.Component {
@@ -34,7 +32,7 @@ export default class Board extends React.Component {
     this.zonesDescription = this.getZoneDescriptions();
     this.zoneChanged = this.zoneChanged.bind(this);
 
-    const buildNumber = generate();
+    const buildNumber ="BUILD_NUMBER_PLACEHOLDER";
     console.log("Build number:", buildNumber);
     this.state = {
       buildNumber: buildNumber,
