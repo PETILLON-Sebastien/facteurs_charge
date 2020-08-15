@@ -68,7 +68,7 @@ class SlideLoad extends React.Component {
         for (let i = 0; i < firstHalfOfKeys.length; i++) {
             const installationType = firstHalfOfKeys[i];
             const newComponent = <div key={installationType}
-                className="column is-12-widescreen is-12-full-hd is-12-desktop is-4-tablet is-4-mobile ">
+            className="column is-12-widescreen is-12-full-hd is-12-desktop is-12-tablet is-6-mobile " style={{ "marginTop": "10px" }}>
                 <PowerSourceLoad
                     key={installationType}
                     load={currentData[installationType].load}
@@ -86,7 +86,7 @@ class SlideLoad extends React.Component {
         for (let i = 0; i < secondHalfOfKeys.length; i++) {
             const installationType = secondHalfOfKeys[i];
             const newComponent = <div key={installationType}
-                className="column is-12-widescreen is-12-full-hd is-12-desktop is-4-tablet is-4-mobile ">
+            className="column is-12-widescreen is-12-full-hd is-12-desktop is-12-tablet is-6-mobile " style={{ "marginTop": "10px" }}>
                 <PowerSourceLoad
                     key={installationType}
                     load={currentData[installationType].load}
@@ -103,7 +103,7 @@ class SlideLoad extends React.Component {
         return (
             <React.Fragment>
                 <div className="section is-medium" id="slide-load" style={{ "minHeight": "100vh" }}>
-                    <div className="container">
+                    {/* <div className="container"> */}
                         <div className="columns is-centered" >
                             <div className="column has-text-centered">
                                 <h1 className="is-size-1">Facteur de charge ({currentZoneID})</h1>
@@ -204,7 +204,7 @@ class SlideLoad extends React.Component {
                             </div>
                         </div>
                     </div>
-                </div >
+                {/* </div > */}
             </React.Fragment >
         );
     }

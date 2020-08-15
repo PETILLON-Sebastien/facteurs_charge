@@ -267,7 +267,7 @@ export default class Board extends React.Component {
           <Navbar that={that} label_region={this.state.currentZone.label} hookZoneChanged={this.zoneChanged} zonesDescription={this.zonesDescription} />
         </header>
 
-        <div className="section is-medium" id="slide-map" style={{ "marginTop": "0rem" }}>
+        <div className="section is-small" id="slide-map" style={{ "marginTop": "0rem" }}>
           <div className="container">
             <SlideMap zoneChanged={this.zoneChanged} zonesDescription={this.zonesDescription} highestLoads={this.state.highestLoads} buildNumber={this.state.buildNumber} buildDate={this.state.buildDate}/>
           </div>
