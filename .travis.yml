@@ -29,4 +29,4 @@ deploy:
   on:
     branch: integration
 after_deploy:
-- ssh ubuntu@51.210.182.41 screen -d -m bash -c 'cd /var/www/server/server && npm run start'
+- ssh ubuntu@51.210.182.41 screen -d -m bash -c 'forever stopall && cd /var/www/server/server && npm run start'
