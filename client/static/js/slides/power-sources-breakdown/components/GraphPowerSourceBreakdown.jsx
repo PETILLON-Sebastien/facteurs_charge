@@ -164,7 +164,7 @@ class ProductionBySourcesGraph extends React.Component {
             legend: {
                 enabled: false
             },
-            // plotOptions: {
+            plotOptions: {
             //     series: {
             //         connectNulls: true
             //     },
@@ -179,21 +179,19 @@ class ProductionBySourcesGraph extends React.Component {
             //             enabled: false
             //         }
             //     },
-            //     spline: {
-            //         marker: {
-            //             lineWidth: 1,
-            //             lineColor: '#222',
-            //             enabled: false
-            //         }
-            //     }
-            // },
+                line: {
+                    marker: {
+                        enabled: false
+                    }
+                }
+            },
             time: {
                 timezoneOffset: -60
             },
             chart: {
                 height: 260,
 
-                // type: 'areaspline',
+                type: 'line',
                 // stacking: 'normal',
                 backgroundColor: "rgba(0,0,0,0)"
             },

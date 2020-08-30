@@ -105,7 +105,7 @@ class SlideLoad extends React.Component {
                     {/* <div className="container"> */}
                         <div className="columns is-centered" >
                             <div className="column has-text-centered">
-                                <h1 className="is-size-1">Facteur de charge ({currentZoneID})</h1>
+                                <h1 className="is-size-1">Facteur de charge</h1>
                             </div>
                         </div>
                         <div className="columns  is-centered" style={{ "marginBottom": "4rem" }}>

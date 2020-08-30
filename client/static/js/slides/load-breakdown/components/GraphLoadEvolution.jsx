@@ -111,7 +111,8 @@ class LoadBySourcesGraph extends React.Component {
                 text: ''
             },
             tooltip: {
-                valueSuffix: ' %'
+                valueSuffix: ' %',
+                valueDecimals: 2
             },
             yAxis: {
                 title: {
@@ -119,9 +120,6 @@ class LoadBySourcesGraph extends React.Component {
                 },
                 labels: {
                     formatter: function () {
-                        // if (this.value > 999 || this.value < 999) {
-                        //     return Math.round(this.value / 10) / 100 + " GW";
-                        // }
                         return this.value + " %";
                     },
                     style: {
@@ -148,35 +146,23 @@ class LoadBySourcesGraph extends React.Component {
             legend: {
                 enabled: false
             },
-            // plotOptions: {
+            plotOptions: {
             //     series: {
             //         connectNulls: true
             //     },
             //     stacking: 'normal',
-            //     areaspline: {
-            //         stacking: 'areaspline',
-            //         lineColor: '#222',
-            //         lineWidth: 1,
-            //         marker: {
-            //             lineWidth: 1,
-            //             lineColor: '#222',
-            //             enabled: false
-            //         }
-            //     },
-            //     spline: {
-            //         marker: {
-            //             lineWidth: 1,
-            //             lineColor: '#222',
-            //             enabled: false
-            //         }
-            //     }
-            // },
+                line: {
+                    marker: {
+                      enabled: false
+                    }
+                }
+            },
             time: {
                 timezoneOffset: -60
             },
-            chart: {        height: 280,
-
-                // type: 'areaspline',
+            chart: {
+                height: 280,
+                type: 'line',
                 // stacking: 'normal',
                 backgroundColor: "rgba(0,0,0,0)"
             },
