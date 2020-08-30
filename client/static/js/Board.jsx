@@ -58,7 +58,7 @@ export default class Board extends React.Component {
 
   async componentDidMount() {
     console.log("Board mounted.");
-    await this.zoneChanged(11);
+    await this.zoneChanged(0);
   }
 
   async zoneChanged(newZoneID) {
@@ -129,7 +129,7 @@ export default class Board extends React.Component {
     let data = await fetch(targetUrl);
     data = await data.json();
 
-    // Sort data 
+    // Sort data
     // ISSUE https://github.com/PETILLON-Sebastien/facteurs_charge/issues/52
     data.sort((breakdownA, breakdownB) => {
       return moment(breakdownA.datetime).valueOf() - moment(breakdownB.datetime).valueOf();
@@ -279,7 +279,7 @@ export default class Board extends React.Component {
 
         {/* <div className="section is-medium" id="slide-load" style={{ "minHeight": "100vh" }}>
             <SlideLoad />
-          </div> 
+          </div>
           <div className="section is-medium" id="slide-balance" style={{ "minHeight": "100vh" }}>
             <div className="container">
               <SlidePowerBalance />
