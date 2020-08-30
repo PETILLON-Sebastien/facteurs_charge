@@ -55,10 +55,10 @@ class SlideMap extends React.Component {
                             </div>
                         </div>
                         <p style={{ "textAlign": "justify", "marginTop": "8px" }}>
-                            Facteurs charge a pour but de rendre accessible au grand public les données des installations eléctriques française.
+                            Facteurs charge a pour but de rendre accessible au grand public les données des installations électriques française.
                         </p>
                         <p style={{ "textAlign": "justify", "marginTop": "8px" }}>
-                            Grâce aux données ouvertes d'Open API,nous avons des données concernant {zonesDescription.length} zones: {listOfZonesNames}.
+                            Grâce aux données ouvertes d'Open API,nous avons des données concernant la France et {zonesDescription.length} zones: {listOfZonesNames}.
                         </p>
                         <p className="is-size-5" style={{ "textAlign": "justify", "marginTop": "5%" }}>
                             Commencez par naviguer sur ce site, ou sélectionnez une zone en particulier sur la carte !

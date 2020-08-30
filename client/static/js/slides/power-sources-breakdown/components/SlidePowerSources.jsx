@@ -62,9 +62,9 @@ class SlidePowerSources extends React.Component {
                         </div>
                         <div className="columns" style={{ "marginBottom": "2rem" }}>
                             <div className="column is-full has-text-centered">
-                                <div className="is-size-6"><span className="has-background-grey text-inline-highlighted">{currentZoneName}</span> produit de l’énergie de différentes manières, c’est ce qu’on appelle un « mix » énergétique. Ce mix est injecté dans la grille française de production.</div>
+                                <div className="is-size-6">En <span className="has-background-grey text-inline-highlighted">{currentZoneName}</span>, on produit de l’énergie de différentes manières, c’est ce qu’on appelle un « mix » énergétique.</div>
                                 <div className="is-size-5" style={{ "marginTop": "2rem" }}>
-                                    Actuellement, en <span className="has-background-grey text-inline-highlighted">{currentZoneName}</span>, l’énergie {highestSourceOfPower} contribue le plus à la grille.
+                                    Actuellement, en <span className="has-background-grey text-inline-highlighted">{currentZoneName}</span>, l’énergie {highestSourceOfPower} est la production la plus importante.
                         </div>
                             </div>
                         </div>

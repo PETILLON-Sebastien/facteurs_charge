@@ -14,7 +14,6 @@ class SlideLoad extends React.Component {
     findMostLoaded(breakdownData) {
         let bestComponent = undefined, bestLoadValue = undefined;
         Object.keys(breakdownData).forEach((installationType) => {
-            // console.log(breakdownData, installationType); 
             const currentLoadValue = breakdownData[installationType].load.value;
 
             if (bestComponent == undefined) {
@@ -112,13 +111,17 @@ class SlideLoad extends React.Component {
                         <div className="columns  is-centered" style={{ "marginBottom": "4rem" }}>
                             <div className="column is-three-quarters has-text-centered">
                                 <div className="is-size-6">
-                                    Une source d’énergie peut produire énormément en quantité, mais être sous-utilisé ! À l’inverse, une source peut être à 100% de sa capacité, et n’avoir qu’un petit impact sur l’apport à la grille…
-                        </div>
+                                    Le taux de charge correspond au rapport production effective / capacité installée.<br/>
+                                    Si un moyen de production tourne à la moitié de ses capacités, on dit qu'il a un taux de charge de 50%.<br/><br/>
+                                </div>
+                                <div className="is-size-6">
+                                    Une variation du taux de charge peut être subie, lors d'une panne, d'entretien, ou lorsque la source primaire est absente
+                                    (<PowerSourceNameInline type="solar"/>, <PowerSourceNameInline type="wind"/> et <PowerSourceNameInline type="hydraulic"/> dans certains cas) : c'est l'intermittence.<br/>
+                                    Une variation du taux de charge peut être volontaire quand on utilise un moyen pilotable (dont on peut faire varier la production, comme <PowerSourceNameInline type="fossil"/>, <PowerSourceNameInline type="bioenergy"/>, <PowerSourceNameInline type="nuclear"/> et <PowerSourceNameInline type="hydraulic"/> dans certains cas).
+                                </div>
                                 <div className="is-size-5" style={{ "marginTop": "2rem" }}>
-
-                                    C’est ce qu’on appelle le facteur charge ! Il représente le taux d’utilisation de chacune des sources d’énergie.
-                        Actuellement, en <span className="has-background-grey text-inline-highlighted">{currentZoneName}</span>, les installations {mostLoadedInstallation} sont les plus à fond les ballons et les installations {leastLoadedInstallation} les moins surchargées.
-                        </div>
+                                    Actuellement, en <span className="has-background-grey text-inline-highlighted">{currentZoneName}</span>, le parc {mostLoadedInstallation} a le meilleur taux de charge et le parc {leastLoadedInstallation} le plus faible.
+                                </div>
 
                             </div>
                         </div>
