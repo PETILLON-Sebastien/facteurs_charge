@@ -101,7 +101,7 @@ class Navbar extends React.Component {
                                         <button className={`${this.state.activeTab == 'load' ? "is-success" : ""} is-primary button is-fullwidth`}
                                             onClick={() => this.setCurrentSlide('load')}>
                                             <span className="icon">
-                                                <i className="fas fa-battery-three-quarters"></i>
+                                                <i className="fas fa-percent"></i>
                                             </span>
                                             <span>
                                                 Charge
@@ -111,9 +111,9 @@ class Navbar extends React.Component {
                                 </span>
 
 
-                           
 
-{/* 
+
+{/*
                                 <span className="navbar-item">
                                     <a href="#slide-balance">
                                         <button className={`${this.state.activeTab == 'balance' ? "is-success" : ""} is-primary button is-fullwidth`}
