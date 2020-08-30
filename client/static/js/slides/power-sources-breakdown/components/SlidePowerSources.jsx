@@ -64,7 +64,7 @@ class SlidePowerSources extends React.Component {
                             <div className="column is-full has-text-centered">
                                 <div className="is-size-6">En <span className="has-background-grey text-inline-highlighted">{currentZoneName}</span>, on produit de l’énergie de différentes manières, c’est ce qu’on appelle un « mix » énergétique.</div>
                                 <div className="is-size-5" style={{ "marginTop": "2rem" }}>
-                                    Actuellement, en <span className="has-background-grey text-inline-highlighted">{currentZoneName}</span>, l’énergie {highestSourceOfPower} est la production la plus importante.
+                                    Actuellement, en <span className="has-background-grey text-inline-highlighted">{currentZoneName}</span>, l’énergie {highestSourceOfPower} est la source de production électrique la plus importante.
                         </div>
                             </div>
                         </div>

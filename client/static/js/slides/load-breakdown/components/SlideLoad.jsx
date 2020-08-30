@@ -112,12 +112,13 @@ class SlideLoad extends React.Component {
                             <div className="column is-three-quarters has-text-centered">
                                 <div className="is-size-6">
                                     Le taux de charge correspond au rapport production effective / capacité installée.<br/>
-                                    Si un moyen de production tourne à la moitié de ses capacités, on dit qu'il a un taux de charge de 50%.<br/><br/>
+                                    Si un moyen de production fonctionne à moitié de ses capacités, on dit qu'il a un taux de charge de 50%.<br/><br/>
                                 </div>
                                 <div className="is-size-6">
-                                    Une variation du taux de charge peut être subie, lors d'une panne, d'entretien, ou lorsque la source primaire est absente
-                                    (<PowerSourceNameInline type="solar"/>, <PowerSourceNameInline type="wind"/> et <PowerSourceNameInline type="hydraulic"/> dans certains cas) : c'est l'intermittence.<br/>
-                                    Une variation du taux de charge peut être volontaire quand on utilise un moyen pilotable (dont on peut faire varier la production, comme <PowerSourceNameInline type="fossil"/>, <PowerSourceNameInline type="bioenergy"/>, <PowerSourceNameInline type="nuclear"/> et <PowerSourceNameInline type="hydraulic"/> dans certains cas).
+                                    Certaines sources sont intrisèquement intermittentes  (<PowerSourceNameInline type="solar"/>, <PowerSourceNameInline type="wind"/> et <PowerSourceNameInline type="hydraulic"/> au fil de l'eau).<br/>
+                                    D'autres sont pilotables (<PowerSourceNameInline type="fossil"/>, <PowerSourceNameInline type="bioenergy"/>, <PowerSourceNameInline type="nuclear"/> et <PowerSourceNameInline type="hydraulic"/> en STEP).<br/>
+                                    Dans un cas, le taux de charge est subi, dans l'autre choisi.<br/>
+                                    Les pannes, maintenances et accidents influent également les disponibilités et affectent toute les sources de production électrique.<br/>
                                 </div>
                                 <div className="is-size-5" style={{ "marginTop": "2rem" }}>
                                     Actuellement, en <span className="has-background-grey text-inline-highlighted">{currentZoneName}</span>, le parc {mostLoadedInstallation} a le meilleur taux de charge et le parc {leastLoadedInstallation} le plus faible.
