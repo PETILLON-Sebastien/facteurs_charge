@@ -79,8 +79,9 @@ export default class Board extends React.Component {
 
   dateChanged(newDate) {
     console.log("WOW DATE CHANGED", newDate);
+    this.update(this.state.currentZone.id, newDate);
   }
-  
+
   zoneChanged(newZoneID) {
     let currentZoneSelected = _.find(this.zonesDescription, { id: newZoneID });
     let labelCurrentZone = currentZoneSelected.label;
@@ -103,12 +104,14 @@ export default class Board extends React.Component {
       console.log("Zone hasn't changed.");
       return;
     }
-    
-    // update(ISOZoneID, toDate) {...
 
-    else {
-      this.setState({ isLoading: true });
-    }
+    this.update({id:ISOZoneId,label:labelCurrentZone }, this.state.currentDate);
+  }
+
+  update(toZone, toDate) {
+    const ISOZoneId = toZone.id, labelCurrentZone = toZone.label;
+
+    this.setState({ isLoading: true });
 
     Server.getLoadsBreakdown(ISOZoneId).then((breakdownHistory) => {
       // PRECONDITION: Considering timely ordered data
@@ -160,7 +163,7 @@ export default class Board extends React.Component {
           breakdownHistory: this.breakdownHistory,
         },
         highestLoads: this.highestLoads,
-        steps:this.getSteps()
+        steps: this.getSteps(),
       };
       console.log("Changing state because everything is loaded", newState);
 
