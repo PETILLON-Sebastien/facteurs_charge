@@ -80,21 +80,24 @@ export default class Board extends React.Component {
     this.setState({ isLoading: isStillLoading });
 
     if (!isStillLoading) {
-      this.setState({
+      const newState = {
         currentZone: { id: ISOZoneId, label: labelCurrentZone },
         isLoaded: true,
         powerSourceBreakdown: {
           isLoaded: true,
-          latestPowerBreakdown: this.powerSourcesLatestData,
-          powerBreakdownHistory: this.powerSourceData,
+          latestPowerBreakdown: this.latestPowerBreakdown,
+          powerBreakdownHistory: this.powerBreakdownHistory,
         },
         loadBreakdown: {
           isLoaded: true,
           latestBreakdownData: this.latestBreakdownData,
-          breakdownHistory: this.loadBreakdown,
+          breakdownHistory: this.breakdownHistory,
         },
-        highestLoads: this.loadDataForAllZones,
-      });
+        highestLoads: this.highestLoads,
+      };
+      console.log("Changing state because everything is loaded", newState);
+
+      this.setState(newState);
     }
   }
 
@@ -184,7 +187,7 @@ export default class Board extends React.Component {
     // );
     console.log("Rendering Board...");
 
-    if (this.state.isLoading || true) {
+    if (this.state.isLoading) {
       console.log(
         "Board has not been fully loaded yet, aborting the rendering and displaying loading screen instead."
       );
@@ -195,7 +198,14 @@ export default class Board extends React.Component {
         >
           <div className="title has-text-centered">
             <span>Facteurs charge préchauffe... On arrive !</span>
-            <ul class="has-text-left" style={{ color: "#838383", whiteSpace:"break-spaces",marginTop: "2rem" }}>
+            <ul
+              className="has-text-left"
+              style={{
+                color: "#838383",
+                whiteSpace: "break-spaces",
+                marginTop: "2rem",
+              }}
+            >
               {this.state.steps.map((item, i) => {
                 return (
                   <li key={i}>
@@ -222,104 +232,104 @@ export default class Board extends React.Component {
           </div>
         </div>
       );
+    } else {
+      let powerSourceSlide = null;
+      // if (!this.state.powerSourceBreakdown.isLoading) {
+      powerSourceSlide = (
+        <SlidePowerSources
+          currentZone={this.state.currentZone}
+          data={this.state.powerSourceBreakdown}
+        />
+      );
+      // } else {
+      //   powerSourceSlide = (
+      //     <div className="section is-medium" style={{ minHeight: "100vh" }}>
+      //       <div className="container">
+      //         <div
+      //           className="columns is-vcentered has-text-centered"
+      //           style={{ marginTop: "30vh" }}
+      //         >
+      //           <div className="column is-full">
+      //             <div className="lds-dual-ring"></div>
+      //           </div>
+      //         </div>
+      //       </div>
+      //     </div>
+      //   );
+      // }
+
+      let loadBreakdownSlide = null;
+      // if (this.state.loadBreakdown.isLoaded) {
+      loadBreakdownSlide = (
+        <SlideLoad
+          currentZone={this.state.currentZone}
+          data={this.state.loadBreakdown}
+        />
+      );
+      // } else {
+      //   loadBreakdownSlide = (
+      //     <div className="section is-medium" style={{ minHeight: "100vh" }}>
+      //       <div className="container">
+      //         <div
+      //           className="columns is-vcentered has-text-centered"
+      //           style={{ marginTop: "30vh" }}
+      //         >
+      //           <div className="column is-full">
+      //             <div className="lds-dual-ring"></div>
+      //           </div>
+      //         </div>
+      //       </div>
+      //     </div>
+      //   );
+      // }
+
+      return (
+        <React.Fragment>
+          <header>
+            <Navbar
+              that={that}
+              label_region={this.state.currentZone.label}
+              hookZoneChanged={this.zoneChanged}
+              zonesDescription={this.zonesDescription}
+            />
+          </header>
+
+          <div
+            className="section is-small"
+            id="slide-map"
+            style={{ marginTop: "0rem" }}
+          >
+            <div className="container">
+              <SlideMap
+                zoneChanged={this.zoneChanged}
+                zonesDescription={this.zonesDescription}
+                highestLoads={this.state.highestLoads}
+                buildNumber={this.state.buildNumber}
+                buildDate={this.state.buildDate}
+              />
+            </div>
+          </div>
+
+          {powerSourceSlide}
+          {loadBreakdownSlide}
+          {/* <ZoneContext.Provider value={{ currentZone: this.state.currentZone }}> */}
+
+          {/* <div className="section is-medium" id="slide-load" style={{ "minHeight": "100vh" }}>
+            <SlideLoad />
+          </div>
+          <div className="section is-medium" id="slide-balance" style={{ "minHeight": "100vh" }}>
+            <div className="container">
+              <SlidePowerBalance />
+            </div>
+          </div>
+          <div className="section is-medium" id="slide-exchanges" style={{ "minHeight": "100vh" }}>
+            <div className="container">
+              <MyMap />
+            </div>
+          </div> */}
+          {/* </ZoneContext.Provider> */}
+        </React.Fragment>
+      );
     }
-
-    // let powerSourceSlide = null;
-    // if (this.state.powerSourceBreakdown.isLoaded) {
-    //   powerSourceSlide = (
-    //     <SlidePowerSources
-    //       currentZone={this.state.currentZone}
-    //       data={this.state.powerSourceBreakdown}
-    //     />
-    //   );
-    // } else {
-    //   powerSourceSlide = (
-    //     <div className="section is-medium" style={{ minHeight: "100vh" }}>
-    //       <div className="container">
-    //         <div
-    //           className="columns is-vcentered has-text-centered"
-    //           style={{ marginTop: "30vh" }}
-    //         >
-    //           <div className="column is-full">
-    //             <div className="lds-dual-ring"></div>
-    //           </div>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   );
-    // }
-
-    // let loadBreakdownSlide = null;
-    // if (this.state.loadBreakdown.isLoaded) {
-    //   loadBreakdownSlide = (
-    //     <SlideLoad
-    //       currentZone={this.state.currentZone}
-    //       data={this.state.loadBreakdown}
-    //     />
-    //   );
-    // } else {
-    //   loadBreakdownSlide = (
-    //     <div className="section is-medium" style={{ minHeight: "100vh" }}>
-    //       <div className="container">
-    //         <div
-    //           className="columns is-vcentered has-text-centered"
-    //           style={{ marginTop: "30vh" }}
-    //         >
-    //           <div className="column is-full">
-    //             <div className="lds-dual-ring"></div>
-    //           </div>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   );
-    // }
-
-    // return (
-    //   <React.Fragment>
-    //     <header>
-    //       <Navbar
-    //         that={that}
-    //         label_region={this.state.currentZone.label}
-    //         hookZoneChanged={this.zoneChanged}
-    //         zonesDescription={this.zonesDescription}
-    //       />
-    //     </header>
-
-    //     <div
-    //       className="section is-small"
-    //       id="slide-map"
-    //       style={{ marginTop: "0rem" }}
-    //     >
-    //       <div className="container">
-    //         <SlideMap
-    //           zoneChanged={this.zoneChanged}
-    //           zonesDescription={this.zonesDescription}
-    //           highestLoads={this.state.highestLoads}
-    //           buildNumber={this.state.buildNumber}
-    //           buildDate={this.state.buildDate}
-    //         />
-    //       </div>
-    //     </div>
-
-    //     {powerSourceSlide}
-    //     {loadBreakdownSlide}
-    //     {/* <ZoneContext.Provider value={{ currentZone: this.state.currentZone }}> */}
-
-    //     {/* <div className="section is-medium" id="slide-load" style={{ "minHeight": "100vh" }}>
-    //         <SlideLoad />
-    //       </div>
-    //       <div className="section is-medium" id="slide-balance" style={{ "minHeight": "100vh" }}>
-    //         <div className="container">
-    //           <SlidePowerBalance />
-    //         </div>
-    //       </div>
-    //       <div className="section is-medium" id="slide-exchanges" style={{ "minHeight": "100vh" }}>
-    //         <div className="container">
-    //           <MyMap />
-    //         </div>
-    //       </div> */}
-    //     {/* </ZoneContext.Provider> */}
-    //   </React.Fragment>
-    // );
   }
 }
