@@ -4,13 +4,16 @@ import moment from "moment";
 const root_endpoint = process.env.API_URL + "/api/v1";
 
 export default class Server {
+
+    static convertDates(from, to) {
+        return [moment(from).toISOString(), to.toISOString()];
+    }
+
     static getPowerSourcesBreakdown(ISOZoneId, from, to) {
+        [from, to] = this.convertDates(from, to);
+
         return new Promise((resolve) => {
-            const targetUrl =
-                root_endpoint +
-                "/zones/" +
-                ISOZoneId +
-                "/installations/production/breakdown";
+            const targetUrl = `${root_endpoint}/zones/${ISOZoneId}/installations/production/breakdown?from=${from}&to=${to}`;
             console.log("Fetching power sources", targetUrl);
             async.waterfall(
                 [
@@ -72,9 +75,10 @@ export default class Server {
     }
 
     static getLoadsBreakdown(ISOZoneId, from, to) {
+        [from, to] = this.convertDates(from, to);
+
         return new Promise((resolve) => {
-            const targetUrl =
-                root_endpoint + "/zones/" + ISOZoneId + "/installations/breakdown";
+            const targetUrl = `${root_endpoint}/zones/${ISOZoneId}/installations/breakdown?from=${from}&to=${to}`;
             console.log("Fetching loads", targetUrl);
 
             async.waterfall(
@@ -132,9 +136,9 @@ export default class Server {
     }
 
     static getLoadsForAllZones(from, to) {
+        [from, to] = this.convertDates(from, to);
         return new Promise((resolve) => {
-            const targetUrl =
-                root_endpoint + "/zones/installations/load/last?filter=highest";
+            const targetUrl = `${root_endpoint}/zones/installations/load/last?filter=highest&from=${from}&to=${to}`;
             console.log("Fetching last loads", targetUrl);
 
             async.waterfall(
