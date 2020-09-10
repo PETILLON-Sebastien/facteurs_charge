@@ -37,7 +37,13 @@ class Navbar extends React.Component {
   render() {
     const hookZoneChanged = this.props.hookZoneChanged;
     const hookDateChanged = this.props.hookDateChanged;
-    const currentDate = this.props.currentDate;
+    var from = this.props.currentDates.from;
+    var to = this.props.currentDates.to;
+
+    console.log(from, to);
+
+    from = from.format("DD/MM/YY"), to = to.format("DD/MM/YY");
+
     const zonesDescription = this.props.zonesDescription;
 
     return (
@@ -202,7 +208,7 @@ class Navbar extends React.Component {
                     <span className="icon">
                       <i className="far fa-calendar-alt"></i>
                     </span>
-                    <span className="is-size-5"></span>
+                    <span className="is-size-6">{from} - {to}</span>
                     <span className="icon">
                       <i className="fas fa-chevron-down"></i>
                     </span>
