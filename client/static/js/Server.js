@@ -4,7 +4,7 @@ import moment from "moment";
 const root_endpoint = process.env.API_URL + "/api/v1";
 
 export default class Server {
-    static getPowerSourcesBreakdown(ISOZoneId) {
+    static getPowerSourcesBreakdown(ISOZoneId, from, to) {
         return new Promise((resolve) => {
             const targetUrl =
                 root_endpoint +
@@ -71,7 +71,7 @@ export default class Server {
         });
     }
 
-    static getLoadsBreakdown(ISOZoneId) {
+    static getLoadsBreakdown(ISOZoneId, from, to) {
         return new Promise((resolve) => {
             const targetUrl =
                 root_endpoint + "/zones/" + ISOZoneId + "/installations/breakdown";
@@ -131,7 +131,7 @@ export default class Server {
         });
     }
 
-    static getLoadsForAllZones() {
+    static getLoadsForAllZones(from, to) {
         return new Promise((resolve) => {
             const targetUrl =
                 root_endpoint + "/zones/installations/load/last?filter=highest";

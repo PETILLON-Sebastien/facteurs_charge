@@ -18,6 +18,7 @@ import "moment/locale/fr";
 import { ZoneContext } from "./ZoneContext";
 import { element } from "prop-types";
 import LoadingScreen from "./LoadingScreen";
+import moment from "moment";
 
 var that;
 
@@ -43,6 +44,7 @@ export default class Board extends React.Component {
       currentZone: { id: "xxx", label: "xxxx" }, //fixme,
       isLoading: true,
       steps: this.getSteps(),
+      currentDate: moment()
     };
 
     console.log("Board built.", "isLoading?", this.state.isLoading);
@@ -79,7 +81,7 @@ export default class Board extends React.Component {
 
   dateChanged(newDate) {
     console.log("WOW DATE CHANGED", newDate);
-    this.update(this.state.currentZone.id, newDate);
+    this.update(this.state.currentZone.id, newDate, newDate);
   }
 
   zoneChanged(newZoneID) {
@@ -105,15 +107,30 @@ export default class Board extends React.Component {
       return;
     }
 
-    this.update({id:ISOZoneId,label:labelCurrentZone }, this.state.currentDate);
+    this.update(
+      { id: ISOZoneId, label: labelCurrentZone },
+      this.state.currentDate,
+      this.state.currentDate
+    );
   }
 
-  update(toZone, toDate) {
-    const ISOZoneId = toZone.id, labelCurrentZone = toZone.label;
+  update(toZone, fromDate, toDate) {
+    const ISOZoneId = toZone.id,
+      labelCurrentZone = toZone.label;
 
     this.setState({ isLoading: true });
 
-    Server.getLoadsBreakdown(ISOZoneId).then((breakdownHistory) => {
+    var now = moment();
+
+    var from = moment(fromDate);
+    from.hours = 0, from.minutes = 0, from.seconds = 0;
+
+    var to = moment(toDate);
+    if(to.isAfter(now)) {
+      to = now;
+    }
+
+    Server.getLoadsBreakdown(ISOZoneId, from, to).then((breakdownHistory) => {
       // PRECONDITION: Considering timely ordered data
       this.latestBreakdownData =
         breakdownHistory[breakdownHistory.length - 1].breakdown;
@@ -122,7 +139,7 @@ export default class Board extends React.Component {
       this.checkIfStillLoading(ISOZoneId, labelCurrentZone);
     });
 
-    Server.getPowerSourcesBreakdown(ISOZoneId).then((powerSourceData) => {
+    Server.getPowerSourcesBreakdown(ISOZoneId, from, to).then((powerSourceData) => {
       this.latestPowerBreakdown =
         powerSourceData[powerSourceData.length - 1].breakdown;
       this.powerBreakdownHistory = powerSourceData;
@@ -130,7 +147,7 @@ export default class Board extends React.Component {
       this.checkIfStillLoading(ISOZoneId, labelCurrentZone);
     });
 
-    Server.getLoadsForAllZones(ISOZoneId).then((loadDataForAllZones) => {
+    Server.getLoadsForAllZones(from, to).then((loadDataForAllZones) => {
       this.highestLoads = loadDataForAllZones;
       this.updateStepState(2);
       this.checkIfStillLoading(ISOZoneId, labelCurrentZone);
