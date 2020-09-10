@@ -32,6 +32,7 @@
   },
   "dependencies": {
     "@highcharts/map-collection": "^1.1.3",
+    "async": "^3.2.0",
     "babel-loader": "^8.0.6",
     "bulma": "^0.8.2",
     "bulma-pageloader": "^0.3.0",
@@ -51,9 +52,9 @@
     "css-watch": "npm run css-build -- --watch"
   },
   "build": {
-    "unique": "facteurs_charge_client:v1.0.0-integration[build:8]",
-    "number": 8,
-    "timestamp": "2020-8-30 15:23:30",
+    "unique": "facteurs_charge_client:v1.0.0-integration[build:13]",
+    "number": 13,
+    "timestamp": "2020-9-8 20:58:47",
     "git-branch": "integration",
     "git-user": "Benjamin Benni <benjamin.benni06@gmail.com>",
     "git-version": "2.27.0",
@@ -61,7 +62,6 @@
     "computer": "ZEPHYRUS",
     "os": "Windows_NT",
     "arch": "AMD64",
-    "user": "Ben",
-    "lang": "fr_FR.UTF-8"
+    "user": "Ben"
   }
 }
