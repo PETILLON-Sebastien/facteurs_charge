@@ -17,6 +17,7 @@ import "moment/locale/fr";
 
 import { ZoneContext } from "./ZoneContext";
 import { element } from "prop-types";
+import LoadingScreen from "./LoadingScreen";
 
 var that;
 
@@ -41,17 +42,21 @@ export default class Board extends React.Component {
       buildDate: buildDate,
       currentZone: { id: "xxx", label: "xxxx" }, //fixme,
       isLoading: true,
-      steps: [
-        { name: "Récupération de la carte", done: false },
-        {
-          name: "Récupération des informations de sources d'énergie",
-          done: false,
-        },
-        { name: "Récupération des informations de charges", done: false },
-      ],
+      steps: this.getSteps(),
     };
 
     console.log("Board built.", "isLoading?", this.state.isLoading);
+  }
+
+  getSteps() {
+    return [
+      { name: "Récupération de la carte", done: false },
+      {
+        name: "Récupération des informations de sources d'énergie",
+        done: false,
+      },
+      { name: "Récupération des informations de charges", done: false },
+    ];
   }
 
   getZoneDescriptions() {
@@ -69,41 +74,7 @@ export default class Board extends React.Component {
 
   componentDidMount() {
     console.log("Board mounted.");
-
     this.zoneChanged(0);
-  }
-
-  checkIfStillLoading(ISOZoneId, labelCurrentZone) {
-    const isStillLoading =
-      this.state.steps.find((elem) => !elem.done) != undefined;
-
-    if (!isStillLoading) {
-      const newState = {
-        currentZone: { id: ISOZoneId, label: labelCurrentZone },
-        isLoading: isStillLoading,
-        powerSourceBreakdown: {
-          isLoaded: true,
-          latestPowerBreakdown: this.latestPowerBreakdown,
-          powerBreakdownHistory: this.powerBreakdownHistory,
-        },
-        loadBreakdown: {
-          isLoaded: true,
-          latestBreakdownData: this.latestBreakdownData,
-          breakdownHistory: this.breakdownHistory,
-        },
-        highestLoads: this.highestLoads,
-      };
-      console.log("Changing state because everything is loaded", newState);
-
-      this.setState(newState);
-    }
-  }
-
-  updateStepState(stepIndex) {
-    console.log("Step", stepIndex, "done");
-    var steps = Object.assign(this.state.steps);
-    steps[stepIndex].done = true;
-    this.setState({ steps: steps });
   }
 
   zoneChanged(newZoneID) {
@@ -126,14 +97,11 @@ export default class Board extends React.Component {
 
     if (this.state.currentZone.id == ISOZoneId) {
       console.log("Zone hasn't changed.");
-      // this.setState({ powerSourceBreakdown: { isLoading: false } });
       return;
     } else {
-      this.setState({isLoading:true})
+      this.setState({ isLoading: true });
     }
 
-
-    // Trigger network calls
     Server.getLoadsBreakdown(ISOZoneId).then((breakdownHistory) => {
       // PRECONDITION: Considering timely ordered data
       this.latestBreakdownData =
@@ -158,126 +126,49 @@ export default class Board extends React.Component {
     });
   }
 
+  updateStepState(stepIndex) {
+    console.log("Step", stepIndex, "done");
+    var steps = Object.assign(this.state.steps);
+    steps[stepIndex].done = true;
+    this.setState({ steps: steps });
+  }
+
+  checkIfStillLoading(ISOZoneId, labelCurrentZone) {
+    const isStillLoading =
+      this.state.steps.find((elem) => !elem.done) != undefined;
+
+    if (!isStillLoading) {
+      const newState = {
+        currentZone: { id: ISOZoneId, label: labelCurrentZone },
+        isLoading: isStillLoading,
+        powerSourceBreakdown: {
+          isLoaded: true,
+          latestPowerBreakdown: this.latestPowerBreakdown,
+          powerBreakdownHistory: this.powerBreakdownHistory,
+        },
+        loadBreakdown: {
+          isLoaded: true,
+          latestBreakdownData: this.latestBreakdownData,
+          breakdownHistory: this.breakdownHistory,
+        },
+        highestLoads: this.highestLoads,
+        steps:this.getSteps()
+      };
+      console.log("Changing state because everything is loaded", newState);
+
+      this.setState(newState);
+    }
+  }
+
   render() {
-    // return (
-    //   <div>
-    //     <h1>
-    //       {!this.state.isLoading && (
-    //         <span>Everything has been retrieved! We can go on!</span>
-    //       )}
-    //     </h1>
-    //     <h1>{this.state.isLoading && <span>...</span>}</h1>
-    //     <ul>
-    //       {this.state.steps.map((item, i) => {
-    //         return (
-    //           <li key={i}>
-    //             <span>{item.name}</span>
-    //             <span>{item.done && <h1>Done</h1>}</span>
-    //             <span>{!item.done && <h1>Pending</h1>}</span>
-    //           </li>
-    //         );
-    //       })}
-    //     </ul>
-    //   </div>
-    // );
     console.log("Rendering Board...");
 
     if (this.state.isLoading) {
       console.log(
         "Board has not been fully loaded yet, aborting the rendering and displaying loading screen instead."
       );
-      return (
-        <div
-          className={`pageloader is-dark ${this.state.done ? "" : "is-active"}`}
-          ref="spinner"
-        >
-          <div className="title has-text-centered">
-            <span>Facteurs charge préchauffe... On arrive !</span>
-            <ul
-              className="has-text-left"
-              style={{
-                color: "#838383",
-                whiteSpace: "break-spaces",
-                marginTop: "2rem",
-              }}
-            >
-              {this.state.steps.map((item, i) => {
-                return (
-                  <li key={i}>
-                    <div className="columns is-mobile">
-                      <div className="column is-1">
-                        <span>
-                          {item.done && (
-                            <span className="icon">
-                              {" "}
-                              <i className="fas fa-check"></i>
-                            </span>
-                          )}
-                        </span>
-                        <span>{!item.done && <span className="icon"><i className="far fa-circle"></i></span>}</span>
-                      </div>
-                      <div className="column">
-                        <span>{item.name}</span>
-                      </div>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        </div>
-      );
+      return <LoadingScreen steps={this.state.steps} done={this.state.done} />;
     } else {
-      let powerSourceSlide = null;
-      // if (!this.state.powerSourceBreakdown.isLoading) {
-      powerSourceSlide = (
-        <SlidePowerSources
-          currentZone={this.state.currentZone}
-          data={this.state.powerSourceBreakdown}
-        />
-      );
-      // } else {
-      //   powerSourceSlide = (
-      //     <div className="section is-medium" style={{ minHeight: "100vh" }}>
-      //       <div className="container">
-      //         <div
-      //           className="columns is-vcentered has-text-centered"
-      //           style={{ marginTop: "30vh" }}
-      //         >
-      //           <div className="column is-full">
-      //             <div className="lds-dual-ring"></div>
-      //           </div>
-      //         </div>
-      //       </div>
-      //     </div>
-      //   );
-      // }
-
-      let loadBreakdownSlide = null;
-      // if (this.state.loadBreakdown.isLoaded) {
-      loadBreakdownSlide = (
-        <SlideLoad
-          currentZone={this.state.currentZone}
-          data={this.state.loadBreakdown}
-        />
-      );
-      // } else {
-      //   loadBreakdownSlide = (
-      //     <div className="section is-medium" style={{ minHeight: "100vh" }}>
-      //       <div className="container">
-      //         <div
-      //           className="columns is-vcentered has-text-centered"
-      //           style={{ marginTop: "30vh" }}
-      //         >
-      //           <div className="column is-full">
-      //             <div className="lds-dual-ring"></div>
-      //           </div>
-      //         </div>
-      //       </div>
-      //     </div>
-      //   );
-      // }
-
       return (
         <React.Fragment>
           <header>
@@ -288,7 +179,6 @@ export default class Board extends React.Component {
               zonesDescription={this.zonesDescription}
             />
           </header>
-
           <div
             className="section is-small"
             id="slide-map"
@@ -304,25 +194,14 @@ export default class Board extends React.Component {
               />
             </div>
           </div>
-
-          {powerSourceSlide}
-          {loadBreakdownSlide}
-          {/* <ZoneContext.Provider value={{ currentZone: this.state.currentZone }}> */}
-
-          {/* <div className="section is-medium" id="slide-load" style={{ "minHeight": "100vh" }}>
-            <SlideLoad />
-          </div>
-          <div className="section is-medium" id="slide-balance" style={{ "minHeight": "100vh" }}>
-            <div className="container">
-              <SlidePowerBalance />
-            </div>
-          </div>
-          <div className="section is-medium" id="slide-exchanges" style={{ "minHeight": "100vh" }}>
-            <div className="container">
-              <MyMap />
-            </div>
-          </div> */}
-          {/* </ZoneContext.Provider> */}
+          <SlidePowerSources
+            currentZone={this.state.currentZone}
+            data={this.state.powerSourceBreakdown}
+          />
+          <SlideLoad
+            currentZone={this.state.currentZone}
+            data={this.state.loadBreakdown}
+          />
         </React.Fragment>
       );
     }
