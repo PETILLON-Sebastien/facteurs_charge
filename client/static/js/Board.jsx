@@ -51,7 +51,7 @@ export default class Board extends React.Component {
       ],
     };
 
-    console.log("Board built.", "isLoaded?", this.state.isLoaded);
+    console.log("Board built.", "isLoading?", this.state.isLoading);
   }
 
   getZoneDescriptions() {
@@ -77,12 +77,10 @@ export default class Board extends React.Component {
     const isStillLoading =
       this.state.steps.find((elem) => !elem.done) != undefined;
 
-    this.setState({ isLoading: isStillLoading });
-
     if (!isStillLoading) {
       const newState = {
         currentZone: { id: ISOZoneId, label: labelCurrentZone },
-        isLoaded: true,
+        isLoading: isStillLoading,
         powerSourceBreakdown: {
           isLoaded: true,
           latestPowerBreakdown: this.latestPowerBreakdown,
@@ -128,15 +126,12 @@ export default class Board extends React.Component {
 
     if (this.state.currentZone.id == ISOZoneId) {
       console.log("Zone hasn't changed.");
-      this.setState({ powerSourceBreakdown: { isLoaded: true } });
+      // this.setState({ powerSourceBreakdown: { isLoading: false } });
       return;
+    } else {
+      this.setState({isLoading:true})
     }
 
-    console.log("Putting the slide power source breakdown in loading mode...");
-    this.setState({
-      powerSourceBreakdown: { isLoaded: false },
-      loadBreakdown: { isLoaded: false },
-    });
 
     // Trigger network calls
     Server.getLoadsBreakdown(ISOZoneId).then((breakdownHistory) => {
@@ -219,7 +214,7 @@ export default class Board extends React.Component {
                             </span>
                           )}
                         </span>
-                        <span>{!item.done && <span></span>}</span>
+                        <span>{!item.done && <span className="icon"><i className="far fa-circle"></i></span>}</span>
                       </div>
                       <div className="column">
                         <span>{item.name}</span>
