@@ -52,9 +52,9 @@
     "css-watch": "npm run css-build -- --watch"
   },
   "build": {
-    "unique": "facteurs_charge_client:v1.0.0-dev[build:16]",
-    "number": 16,
-    "timestamp": "2020-9-10 9:35:54",
+    "unique": "facteurs_charge_client:v1.0.0-dev[build:17]",
+    "number": 17,
+    "timestamp": "2020-9-10 12:05:31",
     "git-branch": "dev",
     "git-user": "Benjamin Benni <benjamin.benni06@gmail.com>",
     "git-version": "2.27.0",

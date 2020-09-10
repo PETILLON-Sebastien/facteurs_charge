@@ -1,5 +1,7 @@
 import React from "react";
 import Map from "./Map";
+import _ from "lodash";
+
 
 class SlideMap extends React.Component {
 
@@ -19,8 +21,15 @@ class SlideMap extends React.Component {
             if (currentZoneId != 0) {
                 ISOZoneId = ISOZoneId.concat("-").concat(currentZoneId);
             }
+            // console.log(highestLoads,ISOZoneId);
 
-            const highestLoadForCurrentZone = highestLoads[ISOZoneId];
+            var highestLoadForCurrentZone = _.find(highestLoads, {zoneId:ISOZoneId});
+            if (highestLoadForCurrentZone != undefined) {
+                highestLoadForCurrentZone = highestLoadForCurrentZone.snapshots[0].highest;
+            } else {
+                
+            }
+            // console.log(highestLoadForCurrentZone);
             e.highestLoad = highestLoadForCurrentZone
         });
 
