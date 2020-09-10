@@ -3,6 +3,7 @@ import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css';
 
 import Map from "./slides/map/components/Map";
+import moment from "moment";
 
 
 class Navbar extends React.Component {
@@ -35,6 +36,7 @@ class Navbar extends React.Component {
 
         const hookZoneChanged = this.props.hookZoneChanged;
         const hookDateChanged = this.props.hookDateChanged;
+        const currentDate = this.props.currentDate;
         const zonesDescription = this.props.zonesDescription;
 
         return (
@@ -161,7 +163,7 @@ class Navbar extends React.Component {
                                         <span className="icon">
                                             <i className="fas fa-map-marker-alt"></i>
                                         </span>
-                                        <span className="is-size-5">{this.props.currentDate}</span>
+                                        <span className="is-size-5"></span>
                                         <span className="icon">
                                             <i className="fas fa-chevron-down"></i>
                                         </span>
@@ -201,7 +203,7 @@ class Navbar extends React.Component {
                 <div className={`modal ${this.state.showCalendarModal ? "is-active" : ""}`}>
                     <div className="modal-background" onClick={() => this.setState({ showCalendarModal: false })}></div>
                     <div className="modal-content">
-                            <Calendar maxDate={new Date()} onChange={(value) => this.hideModal(hookDateChanged, value)}/>
+                            <Calendar returnDate="range" selectRange={true} maxDate={new Date()} minDate={moment("2020-02-01T00:00:00.00Z").toDate()} onChange={(values) => this.hideModal(hookDateChanged, values)}/>
                     </div>
                     <button className="modal-close is-large" aria-label="close" onClick={() => this.setState({ showCalendarModal: false })}></button>
                 </div>

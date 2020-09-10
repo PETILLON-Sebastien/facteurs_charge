@@ -6,7 +6,7 @@ const root_endpoint = process.env.API_URL + "/api/v1";
 export default class Server {
 
     static convertDates(from, to) {
-        return [moment(from).toISOString(), to.toISOString()];
+        return [from.toISOString(), to.toISOString()];
     }
 
     static getPowerSourcesBreakdown(ISOZoneId, from, to) {

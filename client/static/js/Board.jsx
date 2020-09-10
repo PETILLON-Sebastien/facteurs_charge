@@ -34,17 +34,24 @@ export default class Board extends React.Component {
 
     this.zonesDescription = this.getZoneDescriptions();
     this.zoneChanged = this.zoneChanged.bind(this);
+    this.update = this.update.bind(this);
+    this.dateChanged = this.dateChanged.bind(this);
 
     const buildNumber = "BUILD_NUMBER_PLACEHOLDER";
     const buildDate = "BUILD_DATE_PLACEHOLDER";
     console.log("Build number:", buildNumber);
+
+    var now = moment(),
+      thisMorning = moment();
+    (thisMorning.hours = 0), (thisMorning.minutes = 0);
+
     this.state = {
       buildNumber: buildNumber,
       buildDate: buildDate,
       currentZone: { id: "xxx", label: "xxxx" }, //fixme,
       isLoading: true,
       steps: this.getSteps(),
-      currentDate: moment()
+      currentDates: { from: thisMorning, to: now },
     };
 
     console.log("Board built.", "isLoading?", this.state.isLoading);
@@ -68,7 +75,17 @@ export default class Board extends React.Component {
   shouldComponentUpdate(nextProps, nextState) {
     const shouldBoardUpdate =
       nextState.isLoading ||
-      this.state.currentZone.id != nextState.currentZone.id;
+      this.state.currentZone.id != nextState.currentZone.id ||
+      this.state.currentDates.from != nextState.currentDates.from ||
+      this.state.currentDates.to != nextState.currentDates.to;
+
+    console.log(
+      nextState.isLoading,
+      this.state.currentZone.id != nextState.currentZone.id,
+      this.state.currentDates.from != nextState.currentDates.from,
+      this.state.currentDates.to != nextState.currentDates.to
+    );
+
     console.log("Should Board update?", shouldBoardUpdate);
     console.log(this.state, nextState);
     return shouldBoardUpdate;
@@ -79,9 +96,9 @@ export default class Board extends React.Component {
     this.zoneChanged(0);
   }
 
-  dateChanged(newDate) {
-    console.log("WOW DATE CHANGED", newDate);
-    this.update(this.state.currentZone.id, newDate, newDate);
+  dateChanged(newDates) {
+    console.log("Dates have changed", newDates);
+    this.update(this.state.currentZone, {from:newDates[0], to:newDates[1]});
   }
 
   zoneChanged(newZoneID) {
@@ -109,49 +126,54 @@ export default class Board extends React.Component {
 
     this.update(
       { id: ISOZoneId, label: labelCurrentZone },
-      this.state.currentDate,
-      this.state.currentDate
+      this.state.currentDates
     );
   }
 
-  update(toZone, fromDate, toDate) {
+  update(toZone, datesInterval) {
+    this.setState({ isLoading: true });
+
     const ISOZoneId = toZone.id,
       labelCurrentZone = toZone.label;
 
-    this.setState({ isLoading: true });
+    var from = datesInterval.from;
+
+    var toDate = datesInterval.to;
 
     var now = moment();
-
-    var from = moment(fromDate);
-    from.hours = 0, from.minutes = 0, from.seconds = 0;
-
     var to = moment(toDate);
-    if(to.isAfter(now)) {
+    if (to.isAfter(now)) {
       to = now;
     }
 
-    Server.getLoadsBreakdown(ISOZoneId, from, to).then((breakdownHistory) => {
-      // PRECONDITION: Considering timely ordered data
-      this.latestBreakdownData =
-        breakdownHistory[breakdownHistory.length - 1].breakdown;
-      this.breakdownHistory = breakdownHistory;
-      this.updateStepState(0);
-      this.checkIfStillLoading(ISOZoneId, labelCurrentZone);
-    });
+    Server.getLoadsBreakdown(ISOZoneId, from, to).then(
+      (breakdownHistory) => {
+        // PRECONDITION: Considering timely ordered data
+        this.latestBreakdownData =
+          breakdownHistory[breakdownHistory.length - 1].breakdown;
+        this.breakdownHistory = breakdownHistory;
+        this.updateStepState(0);
+        this.checkIfStillLoading(ISOZoneId, labelCurrentZone, from, to);
+      }
+    );
 
-    Server.getPowerSourcesBreakdown(ISOZoneId, from, to).then((powerSourceData) => {
-      this.latestPowerBreakdown =
-        powerSourceData[powerSourceData.length - 1].breakdown;
-      this.powerBreakdownHistory = powerSourceData;
-      this.updateStepState(1);
-      this.checkIfStillLoading(ISOZoneId, labelCurrentZone);
-    });
+    Server.getPowerSourcesBreakdown(ISOZoneId, from, to).then(
+      (powerSourceData) => {
+        this.latestPowerBreakdown =
+          powerSourceData[powerSourceData.length - 1].breakdown;
+        this.powerBreakdownHistory = powerSourceData;
+        this.updateStepState(1);
+        this.checkIfStillLoading(ISOZoneId, labelCurrentZone, from, to);
+      }
+    );
 
-    Server.getLoadsForAllZones(from, to).then((loadDataForAllZones) => {
-      this.highestLoads = loadDataForAllZones;
-      this.updateStepState(2);
-      this.checkIfStillLoading(ISOZoneId, labelCurrentZone);
-    });
+    Server.getLoadsForAllZones(from, to).then(
+      (loadDataForAllZones) => {
+        this.highestLoads = loadDataForAllZones;
+        this.updateStepState(2);
+        this.checkIfStillLoading(ISOZoneId, labelCurrentZone, from, to);
+      }
+    );
   }
 
   updateStepState(stepIndex) {
@@ -161,14 +183,14 @@ export default class Board extends React.Component {
     this.setState({ steps: steps });
   }
 
-  checkIfStillLoading(ISOZoneId, labelCurrentZone) {
+  checkIfStillLoading(ISOZoneId, labelCurrentZone, from, to) {
     const isStillLoading =
       this.state.steps.find((elem) => !elem.done) != undefined;
 
     if (!isStillLoading) {
       const newState = {
         currentZone: { id: ISOZoneId, label: labelCurrentZone },
-        isLoading: isStillLoading,
+        isLoading: false,
         powerSourceBreakdown: {
           isLoaded: true,
           latestPowerBreakdown: this.latestPowerBreakdown,
@@ -181,6 +203,7 @@ export default class Board extends React.Component {
         },
         highestLoads: this.highestLoads,
         steps: this.getSteps(),
+        currentDates: { from: from, to: to },
       };
       console.log("Changing state because everything is loaded", newState);
 
@@ -205,6 +228,7 @@ export default class Board extends React.Component {
               label_region={this.state.currentZone.label}
               hookZoneChanged={this.zoneChanged}
               hookDateChanged={this.dateChanged}
+              currentDate={this.state.currentDates}
               zonesDescription={this.zonesDescription}
             />
           </header>
