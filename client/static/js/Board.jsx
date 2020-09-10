@@ -98,7 +98,7 @@ export default class Board extends React.Component {
 
   dateChanged(newDates) {
     console.log("Dates have changed", newDates);
-    this.update(this.state.currentZone, {from:newDates[0], to:newDates[1]});
+    this.update(this.state.currentZone, {from:moment(newDates[0]), to:moment(newDates[1])});
   }
 
   zoneChanged(newZoneID) {
@@ -228,7 +228,7 @@ export default class Board extends React.Component {
               label_region={this.state.currentZone.label}
               hookZoneChanged={this.zoneChanged}
               hookDateChanged={this.dateChanged}
-              currentDate={this.state.currentDates}
+              currentDates={this.state.currentDates}
               zonesDescription={this.zonesDescription}
             />
           </header>
