@@ -52,16 +52,17 @@
     "css-watch": "npm run css-build -- --watch"
   },
   "build": {
-    "unique": "facteurs_charge_client:v1.0.0-integration[build:13]",
-    "number": 13,
-    "timestamp": "2020-9-8 20:58:47",
-    "git-branch": "integration",
+    "unique": "facteurs_charge_client:v1.0.0-dev[build:16]",
+    "number": 16,
+    "timestamp": "2020-9-10 9:35:54",
+    "git-branch": "dev",
     "git-user": "Benjamin Benni <benjamin.benni06@gmail.com>",
     "git-version": "2.27.0",
     "node-version": "v12.18.3",
     "computer": "ZEPHYRUS",
     "os": "Windows_NT",
     "arch": "AMD64",
-    "user": "Ben"
+    "user": "Ben",
+    "lang": "fr_FR.UTF-8"
   }
 }
