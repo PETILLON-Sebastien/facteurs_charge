@@ -40,9 +40,10 @@ class Navbar extends React.Component {
     var from = this.props.currentDates.from;
     var to = this.props.currentDates.to;
 
-    console.log(from, to);
+    var fromISO = from.toDate(),
+      toISO = to.toDate();
 
-    from = from.format("DD/MM/YY"), to = to.format("DD/MM/YY");
+    (from = from.format("DD/MM/YY")), (to = to.format("DD/MM/YY"));
 
     const zonesDescription = this.props.zonesDescription;
 
@@ -208,7 +209,9 @@ class Navbar extends React.Component {
                     <span className="icon">
                       <i className="far fa-calendar-alt"></i>
                     </span>
-                    <span className="is-size-6">{from} - {to}</span>
+                    <span className="is-size-6">
+                      {from} - {to}
+                    </span>
                     <span className="icon">
                       <i className="fas fa-chevron-down"></i>
                     </span>
@@ -277,6 +280,7 @@ class Navbar extends React.Component {
               maxDate={new Date()}
               minDate={moment("2020-02-01T00:00:00.00Z").toDate()}
               onChange={(values) => this.hideModal(hookDateChanged, values)}
+              value={[fromISO, toISO]}
             />
           </div>
           <button
