@@ -96,10 +96,10 @@ export default class Server {
                             const currentKey = keys[j];
 
                             // PATCH https://github.com/PETILLON-Sebastien/facteurs_charge/issues/58
-                            if (currentKey == "nuclear") {
-                                delete data[i].breakdown["nuclear"];
-                                continue;
-                            }
+                            // if (currentKey == "nuclear") {
+                            //     delete data[i].breakdown["nuclear"];
+                            //     continue;
+                            // }
                             const currentLoad = currentBreakdown[currentKey].load.value;
                             const updatedLoad = currentLoad * 100;
                             currentBreakdown[currentKey].load.value = updatedLoad;
