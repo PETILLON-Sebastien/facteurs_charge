@@ -12,7 +12,6 @@ import MyMap from "./slides/exchanges/MyMap";
 import stubZonesDescription from "./regions-descriptions";
 
 import _ from "lodash";
-import moment from "moment";
 
 import "moment/locale/fr";
 
@@ -30,234 +29,200 @@ var that;
 export default class Board extends React.Component {
   constructor(props) {
     super(props);
+
+    this.zonesDescription = this.getZoneDescriptions();
+    this.zoneChanged = this.zoneChanged.bind(this);
+
+    const buildNumber = "BUILD_NUMBER_PLACEHOLDER";
+    const buildDate = "BUILD_DATE_PLACEHOLDER";
+    console.log("Build number:", buildNumber);
     this.state = {
+      buildNumber: buildNumber,
+      buildDate: buildDate,
+      currentZone: { id: "xxx", label: "xxxx" }, //fixme,
       isLoading: true,
       steps: [
-        { name: "Fetching f1", done: false },
-        { name: "Fetching f2", done: false },
-        { name: "Fetching f3", done: false },
+        { name: "Récupération de la carte", done: false },
+        {
+          name: "Récupération des informations de sources d'énergie",
+          done: false,
+        },
+        { name: "Récupération des informations de charges", done: false },
       ],
     };
-    //   that = this;
 
-    //   this.zonesDescription = this.getZoneDescriptions();
-    //   this.zoneChanged = this.zoneChanged.bind(this);
-
-    //   const buildNumber = "BUILD_NUMBER_PLACEHOLDER";
-    //   const buildDate = "BUILD_DATE_PLACEHOLDER";
-    //   console.log("Build number:", buildNumber);
-    //   this.state = {
-    //     buildNumber: buildNumber,
-    //     buildDate: buildDate,
-    //     currentZone: { id: "xxx", label: "xxxx" }, //fixme,
-    //     isLoaded: false,
-    //     loadingStatuses: [],
-    //   };
-
-    //   this.state.loadingStatuses.push({
-    //     name: "fetching power source breakdown",
-    //     status: "...",
-    //   });
-    //   this.state.loadingStatuses.push({
-    //     name: "fetching load breakdown",
-    //     status: "...",
-    //   });
-    //   this.state.loadingStatuses.push({
-    //     name: "fetching load for all zones",
-    //     status: "...",
-    //   });
-
-    //   console.log("Board built.", "isLoaded?", this.state.isLoaded);
-    // }
-
-    // getZoneDescriptions() {
-    //   return stubZonesDescription;
+    console.log("Board built.", "isLoaded?", this.state.isLoaded);
   }
 
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   const shouldBoardUpdate =
-  //     nextState.isLoaded &&
-  //     this.state.currentZone.id != nextState.currentZone.id;
-  //   console.log("Should Board update?", shouldBoardUpdate);
-  //   console.log(this.state, nextState);
-  //   return shouldBoardUpdate;
-  // }
+  getZoneDescriptions() {
+    return stubZonesDescription;
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const shouldBoardUpdate =
+      nextState.isLoading ||
+      this.state.currentZone.id != nextState.currentZone.id;
+    console.log("Should Board update?", shouldBoardUpdate);
+    console.log(this.state, nextState);
+    return shouldBoardUpdate;
+  }
 
   componentDidMount() {
     console.log("Board mounted.");
 
-    // Trigger network calls
-    this.function1().then(() => {
-      this.updateStepState(0);
-      const isStillLoading = this.state.steps.find((elem) => !elem.done) != undefined;
-      this.setState({ isLoading: isStillLoading });
-    });
+    this.zoneChanged(0);
+  }
 
-    this.function2().then(() => {
-      this.updateStepState(1);
-console.log(this.state.steps.find((elem) => !elem.done));
-      const isStillLoading = this.state.steps.find((elem) => !elem.done) != undefined;
-      this.setState({ isLoading: isStillLoading });
-    });
+  checkIfStillLoading(ISOZoneId, labelCurrentZone) {
+    const isStillLoading =
+      this.state.steps.find((elem) => !elem.done) != undefined;
 
-    this.function3().then(() => {
-      this.updateStepState(2);
+    this.setState({ isLoading: isStillLoading });
 
-      const isStillLoading = this.state.steps.find((elem) => !elem.done) != undefined;
-      this.setState({ isLoading: isStillLoading });
-    });
+    if (!isStillLoading) {
+      this.setState({
+        currentZone: { id: ISOZoneId, label: labelCurrentZone },
+        isLoaded: true,
+        powerSourceBreakdown: {
+          isLoaded: true,
+          latestPowerBreakdown: this.powerSourcesLatestData,
+          powerBreakdownHistory: this.powerSourceData,
+        },
+        loadBreakdown: {
+          isLoaded: true,
+          latestBreakdownData: this.latestBreakdownData,
+          breakdownHistory: this.loadBreakdown,
+        },
+        highestLoads: this.loadDataForAllZones,
+      });
+    }
   }
 
   updateStepState(stepIndex) {
+    console.log("Step", stepIndex, "done");
     var steps = Object.assign(this.state.steps);
     steps[stepIndex].done = true;
     this.setState({ steps: steps });
   }
 
-  sleep(ms) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  }
+  zoneChanged(newZoneID) {
+    let currentZoneSelected = _.find(this.zonesDescription, { id: newZoneID });
+    let labelCurrentZone = currentZoneSelected.label;
 
-  function1() {
-    return new Promise((resolve) => {
-      this.sleep(1000).then(() => resolve());
+    let ISOZoneId = "FR";
+
+    if (newZoneID != 0) {
+      ISOZoneId = ISOZoneId.concat("-").concat(newZoneID);
+    }
+
+    console.log(
+      "Zone has changed!",
+      "Old:",
+      this.state.currentZone.id,
+      "New:",
+      ISOZoneId
+    );
+
+    if (this.state.currentZone.id == ISOZoneId) {
+      console.log("Zone hasn't changed.");
+      this.setState({ powerSourceBreakdown: { isLoaded: true } });
+      return;
+    }
+
+    console.log("Putting the slide power source breakdown in loading mode...");
+    this.setState({
+      powerSourceBreakdown: { isLoaded: false },
+      loadBreakdown: { isLoaded: false },
+    });
+
+    // Trigger network calls
+    Server.getLoadsBreakdown(ISOZoneId).then((breakdownHistory) => {
+      // PRECONDITION: Considering timely ordered data
+      this.latestBreakdownData =
+        breakdownHistory[breakdownHistory.length - 1].breakdown;
+      this.breakdownHistory = breakdownHistory;
+      this.updateStepState(0);
+      this.checkIfStillLoading(ISOZoneId, labelCurrentZone);
+    });
+
+    Server.getPowerSourcesBreakdown(ISOZoneId).then((powerSourceData) => {
+      this.latestPowerBreakdown =
+        powerSourceData[powerSourceData.length - 1].breakdown;
+      this.powerBreakdownHistory = powerSourceData;
+      this.updateStepState(1);
+      this.checkIfStillLoading(ISOZoneId, labelCurrentZone);
+    });
+
+    Server.getLoadsForAllZones(ISOZoneId).then((loadDataForAllZones) => {
+      this.highestLoads = loadDataForAllZones;
+      this.updateStepState(2);
+      this.checkIfStillLoading(ISOZoneId, labelCurrentZone);
     });
   }
-
-  function2() {
-    return new Promise((resolve) => {
-      this.sleep(2000).then(() => resolve());
-    });
-  }
-
-  function3() {
-    return new Promise((resolve) => {
-      this.sleep(3000).then(()=> resolve());
-    });
-  }
-
-  // zoneChanged(newZoneID) {
-  //   let currentZoneSelected = _.find(this.zonesDescription, { id: newZoneID });
-  //   let labelCurrentZone = currentZoneSelected.label;
-
-  //   let ISOZoneId = "FR";
-
-  //   if (newZoneID != 0) {
-  //     ISOZoneId = ISOZoneId.concat("-").concat(newZoneID);
-  //   }
-  //   console.log(
-  //     "Zone has changed!",
-  //     "Old:",
-  //     this.state.currentZone.id,
-  //     "New:",
-  //     ISOZoneId
-  //   );
-
-  //   if (this.state.currentZone.id == ISOZoneId) {
-  //     console.log("Zone hasn't changed.");
-  //     this.setState({ powerSourceBreakdown: { isLoaded: true } });
-  //     return;
-  //   }
-
-  //   console.log("Putting the slide power source breakdown in loading mode...");
-  //   this.setState({
-  //     powerSourceBreakdown: { isLoaded: false },
-  //     loadBreakdown: { isLoaded: false },
-  //   });
-
-  //   const loadBreakdown = Server.getLoadsBreakdown(ISOZoneId);
-  //   const powerSourcesBreadown = Server.getPowerSourcesBreakdown(ISOZoneId);
-  //   const loadsBreakdownForAllZones = Server.getLoadsForAllZones(ISOZoneId);
-
-  //   Promise.all([
-  //     loadBreakdown,
-  //     powerSourcesBreadown,
-  //     loadsBreakdownForAllZones,
-  //   ]).then((values) => {
-  //     console.log(values);
-  //     let loadBreakdown = values[0];
-  //     let powerSourceData = values[1];
-  //     let loadDataForAllZones = values[2];
-
-  //     const powerSourcesLatestData =
-  //       powerSourceData[powerSourceData.length - 1].breakdown;
-
-  //     // PRECONDITION: Considering timely ordered data
-  //     const latestBreakdownData =
-  //       loadBreakdown[loadBreakdown.length - 1].breakdown;
-  //     console.log("Lastest breakdown", latestBreakdownData);
-
-  //     // PRECONDITION: Considering timely ordered data
-  //     const latestLoads = loadBreakdown[loadBreakdown.length - 1].breakdown;
-
-  //     console.log(
-  //       "Modifying state of Board and setting loading state of power source slide to loaded."
-  //     );
-  //     this.setState({
-  //       currentZone: { id: ISOZoneId, label: labelCurrentZone },
-  //       isLoaded: true,
-  //       powerSourceBreakdown: {
-  //         isLoaded: true,
-  //         latestPowerBreakdown: powerSourcesLatestData,
-  //         powerBreakdownHistory: powerSourceData,
-  //       },
-  //       loadBreakdown: {
-  //         isLoaded: true,
-  //         latestBreakdownData: latestBreakdownData,
-  //         breakdownHistory: loadBreakdown,
-  //       }, // this can be built in the callback of the async.parallel
-  //       highestLoads: loadDataForAllZones,
-  //     });
-  //   });
-  // }
 
   render() {
-    return (
-      <div>
-        <h1>{!this.state.isLoading && <span>Everything has been retrieved! We can go on!</span>}</h1>
-        <h1>{this.state.isLoading && <span>...</span>}</h1>
-        <ul>
-          {this.state.steps.map((item, i) => {
-            return (
-              <li key={i}>
-                <span>{item.name}</span>
-                <span>{item.done && <h1>Done</h1>}</span>
-                <span>{!item.done && <h1>Pending</h1>}</span>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    );
-    // console.log("Rendering Board...");
+    // return (
+    //   <div>
+    //     <h1>
+    //       {!this.state.isLoading && (
+    //         <span>Everything has been retrieved! We can go on!</span>
+    //       )}
+    //     </h1>
+    //     <h1>{this.state.isLoading && <span>...</span>}</h1>
+    //     <ul>
+    //       {this.state.steps.map((item, i) => {
+    //         return (
+    //           <li key={i}>
+    //             <span>{item.name}</span>
+    //             <span>{item.done && <h1>Done</h1>}</span>
+    //             <span>{!item.done && <h1>Pending</h1>}</span>
+    //           </li>
+    //         );
+    //       })}
+    //     </ul>
+    //   </div>
+    // );
+    console.log("Rendering Board...");
 
-    // if (!this.state.isLoaded) {
-    //   console.log(
-    //     "Board has not been fully loaded yet, aborting the rendering and displaying loading screen instead."
-    //   );
-    //   return (
-    //     <div
-    //       className={`pageloader is-dark ${this.state.done ? "" : "is-active"}`}
-    //       ref="spinner"
-    //     >
-    //       <span className="title">
-    //         Facteurs charge préchauffe... On arrive !
-    //       </span>
-    //       <div>
-    //         <ul>
-    //           {this.state.loadingStatuses.map((item, i) => {
-    //             return (
-    //               <li key={i}>
-    //                 <span>{item.name}</span>
-    //                 <span>{item.status}</span>
-    //               </li>
-    //             );
-    //           })}
-    //         </ul>
-    //       </div>
-    //     </div>
-    //   );
-    // }
+    if (this.state.isLoading || true) {
+      console.log(
+        "Board has not been fully loaded yet, aborting the rendering and displaying loading screen instead."
+      );
+      return (
+        <div
+          className={`pageloader is-dark ${this.state.done ? "" : "is-active"}`}
+          ref="spinner"
+        >
+          <div className="title has-text-centered">
+            <span>Facteurs charge préchauffe... On arrive !</span>
+            <ul class="has-text-left" style={{ color: "#838383", whiteSpace:"break-spaces",marginTop: "2rem" }}>
+              {this.state.steps.map((item, i) => {
+                return (
+                  <li key={i}>
+                    <div className="columns is-mobile">
+                      <div className="column is-1">
+                        <span>
+                          {item.done && (
+                            <span className="icon">
+                              {" "}
+                              <i className="fas fa-check"></i>
+                            </span>
+                          )}
+                        </span>
+                        <span>{!item.done && <span></span>}</span>
+                      </div>
+                      <div className="column">
+                        <span>{item.name}</span>
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+      );
+    }
 
     // let powerSourceSlide = null;
     // if (this.state.powerSourceBreakdown.isLoaded) {
