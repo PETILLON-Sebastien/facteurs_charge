@@ -67,8 +67,8 @@ export default class Server {
                     // data.pop();
                     // data.pop();
                     // ------------------------------------------------------------------------
-                    // resolve(data);
-                    Server.sleep(300).then(() => resolve(data));
+                    resolve(data);
+                    // Server.sleep(800).then(() => resolve(data));
                 }
             );
         });
@@ -127,9 +127,8 @@ export default class Server {
                             }
                         }
                     }
-                    Server.sleep(200).then(() => resolve(data));
-
-                    // resolve(data);
+                    // Server.sleep(1500).then(() => resolve(data));
+                    resolve(data);
                 }
             );
         });
@@ -159,8 +158,8 @@ export default class Server {
                         let currentData = data[i];
                         result[currentData.zoneId] = currentData.snapshots[0].highest;
                     }
-                    Server.sleep(500).then(() => resolve(data));
-                    // resolve(data);
+                    // Server.sleep(150).then(() => resolve(data));
+                    resolve(data);
                 }
             );
         });
