@@ -64,7 +64,8 @@ export default class Server {
                     // data.pop();
                     // data.pop();
                     // ------------------------------------------------------------------------
-                    resolve(data);
+                    // resolve(data);
+                    Server.sleep(300).then(() => resolve(data));
                 }
             );
         });
@@ -100,13 +101,31 @@ export default class Server {
                             //     delete data[i].breakdown["nuclear"];
                             //     continue;
                             // }
-                            const currentLoad = currentBreakdown[currentKey].load.value;
-                            const updatedLoad = currentLoad * 100;
-                            currentBreakdown[currentKey].load.value = updatedLoad;
+                            const currentLoad = currentBreakdown[currentKey];
+                            if (currentLoad == undefined) {
+                                console.warn(
+                                    "Given breakdown does not contains information for",
+                                    currentKey
+                                );
+                                currentBreakdown[currentKey] = {};
+                                currentBreakdown[currentKey].load.value = -1;
+                            } else if (currentLoad.load == undefined) {
+                                console.warn(
+                                    "Given breakdown does not contains information for the 'load' of",
+                                    currentKey
+                                );
+                                currentBreakdown[currentKey].load = {};
+                                currentBreakdown[currentKey].load.value = -1;
+                            } else {
+                                currentLoad = currentLoad.load.value;
+                                const updatedLoad = currentLoad * 100;
+                                currentBreakdown[currentKey].load.value = updatedLoad;
+                            }
                         }
                     }
+                    Server.sleep(200).then(() => resolve(data));
 
-                    resolve(data);
+                    // resolve(data);
                 }
             );
         });
@@ -136,8 +155,8 @@ export default class Server {
                         let currentData = data[i];
                         result[currentData.zoneId] = currentData.snapshots[0].highest;
                     }
-                    // Server.sleep(5000).then(() => resolve(data));
-                    resolve(data);
+                    Server.sleep(500).then(() => resolve(data));
+                    // resolve(data);
                 }
             );
         });
