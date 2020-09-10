@@ -77,6 +77,10 @@ export default class Board extends React.Component {
     this.zoneChanged(0);
   }
 
+  dateChanged(newDate) {
+    console.log("WOW DATE CHANGED", newDate);
+  }
+  
   zoneChanged(newZoneID) {
     let currentZoneSelected = _.find(this.zonesDescription, { id: newZoneID });
     let labelCurrentZone = currentZoneSelected.label;
@@ -98,7 +102,11 @@ export default class Board extends React.Component {
     if (this.state.currentZone.id == ISOZoneId) {
       console.log("Zone hasn't changed.");
       return;
-    } else {
+    }
+    
+    // update(ISOZoneID, toDate) {...
+
+    else {
       this.setState({ isLoading: true });
     }
 
@@ -176,6 +184,7 @@ export default class Board extends React.Component {
               that={that}
               label_region={this.state.currentZone.label}
               hookZoneChanged={this.zoneChanged}
+              hookDateChanged={this.dateChanged}
               zonesDescription={this.zonesDescription}
             />
           </header>

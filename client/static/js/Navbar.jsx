@@ -1,5 +1,6 @@
 import React from "react";
-var that;
+import Calendar from 'react-calendar'
+import 'react-calendar/dist/Calendar.css';
 
 import Map from "./slides/map/components/Map";
 
@@ -12,7 +13,7 @@ class Navbar extends React.Component {
         this.menuToggle = this.menuToggle.bind(this);
         this.setCurrentSlide = this.setCurrentSlide.bind(this);
 
-        this.state = { showMobileMenu: false, activeTab: 'map', showModal: false };
+        this.state = { showMobileMenu: false, activeTab: 'map', showLocationModal: false, showCalendarModal: false };
     }
 
     componentDidMount() {
@@ -33,6 +34,7 @@ class Navbar extends React.Component {
     render() {
 
         const hookZoneChanged = this.props.hookZoneChanged;
+        const hookDateChanged = this.props.hookDateChanged;
         const zonesDescription = this.props.zonesDescription;
 
         return (
@@ -141,10 +143,8 @@ class Navbar extends React.Component {
                                         </button>
                                     </a>
                                 </span> */}
-
-
                                 <span className="navbar-item">
-                                    <a className="button is-dark is-fullwidth" onClick={() => this.setState({ showModal: true })}>
+                                    <a className="button is-dark is-fullwidth" onClick={() => this.setState({ showLocationModal: true })}>
                                         <span className="icon">
                                             <i className="fas fa-map-marker-alt"></i>
                                         </span>
@@ -153,8 +153,22 @@ class Navbar extends React.Component {
                                             <i className="fas fa-chevron-down"></i>
                                         </span>
                                     </a>
-
                                 </span>
+
+                                
+                                <span className="navbar-item">
+                                    <a className="button is-dark is-fullwidth" onClick={() => this.setState({ showCalendarModal: true })}>
+                                        <span className="icon">
+                                            <i className="fas fa-map-marker-alt"></i>
+                                        </span>
+                                        <span className="is-size-5">{this.props.currentDate}</span>
+                                        <span className="icon">
+                                            <i className="fas fa-chevron-down"></i>
+                                        </span>
+                                    </a>
+                                </span>
+
+
                             </div>
 
                             <div className="navbar-end">
@@ -176,12 +190,20 @@ class Navbar extends React.Component {
                     </nav>
                 </div>
 
-                <div className={`modal ${this.state.showModal ? "is-active" : ""}`}>
-                    <div className="modal-background" onClick={() => this.setState({ showModal: false })}></div>
+                <div className={`modal ${this.state.showLocationModal ? "is-active" : ""}`}>
+                    <div className="modal-background" onClick={() => this.setState({ showLocationModal: false })}></div>
                     <div className="modal-content">
                         <Map zoneChanged={(value) => this.hideModal(hookZoneChanged, value)} zonesDescription={zonesDescription} />
                     </div>
-                    <button className="modal-close is-large" aria-label="close" onClick={() => this.setState({ showModal: false })}></button>
+                    <button className="modal-close is-large" aria-label="close" onClick={() => this.setState({ showLocationModal: false })}></button>
+                </div>
+
+                <div className={`modal ${this.state.showCalendarModal ? "is-active" : ""}`}>
+                    <div className="modal-background" onClick={() => this.setState({ showCalendarModal: false })}></div>
+                    <div className="modal-content">
+                            <Calendar maxDate={new Date()} onChange={(value) => this.hideModal(hookDateChanged, value)}/>
+                    </div>
+                    <button className="modal-close is-large" aria-label="close" onClick={() => this.setState({ showCalendarModal: false })}></button>
                 </div>
             </React.Fragment>
         )
@@ -189,7 +211,8 @@ class Navbar extends React.Component {
 
     hideModal(callBack, value) {
         callBack(value);
-        this.setState({ showModal: false });
+        this.setState({ showLocationModal: false });
+        this.setState({ showCalendarModal: false });
     }
 }
 

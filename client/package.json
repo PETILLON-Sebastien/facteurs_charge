@@ -39,7 +39,8 @@
     "concurrently": "^5.2.0",
     "highcharts": "^8.1.1",
     "highcharts-react-official": "2.2.2",
-    "node-build-number": "^1.0.2"
+    "node-build-number": "^1.0.2",
+    "react-calendar": "^3.1.0"
   },
   "scripts": {
     "build": "nbn && npm run css-deploy &&  webpack -p --env.API_URL=http://51.210.182.41:8080 --progress --config static/webpack.config.js",
