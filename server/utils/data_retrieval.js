@@ -51,7 +51,9 @@ var retrieve = function(start, end) {
   var defered = Q.defer();
   api_provider.api_call(start, end)
   .then(function(data) {
+    
     if(_.get(data, '[0].records') === undefined || _.get(data, '[1].records') === undefined) {
+      console.error(`Retrieving data from ${start} to ${end} returned ${data}; but [0] or [1] is missing record fields...`);
       defered.reject('Missing data');
     } else {
       var records = _.concat(data[0].records, data[1].records);
