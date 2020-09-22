@@ -8,13 +8,13 @@ var constants = require('./constants.js');
 var get_string_list_dates = function(start, end) {
   var start_date = moment(start);
   var end_date = moment(end);
-  var dates = [start_date.format('YYYY-MM-DD')];
+  var dates = [];
   if(end_date.isBefore(end_date)) {
-    return dates;
+    return [start_date.format('YYYY-MM-DD')];
   }
   while(start_date.isBefore(end_date)) {
+    dates.push(start_date.format('YYYY-MM-DD'));
     start_date = moment(start_date.add(1, 'day'));
-      dates.push(start_date.format('YYYY-MM-DD'));
   }
   if(end_date.isSame(moment(), 'day')) {
     dates.push('current');
