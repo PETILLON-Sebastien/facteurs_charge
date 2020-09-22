@@ -41,6 +41,10 @@ var migrate_capacity = function(date) {
 var migrate_consumption_production = function(date) {
   var file_name = path.join(__dirname, '..', '..', 'donnees', 'donnees_' + moment(date).format('YYYY-MM-DD') + '.json');
   fs.readFile(file_name, 'UTF-8', function(err, data) {
+    if(err) {
+      return console.log(err);
+    }
+    
     var data = JSON.parse(data);
     var consumption_to_store = [];
     var production_to_store = [];
@@ -100,13 +104,18 @@ var migrate_consumption_production = function(date) {
   });
 };
 
-var start_day = moment(process.env.START_DAY)
-var end_day = moment(process.env.END_DAY)
-if(start_day.isValid() && end_day.isValid()) {
-  current_day = start_day;
-  while(!current_day.isAfter(end_day)) {
-    migrate_consumption_production(moment(current_day));
-    migrate_capacity(moment(current_day));
-    current_day = current_day.add(1, 'day');
+if(process.argv.length < 4) {
+  console.log("Deux arguments nécessaires (start & end)");
+} else {
+  var start_day = moment(process.argv[2]);
+  var end_day = moment(process.argv[3]);
+  if(start_day.isValid() && end_day.isValid()) {
+    console.log("Migration des données de", process.argv[2], "à", process.argv[3]);
+    current_day = start_day;
+    while(!current_day.isAfter(end_day)) {
+      migrate_consumption_production(moment(current_day));
+      migrate_capacity(moment(current_day));
+      current_day = current_day.add(1, 'day');
+    }
   }
 }
