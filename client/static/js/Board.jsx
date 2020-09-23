@@ -6,12 +6,8 @@ import Server from "./Server";
 import SlidePowerSources from "./slides/power-sources-breakdown/components/SlidePowerSources";
 import SlideLoad from "./slides/load-breakdown/components/SlideLoad";
 import SlideMap from "./slides/map/components/SlideMap";
-import SlidePowerBalance from "./slides/power-balance/components/SlidePowerBalance";
-import MyMap from "./slides/exchanges/MyMap";
 
 import stubZonesDescription from "./regions-descriptions";
-
-import _ from "lodash";
 
 import "moment/locale/fr";
 
@@ -102,7 +98,7 @@ export default class Board extends React.Component {
   }
 
   zoneChanged(newZoneID) {
-    let currentZoneSelected = _.find(this.zonesDescription, { id: newZoneID });
+    let currentZoneSelected = this.zonesDescription.find((element) =>  element.id == newZoneID);
     let labelCurrentZone = currentZoneSelected.label;
 
     let ISOZoneId = "FR";

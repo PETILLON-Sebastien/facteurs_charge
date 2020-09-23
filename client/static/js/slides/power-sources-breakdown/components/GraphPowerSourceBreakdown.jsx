@@ -3,7 +3,6 @@ import HighchartsReact from "highcharts-react-official";
 import moment from "moment";
 import cssVar from '../../../../_sass/_variables.scss';
 import PowerSourceStyleMap from '../../../power-sources/components/PowerSourceStyleMap.js';
-import { now } from "lodash";
 
 let that;
 

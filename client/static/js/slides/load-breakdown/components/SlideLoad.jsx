@@ -3,7 +3,6 @@ import PowerSourceLoad from './PowerSourceLoad';
 import GraphLoadEvolution from "./GraphLoadEvolution";
 import { ZoneContext } from '../../../ZoneContext';
 import PowerSourceNameInline from "../../../power-sources/components/PowerSourceNameInline";
-import { first } from "lodash";
 
 class SlideLoad extends React.Component {
 
