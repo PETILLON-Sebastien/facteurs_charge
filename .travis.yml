@@ -8,6 +8,7 @@ before_script:
 - npm install
 - cd ../server
 - npm install
+- npm install -g csso-cli
 script: 
 - cd ../client
 - npm run build
