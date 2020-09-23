@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
-// const MomentTimezoneDataPlugin = require('moment-timezone-data-webpack-plugin');
+const MomentTimezoneDataPlugin = require('moment-timezone-data-webpack-plugin');
 
 const config = (env) => {
 
@@ -11,14 +11,18 @@ const config = (env) => {
     return prev;
   }, {});
 
-  return {  performance: {
-    maxEntrypointSize: 1328000,
-    maxAssetSize: 1328000
-  },
+  return {  
+    performance: {
+      maxEntrypointSize: 1328000,
+      maxAssetSize: 1328000
+    },
+
+    devtool: '', // Removed dev-tools mapping
     entry: __dirname + '/js/index.jsx',
     output: {
-      path: __dirname + '/dist',
+      path: __dirname  + '/dist',
       filename: 'bundle.js',
+      publicPath:__dirname  + '/dist'
     },
     resolve: {
       extensions: ['.js', '.jsx', '.css']
@@ -66,10 +70,10 @@ const config = (env) => {
       new MomentLocalesPlugin({
         localesToKeep: ['fr'],
     }),
-    // new MomentTimezoneDataPlugin({
-    //   startYear:2017,
-    //   matchCountries:"FR"
-    // }),
+    new MomentTimezoneDataPlugin({
+      startYear:2017,
+      matchZones: /Europe\/(Belfast|London|Paris|Athens)/,
+    }),
     ]
   };
 };

@@ -21,7 +21,7 @@ class SlideMap extends React.Component {
             }
             // console.log(highestLoads,ISOZoneId);
 
-            var highestLoadForCurrentZone = highestLoads.from((element) => element.zoneId == ISOZoneId);
+            var highestLoadForCurrentZone = highestLoads.find((element) => element.zoneId == ISOZoneId);
             if (highestLoadForCurrentZone != undefined) {
                 highestLoadForCurrentZone = highestLoadForCurrentZone.snapshots[0].highest;
             } else {
