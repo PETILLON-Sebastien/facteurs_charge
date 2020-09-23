@@ -54,6 +54,7 @@ var retrieve = function(start, end) {
     
     if(_.get(data, '[0].records') === undefined || _.get(data, '[1].records') === undefined) {
       console.error(`Retrieving data from ${start} to ${end} returned ${JSON.stringify(data)}; but [0] or [1] is missing record fields...`);
+      
       defered.reject('Missing data');
     } else {
       var records = _.concat(data[0].records, data[1].records);
