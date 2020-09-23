@@ -9,8 +9,6 @@ import SlideMap from "./slides/map/components/SlideMap";
 
 import stubZonesDescription from "./regions-descriptions";
 
-import _ from "lodash";
-
 import "moment/locale/fr";
 
 import { ZoneContext } from "./ZoneContext";
@@ -100,7 +98,7 @@ export default class Board extends React.Component {
   }
 
   zoneChanged(newZoneID) {
-    let currentZoneSelected = _.find(this.zonesDescription, { id: newZoneID });
+    let currentZoneSelected = this.zonesDescription.find((element) =>  element.id == newZoneID);
     let labelCurrentZone = currentZoneSelected.label;
 
     let ISOZoneId = "FR";
