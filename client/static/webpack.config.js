@@ -66,7 +66,7 @@ const config = (env) => {
     },
     plugins: [
       new webpack.DefinePlugin(envKeys),
-      new BundleAnalyzerPlugin(),
+      // new BundleAnalyzerPlugin(),
       new MomentLocalesPlugin({
         localesToKeep: ['fr'],
     }),
