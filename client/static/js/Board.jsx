@@ -6,8 +6,6 @@ import Server from "./Server";
 import SlidePowerSources from "./slides/power-sources-breakdown/components/SlidePowerSources";
 import SlideLoad from "./slides/load-breakdown/components/SlideLoad";
 import SlideMap from "./slides/map/components/SlideMap";
-import SlidePowerBalance from "./slides/power-balance/components/SlidePowerBalance";
-import MyMap from "./slides/exchanges/MyMap";
 
 import stubZonesDescription from "./regions-descriptions";
 
