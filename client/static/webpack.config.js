@@ -74,6 +74,7 @@ const config = (env) => {
       startYear:2017,
       matchZones: /Europe\/(Belfast|London|Paris|Athens)/,
     }),
+    
     ]
   };
 };

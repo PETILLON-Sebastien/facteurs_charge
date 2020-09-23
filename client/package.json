@@ -44,7 +44,7 @@
     "react-calendar": "^3.1.0"
   },
   "scripts": {
-    "build": "nbn && npm run css-deploy &&  webpack -p --env.API_URL=http://51.210.182.41:8080 --progress --config static/webpack.config.js",
+    "build": "nbn && npm run css-deploy &&  webpack -p --env.API_URL=http://51.210.182.41:8080 --progress --config static/webpack.config.js &&  csso -i static/css/main.css -o static/css/main.css",
     "dev-build": "npm run css-deploy && webpack --env.API_URL=http://localhost:8080 --progress -d --config static/webpack.config.js",
     "watch": "concurrently  \"npm run client-watch\" \"npm run css-watch\"",
     "client-watch": "nbn && webpack --env.API_URL=http://localhost:8080 --progress -d --config static/webpack.config.js --watch",
@@ -54,9 +54,9 @@
     "css-watch": "npm run css-build -- --watch"
   },
   "build": {
-    "unique": "facteurs_charge_client:v1.0.0-integration[build:50]",
-    "number": 50,
-    "timestamp": "2020-9-23 15:49:44",
+    "unique": "facteurs_charge_client:v1.0.0-integration[build:51]",
+    "number": 51,
+    "timestamp": "2020-9-23 15:53:25",
     "git-branch": "integration",
     "git-user": "Benjamin Benni <benjamin.benni06@gmail.com>",
     "git-version": "2.27.0",
