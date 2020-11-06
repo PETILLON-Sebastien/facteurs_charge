@@ -1,0 +1,119 @@
+[
+  {
+    "zoneId": "FR-11",
+    "snapshots": [
+      {
+        "datetime": "2020-09-23T21:15:00+02:00",
+        "highest": "bioenergy"
+      }
+    ]
+  },
+  {
+    "zoneId": "FR-53",
+    "snapshots": [
+      {
+        "datetime": "2020-09-23T21:15:00+02:00",
+        "highest": "bioenergy"
+      }
+    ]
+  },
+  {
+    "zoneId": "FR-27",
+    "snapshots": [
+      {
+        "datetime": "2020-09-23T21:15:00+02:00",
+        "highest": "wind"
+      }
+    ]
+  },
+  {
+    "zoneId": "FR-84",
+    "snapshots": [
+      {
+        "datetime": "2020-09-23T21:15:00+02:00",
+        "highest": "nuclear"
+      }
+    ]
+  },
+  {
+    "zoneId": "FR-75",
+    "snapshots": [
+      {
+        "datetime": "2020-09-23T21:15:00+02:00",
+        "highest": "nuclear"
+      }
+    ]
+  },
+  {
+    "zoneId": "FR-24",
+    "snapshots": [
+      {
+        "datetime": "2020-09-23T21:15:00+02:00",
+        "highest": "bioenergy"
+      }
+    ]
+  },
+  {
+    "zoneId": "FR-76",
+    "snapshots": [
+      {
+        "datetime": "2020-09-23T21:15:00+02:00",
+        "highest": "bioenergy"
+      }
+    ]
+  },
+  {
+    "zoneId": "FR-32",
+    "snapshots": [
+      {
+        "datetime": "2020-09-23T21:15:00+02:00",
+        "highest": "bioenergy"
+      }
+    ]
+  },
+  {
+    "zoneId": "FR-52",
+    "snapshots": [
+      {
+        "datetime": "2020-09-23T21:15:00+02:00",
+        "highest": "bioenergy"
+      }
+    ]
+  },
+  {
+    "zoneId": "FR-44",
+    "snapshots": [
+      {
+        "datetime": "2020-09-23T21:15:00+02:00",
+        "highest": "nuclear"
+      }
+    ]
+  },
+  {
+    "zoneId": "FR-28",
+    "snapshots": [
+      {
+        "datetime": "2020-09-23T21:15:00+02:00",
+        "highest": "wind"
+      }
+    ]
+  },
+  {
+    "zoneId": "FR-93",
+    "snapshots": [
+      {
+        "datetime": "2020-09-23T21:15:00+02:00",
+        "highest": "bioenergy"
+      }
+    ]
+  },
+  {
+    "zoneId": "FR",
+    "snapshots": [
+      {
+        "datetime": "2020-09-23T21:45:00+02:00",
+        "highest": "nuclear"
+      }
+    ]
+  }
+]
