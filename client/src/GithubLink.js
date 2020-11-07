@@ -1,9 +1,9 @@
 import React from "react";
 
-function GithubLink() {
+function GithubLink({ touchOrDesktop }) {
     return (
         <a
-            className="navbar-item is-size-2 is-hidden-desktop"
+            className={`navbar-item is-size-2 is-hidden-${touchOrDesktop === "touch" ? "desktop" : "touch"}`}
             href="https://github.com/PETILLON-Sebastien/facteurs_charge"
             target="_blank"
         >
