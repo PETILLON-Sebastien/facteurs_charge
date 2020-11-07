@@ -7,7 +7,7 @@ function SlideNavLink({ slideName, setCurrentSlide, slideAnchor, activeTab }) {
         <span className="navbar-item">
             <a href="#slide-map">
                 <button
-                    className={`${activeTab == slideAnchor ? "is-success" : ""
+                    className={`${activeTab === slideAnchor ? "is-success" : ""
                         } is-primary button is-fullwidth`}
                     onClick={() => setCurrentSlide(slideAnchor)}
                 >
