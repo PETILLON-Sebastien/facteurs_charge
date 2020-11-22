@@ -1,14 +1,18 @@
 
 
 
-import React from "react";
+import React, { useState } from "react";
+import CurrentLocationSelection from "./CurrentLocationSelection";
+import PropTypes from 'prop-types'; // ES6
 
-function CurrentLocationButton({ setShowLocationSelection, currentZoneName }) {
+function CurrentLocationButton({ currentZoneName, setSelectedZone }) {
+    const [isLocationModalShown, setShowLocationSelection] = useState(false);
+
     return (
-        <span className="navbar-item">
+        <React.Fragment>
             <a
                 className="button is-dark is-fullwidth"
-                onClick={() => setShowLocationSelection(true)}
+                onClick={() => setShowLocationSelection(() => true)}
             >
                 <span className="icon">
                     <i className="fas fa-map-marker-alt"></i>
@@ -18,8 +22,19 @@ function CurrentLocationButton({ setShowLocationSelection, currentZoneName }) {
                     <i className="fas fa-chevron-down"></i>
                 </span>
             </a>
-        </span>
+            {isLocationModalShown &&
+                <CurrentLocationSelection
+                    setShowLocationSelection={setShowLocationSelection}
+                    setSelectedZone={setSelectedZone}
+                />
+            }
+        </React.Fragment>
     )
 }
+
+CurrentLocationButton.propTypes = {
+    currentZoneName: PropTypes.string.isRequired,
+    setSelectedZone: PropTypes.func.isRequired
+};
 
 export default CurrentLocationButton;

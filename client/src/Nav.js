@@ -7,9 +7,17 @@ import SlideLink from "./SlideNavLink";
 import CurrentLocationButton from "./CurrentLocationButton";
 import CurrentDateButton from "./CurrentDateButton";
 
-function Nav({ setSelectedDate, setSelectedZone, currentDate, currentZone }) {
+function Nav({ setCurrentSlide, setSelectedDate, setSelectedZone, currentDate, currentZone }) {
 
     const [inputZone, setInputZone] = useState("");
+    const [isMobileMenuShown, setShowMenu] = useState(false);
+    const [showLocationSelection, setShowLocationSelection] = useState(false);
+    const [showDateSelection, setShowDateSelection] = useState(false);
+
+    const currentDatesFrom = currentDate.from;
+    const currentDatesTo = currentDate.to;
+    const currentZoneName = currentZone.name;
+
 
     const changeZoneHandler = (e) => {
         setInputZone(e.target.value);
@@ -19,9 +27,9 @@ function Nav({ setSelectedDate, setSelectedZone, currentDate, currentZone }) {
         setSelectedZone(inputZone);
     }
 
-    const setCurrentSlide = (slideAnchor) => {
-        console.log(`Goto slideAnchor`);
-    }
+    // const setCurrentSlide = (slideAnchor) => {
+    //     console.log(`Goto slideAnchor`);
+    // }
 
     return (
 
@@ -33,20 +41,25 @@ function Nav({ setSelectedDate, setSelectedZone, currentDate, currentZone }) {
                     aria-label="main navigation"
                 >
                     <div className="navbar-brand">
-                        <Logo />
+                        {/* <Logo />
                         <GithubLink touchOrDesktop={"touch"} />
                         <Twitter touchOrDesktop={"touch"} />
                         <Burger isMobileMenuShown={isMobileMenuShown} setShowMenu={setShowMenu} />
                         <SlideLink slideName="Carte" slideAnchor="map" setCurrentSlide={setCurrentSlide} fasLogo={"fa-map-marker-alt"} />
                         <SlideLink slideName="Installations" slideAnchor="installations" setCurrentSlide={setCurrentSlide} fasLogo={"fa-solar-panel"} />
-                        <SlideLink slideName="Charge" slideAnchor="load" setCurrentSlide={setCurrentSlide} fasLogo={"fa-percent"} />
-                        <CurrentLocationButton setShowLocationSelection={setShowLocationSelection} currentZoneName={currentZoneName} />
-                        <CurrentDateButton setShowDateSelection={setShowDateSelection} currentDatesFrom={currentDatesFrom} currentDatesTo={currentDatesTo} />
+                        <SlideLink slideName="Charge" slideAnchor="load" setCurrentSlide={setCurrentSlide} fasLogo={"fa-percent"} /> */}
+                        <span className="navbar-item">
+                            <CurrentLocationButton
+                                setSelectedZone={setSelectedZone}
+                                currentZoneName={currentZoneName}
+                            />
+                        </span>
+                        {/* <CurrentDateButton setShowDateSelection={setShowDateSelection} currentDatesFrom={currentDatesFrom} currentDatesTo={currentDatesTo} /> */}
 
-                        <div className="navbar-end">
+                        {/* <div className="navbar-end">
                             <GithubLink touchOrDesktop={"desktop"} />
                             <Twitter touchOrDesktop={"desktop"} />
-                        </div>
+                        </div> */}
 
                         {/* <h1>Nav</h1>
             <input onChange={changeZoneHandler} type="text"/>

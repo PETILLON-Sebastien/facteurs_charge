@@ -5,18 +5,28 @@ import Board from "./Board";
 
 function App() {
   const [selectedDate, setSelectedDate] = useState(Date.now);
-  const [selectedZone, setSelectedZone] = useState(0);
+  const [selectedZone, setSelectedZone] = useState({ id: 0, name: "France" });
   const [data, setData] = useState({});
   const [loadingIsDone, setLoadingIsDone] = useState(false);
 
+  const setCurrentSlide = () => {
+    console.log("slide changed");
+  };
+
   useEffect(() => {
     fetch("http://localhost:8080/api/v1/zones/installations/load/last").then(
-      async (data) => {
-        const d = await data.json();
-        console.log(d);
-        setData(d);
-        setLoadingIsDone(true);
+      (data) => {
+        data.json().then((d) => {
+          setData(d);
+          setLoadingIsDone(true);
+        });
       }
+    ).catch((e) => {
+      console.log(e);
+      // e.text().then(errorMessage => {
+      //   console.error(errorMessage, "toto");
+      // });
+    }
     );
   }, [selectedDate, selectedZone]);
 
@@ -29,8 +39,9 @@ function App() {
             currentZone={selectedZone}
             setSelectedDate={setSelectedDate}
             setSelectedZone={setSelectedZone}
+            setCurrentSlide={setCurrentSlide}
           />
-          <Board data={data} />
+          {/* <Board data={data} /> */}
         </React.Fragment>
       );
     } else {
