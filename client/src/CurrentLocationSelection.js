@@ -5,9 +5,7 @@ import PropTypes from 'prop-types'; // ES6
 import Map from "./Map"
 // I dont know if this component should be conditionnally rendered, or if it should decide to be displayed via is-active css toggle...
 // Same goes for Calendar selection.
-function CurrentLocationSelection({ zonesDescription, setShowLocationSelection, setSelectedZone }) {
-
-
+function CurrentLocationSelection({ zonesDescription, setShowLocationSelection, setCurrentZone }) {
     return (
 
         <div
@@ -19,7 +17,7 @@ function CurrentLocationSelection({ zonesDescription, setShowLocationSelection, 
             ></div>
             <div className="modal-content">
                 <Map
-                    zoneChanged={(value) => setSelectedZone(value)}
+                    setCurrentZone={setCurrentZone}
                 />
             </div>
             <button
@@ -34,7 +32,7 @@ function CurrentLocationSelection({ zonesDescription, setShowLocationSelection, 
 
 CurrentLocationSelection.propTypes = {
     setShowLocationSelection: PropTypes.func.isRequired,
-    setSelectedZone: PropTypes.func.isRequired,
+    setCurrentZone: PropTypes.func.isRequired,
 };
 
 export default CurrentLocationSelection;

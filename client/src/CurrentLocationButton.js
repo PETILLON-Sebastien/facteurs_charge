@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import CurrentLocationSelection from "./CurrentLocationSelection";
 import PropTypes from 'prop-types'; // ES6
 
-function CurrentLocationButton({ currentZoneName, setSelectedZone }) {
+function CurrentLocationButton({ currentZoneName, setCurrentZone }) {
     const [isLocationModalShown, setShowLocationSelection] = useState(false);
 
     return (
@@ -25,7 +25,7 @@ function CurrentLocationButton({ currentZoneName, setSelectedZone }) {
             {isLocationModalShown &&
                 <CurrentLocationSelection
                     setShowLocationSelection={setShowLocationSelection}
-                    setSelectedZone={setSelectedZone}
+                    setCurrentZone={setCurrentZone}
                 />
             }
         </React.Fragment>
@@ -34,7 +34,7 @@ function CurrentLocationButton({ currentZoneName, setSelectedZone }) {
 
 CurrentLocationButton.propTypes = {
     currentZoneName: PropTypes.string.isRequired,
-    setSelectedZone: PropTypes.func.isRequired
+    setCurrentZone: PropTypes.func.isRequired
 };
 
 export default CurrentLocationButton;

@@ -7,25 +7,17 @@ import SlideLink from "./SlideNavLink";
 import CurrentLocationButton from "./CurrentLocationButton";
 import CurrentDateButton from "./CurrentDateButton";
 
-function Nav({ setCurrentSlide, setSelectedDate, setSelectedZone, currentDate, currentZone }) {
+function Nav({ setCurrentSlide, setSelectedDate, setCurrentZone, currentDate, currentZone }) {
 
-    const [inputZone, setInputZone] = useState("");
-    const [isMobileMenuShown, setShowMenu] = useState(false);
-    const [showLocationSelection, setShowLocationSelection] = useState(false);
-    const [showDateSelection, setShowDateSelection] = useState(false);
+    // const [inputZone, setInputZone] = useState("");
+    // const [isMobileMenuShown, setShowMenu] = useState(false);
+    // const [showLocationSelection, setShowLocationSelection] = useState(false);
+    // const [showDateSelection, setShowDateSelection] = useState(false);
 
     const currentDatesFrom = currentDate.from;
     const currentDatesTo = currentDate.to;
-    const currentZoneName = currentZone.name;
+    const currentZoneName = currentZone.label;
 
-
-    const changeZoneHandler = (e) => {
-        setInputZone(e.target.value);
-    }
-
-    const changeZone = () => {
-        setSelectedZone(inputZone);
-    }
 
     // const setCurrentSlide = (slideAnchor) => {
     //     console.log(`Goto slideAnchor`);
@@ -50,7 +42,7 @@ function Nav({ setCurrentSlide, setSelectedDate, setSelectedZone, currentDate, c
                         <SlideLink slideName="Charge" slideAnchor="load" setCurrentSlide={setCurrentSlide} fasLogo={"fa-percent"} /> */}
                         <span className="navbar-item">
                             <CurrentLocationButton
-                                setSelectedZone={setSelectedZone}
+                                setCurrentZone={setCurrentZone}
                                 currentZoneName={currentZoneName}
                             />
                         </span>

@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import Nav from "./Nav";
-import Board from "./Board";
 
 function App() {
   const [selectedDate, setSelectedDate] = useState(Date.now);
-  const [selectedZone, setSelectedZone] = useState({ id: 0, name: "France" });
+  const [currentZone, setCurrentZone] = useState({ id: 0, label: "France" });
   const [data, setData] = useState({});
   const [loadingIsDone, setLoadingIsDone] = useState(false);
 
@@ -13,7 +12,13 @@ function App() {
     console.log("slide changed");
   };
 
+  const setCurrentZoneHandler = (value) => {
+    console.log("CURRENT ZONE CHANGED", value, Date.now().toString());
+    setCurrentZone(value);
+  };
+
   useEffect(() => {
+    console.log("FETCHING DATA...", Date.now().toString());
     fetch("http://localhost:8080/api/v1/zones/installations/load/last").then(
       (data) => {
         data.json().then((d) => {
@@ -28,7 +33,7 @@ function App() {
       // });
     }
     );
-  }, [selectedDate, selectedZone]);
+  }, [selectedDate, currentZone]);
 
   function Body() {
     if (loadingIsDone) {
@@ -36,9 +41,9 @@ function App() {
         <React.Fragment>
           <Nav
             currentDate={selectedDate}
-            currentZone={selectedZone}
+            currentZone={currentZone}
             setSelectedDate={setSelectedDate}
-            setSelectedZone={setSelectedZone}
+            setCurrentZone={setCurrentZoneHandler}
             setCurrentSlide={setCurrentSlide}
           />
           {/* <Board data={data} /> */}
