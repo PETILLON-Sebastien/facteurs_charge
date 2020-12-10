@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
+import "./_sass/main.scss";
 import Nav from "./Nav";
 import BoardJS from "./BoardJS";
+import LoadingScreen from "./LoadingScreen";
 
 function App() {
   const now = Date.now();
@@ -59,7 +60,7 @@ function App() {
         </React.Fragment>
       );
     } else {
-      return <h1>Loading my love</h1>;
+      return <LoadingScreen />
     }
   }
 

@@ -175,7 +175,7 @@ a {
 }
 
 .navbar {
-  border-radius: $radius;
+  //border-radius: $radius;
 
   &.is-transparent {
     background: none;
@@ -304,46 +304,51 @@ header.section {
 }
 
 header.section > .container {
-  width:100% !important;
+  width: 100% !important;
   max-width: 100% !important;
 }
 
 .navbar {
-  width:100% !important;
+  width: 100% !important;
 }
 
 .navbar-brand {
-  margin-left:0px;
+  margin-left: 0px;
+}
+
+.navbar-start {
+  flex-grow: 1;
+  justify-content: center;
 }
 
 .navbar {
-  padding: 0rem 1rem 0rem 1rem;
+  padding: 1rem 3rem 1rem 3rem;
 }
 
-.logo-mix , .logo-mix > svg {
-  height:7rem;
+.logo-mix,
+.logo-mix > svg {
+  height: 7rem;
   max-width: 7rem;
 }
 
 .progress {
-  height:4px;
+  height: 4px;
 }
-
-
 
 .navbar .button.is-active {
   background-color: #808080;
   box-shadow: 0 0 0 2px rgba(171, 171, 171, 0.5);
 }
 
-.map , .map svg {
+.map,
+.map svg {
   height: 50vh;
 }
 
 .rc-slider-mark-text {
-  color:#cecece;  
+  color: #cecece;
 }
 
 .rc-slider-mark-text .rc-slider-mark-text-active {
-  color:#f5f5f5;  
+  color: #f5f5f5;
 }

@@ -3,16 +3,13 @@ import React from "react";
 function BoardJS() {
     return (
         <React.Fragment>
-            <h1>Board</h1>
-            <h1>Board</h1>
-            <h1>Board</h1>
-            <h1>Board</h1>
-            <h1>Board</h1>
-            <h1>Board</h1>
-            <h1>Board</h1>
-            <h1>Board</h1>
-            <h1>Board</h1>
-            <h1>Board</h1>
+            <div
+                className="section is-small"
+                id="slide-map"
+                style={{ marginTop: "0rem" }}
+            >
+                <div className="container">
+                </div></div>
         </React.Fragment>
     );
 };

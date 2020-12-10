@@ -1,13 +1,14 @@
 import React from "react";
+import logo from './images/logo.png'; // Tell Webpack this JS file uses this image
 
 function Logo() {
     return (
         <span className="navbar-item">
             <img
-                style={{ maxHeight: "3.5rem", width: "3.5rem" }}
-                src="./images/logo.png"
-                width="64"
-                height="64"
+                style={{ maxHeight: "3.75rem", width: "3.75rem" }}
+                src={logo}
+                width="128"
+                height="128"
             />
         </span>
     );

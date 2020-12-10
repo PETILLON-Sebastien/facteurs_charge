@@ -1,168 +1,164 @@
-$footer-background-color:#ff0000;
-$navbar-item-color:#b5b5b5;
+// $footer-background-color: #ff0000;
+// $navbar-item-color: #b5b5b5;
+@import "variables";
 
-// @import 'bulma';
-// @import '~bulma-page-loader';
+@import "~bulma";
+@import "~bulma-pageloader";
 
-@import "_variables.scss";
-@import "../../node_modules/bulma/bulma";
-@import "../../node_modules/bulma-pageloader/dist/css/bulma-pageloader";
-// @import "../../node_modules/@fortawesome/fontawesome-free/css/all";
-@import "_overrides.scss";
+// @import "../../node_modules/bulma/bulma";
+// @import "~bulma";
+// @import "~bulma-pageloader";
+// // @import "../../node_modules/bulma-pageloader/dist/css/bulma-pageloader";
+@import "~@fortawesome/fontawesome-free/css/all";
+@import "overrides";
 
+// @import "../power-sources/styles/animation-power-sources.scss";
+// @import "../power-sources/styles/power-source-inline.scss";
+// @import "../power-sources/styles/power-source-legend.scss";
 
-@import "../js/power-sources/styles/animation-power-sources.scss";
-@import "../js/power-sources/styles/power-source-inline.scss";
-@import "../js/power-sources/styles/power-source-legend.scss";
+// @import "../slides/load-breakdown/styles/slide-load.scss";
+// @import "../slides/power-sources-breakdown/styles/slide-power-sources.scss";
+// @import "../slides/map/styles/map.scss";
 
-@import "../js/slides/load-breakdown/styles/slide-load.scss";
-@import "../js/slides/power-sources-breakdown/styles/slide-power-sources.scss";
-@import "../js/slides/map/styles/map.scss";
-
-html {
-    scroll-behavior: smooth;
-}
-
-.section:nth-child(2n) {
-    background-color: rgb(15, 15, 15) !important;
-}
-
-
-.section:nth-child(2n + 1) {
-    background-color: rgb(36, 36, 36) !important;
-}
-
-// body {
-//     display: flex;
-//     min-height: 100vh;
-//     flex-direction: column;
-//   }
-
-//   #wrapper {
-//     flex: 1;
-//   }
-
-//   .navbar-item-name { 
-//     font-size: 20px !important;
-//     font-weight: 900;
-//   }
-
-//   .representation-name {
-//     // color: #b5b5b5;
-//     color:#dbdbdb;
-//   }
-
-//   .navbar {
-//     background-color:rgba($color: #000000, $alpha: 0.0)
-//   }
-
-@media screen and (min-width: 1408px) {
-    .container {
-        max-width: 1152px;
-        width: 1152px;
-    }
-}
-
-// .affichage-representation {
-//     display: flex;
-// }
-// .representation-icon {
-//     height:20rem;
+// html {
+//   scroll-behavior: smooth;
 // }
 
-// .representation-data-text {
-//     color:#dbdbdb;
+// .section:nth-child(2n) {
+//   background-color: rgb(15, 15, 15) !important;
 // }
 
-.footer {
-    background-color: #121212;
-    position: fixed;
-    bottom: 0px;
-    width: 100%;
-    padding: 2rem 1.5rem 2rem;
-    margin-top: 3rem;
-}
-
-// .representations-wrapper > .column {
-//     margin-bottom: 3rem;
+// .section:nth-child(2n + 1) {
+//   background-color: rgb(36, 36, 36) !important;
 // }
 
-.rc-slider {
-    width: 95% !important;
-    margin: auto;
-}
+// // body {
+// //     display: flex;
+// //     min-height: 100vh;
+// //     flex-direction: column;
+// //   }
 
-.rc-slider-track {
-    background-color: whitesmoke !important;
-}
+// //   #wrapper {
+// //     flex: 1;
+// //   }
 
-.rc-slider-dot-active {
-    border-color: #96dbfa !important;
-}
+// //   .navbar-item-name {
+// //     font-size: 20px !important;
+// //     font-weight: 900;
+// //   }
 
-.rc-slider-dot {
-    border: 2px solid #b5b5b5 !important;
-}
+// //   .representation-name {
+// //     // color: #b5b5b5;
+// //     color:#dbdbdb;
+// //   }
 
+// //   .navbar {
+// //     background-color:rgba($color: #000000, $alpha: 0.0)
+// //   }
 
+// @media screen and (min-width: 1408px) {
+//   .container {
+//     max-width: 1152px;
+//     width: 1152px;
+//   }
+// }
 
-.has-background-yellow {
-    background-color: $yellowBackground;
-    color: black;
-}
+// // .affichage-representation {
+// //     display: flex;
+// // }
+// // .representation-icon {
+// //     height:20rem;
+// // }
 
-.has-background-orange {
-    background-color: $orangeBackground;
-}
+// // .representation-data-text {
+// //     color:#dbdbdb;
+// // }
 
-.has-background-blue {
-    background-color: $blueBackground;
-}
+// .footer {
+//   background-color: #121212;
+//   position: fixed;
+//   bottom: 0px;
+//   width: 100%;
+//   padding: 2rem 1.5rem 2rem;
+//   margin-top: 3rem;
+// }
 
-.has-background-light-blue {
-    background-color: $lightBlueBackground;
-    color: black;
-}
+// // .representations-wrapper > .column {
+// //     margin-bottom: 3rem;
+// // }
 
-.has-background-dark-blue {
-    background-color: $darkBlueBackground;
-    color: white;
-}
+// .rc-slider {
+//   width: 95% !important;
+//   margin: auto;
+// }
 
+// .rc-slider-track {
+//   background-color: whitesmoke !important;
+// }
 
+// .rc-slider-dot-active {
+//   border-color: #96dbfa !important;
+// }
 
-.lds-dual-ring {
-    display: inline-block;
-    width: 80px;
-    height: 80px;
-}
+// .rc-slider-dot {
+//   border: 2px solid #b5b5b5 !important;
+// }
 
-.lds-dual-ring:after {
-    content: " ";
-    display: block;
-    width: 64px;
-    height: 64px;
-    margin: 8px;
-    border-radius: 50%;
-    border: 6px solid #fff;
-    border-color: #fff transparent #fff transparent;
-    animation: lds-dual-ring 1.2s linear infinite;
-}
+// .has-background-yellow {
+//   background-color: $yellowBackground;
+//   color: black;
+// }
 
-@keyframes lds-dual-ring {
-    0% {
-        transform: rotate(0deg);
-    }
+// .has-background-orange {
+//   background-color: $orangeBackground;
+// }
 
-    100% {
-        transform: rotate(360deg);
-    }
-}
+// .has-background-blue {
+//   background-color: $blueBackground;
+// }
 
-.react-calendar {
-    margin: auto;
-}
+// .has-background-light-blue {
+//   background-color: $lightBlueBackground;
+//   color: black;
+// }
 
-.logo .image {
-    display: inline-block;
-}
+// .has-background-dark-blue {
+//   background-color: $darkBlueBackground;
+//   color: white;
+// }
+
+// .lds-dual-ring {
+//   display: inline-block;
+//   width: 80px;
+//   height: 80px;
+// }
+
+// .lds-dual-ring:after {
+//   content: " ";
+//   display: block;
+//   width: 64px;
+//   height: 64px;
+//   margin: 8px;
+//   border-radius: 50%;
+//   border: 6px solid #fff;
+//   border-color: #fff transparent #fff transparent;
+//   animation: lds-dual-ring 1.2s linear infinite;
+// }
+
+// @keyframes lds-dual-ring {
+//   0% {
+//     transform: rotate(0deg);
+//   }
+
+//   100% {
+//     transform: rotate(360deg);
+//   }
+// }
+
+// .react-calendar {
+//   margin: auto;
+// }
+
+// .logo .image {
+//   display: inline-block;
+// }
