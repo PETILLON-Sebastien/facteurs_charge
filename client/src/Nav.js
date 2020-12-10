@@ -7,15 +7,15 @@ import SlideLink from "./SlideNavLink";
 import CurrentLocationButton from "./CurrentLocationButton";
 import CurrentDateButton from "./CurrentDateButton";
 
-function Nav({ setCurrentSlide, setSelectedDate, setCurrentZone, currentDate, currentZone }) {
+function Nav({ setCurrentSlide, setCurrentDate, setCurrentZone, currentDates, currentZone }) {
 
     // const [inputZone, setInputZone] = useState("");
     // const [isMobileMenuShown, setShowMenu] = useState(false);
     // const [showLocationSelection, setShowLocationSelection] = useState(false);
     // const [showDateSelection, setShowDateSelection] = useState(false);
 
-    const currentDatesFrom = currentDate.from;
-    const currentDatesTo = currentDate.to;
+    const currentDatesFrom = currentDates.from;
+    const currentDatesTo = currentDates.to;
     const currentZoneName = currentZone.label;
 
 
@@ -46,7 +46,13 @@ function Nav({ setCurrentSlide, setSelectedDate, setCurrentZone, currentDate, cu
                                 currentZoneName={currentZoneName}
                             />
                         </span>
-                        {/* <CurrentDateButton setShowDateSelection={setShowDateSelection} currentDatesFrom={currentDatesFrom} currentDatesTo={currentDatesTo} /> */}
+                        <span className="navbar-item">
+                            <CurrentDateButton
+                                currentDatesFrom={currentDatesFrom}
+                                currentDatesTo={currentDatesTo}
+                                setCurrentDate={setCurrentDate} />
+                        </span>
+
 
                         {/* <div className="navbar-end">
                             <GithubLink touchOrDesktop={"desktop"} />
