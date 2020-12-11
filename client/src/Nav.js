@@ -38,7 +38,10 @@ function Nav({ setCurrentSlide, setCurrentDate, setCurrentZone, currentDates, cu
                         aria-label="main navigation"
                     >
                         <div className="navbar-brand">
-                            <Logo />
+                            <span className="navbar-item">
+                                <Logo isSmall={true} />
+                            </span>
+
                             <GithubLink touchOrDesktop={"touch"} />
                             <Twitter touchOrDesktop={"touch"} />
                             <Burger isMobileMenuShown={isMobileMenuShown} setShowMenu={menuToggle} />

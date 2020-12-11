@@ -1,7 +1,7 @@
 import React from "react";
-// import SlideMap from "./SlideMap";
+import SlideMap from "./SlideMap";
 
-function BoardJS() {
+function BoardJS({ setCurrentZone, slideMapData, buildInfos = { number: -1, date: new Date().getTime() } }) {
     return (
         <React.Fragment>
             <div
@@ -10,15 +10,12 @@ function BoardJS() {
                 style={{ marginTop: "0rem" }}
             >
                 <div className="container">
-                    {/* const SlideMap = ({highestLoads, hookZoneChanged, build: {number, date} }) => { */}
 
-                    {/* <SlideMap
-                        zoneChanged={this.zoneChanged} // setter pass throught
-                        zonesDescription={this.zonesDescription} // to remove
-                        highestLoads={this.state.highestLoads} // props
-                        buildNumber={this.state.buildNumber} // props to encapsulate into 'build{number,date}
-                        buildDate={this.state.buildDate} // props
-                    /> */}
+                    <SlideMap
+                        setCurrentZone={setCurrentZone} // setter pass throught
+                        highestLoads={slideMapData} // props
+                        build={buildInfos}
+                    />
                 </div>
             </div>
         </React.Fragment>

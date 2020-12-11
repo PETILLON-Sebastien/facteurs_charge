@@ -79,7 +79,6 @@ function App() {
     if (loadingIsDone) {
       return (
         <React.Fragment>
-          {/* <header> */}
           <Nav
             currentDates={currentDates}
             currentZone={currentZone}
@@ -87,15 +86,7 @@ function App() {
             setCurrentZone={setCurrentZoneHandler}
             setCurrentSlide={setCurrentSlide}
           />
-          {/* </header> */}
-          <BoardJS data={slideMapData} />
-
-          {/* zoneChanged={this.zoneChanged}
-                        zonesDescription={this.zonesDescription}
-                        highestLoads={this.state.highestLoads}
-                        buildNumber={this.state.buildNumber}
-                        buildDate={this.state.buildDate} */}
-
+          <BoardJS slideMapData={slideMapData} setCurrentZone={setCurrentZoneHandler} build={{}} />
         </React.Fragment>
       );
     } else {

@@ -1,0 +1,35 @@
+.region-solar {
+  fill: $solar-color;
+}
+
+.region-wind {
+  fill: $wind-color;
+}
+
+.region-hydraulic {
+  fill: $hydraulic-color;
+}
+
+.region-nuclear {
+  fill: $nuclear-color;
+}
+
+.region-bioenergies {
+  fill: $bioenergies-color;
+}
+
+.region-fossil {
+  fill: $fossil-color;
+}
+
+#slide-map > .container {
+  margin-top: 7rem;
+}
+
+#build_infos {
+  font-size: 60%;
+}
+
+.region {
+  stroke: black;
+}
