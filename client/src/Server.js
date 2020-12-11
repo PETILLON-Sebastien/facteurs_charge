@@ -18,7 +18,14 @@ export default class Server {
             [
                 (cb) => {
                     try {
-                        fetch(targetUrl).then((rawData) => cb(null, rawData));
+                        fetch(targetUrl).then((rawData) => cb(null, rawData)).catch((e) => {
+                            let message = `Failed to fetch server data when fetching ${targetUrl}.`
+                            let stack = new Error(message).stack;
+                            // e.stack = stack;
+                            e.stack = stack.split('\n').slice(0, 2).join('\n') + '\n' + e.stack;
+                            // throw e
+                            error(e);
+                        });
                     }
                     catch (err) {
                         cb(err);
@@ -26,7 +33,14 @@ export default class Server {
                 },
                 (rawData, cb) => {
                     try {
-                        rawData.json().then((data) => cb(null, data));
+                        rawData.json().then((data) => cb(null, data)).catch((e) => {
+                            let message = `Failed to fetch server data when fetching ${targetUrl}.`
+                            let stack = new Error(message).stack;
+                            // e.stack = stack;
+                            e.stack = stack.split('\n').slice(0, 2).join('\n') + '\n' + e.stack;
+                            // throw e
+                            error(e);
+                        });
                     }
                     catch (err) {
                         cb(err);
@@ -57,12 +71,13 @@ export default class Server {
                     Object.keys(breakdown).forEach((installationType) => {
                         if (
                             breakdown[installationType] === {} ||
-                            breakdown[installationType].power === undefined
+                            breakdown[installationType].production === undefined
                         ) {
+                            // FIXME IT THIS SUPPOSED TO BE .production OR .power ?!
                             console.warn(
-                                "Slide power source, finding highest source of poweer, installation",
+                                "Slide power source, finding highest source of power, installation",
                                 installationType,
-                                "is not defined or has no power field"
+                                "is not defined or has no production field"
                             );
                             delete copyOfData[i].breakdown[installationType];
                         }
@@ -203,3 +218,4 @@ export default class Server {
         );
     }
 }
+

@@ -4,11 +4,13 @@ import Nav from "./Nav";
 import BoardJS from "./BoardJS";
 import LoadingScreen from "./LoadingScreen";
 import Server from "./Server";
+var async = require("async");
 
 function App() {
   const now = Date.now();
   const [currentDates, setCurrentDates] = useState({ from: now, to: now });
   const [currentZone, setCurrentZone] = useState({ id: 0, label: "France" });
+  const [slidePowerSourcesData, setSlidePowerSourceBreakdownData] = useState({});
   const [slideMapData, setSlideMapData] = useState({});
   const [loadingIsDone, setLoadingIsDone] = useState(false);
 
@@ -27,53 +29,77 @@ function App() {
   };
 
 
-  // When nothing changes (thus at the first boot), get last installations loads
-  useEffect(() => {
+  const updateLatestLoads = (cb) => {
     Server.getLoadsForAllZones(
       currentDates.from,
       currentDates.to,
       (d) => {
         setSlideMapData(d);
-        setLoadingIsDone(true);
+        cb(null, slideMapData);
       }, (err) => {
         console.error(err);
       });
-    // async.waterfall(
-    //   [
-    //     (cb) => {
-    //       fetch(targetUrl).then((rawData) => cb(null, rawData));
-    //     },
-    //     (rawData, cb) => {
-    //       rawData.json().then((data) => cb(null, data));
-    //     },
-    //   ],
-    //   (err, data) => {
+  };
 
-    //   }
-    // );
+  const updatePowerSourceBreadowns = (cb) => {
+    Server.getPowerSourcesBreakdown(
+      currentZone.id,
+      currentDates.from,
+      currentDates.to,
+      (d) => {
+        setSlidePowerSourceBreakdownData(d);
+        cb(null, slidePowerSourcesData);
+      }, (err) => {
+        console.error(err);
+      });
+  };
 
+
+  // const updatePowerSourceBreadowns = (cb) => {
+  //   Server.getPowerSourcesBreakdown(
+  //     currentZone.id,
+  //     currentDates.from,
+  //     currentDates.to,
+  //     (d) => {
+  //       setSlidePowerSourceBreakdownData(d);
+  //       cb(null, slidePowerSourcesData);
+  //     }, (err) => {
+  //       console.error(err);
+  //     });
+  // };
+
+
+
+  // When nothing changes (thus at the first boot), get last installations loads
+  useEffect(() => {
+    updateLatestLoads(() => { });
   }, []);
 
-  // useEffect(() => {
+  // When date or zone change, and at the first boot get slides information
+  useEffect(() => {
+
+    async.waterfall(
+      [
+        (cb) => {
+          updatePowerSourceBreadowns(cb);
+        },
+        (_, cb) => {
+          updateLatestLoads(cb);
+        },
+        // (_, cb) => {
+        //   updateLatestLoads(cb);
+        // },
+        // (_, cb) => {
+        //   updateLatestLoads(cb);
+        // },
+      ],
+      (err, data) => {
+        setLoadingIsDone(true);
+      }
+    );
 
 
-  //   console.log("FETCHING DATA...", currentDates.from.toString());
-  //   fetch("http://localhost:8080/api/v1/zones/installations/load/last").then(
-  //     (data) => {
-  //       data.json().then((d) => {
-  //         console.log(d);
-  //         setData(d);
-  //         setLoadingIsDone(true);
-  //       });
-  //     }
-  //   ).catch((e) => {
-  //     console.log(e);
-  //     // e.text().then(errorMessage => {
-  //     //   console.error(errorMessage, "toto");
-  //     // });
-  //   }
-  //   );
-  // }, [currentDates, currentZone]);
+  }, [currentDates, currentZone]);
 
   function Body() {
     if (loadingIsDone) {
@@ -86,7 +112,12 @@ function App() {
             setCurrentZone={setCurrentZoneHandler}
             setCurrentSlide={setCurrentSlide}
           />
-          <BoardJS slideMapData={slideMapData} setCurrentZone={setCurrentZoneHandler} build={{}} />
+          <BoardJS
+            slideMapData={slideMapData}
+            slidePowerSourcesData={slidePowerSourcesData}
+            setCurrentZone={setCurrentZoneHandler}
+            build={{}}
+            currentZone={currentZone} />
         </React.Fragment>
       );
     } else {
