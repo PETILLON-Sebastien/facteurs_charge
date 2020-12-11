@@ -3,12 +3,13 @@ import "./_sass/main.scss";
 import Nav from "./Nav";
 import BoardJS from "./BoardJS";
 import LoadingScreen from "./LoadingScreen";
+import Server from "./Server";
 
 function App() {
   const now = Date.now();
   const [currentDates, setCurrentDates] = useState({ from: now, to: now });
   const [currentZone, setCurrentZone] = useState({ id: 0, label: "France" });
-  const [data, setData] = useState({});
+  const [slideMapData, setSlideMapData] = useState({});
   const [loadingIsDone, setLoadingIsDone] = useState(false);
 
   const setCurrentSlide = () => {
@@ -25,23 +26,54 @@ function App() {
     setCurrentDates(values);
   };
 
+
+  // When nothing changes (thus at the first boot), get last installations loads
   useEffect(() => {
-    console.log("FETCHING DATA...", currentDates.from.toString());
-    fetch("http://localhost:8080/api/v1/zones/installations/load/last").then(
-      (data) => {
-        data.json().then((d) => {
-          setData(d);
-          setLoadingIsDone(true);
-        });
-      }
-    ).catch((e) => {
-      console.log(e);
-      // e.text().then(errorMessage => {
-      //   console.error(errorMessage, "toto");
-      // });
-    }
-    );
-  }, [currentDates, currentZone]);
+    Server.getLoadsForAllZones(
+      currentDates.from,
+      currentDates.to,
+      (d) => {
+        setSlideMapData(d);
+        setLoadingIsDone(true);
+      }, (err) => {
+        console.error(err);
+      });
+    // async.waterfall(
+    //   [
+    //     (cb) => {
+    //       fetch(targetUrl).then((rawData) => cb(null, rawData));
+    //     },
+    //     (rawData, cb) => {
+    //       rawData.json().then((data) => cb(null, data));
+    //     },
+    //   ],
+    //   (err, data) => {
+
+    //   }
+    // );
+
+  }, []);
+
+  // useEffect(() => {
+
+
+  //   console.log("FETCHING DATA...", currentDates.from.toString());
+  //   fetch("http://localhost:8080/api/v1/zones/installations/load/last").then(
+  //     (data) => {
+  //       data.json().then((d) => {
+  //         console.log(d);
+  //         setData(d);
+  //         setLoadingIsDone(true);
+  //       });
+  //     }
+  //   ).catch((e) => {
+  //     console.log(e);
+  //     // e.text().then(errorMessage => {
+  //     //   console.error(errorMessage, "toto");
+  //     // });
+  //   }
+  //   );
+  // }, [currentDates, currentZone]);
 
   function Body() {
     if (loadingIsDone) {
@@ -56,7 +88,14 @@ function App() {
             setCurrentSlide={setCurrentSlide}
           />
           {/* </header> */}
-          <BoardJS data={data} />
+          <BoardJS data={slideMapData} />
+
+          {/* zoneChanged={this.zoneChanged}
+                        zonesDescription={this.zonesDescription}
+                        highestLoads={this.state.highestLoads}
+                        buildNumber={this.state.buildNumber}
+                        buildDate={this.state.buildDate} */}
+
         </React.Fragment>
       );
     } else {

@@ -1,4 +1,5 @@
 import React from "react";
+// import SlideMap from "./SlideMap";
 
 function BoardJS() {
     return (
@@ -9,7 +10,17 @@ function BoardJS() {
                 style={{ marginTop: "0rem" }}
             >
                 <div className="container">
-                </div></div>
+                    {/* const SlideMap = ({highestLoads, hookZoneChanged, build: {number, date} }) => { */}
+
+                    {/* <SlideMap
+                        zoneChanged={this.zoneChanged} // setter pass throught
+                        zonesDescription={this.zonesDescription} // to remove
+                        highestLoads={this.state.highestLoads} // props
+                        buildNumber={this.state.buildNumber} // props to encapsulate into 'build{number,date}
+                        buildDate={this.state.buildDate} // props
+                    /> */}
+                </div>
+            </div>
         </React.Fragment>
     );
 };
