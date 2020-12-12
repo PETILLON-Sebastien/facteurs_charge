@@ -11,10 +11,11 @@ function Logo({ isSmall }) {
             src={logo}
             width="128"
             height="128"
+            alt='Facteur Charge logo'
         />;
     } else {
         logoContent = <figure className="image is-128x128">
-            <img src={logo} />
+            <img src={logo} alt='Facteur Charge logo' />
         </figure>
     }
 

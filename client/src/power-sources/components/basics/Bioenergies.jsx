@@ -1,29 +1,24 @@
 import React from "react";
 
 class Bioenergies extends React.Component {
-
-  constructor(props) {
-      super(props);
-  }
-
   pourcentageVersTemps() {
-      var temps = 0;
-      if(this.props.pourcentage > 1) {
-          temps = 3 * Math.exp(-0.02 * this.props.pourcentage);
-      }
-      return temps;
+    var temps = 0;
+    if (this.props.pourcentage > 1) {
+      temps = 3 * Math.exp(-0.02 * this.props.pourcentage);
+    }
+    return temps;
   }
   pourcentageVersOpacite() {
-      var opacite = 0;
-      if(this.props.pourcentage > 1) {
-          opacite = 0.24 * Math.log(this.props.pourcentage) - 0.15;
-      }
-      return opacite;
+    var opacite = 0;
+    if (this.props.pourcentage > 1) {
+      opacite = 0.24 * Math.log(this.props.pourcentage) - 0.15;
+    }
+    return opacite;
   }
-  
+
   render() {
     const translationStyle = {
-        'animationDuration': this.pourcentageVersTemps() + 's'
+      animationDuration: this.pourcentageVersTemps() + "s",
     };
     const opacite = this.pourcentageVersOpacite();
 
@@ -117,7 +112,6 @@ class Bioenergies extends React.Component {
             <stop offset="0" stopColor="#1b843c" stopOpacity="1"></stop>
             <stop offset="1" stopColor="#53b900" stopOpacity="1"></stop>
           </linearGradient>
-
         </defs>
         <ellipse
           cx="36.38"
@@ -147,7 +141,7 @@ class Bioenergies extends React.Component {
           gradientUnits="userSpaceOnUse"
           className="fumee-petite"
           d="M31.925-.43c.032 4.906 2.11 6.576 2.006 9.353-.103 2.777-2.118 3.58-2.098 5.74.032 4.907 2.11 6.576 2.006 9.353-.104 2.777-2.119 3.579-2.099 5.74.032 4.906 2.11 6.575 2.006 9.352-.103 2.778-2.118 3.58-2.098 5.74.032 4.907 2.11 6.576 2.006 9.354-.104 2.777-2.119 3.58-2.099 5.74.032 4.906 2.11 6.576 2.006 9.353-.104 2.777-2.118 3.58-2.099 5.74.033 4.906 2.11 6.576 2.007 9.353-.104 2.777-2.119 3.579-2.099 5.74l8.372.034c.118-1.786 1.18-2.855 1.228-6.307.048-3.452-1.156-5.857-1.136-8.786.118-1.786 1.18-2.855 1.229-6.307.048-3.452-1.156-5.857-1.136-8.786.118-1.786 1.18-2.855 1.228-6.306.048-3.452-1.156-5.859-1.136-8.787.119-1.787 1.18-2.855 1.229-6.307.048-3.451-1.157-5.857-1.136-8.786.118-1.786 1.18-2.855 1.228-6.307.048-3.451-1.156-5.857-1.136-8.786.118-1.786 1.18-2.855 1.229-6.307.048-3.452-1.156-5.857-1.136-8.786z"
-          ></path>
+        ></path>
         <g clipPath="none" transform="translate(0 -1.058)">
           <g
             id="bioenergies-g"
@@ -203,7 +197,7 @@ class Bioenergies extends React.Component {
           gradientUnits="userSpaceOnUse"
           className="fumee-petite"
           d="M64.908-.43c.032 4.908 2.063 6.578 1.961 9.356-.101 2.779-2.07 3.581-2.051 5.743.031 4.908 2.062 6.578 1.961 9.356-.101 2.778-2.071 3.58-2.052 5.742.032 4.908 2.063 6.578 1.962 9.356-.102 2.778-2.072 3.581-2.052 5.743.031 4.908 2.062 6.578 1.961 9.356-.101 2.778-2.071 3.581-2.052 5.743.032 4.908 2.063 6.578 1.961 9.356-.101 2.778-2.07 3.58-2.051 5.743.031 4.908 2.062 6.578 1.96 9.356-.1 2.778-2.07 3.58-2.05 5.742l8.183.034c.116-1.787 1.154-2.856 1.201-6.31.047-3.452-1.13-5.859-1.11-8.789.115-1.787 1.154-2.856 1.2-6.31.048-3.452-1.13-5.859-1.11-8.788.116-1.787 1.154-2.856 1.201-6.31.047-3.452-1.13-5.86-1.11-8.79.115-1.786 1.154-2.855 1.2-6.308.048-3.453-1.13-5.86-1.11-8.79.115-1.786 1.154-2.856 1.2-6.309.048-3.453-1.13-5.86-1.11-8.79.116-1.786 1.154-2.856 1.201-6.309.047-3.453-1.13-5.86-1.11-8.79z"
-          ></path>
+        ></path>
         <g
           fillOpacity="1"
           stroke="none"
@@ -361,7 +355,7 @@ class Bioenergies extends React.Component {
           strokeOpacity="0.588"
           strokeWidth="0.169"
           d="M84.283 107.35s10.293 4.66 5.738 8.033c-4.555 3.372-9.584-2.024-9.938-11.16-.355-9.136-.77-2.085 3.312.123 4.082 2.207 6.922 1.471 8.933 3.617 3.557 3.795-.946 7.052-.946 7.052s3.727-4.047-7.1-7.665z"
-      ></path>
+        ></path>
       </svg>
     );
   }

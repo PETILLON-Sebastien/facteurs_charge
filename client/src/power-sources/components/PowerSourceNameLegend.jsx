@@ -1,38 +1,34 @@
-
 import React from "react";
-import PowerSourceStyleMap from './PowerSourceStyleMap';
+import PowerSourceStyleMap from "./PowerSourceStyleMap";
 
 class PowerSourceNameLegend extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    const type = this.props.type;
+    this.buildProperVisualization(type);
+  }
 
-    constructor(props) {
-        super(props);
+  buildProperVisualization(type) {
+    let classes = "legende-moyen-production legende-";
 
-        this.state = {};
+    let powerSourceStyleMap = new PowerSourceStyleMap(type);
 
-        const type = this.props.type;
+    this.setState({
+      cssClasses: classes + powerSourceStyleMap.classes,
+      name: powerSourceStyleMap.name || "DEFAULT",
+    });
+  }
 
-        this.buildProperVisualization(type);
-    }
+  render() {
+    const cssClass = this.props.cssClass || "";
 
-    buildProperVisualization(type) {
-        let classes = "legende-moyen-production legende-";
-
-        let powerSourceStyleMap = new PowerSourceStyleMap(type);
-
-        this.state.cssClasses = classes + powerSourceStyleMap.classes;
-        this.state.name = powerSourceStyleMap.name || "DEFAULT";
-    }
-
-    render() {
-        const cssClass = this.props.cssClass || '';
-
-        return (
-            <React.Fragment>
-                <span className={this.state.cssClasses}></span>
-                <span className={`${cssClass}-source-name`}>{this.state.name}</span>
-            </React.Fragment>
-        );
-    }
+    return (
+      <React.Fragment>
+        <span className={this.state.cssClasses}></span>
+        <span className={`${cssClass}-source-name`}>{this.state.name}</span>
+      </React.Fragment>
+    );
+  }
 }
 export default PowerSourceNameLegend;
-

@@ -3,7 +3,6 @@ import React from "react";
 import PowerSourceProduction from "./slides/power-sources-breakdown/components/PowerSourceProduction";
 import GraphPowerSourceBreakdown from "./slides/power-sources-breakdown/components/GraphPowerSourceBreakdown";
 
-import { ZoneContext } from './ZoneContext';
 import PowerSourceNameInline from "./power-sources/components/PowerSourceNameInline";
 // FIXME import TimeSlider from './TimeSlider'; 
 // {/* <TimeSlider hours={this.state.timeMarks} currentTime={0} endOfTimeFrame={this.state.timeMarks[this.state.timeMarks.length - 1]} /> */ }
@@ -14,8 +13,9 @@ const SlidePowerSources = ({ powerBreakdownHistory, currentZone: { id, label } }
 
     const latestPowerBreakdown = powerBreakdownHistory[powerBreakdownHistory.length - 1].breakdown;
     const highestSourceOfPower = findHighestSourceOfPower(latestPowerBreakdown);
+    console.log("hsop", highestSourceOfPower);
     const currentData = latestPowerBreakdown;
-    const currentZoneID = id;
+    // const currentZoneID = id;
     const currentZoneName = label;
 
     let arrayOfPowerSourceComponents = [];
@@ -64,7 +64,7 @@ const SlidePowerSources = ({ powerBreakdownHistory, currentZone: { id, label } }
 const findHighestSourceOfPower = (powerBreakdown) => {
     let bestValue = 0, bestComponent = undefined;
     Object.keys(powerBreakdown).forEach((installationType) => {
-        if (bestComponent == undefined) {
+        if (bestComponent === undefined) {
             bestComponent = <PowerSourceNameInline type={installationType} />;
             bestValue = powerBreakdown[installationType].production.value;
         } else {

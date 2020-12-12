@@ -10,7 +10,7 @@ function CurrentLocationButton({ currentZoneName, setCurrentZone }) {
 
     return (
         <React.Fragment>
-            <a
+            <button
                 className="button is-dark is-fullwidth"
                 onClick={() => setShowLocationSelection(() => true)}
             >
@@ -21,7 +21,7 @@ function CurrentLocationButton({ currentZoneName, setCurrentZone }) {
                 <span className="icon">
                     <i className="fas fa-chevron-down"></i>
                 </span>
-            </a>
+            </button>
             {isLocationModalShown &&
                 <CurrentLocationSelection
                     setShowLocationSelection={setShowLocationSelection}

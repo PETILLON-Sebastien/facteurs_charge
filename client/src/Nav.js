@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import Logo from "./Logo";
 import GithubLink from "./GithubLink";
 import Twitter from "./Twitter";
@@ -8,12 +8,7 @@ import CurrentLocationButton from "./CurrentLocationButton";
 import CurrentDateButton from "./CurrentDateButton";
 
 function Nav({ setCurrentSlide, setCurrentDate, setCurrentZone, currentDates, currentZone }) {
-
-    const [inputZone, setInputZone] = useState("");
     const [isMobileMenuShown, setShowMenu] = useState(false);
-    const [showLocationSelection, setShowLocationSelection] = useState(false);
-    const [showDateSelection, setShowDateSelection] = useState(false);
-
     const currentDatesFrom = currentDates.from;
     const currentDatesTo = currentDates.to;
     const currentZoneName = currentZone.label;

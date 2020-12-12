@@ -1,12 +1,14 @@
 import React, { createRef } from "react";
 import HighchartsReact from "highcharts-react-official";
 import cssVar from "../../../_sass/_variables.scss";
+import l from "./titt.scss";
 import PowerSourceStyleMap from "../../../power-sources/components/PowerSourceStyleMap.js";
 
 let that;
 
 class ProductionBySourcesGraph extends React.Component {
   constructor(props) {
+    console.log("LLLLL", l);
     super(props);
     that = this;
     this.chart = createRef();
@@ -64,7 +66,7 @@ class ProductionBySourcesGraph extends React.Component {
     // Check if data is ordered
     // ISSUE https://github.com/PETILLON-Sebastien/facteurs_charge/issues/53 and https://github.com/PETILLON-Sebastien/facteurs_charge/issues/52
     let targetArray = productionsArrayPerSource.solar;
-    console.log(productionsArrayPerSource);
+
     let lowest = targetArray[0][0];
     for (let i = 1; i < targetArray.length; i++) {
       let current = targetArray[i][0];
@@ -129,18 +131,18 @@ class ProductionBySourcesGraph extends React.Component {
         text: "",
       },
       tooltip: {
-        valueSuffix: " MW",
+        valueSuffix: "",
       },
       yAxis: {
         title: {
-          text: "Production",
+          text: "Production (GW)",
         },
         labels: {
           formatter: function () {
             if (this.value > 999 || this.value < 999) {
-              return Math.round(this.value / 10) / 100 + " GW";
+              return Math.round(this.value / 10) / 100 + "";
             }
-            return this.value + " MW";
+            return this.value + "";
           },
           style: {
             color: "#ffffff",

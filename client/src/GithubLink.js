@@ -6,6 +6,7 @@ function GithubLink({ touchOrDesktop }) {
             className={`navbar-item is-size-2 is-hidden-${touchOrDesktop === "touch" ? "desktop" : "touch"}`}
             href="https://github.com/PETILLON-Sebastien/facteurs_charge"
             target="_blank"
+            rel="noreferrer"
         >
             <span className="icon has-text-white">
                 <i className="fab fa-github-square"></i>

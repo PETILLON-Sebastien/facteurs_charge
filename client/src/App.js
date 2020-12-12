@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "./_sass/main.scss";
 import Nav from "./Nav";
 import BoardJS from "./BoardJS";

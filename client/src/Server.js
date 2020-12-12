@@ -135,14 +135,14 @@ export default class Server {
                             //     continue;
                             // }
                             const currentLoad = currentBreakdown[currentKey];
-                            if (currentLoad == undefined) {
+                            if (currentLoad === undefined) {
                                 console.warn(
                                     "Given breakdown does not contains information for",
                                     currentKey
                                 );
                                 currentBreakdown[currentKey] = {};
                                 currentBreakdown[currentKey].load.value = -1;
-                            } else if (currentLoad.load == undefined) {
+                            } else if (currentLoad.load === undefined) {
                                 console.warn(
                                     "Given breakdown does not contains information for the 'load' of",
                                     currentKey
@@ -150,8 +150,7 @@ export default class Server {
                                 currentBreakdown[currentKey].load = {};
                                 currentBreakdown[currentKey].load.value = -1;
                             } else {
-                                currentLoad = currentLoad.load.value;
-                                const updatedLoad = currentLoad * 100;
+                                const updatedLoad = currentLoad.load.value * 100;
                                 currentBreakdown[currentKey].load.value = updatedLoad;
                             }
                         }

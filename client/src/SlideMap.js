@@ -8,12 +8,12 @@ const SlideMap = ({ highestLoads, setCurrentZone, build: { number, date } }) => 
         const currentZoneId = e.id;
         let ISOZoneId = "FR";
 
-        if (currentZoneId != 0) {
+        if (currentZoneId !== 0) {
             ISOZoneId = ISOZoneId.concat("-").concat(currentZoneId);
         }
 
-        var highestLoadForCurrentZone = highestLoads.find((element) => element.zoneId == ISOZoneId);
-        if (highestLoadForCurrentZone != undefined) {
+        var highestLoadForCurrentZone = highestLoads.find((element) => element.zoneId === ISOZoneId);
+        if (highestLoadForCurrentZone !== undefined) {
             highestLoadForCurrentZone = highestLoadForCurrentZone.snapshots[0].highest;
         } else {
 

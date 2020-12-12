@@ -2,8 +2,8 @@ import React from "react";
 
 function Twitter({ isMobileMenuShown, setShowMenu }) {
     return (
-        <a
-            role="button"
+        <button
+            // role="button"
             className={`navbar-burger burger ${isMobileMenuShown ? "is-active" : ""
                 }`}
             onClick={setShowMenu}
@@ -14,7 +14,7 @@ function Twitter({ isMobileMenuShown, setShowMenu }) {
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
-        </a>
+        </button>
     );
 }
 

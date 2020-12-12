@@ -1,61 +1,73 @@
 import React from "react";
 
-import PowerSourceLogo from '../../../power-sources/components/PowerSourceLogo';
+import PowerSourceLogo from "../../../power-sources/components/PowerSourceLogo";
 import PowerSourceKPI from "../../../power-sources/components/PowerSourceKPI";
 import PowerSourceNameLegend from "../../../power-sources/components/PowerSourceNameLegend";
 
 class PowerSourceProduction extends React.Component {
+  constructor(props) {
+    super(props);
 
-    constructor(props) {
-        super(props);
+    this.state = {
+      type: this.props.type,
+      cssClass: this.props.cssClass || "",
+      kpis: {},
+    };
+    this.refreshKPIs();
 
-        this.state = {
-            type: this.props.type,
-            cssClass: this.props.cssClass || '',
-            kpis: {}
-        };
+    // this.refreshKPIs();
+  }
 
-        // this.refreshKPIs();
+  refreshKPIs() {
+    const production = this.props.production;
+    const cssClass = this.props.cssClass;
+
+    this.buildKPI("Production", production, cssClass);
+  }
+
+  buildKPI(kpiName, kpiDescription, cssClass = "") {
+    // console.log("Building KPI with", kpiDescription);
+    if (kpiDescription !== undefined) {
+      const kpiValue = Math.round(kpiDescription.value);
+      const kpiUnit = kpiDescription.unit || "%"; //fixme this clause was added to patch the fact that the server does not provide a unit when returning load values
+      const kpi = (
+        <PowerSourceKPI
+          title={kpiName}
+          value={kpiValue}
+          unit={kpiUnit}
+          cssClass={cssClass}
+        />
+      );
+      // A STATE IS A THING THAT IS MEANT TO CHANGE, NOT A GLOBAL VARIABLE.
+      this.state.production = kpi;
     }
+  }
 
-    refreshKPIs() {
-        const production = this.props.production;
-        const cssClass = this.props.cssClass;
+  render() {
+    // console.log("Refreshing source of power subcomponent");
 
-        this.buildKPI("Production", production, cssClass);
-    }
+    const cssClass = this.state.cssClass;
+    const type = this.state.type;
 
-    buildKPI(kpiName, kpiDescription, cssClass = '') {
-        // console.log("Building KPI with", kpiDescription);
-        if (kpiDescription != undefined) {
-            const kpiValue = Math.round(kpiDescription.value);
-            const kpiUnit = kpiDescription.unit || "%"; //fixme this clause was added to patch the fact that the server does not provide a unit when returning load values
-            const kpi = <PowerSourceKPI title={kpiName} value={kpiValue} unit={kpiUnit} cssClass={cssClass} />
-            this.state.production = kpi;
-        }
-    }
+    return (
+      <div
+        className={`columns is-gapless is-vcentered ${cssClass}-power-source`}
+      >
+        <div className="column is-3-fullhd is-3-widescreen is-3-desktop is-4-tablet is-12-mobile has-text-centered is-vcentered ">
+          <PowerSourceLogo type={type} cssClass={cssClass} />
+        </div>
 
-    render() {
-        // console.log("Refreshing source of power subcomponent");
-        this.refreshKPIs();
-        const cssClass = this.state.cssClass;
-        const type = this.state.type;
+        <div
+          className={`column is-9-fullhd is-9-widescreen is-9-desktop is-8-tablet is-12-mobile has-text-left has-text-centered-mobile`}
+        >
+          <PowerSourceNameLegend type={type} cssClass={cssClass} />
 
-        return (
-            <div className={`columns is-gapless is-vcentered ${cssClass}-power-source`}>
-                <div className="column is-3-fullhd is-3-widescreen is-3-desktop is-4-tablet is-12-mobile has-text-centered is-vcentered ">
-                    <PowerSourceLogo type={type} cssClass={cssClass} />
-                </div>
-
-                <div className={`column is-9-fullhd is-9-widescreen is-9-desktop is-8-tablet is-12-mobile has-text-left has-text-centered-mobile`}>
-                    <PowerSourceNameLegend type={type} cssClass={cssClass} />
-
-                    <div className="content statistiques representation-data-text">
-                        {this.state.production}
-                    </div>
-                </div>
-            </div>
-        );
-    }
+          <div className="content statistiques representation-data-text">
+            {this.state.production}
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 export default PowerSourceProduction;
