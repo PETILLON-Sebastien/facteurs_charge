@@ -13,7 +13,7 @@ function CurrentDateButton({ currentDatesFrom, currentDatesTo, setCurrentDate })
     return (
         <React.Fragment>
             <span className="navbar-item">
-                <a
+                <button
                     className="button is-dark is-fullwidth"
                     onClick={() => setShowDateSelection(true)}
                 >
@@ -26,7 +26,7 @@ function CurrentDateButton({ currentDatesFrom, currentDatesTo, setCurrentDate })
                     <span className="icon">
                         <i className="fas fa-chevron-down"></i>
                     </span>
-                </a >
+                </button>
             </span >
             {
                 isDateModalShown &&

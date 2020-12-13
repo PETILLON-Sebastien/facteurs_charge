@@ -4,20 +4,23 @@ import PowerSourceStyleMap from "./PowerSourceStyleMap";
 class PowerSourceNameLegend extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
     const type = this.props.type;
-    this.buildProperVisualization(type);
+    let classes = "legende-moyen-production legende-";
+    let powerSourceStyleMap = new PowerSourceStyleMap(type);
+    let cssClasses = classes + powerSourceStyleMap.classes;
+    let name = powerSourceStyleMap.name || "DEFAULT";
+
+    this.state = { name: name, cssClasses: cssClasses };
   }
 
   buildProperVisualization(type) {
     let classes = "legende-moyen-production legende-";
 
     let powerSourceStyleMap = new PowerSourceStyleMap(type);
-
-    this.setState({
+    return {
       cssClasses: classes + powerSourceStyleMap.classes,
       name: powerSourceStyleMap.name || "DEFAULT",
-    });
+    };
   }
 
   render() {
