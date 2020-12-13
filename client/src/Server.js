@@ -11,6 +11,10 @@ export default class Server {
     static getPowerSourcesBreakdown(ISOZoneId, from, to, callback, error) {
         [from, to] = this.convertDates(from, to);
 
+        if (ISOZoneId == 0) {
+            ISOZoneId = "FR";
+        }
+
         // return new Promise((resolve) => {
         const targetUrl = `${root_endpoint}/zones/${ISOZoneId}/installations/production/breakdown?from=${from}&to=${to}`;
         console.log("Fetching power sources", targetUrl);
@@ -71,7 +75,7 @@ export default class Server {
                     Object.keys(breakdown).forEach((installationType) => {
                         if (
                             breakdown[installationType] === {} ||
-                            breakdown[installationType].production === undefined
+                            breakdown[installationType].power === undefined
                         ) {
                             // FIXME IT THIS SUPPOSED TO BE .production OR .power ?!
                             console.warn(
@@ -105,7 +109,9 @@ export default class Server {
 
     static getLoadsBreakdown(ISOZoneId, from, to) {
         [from, to] = this.convertDates(from, to);
-
+        if (ISOZoneId == 0) {
+            ISOZoneId = "FR";
+        }
         return new Promise((resolve) => {
             const targetUrl = `${root_endpoint}/zones/${ISOZoneId}/installations/breakdown?from=${from}&to=${to}`;
             console.log("Fetching loads", targetUrl);
