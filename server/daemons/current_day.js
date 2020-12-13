@@ -4,8 +4,6 @@ var _ = require('lodash');
 var path = require('path');
 var data_retrieval = require('../utils/data_retrieval.js');
 
-const INTERVAL = 5*60*1000;
-
 var update = function() {
     var start = moment().startOf('day').format('YYYY-MM-DD[T]HH:mm:ss');
     var end = moment().format('YYYY-MM-DD[T]HH:mm:ss');
@@ -20,7 +18,6 @@ var update = function() {
                 console.log('current ' + key + ' data saved at ' + moment().format('YYYY-MM-DD[T]HH:mm:ss'));
             });
         });
-        setTimeout(update, INTERVAL);
     }).catch(function(error) {
         console.log('Could not store data');
         console.log(error);
