@@ -66,11 +66,11 @@ const findHighestSourceOfPower = (powerBreakdown) => {
     Object.keys(powerBreakdown).forEach((installationType) => {
         if (bestComponent === undefined) {
             bestComponent = <PowerSourceNameInline type={installationType} />;
-            bestValue = powerBreakdown[installationType].production.value;
+            bestValue = powerBreakdown[installationType].power.value;
         } else {
-            if (powerBreakdown[installationType].production.value > bestValue) {
+            if (powerBreakdown[installationType].power.value > bestValue) {
                 bestComponent = <PowerSourceNameInline type={installationType} />;
-                bestValue = powerBreakdown[installationType].production.value;
+                bestValue = powerBreakdown[installationType].power.value;
             }
         }
     });
