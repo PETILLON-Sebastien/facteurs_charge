@@ -11,12 +11,10 @@ class PowerSourceLogo extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
-
     const type = this.props.type;
     const load = this.props.load === undefined ? 50 : this.props.load;
 
-    this.buildProperVisualization(type, load);
+    this.state = { svg: this.buildProperVisualization(type, load) };
   }
 
   buildProperVisualization(type, load) {
@@ -51,7 +49,7 @@ class PowerSourceLogo extends React.Component {
         break;
     }
 
-    this.setState({ svg: svg });
+    return svg;
   }
 
   render() {
