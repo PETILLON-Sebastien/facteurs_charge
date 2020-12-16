@@ -1,6 +1,6 @@
 // $footer-background-color: #ff0000;
 // $navbar-item-color: #b5b5b5;
-@import "variables";
+@import "./variables.module.scss";
 
 @import "~bulma";
 @import "~bulma-pageloader";
@@ -38,6 +38,9 @@ html {
   background-color: rgb(36, 36, 36) !important;
 }
 
+.section {
+  padding: 3rem 7.5rem;
+}
 // // body {
 // //     display: flex;
 // //     min-height: 100vh;

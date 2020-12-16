@@ -1,8 +1,8 @@
 import React, { createRef } from "react";
 import HighchartsReact from "highcharts-react-official";
 import PowerSourceStyleMap from "../../../power-sources/components/PowerSourceStyleMap.js";
-import cssVar from "../../../_sass/_variables.scss";
-
+// import cssVar from "../../../_sass/_variables.scss";
+import cssVar from "../../../_sass/variables.module.scss";
 let that;
 
 class LoadBySourcesGraph extends React.Component {
@@ -56,7 +56,7 @@ class LoadBySourcesGraph extends React.Component {
       });
     });
 
-    console.log("Load array per source", loadsArrayPerSource);
+    // console.log("Load array per source", loadsArrayPerSource);
 
     let series = [
       {

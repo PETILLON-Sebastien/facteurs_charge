@@ -1,14 +1,13 @@
 import React, { createRef } from "react";
 import HighchartsReact from "highcharts-react-official";
-import cssVar from "../../../_sass/_variables.scss";
-import l from "./titt.scss";
+import cssVar from "../../../_sass/variables.module.scss";
 import PowerSourceStyleMap from "../../../power-sources/components/PowerSourceStyleMap.js";
 
 let that;
 
 class ProductionBySourcesGraph extends React.Component {
   constructor(props) {
-    // console.log("LLLLL", l);
+    console.log(cssVar);
     super(props);
     that = this;
     this.chart = createRef();
