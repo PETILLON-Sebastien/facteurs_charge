@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./_sass/main.scss";
 import Nav from "./Nav";
 import BoardJS from "./BoardJS";
@@ -14,7 +14,6 @@ function App() {
   // const [slideLoadBreakdownData, setSlideLoadBreakdownData] = useState({});
   // const [slideMapData, setSlideMapData] = useState({});
   const [data, setData] = useState({});
-  const [loadingIsDone, setLoadingIsDone] = useState(false);
 
   const setCurrentSlide = () => {
     console.log("slide changed");
@@ -106,6 +105,7 @@ function App() {
 
       }
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentDates, currentZone]);
 
   function Body() {
