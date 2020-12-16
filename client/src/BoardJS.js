@@ -20,14 +20,16 @@ function BoardJS({
                         highestLoads={slideMapData} // props
                         build={buildInfos}
                     />
-                    <SlidePowerSources powerBreakdownHistory={slidePowerSourcesData} currentZone={currentZone} />
-
-                    <SlideLoad
-                        currentZone={currentZone}
-                        data={slideLoadBreakdownData}
-                    />
                 </div>
             </div>
+
+            <SlidePowerSources powerBreakdownHistory={slidePowerSourcesData} currentZone={currentZone} />
+
+            <SlideLoad
+                currentZone={currentZone}
+                data={slideLoadBreakdownData}
+            />
+
         </React.Fragment>
     );
 };

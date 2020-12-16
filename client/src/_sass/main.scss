@@ -26,17 +26,17 @@
 // @import "../slides/power-sources-breakdown/styles/slide-power-sources.scss";
 // @import "../slides/map/styles/map.scss";
 
-// html {
-//   scroll-behavior: smooth;
-// }
+html {
+  scroll-behavior: smooth;
+}
 
-// .section:nth-child(2n) {
-//   background-color: rgb(15, 15, 15) !important;
-// }
+.section:nth-child(2n) {
+  background-color: rgb(15, 15, 15) !important;
+}
 
-// .section:nth-child(2n + 1) {
-//   background-color: rgb(36, 36, 36) !important;
-// }
+.section:nth-child(2n + 1) {
+  background-color: rgb(36, 36, 36) !important;
+}
 
 // // body {
 // //     display: flex;
@@ -62,12 +62,12 @@
 // //     background-color:rgba($color: #000000, $alpha: 0.0)
 // //   }
 
-// @media screen and (min-width: 1408px) {
-//   .container {
-//     max-width: 1152px;
-//     width: 1152px;
-//   }
-// }
+@media screen and (min-width: 1408px) {
+  .container {
+    max-width: 1152px;
+    width: 1152px;
+  }
+}
 
 // // .affichage-representation {
 // //     display: flex;
