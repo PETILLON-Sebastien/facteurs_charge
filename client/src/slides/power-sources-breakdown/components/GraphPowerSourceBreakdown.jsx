@@ -51,7 +51,7 @@ class ProductionBySourcesGraph extends React.Component {
 
         // Add the value of production of this source for the given time
         const productionOfThisSourceThatDay =
-          currentBreakdown[typeOfSource].power.value;
+          currentBreakdown[typeOfSource].production.value;
         const date = new Date(datedData.datetime).valueOf();
         overallProductionsForCurrentSource.push([
           date,

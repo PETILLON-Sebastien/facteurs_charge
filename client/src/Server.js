@@ -75,7 +75,7 @@ export default class Server {
                     Object.keys(breakdown).forEach((installationType) => {
                         if (
                             breakdown[installationType] === {} ||
-                            breakdown[installationType].power === undefined
+                            breakdown[installationType].production === undefined
                         ) {
                             // FIXME IT THIS SUPPOSED TO BE .production OR .power ?!
                             console.warn(

@@ -22,7 +22,7 @@ const SlidePowerSources = ({ powerBreakdownHistory, currentZone: { id, label } }
     Object.keys(currentData).forEach((installationType) => {
         const newComponent =
             <div key={installationType} className="column is-6-widescreen is-6-full-hd is-6-desktop is-4-tablet is-6-mobile " style={{ "marginTop": "10px" }}>
-                <PowerSourceProduction key={installationType} production={currentData[installationType].power} type={installationType} cssClass="power-sources" />
+                <PowerSourceProduction key={installationType} production={currentData[installationType].production} type={installationType} cssClass="power-sources" />
             </div>;
 
         arrayOfPowerSourceComponents.push(newComponent);
@@ -66,11 +66,11 @@ const findHighestSourceOfPower = (powerBreakdown) => {
     Object.keys(powerBreakdown).forEach((installationType) => {
         if (bestComponent === undefined) {
             bestComponent = <PowerSourceNameInline type={installationType} />;
-            bestValue = powerBreakdown[installationType].power.value;
+            bestValue = powerBreakdown[installationType].production.value;
         } else {
-            if (powerBreakdown[installationType].power.value > bestValue) {
+            if (powerBreakdown[installationType].production.value > bestValue) {
                 bestComponent = <PowerSourceNameInline type={installationType} />;
-                bestValue = powerBreakdown[installationType].power.value;
+                bestValue = powerBreakdown[installationType].production.value;
             }
         }
     });
