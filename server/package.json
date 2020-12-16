@@ -19,7 +19,8 @@
     "swagger-tools": "0.10.4"
   },
   "dependencies": {
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
   },
   "scripts": {
     "start": "forever forever/config.json",

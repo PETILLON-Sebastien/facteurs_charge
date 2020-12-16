@@ -14,7 +14,7 @@ function sleep(ms) {
 }
 
 app.get("/api/v1/zones/installations/load/last", (req, res, next) => {
-    const file = "src/_api_v1_zones_installations_load_last.json";
+    const file = "_api_v1_zones_installations_load_last.json";
     console.log(file);
     fs.readFile(file, 'utf8', async function (err, data) {
         if (err) throw err;
@@ -26,7 +26,7 @@ app.get("/api/v1/zones/installations/load/last", (req, res, next) => {
 
 
 app.get("/api/v1/zones/:id/installations/breakdown", (req, res, next) => {
-    const file = "src/_api_v1_zones_FR_installations_breakdown.json";
+    const file = "_api_v1_zones_FR_installations_breakdown.json";
     console.log(file);
     fs.readFile(file, 'utf8', async function (err, data) {
         if (err) throw err;
@@ -38,7 +38,7 @@ app.get("/api/v1/zones/:id/installations/breakdown", (req, res, next) => {
 
 
 app.get("/api/v1/zones/:id/installations/production/breakdown", (req, res, next) => {
-    const file = "src/_api_v1_zones_FR_installations_breakdown.json";
+    const file = "_api_v1_zones_FR_installations_breakdown.json";
     console.log(file);
     fs.readFile(file, 'utf8', async function (err, data) {
         if (err) throw err;
