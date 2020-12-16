@@ -13,7 +13,7 @@ const SlidePowerSources = ({ powerBreakdownHistory, currentZone: { id, label } }
 
     const latestPowerBreakdown = powerBreakdownHistory[powerBreakdownHistory.length - 1].breakdown;
     const highestSourceOfPower = findHighestSourceOfPower(latestPowerBreakdown);
-    console.log("hsop", highestSourceOfPower);
+    // console.log("hsop", highestSourceOfPower);
     const currentData = latestPowerBreakdown;
     // const currentZoneID = id;
     const currentZoneName = label;

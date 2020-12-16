@@ -107,65 +107,91 @@ export default class Server {
         // });
     }
 
-    static getLoadsBreakdown(ISOZoneId, from, to) {
+    static getLoadsBreakdown(ISOZoneId, from, to, callback, error) {
         [from, to] = this.convertDates(from, to);
         if (ISOZoneId == 0) {
             ISOZoneId = "FR";
         }
-        return new Promise((resolve) => {
-            const targetUrl = `${root_endpoint}/zones/${ISOZoneId}/installations/breakdown?from=${from}&to=${to}`;
-            console.log("Fetching loads", targetUrl);
+        // return new Promise((resolve) => {
+        const targetUrl = `${root_endpoint}/zones/${ISOZoneId}/installations/breakdown?from=${from}&to=${to}`;
+        console.log("Fetching loads", targetUrl);
 
-            async.waterfall(
-                [
-                    (cb) => {
-                        fetch(targetUrl).then((rawData) => cb(null, rawData));
-                    },
-                    (rawData, cb) => {
-                        rawData.json().then((data) => cb(null, data));
-                    },
-                ],
-                (err, data) => {
-                    let i = 0,
-                        j = 0;
+        async.waterfall(
+            [
+                (cb) => {
+                    try {
+                        fetch(targetUrl).then((rawData) => cb(null, rawData)).catch((e) => {
+                            let message = `Failed to fetch server data when fetching ${targetUrl}.`
+                            let stack = new Error(message).stack;
+                            // e.stack = stack;
+                            e.stack = stack.split('\n').slice(0, 2).join('\n') + '\n' + e.stack;
+                            // throw e
+                            error(e);
+                        });
+                    }
+                    catch (err) {
+                        cb(err);
+                    }
+                },
+                (rawData, cb) => {
+                    try {
 
-                    for (i = 0; i < data.length; i++) {
-                        let currentBreakdown = data[i].breakdown;
-                        let keys = Object.keys(currentBreakdown);
-                        for (j = 0; j < keys.length; j++) {
-                            const currentKey = keys[j];
+                        rawData.json().then((data) => cb(null, data)).catch((e) => {
+                            let message = `Failed to fetch server data when fetching ${targetUrl}.`
+                            let stack = new Error(message).stack;
+                            // e.stack = stack;
+                            e.stack = stack.split('\n').slice(0, 2).join('\n') + '\n' + e.stack;
+                            // throw e
+                            error(e);
+                        });
+                    }
+                    catch (err) {
+                        cb(err);
+                    }
+                },
+            ],
+            (err, data) => {
+                let i = 0,
+                    j = 0;
 
-                            // PATCH https://github.com/PETILLON-Sebastien/facteurs_charge/issues/58
-                            // if (currentKey == "nuclear") {
-                            //     delete data[i].breakdown["nuclear"];
-                            //     continue;
-                            // }
-                            const currentLoad = currentBreakdown[currentKey];
-                            if (currentLoad === undefined) {
-                                console.warn(
-                                    "Given breakdown does not contains information for",
-                                    currentKey
-                                );
-                                currentBreakdown[currentKey] = {};
-                                currentBreakdown[currentKey].load.value = -1;
-                            } else if (currentLoad.load === undefined) {
-                                console.warn(
-                                    "Given breakdown does not contains information for the 'load' of",
-                                    currentKey
-                                );
-                                currentBreakdown[currentKey].load = {};
-                                currentBreakdown[currentKey].load.value = -1;
-                            } else {
-                                const updatedLoad = currentLoad.load.value * 100;
-                                currentBreakdown[currentKey].load.value = updatedLoad;
-                            }
+                for (i = 0; i < data.length; i++) {
+                    let currentBreakdown = data[i].breakdown;
+                    let keys = Object.keys(currentBreakdown);
+                    for (j = 0; j < keys.length; j++) {
+                        const currentKey = keys[j];
+
+                        // PATCH https://github.com/PETILLON-Sebastien/facteurs_charge/issues/58
+                        // if (currentKey == "nuclear") {
+                        //     delete data[i].breakdown["nuclear"];
+                        //     continue;
+                        // }
+                        const currentLoad = currentBreakdown[currentKey];
+                        if (currentLoad === undefined) {
+                            console.warn(
+                                "Given breakdown does not contains information for",
+                                currentKey
+                            );
+                            currentBreakdown[currentKey] = {};
+                            currentBreakdown[currentKey].load.value = -1;
+                        } else if (currentLoad.load === undefined) {
+                            console.warn(
+                                "Given breakdown does not contains information for the 'load' of",
+                                currentKey
+                            );
+                            currentBreakdown[currentKey].load = {};
+                            currentBreakdown[currentKey].load.value = -1;
+                        } else {
+                            const updatedLoad = currentLoad.load.value * 100;
+                            currentBreakdown[currentKey].load.value = updatedLoad;
                         }
                     }
-                    // Server.sleep(1500).then(() => resolve(data));
-                    resolve(data);
                 }
-            );
-        });
+                // Server.sleep(1500).then(() => resolve(data));
+                // resolve(data);
+                callback(data);
+            }
+        );
+        // });
     }
 
     static getLoadsForAllZones(from, to, callback, error) {

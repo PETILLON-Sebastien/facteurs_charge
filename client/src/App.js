@@ -10,8 +10,10 @@ function App() {
   const now = Date.now();
   const [currentDates, setCurrentDates] = useState({ from: now, to: now });
   const [currentZone, setCurrentZone] = useState({ id: 0, label: "France" });
-  const [slidePowerSourcesData, setSlidePowerSourceBreakdownData] = useState({});
-  const [slideMapData, setSlideMapData] = useState({});
+  // const [slidePowerSourcesData, setSlidePowerSourceBreakdownData] = useState({});
+  // const [slideLoadBreakdownData, setSlideLoadBreakdownData] = useState({});
+  // const [slideMapData, setSlideMapData] = useState({});
+  const [data, setData] = useState({});
   const [loadingIsDone, setLoadingIsDone] = useState(false);
 
   const setCurrentSlide = () => {
@@ -29,80 +31,86 @@ function App() {
   };
 
 
-  const updateLatestLoads = (cb) => {
+  const updateLatestLoads = (agregator, cb) => {
     Server.getLoadsForAllZones(
       currentDates.from,
       currentDates.to,
       (d) => {
-        setSlideMapData(d);
-        cb(null, slideMapData);
+        // setSlideMapData(d);
+        agregator.slideMapData = d;
+        cb(null, agregator);
       }, (err) => {
         console.error(err);
       });
   };
 
-  const updatePowerSourceBreadowns = (cb) => {
+  const updatePowerSourceBreadowns = (agregator, cb) => {
     Server.getPowerSourcesBreakdown(
       currentZone.id,
       currentDates.from,
       currentDates.to,
       (d) => {
-        setSlidePowerSourceBreakdownData(d);
-        cb(null, slidePowerSourcesData);
+        // setSlidePowerSourceBreakdownData(d);
+        agregator.slidePowerSourcesData = d;
+        cb(null, agregator);
       }, (err) => {
         console.error(err);
       });
   };
 
-
-  // const updatePowerSourceBreadowns = (cb) => {
-  //   Server.getPowerSourcesBreakdown(
-  //     currentZone.id,
-  //     currentDates.from,
-  //     currentDates.to,
-  //     (d) => {
-  //       setSlidePowerSourceBreakdownData(d);
-  //       cb(null, slidePowerSourcesData);
-  //     }, (err) => {
-  //       console.error(err);
-  //     });
-  // };
-
-
+  const updateLoadBreadowns = (agregator, cb) => {
+    Server.getLoadsBreakdown(
+      currentZone.id,
+      currentDates.from,
+      currentDates.to,
+      (d) => {
+        // setSlideLoadBreakdownData(d);
+        agregator.slideLoadBreakdownData = d;
+        cb(null, agregator);
+      }, (err) => {
+        console.error(err);
+      });
+  };
 
   // When nothing changes (thus at the first boot), get last installations loads
-  useEffect(() => {
-    updateLatestLoads(() => { });
-  }, []);
+  // useEffect(() => {
+  //   updateLatestLoads({}, () => { });
+  // }, []);
 
   // When date or zone change, and at the first boot get slides information
   useEffect(() => {
 
+    /*
+      If each element of the waterfall set a piece of state, this will trigger as much
+      renders as element in the waterfall. To avoid this, each waterfall function will 
+      set a var, that, once the waterfall ended, is used to update a state
+    */
+
     async.waterfall(
       [
         (cb) => {
-          updatePowerSourceBreadowns(cb);
+          updatePowerSourceBreadowns({}, cb);
         },
-        (_, cb) => {
-          updateLatestLoads(cb);
+        (agregator, cb) => {
+          updateLatestLoads(agregator, cb);
         },
-        // (_, cb) => {
-        //   updateLatestLoads(cb);
-        // },
-        // (_, cb) => {
-        //   updateLatestLoads(cb);
-        // },
+        (agregator, cb) => {
+          updateLoadBreadowns(agregator, cb);
+        },
       ],
       (err, data) => {
-        setLoadingIsDone(true);
+        console.log("SETDATA");
+        setData(data);
+        // console.log("SETLOADING");
+        // setLoadingIsDone(true);
+
       }
     );
-
-
   }, [currentDates, currentZone]);
 
   function Body() {
-    if (loadingIsDone) {
+    console.log(data);
+    if (data !== undefined && Object.keys(data).length > 0 && data.constructor === Object) {
       return (
         <React.Fragment>
           <Nav
@@ -113,8 +121,9 @@ function App() {
             setCurrentSlide={setCurrentSlide}
           />
           <BoardJS
-            slideMapData={slideMapData}
-            slidePowerSourcesData={slidePowerSourcesData}
+            slideMapData={data.slideMapData}
+            slidePowerSourcesData={data.slidePowerSourcesData}
+            slideLoadBreakdownData={data.slideLoadBreakdownData}
             setCurrentZone={setCurrentZoneHandler}
             build={{}}
             currentZone={currentZone} />

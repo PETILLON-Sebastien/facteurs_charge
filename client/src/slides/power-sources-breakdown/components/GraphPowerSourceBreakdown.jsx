@@ -8,7 +8,7 @@ let that;
 
 class ProductionBySourcesGraph extends React.Component {
   constructor(props) {
-    console.log("LLLLL", l);
+    // console.log("LLLLL", l);
     super(props);
     that = this;
     this.chart = createRef();
