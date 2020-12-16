@@ -21,6 +21,7 @@ const SlideMap = ({ highestLoads, setCurrentZone, build: { number, date } }) => 
         e.highestLoad = highestLoadForCurrentZone
     });
 
+
     let listOfZonesNames = '';
     let first = true;
     zonesDescription.forEach(element => {

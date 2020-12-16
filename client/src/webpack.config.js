@@ -1,7 +1,4 @@
 const webpack = require('webpack');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
-const MomentTimezoneDataPlugin = require('moment-timezone-data-webpack-plugin');
 
 const config = (env) => {
 
@@ -12,13 +9,13 @@ const config = (env) => {
   }, {});
 
   return {
-    performance: {
-      maxEntrypointSize: 1328000,
-      maxAssetSize: 1328000
-    },
+    // performance: {
+    //   maxEntrypointSize: 1328000,
+    //   maxAssetSize: 1328000
+    // },
 
     devtool: '', // Removed dev-tools mapping
-    entry: __dirname + '/js/index.jsx',
+    entry: __dirname + '/js/index.js',
     output: {
       path: __dirname + '/dist',
       filename: 'bundle.js',
@@ -29,31 +26,31 @@ const config = (env) => {
     },
     module: {
       rules: [
+        // {
+        //   test: /\.jsx?/,
+        //   exclude: /node_modules/,
+        //   loader: 'babel-loader',
+        //   options: {
+        //     presets: ['@babel/preset-env', '@babel/preset-react'],
+        //     plugins: [
+        //       // "@babel/plugin-syntax-dynamic-import",
+        //       "@babel/plugin-transform-runtime",
+        //       '@babel/plugin-proposal-class-properties'
+        //     ]
+        //   }
+        // },
+        // {
+        //   test: /\.(png|jp(e*)g|svg)$/,
+        //   use: [{
+        //     loader: 'url-loader',
+        //     options: {
+        //       limit: 32000, // Convert images < 32kb to base64 strings
+        //       name: 'images/[hash]-[name].[ext]'
+        //     }
+        //   }]
+        // },
         {
-          test: /\.jsx?/,
-          exclude: /node_modules/,
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
-            plugins: [
-              // "@babel/plugin-syntax-dynamic-import",
-              "@babel/plugin-transform-runtime",
-              '@babel/plugin-proposal-class-properties'
-            ]
-          }
-        },
-        {
-          test: /\.(png|jp(e*)g|svg)$/,
-          use: [{
-            loader: 'url-loader',
-            options: {
-              limit: 32000, // Convert images < 32kb to base64 strings
-              name: 'images/[hash]-[name].[ext]'
-            }
-          }]
-        },
-        {
-          test: /\.(scss|css)$/,
+          test: /\.s[ac]ss$/i,
           use: [{
             loader: "style-loader" // creates style nodes from JS strings
           }, {
@@ -66,15 +63,6 @@ const config = (env) => {
     },
     plugins: [
       new webpack.DefinePlugin(envKeys),
-      // new BundleAnalyzerPlugin(),
-      new MomentLocalesPlugin({
-        localesToKeep: ['fr'],
-      }),
-      new MomentTimezoneDataPlugin({
-        startYear: 2017,
-        matchZones: /Europe\/(Belfast|London|Paris|Athens)/,
-      }),
-
     ]
   };
 };

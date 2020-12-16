@@ -99,7 +99,7 @@ function App() {
         },
       ],
       (err, data) => {
-        console.log("SETDATA");
+        // console.log("SETDATA");
         setData(data);
         // console.log("SETLOADING");
         // setLoadingIsDone(true);
@@ -109,7 +109,7 @@ function App() {
   }, [currentDates, currentZone]);
 
   function Body() {
-    console.log(data);
+    // console.log(data);
     if (data !== undefined && Object.keys(data).length > 0 && data.constructor === Object) {
       return (
         <React.Fragment>

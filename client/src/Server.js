@@ -11,7 +11,7 @@ export default class Server {
     static getPowerSourcesBreakdown(ISOZoneId, from, to, callback, error) {
         [from, to] = this.convertDates(from, to);
 
-        if (ISOZoneId == 0) {
+        if (ISOZoneId === 0) {
             ISOZoneId = "FR";
         }
 
@@ -109,7 +109,7 @@ export default class Server {
 
     static getLoadsBreakdown(ISOZoneId, from, to, callback, error) {
         [from, to] = this.convertDates(from, to);
-        if (ISOZoneId == 0) {
+        if (ISOZoneId === 0) {
             ISOZoneId = "FR";
         }
         // return new Promise((resolve) => {

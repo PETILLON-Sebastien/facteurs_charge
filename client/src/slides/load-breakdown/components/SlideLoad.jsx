@@ -5,10 +5,6 @@ import { ZoneContext } from "../../../ZoneContext";
 import PowerSourceNameInline from "../../../power-sources/components/PowerSourceNameInline";
 
 class SlideLoad extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   findMostLoaded(breakdownData) {
     let bestComponent = undefined,
       bestLoadValue = undefined;
@@ -16,7 +12,7 @@ class SlideLoad extends React.Component {
       // FIXME .breakdown WAS NOT THERE BEFORE?
       const currentLoadValue = breakdownData[installationType].load.value;
 
-      if (bestComponent == undefined) {
+      if (bestComponent === undefined) {
         bestComponent = <PowerSourceNameInline type={installationType} />;
         bestLoadValue = currentLoadValue;
       } else {
@@ -34,7 +30,7 @@ class SlideLoad extends React.Component {
     let bestComponent = undefined;
     let best = undefined;
     Object.keys(breakdownData).forEach((installationType) => {
-      if (best == undefined) {
+      if (best === undefined) {
         bestComponent = <PowerSourceNameInline type={installationType} />;
         best = breakdownData[installationType];
       } else {
@@ -50,9 +46,6 @@ class SlideLoad extends React.Component {
 
   render() {
     const currentData = this.props.data[this.props.data.length - 1].breakdown;
-
-    console.log("RENDER SLIDE LOAD");
-    const currentZoneID = this.props.currentZone.id;
     const currentZoneName = this.props.currentZone.label;
     const mostLoadedInstallation = this.findMostLoaded(currentData);
     const leastLoadedInstallation = this.findLeastLoaded(currentData);
@@ -129,7 +122,7 @@ class SlideLoad extends React.Component {
             className="columns  is-centered"
             style={{ marginBottom: "4rem" }}
           >
-            <div className="column is-three-quarters has-text-centered">
+            <div className="column is-12 has-text-centered">
               <div className="is-size-6">
                 Le taux de charge correspond au rapport production effective /
                 capacité installée.

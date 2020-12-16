@@ -13,7 +13,7 @@ function BoardJS({
 }) {
     return (
         <React.Fragment>
-            <div className="section is-small" id="slide-map" >
+            <div className="section is-small" id="slide-map" style={{ padding: "3rem 1rem" }} >
                 <div className="container" style={{ width: "90%" }}>
                     <SlideMap
                         setCurrentZone={setCurrentZone} // setter pass throught
@@ -30,7 +30,7 @@ function BoardJS({
                 data={slideLoadBreakdownData}
             />
 
-        </React.Fragment>
+        </React.Fragment >
     );
 };
 
