@@ -5,15 +5,9 @@ class PowerSourceNameInline extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { name: "DEFAULT", cssClasses: "" };
-
     const type = this.props.type;
-    this.buildProperVisualization(type);
-  }
-
-  buildProperVisualization(type) {
     let powerSourceStyleMap = new PowerSourceStyleMap(type);
-
+    this.state = {};
     this.state.cssClasses = powerSourceStyleMap.classes;
     this.state.name = powerSourceStyleMap.name || "DEFAULT";
   }
