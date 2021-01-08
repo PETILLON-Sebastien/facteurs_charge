@@ -54,8 +54,7 @@ class SlideLoad extends React.Component {
 
     const half = Math.ceil(keys.length / 2);
 
-    const firstHalfOfKeys = keys.splice(0, half);
-    const secondHalfOfKeys = keys.splice(-half);
+    const firstHalfOfKeys = keys.splice(0, keys.length);
 
     let firstColumn = [];
     for (let i = 0; i < firstHalfOfKeys.length; i++) {
@@ -64,7 +63,7 @@ class SlideLoad extends React.Component {
       const newComponent = (
         <div
           key={installationType}
-          className="column is-12-widescreen is-12-full-hd is-12-desktop is-12-tablet is-6-mobile "
+          className="column powerSourceProduction is-6-widescreen is-6-full-hd is-6-desktop is-4-tablet is-6-mobile "
           style={{ marginTop: "10px" }}
         >
           <PowerSourceLoad
@@ -81,29 +80,29 @@ class SlideLoad extends React.Component {
       firstColumn.push(newComponent);
     }
 
-    let secondColumn = [];
-    for (let i = 0; i < secondHalfOfKeys.length; i++) {
-      const installationType = secondHalfOfKeys[i];
-      const currentDataForInstallation = currentData[installationType];
-      const newComponent = (
-        <div
-          key={installationType}
-          className="column is-12-widescreen is-12-full-hd is-12-desktop is-12-tablet is-6-mobile "
-          style={{ marginTop: "10px" }}
-        >
-          <PowerSourceLoad
-            key={installationType}
-            load={currentDataForInstallation.load}
-            production={currentDataForInstallation.production}
-            capacity={currentDataForInstallation.capacity}
-            type={installationType}
-            cssClass="load"
-            mirrored={false}
-          />
-        </div>
-      );
-      secondColumn.push(newComponent);
-    }
+    // let secondColumn = [];
+    // for (let i = 0; i < secondHalfOfKeys.length; i++) {
+    //   const installationType = secondHalfOfKeys[i];
+    //   const currentDataForInstallation = currentData[installationType];
+    //   const newComponent = (
+    //     <div
+    //       key={installationType}
+    //       className="column is-12-widescreen is-12-full-hd is-12-desktop is-12-tablet is-6-mobile "
+    //       style={{ marginTop: "10px" }}
+    //     >
+    //       <PowerSourceLoad
+    //         key={installationType}
+    //         load={currentDataForInstallation.load}
+    //         production={currentDataForInstallation.production}
+    //         capacity={currentDataForInstallation.capacity}
+    //         type={installationType}
+    //         cssClass="load"
+    //         mirrored={false}
+    //       />
+    //     </div>
+    //   );
+    //   secondColumn.push(newComponent);
+    // }
 
     return (
       <React.Fragment>
@@ -112,17 +111,13 @@ class SlideLoad extends React.Component {
           id="slide-load"
           style={{ minHeight: "100vh" }}
         >
-          {/* <div className="container"> */}
-          <div className="columns is-centered">
-            <div className="column has-text-centered">
-              <h1 className="is-size-1">Facteur de charge</h1>
+          <div className="columns">
+            <div className="column is-full">
+              <h1 className="is-size-1 has-text-centered">Facteur de charge</h1>
             </div>
           </div>
-          <div
-            className="columns  is-centered"
-            style={{ marginBottom: "4rem" }}
-          >
-            <div className="column is-12 has-text-centered">
+          <div className="columns" style={{ marginBottom: "2rem" }}>
+            <div className="column is-full has-text-centered">
               <div className="is-size-6">
                 Le taux de charge correspond au rapport production effective /
                 capacité installée.
@@ -143,7 +138,9 @@ class SlideLoad extends React.Component {
                 <PowerSourceNameInline type="bioenergy" />,{" "}
                 <PowerSourceNameInline type="nuclear" /> et{" "}
                 <PowerSourceNameInline type="hydraulic" /> en STEP).
-                <br />
+              </div>
+
+              <div className="is-size-6">
                 Dans un cas, le taux de charge est subi, dans l'autre choisi.
                 <br />
                 Les pannes, maintenances et accidents influent également les
@@ -162,11 +159,8 @@ class SlideLoad extends React.Component {
             </div>
           </div>
           <div className="columns is-multiline is-centered">
-            <div className="column is-one-fifth">
-              <div
-                id="breakdown"
-                className="columns has-text-centered is-variable is-centered is-mobile is-multiline representations-wrapper"
-              >
+            <div className="column is-4-widescreen is-4-full-hd is-4-desktop is-12-tablet is-12-mobile">
+              <div className="columns is-multiline is-mobile is-vcentered">
                 {firstColumn}
 
                 {/* <div className="column is-12-widescreen is-12-full-hd is-12-desktop is-4-tablet is-4-mobile ">
@@ -202,17 +196,20 @@ class SlideLoad extends React.Component {
               </div>
             </div>
 
-            <div className="column is-6">
+            <div
+              className="column is-6-widescreen is-6-full-hd is-6-desktop is-12-tablet is-12-mobile has-text-centered"
+              style={{ marginTop: "2rem" }}
+            >
               <GraphLoadEvolution loadsOverTime={this.props.data} />
             </div>
-            <div className="column is-one-fifth">
+            {/* <div className="column is-one-fifth">
               <div
                 id="breakdown"
                 className="columns has-text-centered is-variable is-centered is-mobile is-multiline representations-wrapper"
-              >
-                {secondColumn}
+              > */}
+            {/* {secondColumn} */}
 
-                {/* <div className="column is-12-widescreen is-12-full-hd is-12-desktop is-4-tablet is-4-mobile ">
+            {/* <div className="column is-12-widescreen is-12-full-hd is-12-desktop is-4-tablet is-4-mobile ">
                                         <PowerSourceLoad
                                             load={currentData.nuclear.load}
                                             production={currentData.nuclear.production}
@@ -242,8 +239,8 @@ class SlideLoad extends React.Component {
                                             mirrored={true}
                                         />
                                     </div> */}
-              </div>
-            </div>
+            {/* </div>
+            </div> */}
           </div>
         </div>
         {/* </div > */}

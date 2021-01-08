@@ -38,6 +38,10 @@ html {
   background-color: rgb(36, 36, 36) !important;
 }
 
+.section:nth-child(2n + 1) .powerSourceProduction {
+  background-color: red !important;
+}
+
 .section {
   padding: 3rem 7.5rem;
 }

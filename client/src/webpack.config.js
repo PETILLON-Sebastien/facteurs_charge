@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+// const PurgecssPlugin = require('purgecss-webpack-plugin')
 
 const config = (env) => {
 
@@ -63,6 +64,10 @@ const config = (env) => {
     },
     plugins: [
       new webpack.DefinePlugin(envKeys),
+      // new PurgecssPlugin({
+      //   paths: glob.sync('./Views/**/*.cshtml', { nodir: true }),
+      //   whitelistPatterns: [/selectize-.*/]
+      // })
     ]
   };
 };

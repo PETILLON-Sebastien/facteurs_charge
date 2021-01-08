@@ -10,23 +10,13 @@ import PowerSourceNameInline from "./power-sources/components/PowerSourceNameInl
 
 
 const SlidePowerSources = ({ powerBreakdownHistory, currentZone: { id, label } }) => {
-
     const latestPowerBreakdown = powerBreakdownHistory[powerBreakdownHistory.length - 1].breakdown;
     const highestSourceOfPower = findHighestSourceOfPower(latestPowerBreakdown);
-    // console.log("hsop", highestSourceOfPower);
+
     const currentData = latestPowerBreakdown;
-    // const currentZoneID = id;
     const currentZoneName = label;
 
-    let arrayOfPowerSourceComponents = [];
-    Object.keys(currentData).forEach((installationType) => {
-        const newComponent =
-            <div key={installationType} className="column is-6-widescreen is-6-full-hd is-6-desktop is-4-tablet is-6-mobile " style={{ "marginTop": "10px" }}>
-                <PowerSourceProduction key={installationType} production={currentData[installationType].production} type={installationType} cssClass="power-sources" />
-            </div>;
-
-        arrayOfPowerSourceComponents.push(newComponent);
-    });
+    const arrayOfPowerSourceComponents = buildPowerSourceCards(currentData);
 
     return (
 
@@ -55,11 +45,23 @@ const SlidePowerSources = ({ powerBreakdownHistory, currentZone: { id, label } }
                     </div>
                 </div>
             </div>
-
         </React.Fragment>
     );
 }
 
+const buildPowerSourceCards = (currentData) => {
+    let arrayOfPowerSourceComponents = [];
+    Object.keys(currentData).forEach((installationType) => {
+        const newComponent =
+            <div key={installationType} className="column powerSourceProduction is-6-widescreen is-6-full-hd is-6-desktop is-4-tablet is-6-mobile " style={{ "marginTop": "10px" }}>
+                <PowerSourceProduction key={installationType} production={currentData[installationType].production} type={installationType} cssClass="power-sources" />
+            </div>;
+
+        arrayOfPowerSourceComponents.push(newComponent);
+    });
+
+    return arrayOfPowerSourceComponents;
+};
 
 const findHighestSourceOfPower = (powerBreakdown) => {
     let bestValue = 0, bestComponent = undefined;
