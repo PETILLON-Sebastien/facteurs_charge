@@ -44,7 +44,7 @@ const buildProperVisualization = (type, load) => {
 
 const PowerSourceLogo = ({ type, load = 50, cssClass = "" }) => {
   const svg = buildProperVisualization(type, load);
-  return <span className={`image ${cssClass}-logo logo`}>{svg}</span>;
+  return <span className={`image ${cssClass}-logo logo `}>{svg}</span>;
 };
 
 export default PowerSourceLogo;

@@ -179,7 +179,7 @@ class LoadBySourcesGraph extends React.Component {
             chartOptions: {
               yAxis: {
                 title: {
-                  text: null,
+                  text: "Taux de charge",
                 },
               },
             },

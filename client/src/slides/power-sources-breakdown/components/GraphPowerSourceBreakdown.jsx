@@ -208,7 +208,7 @@ class ProductionBySourcesGraph extends React.Component {
             chartOptions: {
               yAxis: {
                 title: {
-                  text: null,
+                  text: "Production (en GW)",
                 },
               },
             },
