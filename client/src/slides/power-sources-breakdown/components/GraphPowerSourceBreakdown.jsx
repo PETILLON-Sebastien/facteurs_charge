@@ -203,7 +203,7 @@ class ProductionBySourcesGraph extends React.Component {
         rules: [
           {
             condition: {
-              maxWidth: 500,
+              // maxWidth: 500,
             },
             chartOptions: {
               yAxis: {

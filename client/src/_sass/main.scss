@@ -38,12 +38,16 @@ html {
   background-color: rgb(36, 36, 36) !important;
 }
 
-.section:nth-child(2n + 1) .powerSourceProduction {
-  background-color: red !important;
-}
+// .section:nth-child(2n + 1) .powerSourceProduction {
+//   background-color: #0f0f0f !important;
+// }
+
+// .power-sources-power-source {
+//   background-color: red;
+// }
 
 .section {
-  padding: 3rem 7.5rem;
+  // padding: 3rem 7.5rem;
 }
 // // body {
 // //     display: flex;

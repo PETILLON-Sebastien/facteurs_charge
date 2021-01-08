@@ -107,7 +107,7 @@ class SlideLoad extends React.Component {
     return (
       <React.Fragment>
         <div
-          className="section is-medium"
+          className="section is-small"
           id="slide-load"
           style={{ minHeight: "100vh" }}
         >

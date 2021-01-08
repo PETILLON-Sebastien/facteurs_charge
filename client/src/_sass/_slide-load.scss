@@ -1,70 +1,79 @@
 #load {
-    background-color: #121212;
+  background-color: #121212;
 }
 
-.load-logo, .load-logo > svg {
-    max-height: 6rem;
-    width: 6rem; 
+.load-logo,
+.load-logo > svg {
+  max-height: 6rem;
+  width: 6rem;
 }
 
 .load-power-source-wrapper .value {
-    margin-right: 8px;
-    
-    color: #888;
-    font-size: 85%;
-    font-weight: 100;
-} 
+  margin-right: 8px;
 
-.load-power-source-wrapper .unit {
-    font-weight: 100;
-    font-size: 60%;
-    font-family: 'Courier New', Courier, monospace;
+  color: #888;
+  font-size: 85%;
+  font-weight: 100;
 }
 
-.load-power-source-wrapper  .value_value {
-    font-size: 85%;
-    font-weight: 100; 
-  }
+.load-power-source-wrapper .unit {
+  font-weight: 100;
+  font-size: 60%;
+  font-family: "Courier New", Courier, monospace;
+}
 
+.load-power-source-wrapper .value_value {
+  font-size: 85%;
+  font-weight: 100;
+}
 
 .power-sources-power-source-wrapper .value {
-    margin-right: 8px;
-    
-    color: #888;
-    font-size: 85%;
-    font-weight: 100;
+  margin-right: 8px;
 
-} 
+  color: #888;
+  font-size: 85%;
+  font-weight: 100;
+}
 
 .power-sources-power-source-wrapper .value_value {
-    font-size: 85%;
-    font-weight: 100;
+  font-size: 85%;
+  font-weight: 100;
 }
 
 .power-sources-power-source-wrapper .unit {
-    font-weight: 100;
-    font-size: 60%;
-    font-family: 'Courier New', Courier, monospace;
+  font-weight: 100;
+  font-size: 60%;
+  font-family: "Courier New", Courier, monospace;
 }
 
 .load-source-name {
-    font-size: 90%;
+  font-size: 90%;
 }
 
 .load-power-source {
-    border : 2px solid #202020;
-    // background-color : red;
-    // padding-top: 10px;
-    // padding-bottom: 10px;
-    border-radius: 5px;
+  border: 2px solid #202020;
+  background-color: #242424;
+  // padding-top: 10px;
+  // padding-bottom: 10px;
+  border-radius: 5px;
 }
 
-.load-logo, .load-logo > svg {
-    height: 4rem;
-    max-width: 4rem;
-    // margin: auto;
+.power-sources-power-source {
+  border: 2px solid #0f0f0f;
+  background-color: #1b1b1b;
+  // padding-top: 10px;
+  // padding-bottom: 10px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.load-logo,
+.load-logo > svg {
+  height: 4rem;
+  max-width: 4rem;
+  // margin: auto;
 }
 
 .load-power-source {
-    padding:5px;
+  padding: 5px;
 }
