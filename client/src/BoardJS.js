@@ -3,13 +3,16 @@ import SlideMap from "./SlideMap";
 import SlidePowerSources from "./SlidePowerSources";
 import SlideLoad from "./slides/load-breakdown/components/SlideLoad";
 
+var buildNumber = "BUILD_NUMBER_PLACEHOLDER";
+var buildDate = "BUILD_DATE_PLACEHOLDER";
+
 function BoardJS({
     currentZone,
     setCurrentZone,
     slideMapData,
     slidePowerSourcesData,
     slideLoadBreakdownData,
-    buildInfos = { number: -1, date: new Date().getTime() }
+    buildInfos = { number: buildNumber, date: buildDate }
 }) {
     return (
         <React.Fragment>

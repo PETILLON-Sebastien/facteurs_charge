@@ -18,13 +18,13 @@ before_deploy:
 - eval "$(ssh-agent -s)"
 - chmod 600 /tmp/deploy_rsa
 - ssh-add /tmp/deploy_rsa
-- sudo apt-get install jq
-- build_nb=`cat $TRAVIS_BUILD_DIR/client/package.json | jq .build.unique | sed 's/"//g'`
-- echo "Build number to be deployed:${build_nb}"
-- sed -i -e "s/BUILD_NUMBER_PLACEHOLDER/${build_nb}/g" $TRAVIS_BUILD_DIR/client/static/dist/bundle.js
-- build_date=$(cat $TRAVIS_BUILD_DIR/client/package.json | jq .build.timestamp | sed 's/"//g' | sed 's/\//\\\//g')
-- echo "Build date to be deployed:${build_date}"
-- sed -i -e "s/BUILD_DATE_PLACEHOLDER/${build_date}/g" $TRAVIS_BUILD_DIR/client/static/dist/bundle.js
+- echo "Build number to be deployed:${TRAVIS_BUILD_NUMBER}. Changing the build number in source code..."
+- find client/build/static/js -type f -name "*.js" -print0 | xargs -0 sed -i "s/BUILD_NUMBER_PLACEHOLDER
+DER/${TRAVIS_BUILD_NUMBER}/g"
+- BUILD_DATE=$(date)
+- echo "Build date to be deployed:${BUILD_DATE}. Changing the build date in source code..."
+- find client/build/static/js -type f -name "*.js" -print0 | xargs -0 sed -i "s/BUILD_DATE_PLACEHOL
+DER/${BUILD_DATE}/g"
 deploy:
 # - provider: script
 #   skip_cleanup: true
