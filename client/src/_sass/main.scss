@@ -1,0 +1,181 @@
+// $footer-background-color: #ff0000;
+// $navbar-item-color: #b5b5b5;
+@import "./variables.module.scss";
+
+@import "~bulma";
+@import "~bulma-pageloader";
+
+// @import "../../node_modules/bulma/bulma";
+// @import "~bulma";
+// @import "~bulma-pageloader";
+// // @import "../../node_modules/bulma-pageloader/dist/css/bulma-pageloader";
+@import "~@fortawesome/fontawesome-free/css/all";
+@import "overrides";
+@import "map";
+@import "slide-power-sources";
+@import "animation-power-sources";
+@import "power-source-inline";
+@import "power-source-legend";
+@import "slide-load";
+
+// @import "../power-sources/styles/animation-power-sources.scss";
+// @import "../power-sources/styles/power-source-inline.scss";
+// @import "../power-sources/styles/power-source-legend.scss";
+
+// @import "../slides/load-breakdown/styles/slide-load.scss";
+// @import "../slides/power-sources-breakdown/styles/slide-power-sources.scss";
+// @import "../slides/map/styles/map.scss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+.section:nth-child(2n) {
+  background-color: rgb(15, 15, 15) !important;
+}
+
+.section:nth-child(2n + 1) {
+  background-color: rgb(36, 36, 36) !important;
+}
+
+// .section:nth-child(2n + 1) .powerSourceProduction {
+//   background-color: #0f0f0f !important;
+// }
+
+// .power-sources-power-source {
+//   background-color: red;
+// }
+
+.section {
+  // padding: 3rem 7.5rem;
+}
+// // body {
+// //     display: flex;
+// //     min-height: 100vh;
+// //     flex-direction: column;
+// //   }
+
+// //   #wrapper {
+// //     flex: 1;
+// //   }
+
+// //   .navbar-item-name {
+// //     font-size: 20px !important;
+// //     font-weight: 900;
+// //   }
+
+// //   .representation-name {
+// //     // color: #b5b5b5;
+// //     color:#dbdbdb;
+// //   }
+
+// //   .navbar {
+// //     background-color:rgba($color: #000000, $alpha: 0.0)
+// //   }
+
+@media screen and (min-width: 1408px) {
+  .container {
+    max-width: 1152px;
+    width: 1152px;
+  }
+}
+
+// // .affichage-representation {
+// //     display: flex;
+// // }
+// // .representation-icon {
+// //     height:20rem;
+// // }
+
+// // .representation-data-text {
+// //     color:#dbdbdb;
+// // }
+
+// .footer {
+//   background-color: #121212;
+//   position: fixed;
+//   bottom: 0px;
+//   width: 100%;
+//   padding: 2rem 1.5rem 2rem;
+//   margin-top: 3rem;
+// }
+
+// // .representations-wrapper > .column {
+// //     margin-bottom: 3rem;
+// // }
+
+// .rc-slider {
+//   width: 95% !important;
+//   margin: auto;
+// }
+
+// .rc-slider-track {
+//   background-color: whitesmoke !important;
+// }
+
+// .rc-slider-dot-active {
+//   border-color: #96dbfa !important;
+// }
+
+// .rc-slider-dot {
+//   border: 2px solid #b5b5b5 !important;
+// }
+
+// .has-background-yellow {
+//   background-color: $yellowBackground;
+//   color: black;
+// }
+
+// .has-background-orange {
+//   background-color: $orangeBackground;
+// }
+
+// .has-background-blue {
+//   background-color: $blueBackground;
+// }
+
+// .has-background-light-blue {
+//   background-color: $lightBlueBackground;
+//   color: black;
+// }
+
+// .has-background-dark-blue {
+//   background-color: $darkBlueBackground;
+//   color: white;
+// }
+
+// .lds-dual-ring {
+//   display: inline-block;
+//   width: 80px;
+//   height: 80px;
+// }
+
+// .lds-dual-ring:after {
+//   content: " ";
+//   display: block;
+//   width: 64px;
+//   height: 64px;
+//   margin: 8px;
+//   border-radius: 50%;
+//   border: 6px solid #fff;
+//   border-color: #fff transparent #fff transparent;
+//   animation: lds-dual-ring 1.2s linear infinite;
+// }
+
+// @keyframes lds-dual-ring {
+//   0% {
+//     transform: rotate(0deg);
+//   }
+
+//   100% {
+//     transform: rotate(360deg);
+//   }
+// }
+
+// .react-calendar {
+//   margin: auto;
+// }
+
+// .logo .image {
+//   display: inline-block;
+// }
