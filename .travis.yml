@@ -30,12 +30,7 @@ before_deploy:
 deploy:
   - provider: script
     skip_cleanup: true
-    script:
-      rsync -e 'ssh' -r --delete-after $TRAVIS_BUILD_DIR/client/static/* ubuntu@51.210.182.41:/var/www/html/
-      && rsync -e 'ssh' -r --exclude './server/data' --exclude 'data' --delete-after
-      $TRAVIS_BUILD_DIR/server/* ubuntu@51.210.182.41:/var/www/server/ &&  rsync -e
-      'ssh' -r --delete-after $TRAVIS_BUILD_DIR/start-server.sh ubuntu@51.210.182.41:/var/www/  &&  ssh
-      ubuntu@51.210.182.41 chmod u+x /var/www/start-server.sh
+    script: rsync -e 'ssh' -r --delete-after $TRAVIS_BUILD_DIR/client/static/* ubuntu@51.210.182.41:/var/www/html/ && rsync -e 'ssh' -r --exclude './server/data' --exclude 'data' --delete-after $TRAVIS_BUILD_DIR/server/* ubuntu@51.210.182.41:/var/www/server/ &&  rsync -e 'ssh' -r --delete-after $TRAVIS_BUILD_DIR/start-server.sh ubuntu@51.210.182.41:/var/www/  &&  ssh ubuntu@51.210.182.41 chmod u+x /var/www/start-server.sh
     on:
       branch: integration
 after_deploy:
