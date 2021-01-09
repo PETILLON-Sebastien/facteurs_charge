@@ -26,7 +26,7 @@
   },
   "scripts": {
     "start": "concurrently --kill-others \"react-scripts start\" \"nodemon src/StubServer.js\"",
-    "build": "cross-env REACT_APP_API_URL=http://51.210.182.41/  react-scripts build",
+    "build": "cross-env REACT_APP_API_URL=http://51.210.182.41:8080  react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
