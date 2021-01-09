@@ -19,7 +19,8 @@ before_deploy:
   - chmod 600 /tmp/deploy_rsa
   - ssh-add /tmp/deploy_rsa
   - echo "Build number to be deployed:${TRAVIS_BUILD_NUMBER}. Changing the build number in source code..."
-  - find client/build/static/js -type f -name "*.js" -print0 | xargs -0 sed -i "s/BUILD_NUMBER_PLACEHOLDER/${TRAVIS_BUILD_NUMBER}/g"
+  - BUILD_NUMBER=${TRAVIS_BUILD_NUMBER}-${TRAVIS_COMMIT}
+  - find client/build/static/js -type f -name "*.js" -print0 | xargs -0 sed -i "s/BUILD_NUMBER_PLACEHOLDER/${BUILD_NUMBER}/g"
   - BUILD_DATE=$(date)
   - echo "Build date to be deployed:${BUILD_DATE}. Changing the build date in source code..."
   - find client/build/static/js -type f -name "*.js" -print0 | xargs -0 sed -i "s/BUILD_DATE_PLACEHOLDER/${BUILD_DATE}/g"
