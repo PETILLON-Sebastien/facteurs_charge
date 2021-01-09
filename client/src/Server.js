@@ -1,5 +1,5 @@
 var async = require("async");
-const api_url = process.env.API_URL || "http://localhost:8080";
+const api_url = process.env.REACT_APP_API_URL || "http://localhost:8080";
 const root_endpoint = `${api_url}/api/v1`;
 
 export default class Server {
