@@ -83,7 +83,9 @@ export default class Server {
                                 installationType,
                                 "is not defined or has no production field"
                             );
-                            delete copyOfData[i].breakdown[installationType];
+                            // fall back to power field
+                            breakdown[installationType].production = breakdown[installationType].power;
+                            // delete copyOfData[i].breakdown[installationType];
                         }
                     });
                 });
