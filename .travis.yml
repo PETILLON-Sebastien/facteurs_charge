@@ -14,25 +14,28 @@ script:
   - npm run build
   - cd ..
 before_deploy:
-  - openssl aes-256-cbc -K $encrypted_db2095f63ba3_key -iv $encrypted_db2095f63ba3_iv -in deploy_rsa.enc -out /tmp/deploy_rsa -d
+  - openssl aes-256-cbc -K $encrypted_db2095f63ba3_key -iv $encrypted_db2095f63ba3_iv
+    -in deploy_rsa.enc -out /tmp/deploy_rsa -d
   - eval "$(ssh-agent -s)"
   - chmod 600 /tmp/deploy_rsa
   - ssh-add /tmp/deploy_rsa
-  - echo "Build number to be deployed:${TRAVIS_BUILD_NUMBER}. Changing the build number in source code..."
+  - echo "Build number to be deployed:${TRAVIS_BUILD_NUMBER}. Changing the build number
+    in source code..."
   - BUILD_NUMBER=${TRAVIS_BUILD_NUMBER}-${TRAVIS_COMMIT}
   - find client/build/static/js -type f -name "*.js" -print0 | xargs -0 sed -i "s/BUILD_NUMBER_PLACEHOLDER/${BUILD_NUMBER}/g"
   - BUILD_DATE=$(date)
-  - echo "Build date to be deployed:${BUILD_DATE}. Changing the build date in source code..."
+  - echo "Build date to be deployed:${BUILD_DATE}. Changing the build date in source
+    code..."
   - find client/build/static/js -type f -name "*.js" -print0 | xargs -0 sed -i "s/BUILD_DATE_PLACEHOLDER/${BUILD_DATE}/g"
 deploy:
-  # - provider: script
-  #   skip_cleanup: true
-  #   script: rsync -e 'ssh -p 44335' -r --delete-after $TRAVIS_BUILD_DIR/client/static facteus@sshcloud.cluster024.hosting.ovh.net:~/www/ && rsync -e 'ssh -p 44335' -r --delete-after $TRAVIS_BUILD_DIR/server facteus@sshcloud.cluster024.hosting.ovh.net:~/www/
-  #   on:
-  #     branch: master
   - provider: script
     skip_cleanup: true
-    script: rsync -e 'ssh' -r --delete-after $TRAVIS_BUILD_DIR/client/static/* ubuntu@51.210.182.41:/var/www/html/ && rsync -e 'ssh' -r --exclude './server/data' --exclude 'data' --delete-after $TRAVIS_BUILD_DIR/server/* ubuntu@51.210.182.41:/var/www/server/ &&  rsync -e 'ssh' -r --delete-after $TRAVIS_BUILD_DIR/start-server.sh ubuntu@51.210.182.41:/var/www/  &&  ssh ubuntu@51.210.182.41 chmod u+x /var/www/start-server.sh
+    script:
+      rsync -e 'ssh' -r --delete-after $TRAVIS_BUILD_DIR/client/static/* ubuntu@51.210.182.41:/var/www/html/
+      && rsync -e 'ssh' -r --exclude './server/data' --exclude 'data' --delete-after
+      $TRAVIS_BUILD_DIR/server/* ubuntu@51.210.182.41:/var/www/server/ &&  rsync -e
+      'ssh' -r --delete-after $TRAVIS_BUILD_DIR/start-server.sh ubuntu@51.210.182.41:/var/www/  &&  ssh
+      ubuntu@51.210.182.41 chmod u+x /var/www/start-server.sh
     on:
       branch: integration
 after_deploy:
