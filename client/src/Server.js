@@ -11,9 +11,8 @@ export default class Server {
     static getPowerSourcesBreakdown(ISOZoneId, from, to, callback, error) {
         [from, to] = this.convertDates(from, to);
 
-        if (ISOZoneId === 0) {
-            ISOZoneId = "FR";
-        }
+        ISOZoneId = this.convertZoneID(ISOZoneId);
+
 
         // return new Promise((resolve) => {
         const targetUrl = `${root_endpoint}/zones/${ISOZoneId}/installations/production/breakdown?from=${from}&to=${to}`;
@@ -111,9 +110,9 @@ export default class Server {
 
     static getLoadsBreakdown(ISOZoneId, from, to, callback, error) {
         [from, to] = this.convertDates(from, to);
-        if (ISOZoneId === 0) {
-            ISOZoneId = "FR";
-        }
+
+        ISOZoneId = this.convertZoneID(ISOZoneId);
+
         // return new Promise((resolve) => {
         const targetUrl = `${root_endpoint}/zones/${ISOZoneId}/installations/breakdown?from=${from}&to=${to}`;
         console.log("Fetching loads", targetUrl);
@@ -249,6 +248,18 @@ export default class Server {
                 callback(data);
             }
         );
+    }
+
+    static convertZoneID(ISOZoneId) {
+        // let currentZoneSelected = this.zonesDescription.find((element) => element.id == ISOZoneId);
+
+        let result = "FR";
+
+        if (ISOZoneId != 0) {
+            result = result.concat("-").concat(ISOZoneId);
+        }
+
+        return result;
     }
 }
 
