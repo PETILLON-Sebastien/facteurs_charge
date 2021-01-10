@@ -1,6 +1,6 @@
 import React, { createRef } from "react";
 
-const LoadingScreen = ({ done, steps = [] }) => {
+const LoadingScreen = ({ build: { number, date }, done, steps = [] }) => {
   const spinnerRef = createRef();
   return (
     <div
@@ -9,6 +9,9 @@ const LoadingScreen = ({ done, steps = [] }) => {
     >
       <div className="title has-text-centered">
         <span>Facteurs charge préchauffe... On arrive !</span>
+        <div className="column is-full has-text-centered" id="build_infos">
+          - Build {number} - {date} -
+                    </div>
         <ul
           className="has-text-left"
           style={{

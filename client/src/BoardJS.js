@@ -3,8 +3,6 @@ import SlideMap from "./SlideMap";
 import SlidePowerSources from "./SlidePowerSources";
 import SlideLoad from "./slides/load-breakdown/components/SlideLoad";
 
-var buildNumber = "BUILD_NUMBER_PLACEHOLDER";
-var buildDate = "BUILD_DATE_PLACEHOLDER";
 
 function BoardJS({
     currentZone,
@@ -12,7 +10,7 @@ function BoardJS({
     slideMapData,
     slidePowerSourcesData,
     slideLoadBreakdownData,
-    buildInfos = { number: buildNumber, date: buildDate }
+    build
 }) {
     return (
         <React.Fragment>
@@ -21,7 +19,7 @@ function BoardJS({
                     <SlideMap
                         setCurrentZone={setCurrentZone} // setter pass throught
                         highestLoads={slideMapData} // props
-                        build={buildInfos}
+                        build={build}
                     />
                 </div>
             </div>

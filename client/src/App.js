@@ -6,7 +6,15 @@ import LoadingScreen from "./LoadingScreen";
 import Server from "./Server";
 var async = require("async");
 
+var buildNumber = "BUILD_NUMBER_PLACEHOLDER";
+var buildDate = "BUILD_DATE_PLACEHOLDER";
+
+
 function App() {
+
+  let buildInfos = { number: buildNumber, date: buildDate }
+
+
   const now = Date.now();
   const [currentDates, setCurrentDates] = useState({ from: now, to: now });
   const [currentZone, setCurrentZone] = useState({ id: 0, label: "France" });
@@ -125,12 +133,12 @@ function App() {
             slidePowerSourcesData={data.slidePowerSourcesData}
             slideLoadBreakdownData={data.slideLoadBreakdownData}
             setCurrentZone={setCurrentZoneHandler}
-            build={{}}
+            build={buildInfos}
             currentZone={currentZone} />
         </React.Fragment>
       );
     } else {
-      return <LoadingScreen />
+      return <LoadingScreen build={buildInfos} />
     }
   }
 
