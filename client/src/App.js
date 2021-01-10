@@ -11,6 +11,7 @@ var buildDate = "BUILD_DATE_PLACEHOLDER";
 
 
 function App() {
+  document.title = "Facteur charge";
 
   let buildInfos = { number: buildNumber, date: buildDate }
 
