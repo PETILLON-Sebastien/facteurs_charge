@@ -169,11 +169,17 @@ export default class Server {
                         const currentLoad = currentBreakdown[currentKey];
                         if (currentLoad === undefined) {
                             console.warn(
-                                "Given breakdown does not contains information for",
+                                "Protocol Issue: the given breakdown does not contains information for",
                                 currentKey
                             );
-                            currentBreakdown[currentKey] = {};
-                            currentBreakdown[currentKey].load.value = -1;
+                            // currentLoad= {};
+                            currentLoad.load.value = -1;
+
+                            if (currentLoad.production === undefined && currentLoad.power !== undefined) {
+                                console.warn(`Protocol Issue: the load breakdown of ${currentKey} had a power field and not a production field. Patching this to continue...`);
+                                currentLoad.production = currentLoad.power;
+                            }
+
                         } else if (currentLoad.load === undefined) {
                             console.warn(
                                 "Given breakdown does not contains information for the 'load' of",
