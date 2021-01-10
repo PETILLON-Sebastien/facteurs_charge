@@ -187,7 +187,7 @@ export default class Server {
                                 console.warn(`Protocol Issue: the breakdown of ${currentKey} had a power field and not a production field. Patching this to continue...`);
                                 currentBreakdown[currentKey].production = currentLoad.power;
                                 currentBreakdown[currentKey].capacity = currentLoad.power;
-                                console.warn(`Current load: ${currentLoad}`);
+                                console.warn(`Current load: ${JSON.stringify(currentLoad)}`);
                             }
                         } else {
                             const updatedLoad = currentLoad.load.value * 100;
