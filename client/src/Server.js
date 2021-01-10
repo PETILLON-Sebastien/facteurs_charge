@@ -84,10 +84,8 @@ export default class Server {
                             );
                             // fall back to power field
                             if (breakdown[installationType].production === undefined && breakdown[installationType].power !== undefined) {
-                                console.warn(`Protocol Issue: the breakdown of ${currentKey} had a power field and not a production field. Patching this to continue...`);
-                                currentBreakdown[currentKey].production = currentLoad.power;
-                                currentBreakdown[currentKey].capacity = currentLoad.power;
-                                console.warn(`Current load: ${JSON.stringify(currentLoad)}`);
+                                console.warn(`Protocol Issue: the breakdown of ${installationType} had a power field and not a production field. Patching this to continue...`);
+                                breakdown[installationType].production = breakdown[installationType].power;
                             } else {
                                 breakdown[installationType].production = { value: -1, unit: "MW" };
                             }
