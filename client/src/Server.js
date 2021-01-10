@@ -83,7 +83,16 @@ export default class Server {
                                 "is not defined or has no production field"
                             );
                             // fall back to power field
-                            breakdown[installationType].production = breakdown[installationType].power;
+                            if (breakdown[installationType].production === undefined && breakdown[installationType].power !== undefined) {
+                                console.warn(`Protocol Issue: the breakdown of ${currentKey} had a power field and not a production field. Patching this to continue...`);
+                                currentBreakdown[currentKey].production = currentLoad.power;
+                                currentBreakdown[currentKey].capacity = currentLoad.power;
+                                console.warn(`Current load: ${JSON.stringify(currentLoad)}`);
+                            } else {
+                                breakdown[installationType].production = { value: -1, unit: "MW" };
+                            }
+
+                            // breakdown[installationType].production = breakdown[installationType].power;
                             // delete copyOfData[i].breakdown[installationType];
                         }
                     });
