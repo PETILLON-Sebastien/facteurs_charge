@@ -255,7 +255,7 @@ export default class Server {
 
         let result = "FR";
 
-        if (ISOZoneId != 0) {
+        if (ISOZoneId !== 0) {
             result = result.concat("-").concat(ISOZoneId);
         }
 
