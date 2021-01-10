@@ -187,10 +187,10 @@ export default class Server {
                             currentBreakdown[currentKey].load.value = -1;
 
                             if (currentLoad.production === undefined && currentLoad.power !== undefined) {
-                                console.warn(`Protocol Issue: the load breakdown of ${currentKey} had a power field and not a production field. Patching this to continue...`);
+                                console.warn(`Protocol Issue: the breakdown of ${currentKey} had a power field and not a production field. Patching this to continue...`);
                                 currentLoad.production = currentLoad.power;
                                 currentLoad.capacity = currentLoad.power;
-                                console.warn(currentLoad);
+                                console.warn(`Current load: ${currentLoad}`);
                             }
                         } else {
                             const updatedLoad = currentLoad.load.value * 100;
