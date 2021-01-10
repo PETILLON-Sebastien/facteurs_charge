@@ -59,7 +59,7 @@ const findHighestSourceOfPower = (powerBreakdown) => {
         } else {
             // fixme this is where the bug is triggered.
             if (powerBreakdown[installationType].production === undefined) {
-                console.warn(powerBreakdown[installationType]);
+                console.warn(installationType, powerBreakdown, powerBreakdown[installationType]);
             }
             if (powerBreakdown[installationType].production.value > bestValue) {
                 bestComponent = <PowerSourceNameInline type={installationType} />;
