@@ -179,17 +179,14 @@ export default class Server {
 
 
                         } else if (currentLoad.load === undefined) {
-                            console.warn(
-                                "Protocol Issue: the given breakdown does not contains 'load' field for",
-                                currentKey
-                            );
+                            console.warn(`Protocol Issue: the given breakdown does not contains 'load' field for ${currentKey}`);
                             currentBreakdown[currentKey].load = {};
                             currentBreakdown[currentKey].load.value = -1;
 
                             if (currentLoad.production === undefined && currentLoad.power !== undefined) {
                                 console.warn(`Protocol Issue: the breakdown of ${currentKey} had a power field and not a production field. Patching this to continue...`);
-                                currentLoad.production = currentLoad.power;
-                                currentLoad.capacity = currentLoad.power;
+                                currentBreakdown[currentKey].production = currentLoad.power;
+                                currentBreakdown[currentKey].capacity = currentLoad.power;
                                 console.warn(`Current load: ${currentLoad}`);
                             }
                         } else {
