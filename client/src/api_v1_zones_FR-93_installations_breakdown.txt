@@ -1,0 +1,4638 @@
+[
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 23
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.23708895990104112
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 953
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.2910643548480693
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 115
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.38079470198675497
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 2002
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.6051391487548099
+        }
+      }
+    },
+    "datetime": "2021-01-10T00:00:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 23
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.23708895990104112
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 898
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.27426630708663824
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 114
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.37748344370860926
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1999
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.6042323468335988
+        }
+      }
+    },
+    "datetime": "2021-01-10T00:15:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 23
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.23708895990104112
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 859
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.26235496412853254
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 114
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.37748344370860926
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1971
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5957688622356294
+        }
+      }
+    },
+    "datetime": "2021-01-10T00:30:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 23
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.23708895990104112
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 856
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.26143870697790905
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 113
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.3741721854304636
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1831
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5534514392457827
+        }
+      }
+    },
+    "datetime": "2021-01-10T00:45:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 23
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.23708895990104112
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 851
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.25991161172686983
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 113
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.3741721854304636
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1728
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5223179066175382
+        }
+      }
+    },
+    "datetime": "2021-01-10T01:00:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 23
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.23708895990104112
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 765
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.2336455734089958
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 112
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.3708609271523179
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1787
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5401516777346879
+        }
+      }
+    },
+    "datetime": "2021-01-10T01:15:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 23
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.23708895990104112
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 745
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.22753719240483905
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 113
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.3741721854304636
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1772
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5356176681286329
+        }
+      }
+    },
+    "datetime": "2021-01-10T01:30:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 23
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.23708895990104112
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 771
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.23547808771024284
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 113
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.3741721854304636
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1791
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5413607469629692
+        }
+      }
+    },
+    "datetime": "2021-01-10T01:45:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 23
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.23708895990104112
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 759
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.23181305910774877
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 114
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.37748344370860926
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1771
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5353154008215626
+        }
+      }
+    },
+    "datetime": "2021-01-10T02:00:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 23
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.23708895990104112
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 695
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.21226623989444718
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 114
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.37748344370860926
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1724
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5211088373892568
+        }
+      }
+    },
+    "datetime": "2021-01-10T02:15:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 24
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.24739717554891247
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 696
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.21257165894465502
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 115
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.38079470198675497
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1683
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5087158777993731
+        }
+      }
+    },
+    "datetime": "2021-01-10T02:30:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 24
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.24739717554891247
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 677
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.2067686969907061
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 114
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.37748344370860926
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1640
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.4957183835953487
+        }
+      }
+    },
+    "datetime": "2021-01-10T02:45:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 24
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.24739717554891247
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 681
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.20799037319153746
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 113
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.3741721854304636
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1595
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.4821163547771837
+        }
+      }
+    },
+    "datetime": "2021-01-10T03:00:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 24
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.24739717554891247
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 657
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.20066031598654935
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 114
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.37748344370860926
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1690
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5108317489488654
+        }
+      }
+    },
+    "datetime": "2021-01-10T03:15:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 24
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.24739717554891247
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 658
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.2009657350367572
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 114
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.37748344370860926
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1697
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5129476200983578
+        }
+      }
+    },
+    "datetime": "2021-01-10T03:30:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 24
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.24739717554891247
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 657
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.20066031598654935
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 114
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.37748344370860926
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1701
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5141566893266392
+        }
+      }
+    },
+    "datetime": "2021-01-10T03:45:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 24
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.24739717554891247
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 554
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.16920215381514206
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 115
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.38079470198675497
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1678
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5072045412640215
+        }
+      }
+    },
+    "datetime": "2021-01-10T04:00:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 23
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.23708895990104112
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 421
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.12858142013749965
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 115
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.38079470198675497
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1629
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.49239344321757506
+        }
+      }
+    },
+    "datetime": "2021-01-10T04:15:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 23
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.23708895990104112
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 421
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.12858142013749965
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 115
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.38079470198675497
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1625
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.4911843739892937
+        }
+      }
+    },
+    "datetime": "2021-01-10T04:30:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 22
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.22678074425316977
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 405
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.12369471533417425
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 114
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.37748344370860926
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1608
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.486045829769098
+        }
+      }
+    },
+    "datetime": "2021-01-10T04:45:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 23
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.23708895990104112
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 404
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.12338929628396642
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 113
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.3741721854304636
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1602
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.48423222592667603
+        }
+      }
+    },
+    "datetime": "2021-01-10T05:00:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 22
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.22678074425316977
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 406
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.1240001343843821
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 113
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.3741721854304636
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1632
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.49330024513878606
+        }
+      }
+    },
+    "datetime": "2021-01-10T05:15:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 22
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.22678074425316977
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 407
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.12430555343458993
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 113
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.3741721854304636
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1635
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.4942070470599971
+        }
+      }
+    },
+    "datetime": "2021-01-10T05:30:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 22
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.22678074425316977
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 405
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.12369471533417425
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 114
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.37748344370860926
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1714
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5180861643185535
+        }
+      }
+    },
+    "datetime": "2021-01-10T05:45:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 22
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.22678074425316977
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 411
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.1255272296354213
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 114
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.37748344370860926
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1706
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5156680258619908
+        }
+      }
+    },
+    "datetime": "2021-01-10T06:00:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 22
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.22678074425316977
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 447
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.13652231544290344
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 113
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.3741721854304636
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1752
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5295723219872261
+        }
+      }
+    },
+    "datetime": "2021-01-10T06:15:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 21
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.21647252860529842
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 456
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.13927108689477397
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 115
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.38079470198675497
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1759
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5316881931367186
+        }
+      }
+    },
+    "datetime": "2021-01-10T06:30:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 21
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.21647252860529842
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 450
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.13743857259352696
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 114
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.37748344370860926
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1673
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5056932047286697
+        }
+      }
+    },
+    "datetime": "2021-01-10T06:45:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 21
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.21647252860529842
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 458
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.13988192499518964
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 114
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.37748344370860926
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1617
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.488766235532731
+        }
+      }
+    },
+    "datetime": "2021-01-10T07:00:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 21
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.21647252860529842
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 463
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.14140902024622884
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 113
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.3741721854304636
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1613
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.4875571663044497
+        }
+      }
+    },
+    "datetime": "2021-01-10T07:15:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 22
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.22678074425316977
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 458
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.13988192499518964
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 114
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.37748344370860926
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1638
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.495113848981208
+        }
+      }
+    },
+    "datetime": "2021-01-10T07:30:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 0
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 22
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.22678074425316977
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 466
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.14232527739685236
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 114
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.37748344370860926
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1634
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.49390477975292674
+        }
+      }
+    },
+    "datetime": "2021-01-10T07:45:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 25
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0.01755556335802816
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 22
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.22678074425316977
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 638
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.19485735403260043
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 113
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.3741721854304636
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1684
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5090181451064435
+        }
+      }
+    },
+    "datetime": "2021-01-10T08:00:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 28
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0.01966223096099154
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 22
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.22678074425316977
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 673
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.20554702078987475
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 114
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.37748344370860926
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1670
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5047864028074588
+        }
+      }
+    },
+    "datetime": "2021-01-10T08:15:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 30
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0.02106667602963379
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 23
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.23708895990104112
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 698
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.2131824970450707
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 114
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.37748344370860926
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1673
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5056932047286697
+        }
+      }
+    },
+    "datetime": "2021-01-10T08:30:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 32
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0.022471121098276044
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 23
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.23708895990104112
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 703
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.21470959229610986
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 114
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.37748344370860926
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1697
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5129476200983578
+        }
+      }
+    },
+    "datetime": "2021-01-10T08:45:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 42
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0.02949334644148731
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 23
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.23708895990104112
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 720
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.2199017161496431
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 114
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.37748344370860926
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1730
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5229224412316789
+        }
+      }
+    },
+    "datetime": "2021-01-10T09:00:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 45
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0.03160001404445069
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 23
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.23708895990104112
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 783
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.23914311631273688
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 115
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.38079470198675497
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1688
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5102272143347247
+        }
+      }
+    },
+    "datetime": "2021-01-10T09:15:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 57
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0.0400266844563042
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 24
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.24739717554891247
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 787
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.24036479251356824
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 114
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.37748344370860926
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1760
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5319904604437888
+        }
+      }
+    },
+    "datetime": "2021-01-10T09:30:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 68
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0.04775113233383659
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 24
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.24739717554891247
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 988
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.3017540216053436
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 115
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.38079470198675497
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1928
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5827713680316051
+        }
+      }
+    },
+    "datetime": "2021-01-10T09:45:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 82
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0.05758224781433236
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 24
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.24739717554891247
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 971
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.29656189775181035
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 113
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.3741721854304636
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1965
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5939552583932075
+        }
+      }
+    },
+    "datetime": "2021-01-10T10:00:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 95
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0.066711140760507
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 24
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.24739717554891247
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 1231
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.37597085080584813
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 113
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.3741721854304636
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1961
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5927461891649262
+        }
+      }
+    },
+    "datetime": "2021-01-10T10:15:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 112
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0.07864892384396616
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 24
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.24739717554891247
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 1236
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.37749794605688736
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 114
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.37748344370860926
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1948
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5888167141730117
+        }
+      }
+    },
+    "datetime": "2021-01-10T10:30:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 111
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0.07794670130964503
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 24
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.24739717554891247
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 1234
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.3768871079564717
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 114
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.37748344370860926
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1960
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5924439218578558
+        }
+      }
+    },
+    "datetime": "2021-01-10T10:45:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 120
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0.08426670411853517
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 24
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.24739717554891247
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 1232
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.376276269856056
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 114
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.37748344370860926
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1937
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5854917737952381
+        }
+      }
+    },
+    "datetime": "2021-01-10T11:00:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 142
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0.09971559987359994
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 24
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.24739717554891247
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 991
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.30267027875596714
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 114
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.37748344370860926
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1934
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5845849718740271
+        }
+      }
+    },
+    "datetime": "2021-01-10T11:15:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 157
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0.11024893788841685
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 24
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.24739717554891247
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 975
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.2977835739526417
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 113
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.3741721854304636
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1927
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5824691007245347
+        }
+      }
+    },
+    "datetime": "2021-01-10T11:30:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 159
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0.1116533829570591
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 24
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.24739717554891247
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 921
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.2812909452414185
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 113
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.3741721854304636
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1936
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5851895064881678
+        }
+      }
+    },
+    "datetime": "2021-01-10T11:45:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 162
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0.11376005056002247
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 24
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.24739717554891247
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 930
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.28403971669328903
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 112
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.3708609271523179
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1949
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5891189814800821
+        }
+      }
+    },
+    "datetime": "2021-01-10T12:00:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 168
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0.11797338576594923
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 24
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.24739717554891247
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 895
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.2733500499360147
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 114
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.37748344370860926
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1958
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5918393872437151
+        }
+      }
+    },
+    "datetime": "2021-01-10T12:15:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 178
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0.12499561110916049
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 24
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.24739717554891247
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 859
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.26235496412853254
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 114
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.37748344370860926
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1911
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5776328238114093
+        }
+      }
+    },
+    "datetime": "2021-01-10T12:30:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 185
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0.12991116884940837
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 24
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.24739717554891247
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 854
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.2608278688774934
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 113
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.3741721854304636
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1843
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5570786469306267
+        }
+      }
+    },
+    "datetime": "2021-01-10T12:45:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 179
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0.1256978336434816
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 24
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.24739717554891247
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 847
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.2586899355260385
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 113
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.3741721854304636
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1804
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5452902219548836
+        }
+      }
+    },
+    "datetime": "2021-01-10T13:00:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 180
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0.12640005617780276
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 24
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.24739717554891247
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 770
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.235172668660035
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 114
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.37748344370860926
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1842
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5567763796235563
+        }
+      }
+    },
+    "datetime": "2021-01-10T13:15:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 172
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0.12078227590323373
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 24
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.24739717554891247
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 715
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.21837462089860393
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 114
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.37748344370860926
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1848
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5585899834659783
+        }
+      }
+    },
+    "datetime": "2021-01-10T13:30:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 185
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0.12991116884940837
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 24
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.24739717554891247
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 686
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.20951746844257663
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 112
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.3708609271523179
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1823
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.55103330078922
+        }
+      }
+    },
+    "datetime": "2021-01-10T13:45:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 184
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0.12920894631508725
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 24
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.24739717554891247
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 590
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.1801972396226242
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 112
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.3708609271523179
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1783
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5389426085064065
+        }
+      }
+    },
+    "datetime": "2021-01-10T14:00:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 176
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0.12359116604051824
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 23
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.23708895990104112
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 580
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.17714304912054585
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 113
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.3741721854304636
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1800
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5440811527266023
+        }
+      }
+    },
+    "datetime": "2021-01-10T14:15:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 164
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0.11516449562866472
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 23
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.23708895990104112
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 585
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.17867014437158504
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 113
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.3741721854304636
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1804
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5452902219548836
+        }
+      }
+    },
+    "datetime": "2021-01-10T14:30:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 140
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0.0983111548049577
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 23
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.23708895990104112
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 591
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.18050265867283205
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 113
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.3741721854304636
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1762
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5325949950579295
+        }
+      }
+    },
+    "datetime": "2021-01-10T14:45:00+01:00"
+  },
+  {
+    "breakdown": {
+      "solar": {
+        "production": {
+          "unit": "MW",
+          "value": 132
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 1424.05
+        },
+        "load": {
+          "value": 0.09269337453038869
+        }
+      },
+      "wind": {
+        "production": {
+          "unit": "MW",
+          "value": 23
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 97.01
+        },
+        "load": {
+          "value": 0.23708895990104112
+        }
+      },
+      "hydraulic": {
+        "production": {
+          "unit": "MW",
+          "value": 576
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3274.19
+        },
+        "load": {
+          "value": 0.1759213729197145
+        }
+      },
+      "nuclear": {
+        "power": {
+          "unit": "MW",
+          "value": 0
+        }
+      },
+      "bioenergy": {
+        "production": {
+          "unit": "MW",
+          "value": 114
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 302
+        },
+        "load": {
+          "value": 0.37748344370860926
+        }
+      },
+      "fossil": {
+        "production": {
+          "unit": "MW",
+          "value": 1720
+        },
+        "capacity": {
+          "unit": "MW",
+          "value": 3308.33
+        },
+        "load": {
+          "value": 0.5198997681609755
+        }
+      }
+    },
+    "datetime": "2021-01-10T15:00:00+01:00"
+  }
+]
