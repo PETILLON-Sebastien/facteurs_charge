@@ -174,6 +174,10 @@ export default class Server {
                             );
 
                             delete data[i].breakdown[currentKey];
+                            currentBreakdown[currentKey].production = {};
+                            currentBreakdown[currentKey].production.value = -1;
+
+
                         } else if (currentLoad.load === undefined) {
                             console.warn(
                                 "Protocol Issue: the given breakdown does not contains 'load' field for",
