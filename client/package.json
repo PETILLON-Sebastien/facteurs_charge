@@ -1,46 +1,59 @@
 {
-  "name": "facteurs_charge_server",
-  "version": "1.0.0",
-  "description": "Facteurs de charge server",
-  "main": "server.js",
-  "author": "PETILLON Sébastien",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/PETILLON-Sebastien/facteurs_charge.git"
-  },
-  "license": "GPL-3.0",
-  "devDependencies": {
-    "@babel/core": "^7.7.4",
-    "@babel/preset-env": "^7.7.4",
-    "@babel/preset-react": "^7.7.4",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10",
-    "url-loader": "^3.0.0",
-    "file-loader": "^5.0.2",
-    "style-loader": "1.1.1",
-    "css-loader": "3.4.0",
-    "react-highcharts": "16.1.0",
-    "moment": "2.24.0",
-    "rc-slider": "8.7.1",
-    "lodash": "4.17.15",
-    "express": "4.17.1",
-    "react-router": "5.1.2",
-    "react-router-dom": "5.1.2",
-    "react-day-picker": "7.4.0",
-    "highcharts-export-server": "2.0.24",
-    "q": "1.5.1",
-    "node-ffmpeg": "0.0.0",
-    "ffmpeg-stream": "0.6.0"
-  },
+  "name": "magma-client",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "babel-loader": "^8.0.6"
+    "@fortawesome/fontawesome-free": "^5.15.1",
+    "@testing-library/jest-dom": "^5.11.5",
+    "@testing-library/react": "^11.1.1",
+    "@testing-library/user-event": "^12.2.0",
+    "bulma": "^0.9.1",
+    "bulma-pageloader": "^0.3.0",
+    "cors": "^2.8.5",
+    "css-loader": "3.4.0",
+    "express": "^4.17.1",
+    "highcharts": "^8.2.2",
+    "highcharts-react-official": "^3.0.0",
+    "node-sass": "4.14.1",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.1",
+    "react-calendar": "^3.2.1",
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.1",
+    "style-loader": "1.1.1",
+    "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "build": "webpack -p --env.API_URL=https://www.facteurs-charge.fr --progress --config static/webpack.config.js",
-    "dev-build": "webpack --env.API_URL=http://localhost:8080 --progress -d --config static/webpack.config.js",
-    "watch": "webpack --env.API_URL=http://localhost:8080 --progress -d --config static/webpack.config.js --watch",
-    "start": "node server.js"
+    "start": "concurrently --kill-others \"react-scripts start\" \"nodemon public/src/StubServer.js\"",
+    "build": "cross-env REACT_APP_API_URL=http://51.210.182.41:8080  react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "cross-env": "^7.0.3",
+    "nodemon": "^2.0.7",
+    "purgecss-webpack-plugin": "^3.1.3",
+    "sass": "^1.30.0",
+    "sass-loader": "^8.0.2"
   }
 }

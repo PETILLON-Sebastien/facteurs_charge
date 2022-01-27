@@ -1,8 +1,8 @@
 import React, { createRef } from 'react'
 import Map from "./Map";
-import github from '../images/github.png';
-import buttonOn from '../images/buttonon.png';
-import buttonOff from '../images/buttonoff.png';
+import github from './images/github.png';
+import buttonOn from './images/buttonon.png';
+import buttonOff from './images/buttonoff.png';
 import Representations from "./representations"
 import GrapheCharge from "./graphe-charge";
 import GrapheProduction from "./graphe-production";
