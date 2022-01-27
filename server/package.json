@@ -1,0 +1,31 @@
+{
+  "name": "facteurs_charge_server",
+  "version": "1.1.0",
+  "description": "Facteurs de charge server",
+  "main": "server/api/server.js",
+  "author": "PETILLON Sébastien",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PETILLON-Sebastien/facteurs_charge.git"
+  },
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "moment": "2.24.0",
+    "lodash": "4.17.20",
+    "q": "1.5.1",
+    "forever": "3.0.0",
+    "connect": "^3.2.0",
+    "js-yaml": "^3.3.0",
+    "swagger-tools": "0.10.4"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  },
+  "scripts": {
+    "start": "forever forever/config.json",
+    "stop": "forever stop --uid current_day_daemon server_daemon",
+    "start_integration": "FC_PORT=8082 forever forever/config_integration.json",
+    "stop_integration": "forever stop --uid current_day_daemon_integration server_daemon_integration"
+  }
+}

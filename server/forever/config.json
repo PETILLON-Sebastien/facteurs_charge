@@ -1,0 +1,8 @@
+[
+    {
+      "uid": "server_daemon",
+      "append": true,
+      "watch": false,
+      "script": "./api/server.js"
+    }
+  ]
