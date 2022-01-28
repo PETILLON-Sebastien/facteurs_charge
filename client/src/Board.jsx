@@ -17,7 +17,14 @@ import 'react-day-picker/lib/style.css';
 import MomentLocaleUtils from 'react-day-picker/moment';
 import 'moment/locale/fr';
 
-var SERVER_URL = process.env.API_URL; ;
+var SERVER_URL;
+if(process.env.NODE_ENV == "production") {
+  SERVER_URL = 'http://51.210.182.41:8080';
+} else {
+  SERVER_URL = 'http://localhost:8080';
+}
+
+console.warn(process.env); // Delete me :)
 console.warn("Server API's URL was set to", SERVER_URL); // Delete me :)
 
 var that;

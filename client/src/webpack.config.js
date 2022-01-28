@@ -44,7 +44,7 @@ const config = (env) => {
     },
     plugins: [
       new webpack.DefinePlugin(envKeys)
-    ]
+    ],
   };
 };
 module.exports = config;

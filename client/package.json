@@ -22,11 +22,17 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "style-loader": "1.1.1",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "moment": "2.29.1",
+    "react-chart": "0.0.1",
+    "react-highcharts": "16.1.0",
+    "process": "0.11.10",
+    "rc-slider": "9.7.5",
+    "react-day-picker": "7.4.10"
   },
   "scripts": {
-    "start": "concurrently --kill-others \"react-scripts start\" \"nodemon public/src/StubServer.js\"",
-    "build": "cross-env REACT_APP_API_URL=http://51.210.182.41:8080  react-scripts build",
+    "start": "concurrently --kill-others \"react-scripts start\" \"nodemon src/StubServer.js\"",
+    "build": "cross-env REACT_APP_API_URL=http://51.210.182.41:8080 react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

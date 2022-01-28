@@ -1,10 +1,12 @@
 **\node_modules
 **\**\node_modules
 **\include
+**\.eslintcache
 **\lib
 **\scripts
 **\tcl
 **\donnees
 **\**\dist
+**\package-lock.json
 **\**\package-lock.json
 **\**\bundle.js
