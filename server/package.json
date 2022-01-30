@@ -10,12 +10,12 @@
   },
   "license": "GPL-3.0",
   "devDependencies": {
-    "moment": "2.24.0",
-    "lodash": "4.17.20",
-    "q": "1.5.1",
-    "forever": "3.0.0",
     "connect": "^3.2.0",
+    "forever": "3.0.0",
     "js-yaml": "^3.3.0",
+    "lodash": "4.17.20",
+    "moment": "2.24.0",
+    "q": "1.5.1",
     "swagger-tools": "0.10.4"
   },
   "dependencies": {
@@ -23,6 +23,7 @@
     "express": "^4.17.1"
   },
   "scripts": {
+    "local":"nodemon api/server.js",
     "start": "forever forever/config.json",
     "stop": "forever stop --uid current_day_daemon server_daemon",
     "start_integration": "FC_PORT=8082 forever forever/config_integration.json",
