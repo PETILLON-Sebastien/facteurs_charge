@@ -5,6 +5,9 @@ var moment = require('moment');
 var compute = require('./compute.js');
 var express = require('express')
 var app = express()
+var cors = require('cors')
+app.use(cors())
+
 
 var dernier_appel = undefined;
 var donnees = undefined;
@@ -31,31 +34,15 @@ function serveData(res) {
     }
 }
 
-function serveFrontEnd(res) {
-    fs.readFile('./static/facteurscharge.html', function (err, data) {
-        if (err) {
-            res.writeHead(404);
-            res.end(JSON.stringify(err));
-            return;
-        } else {
-            res.writeHead(200, {"Content-Type": "text/html"});
-            res.end(data);
-            return;
-        }
-    });
-}
-
-app.use(express.static("static"));
 app.use(express.static("donnees"));
 
-app.get('/', function (req, res) {
-    serveFrontEnd(res);
-});
-app.get('/region/[0-9]+', function (req, res) {
-    serveFrontEnd(res);
-});
 app.get('/now', (req, res) => {
     serveData(res);
 });
 
-app.listen(8080, () => console.log(`Application lancée`));
+
+app.get('/', (req, res) => {
+    serveData(res);
+});
+
+app.listen(8080, () => console.log(`Serveur lancé`));
